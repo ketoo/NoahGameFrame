@@ -71,53 +71,53 @@ protected:
 	void RegisterModule(const std::string& tableName, const LuaIntf::LuaRef& luatbl);
 
 	//FOR KERNEL MODULE
-	NFGUID CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strIndex, const NFDataList& arg);
+	NFGUID CreateObject(const NFGUID& self, const int sceneID, const int groupID, const std::string& className, const std::string& strIndex, const NFDataList& arg);
 	bool ExistObject(const NFGUID& self);
 	bool DestroyObject(const NFGUID & self);
 
 	//return the group id
-	bool EnterScene(const int nSceneID, const int nGroupID);
-	bool DoEvent(const NFGUID& self, const int nEventID, const NFDataList& arg);
+	bool EnterScene(const int sceneID, const int groupID);
+	bool DoEvent(const NFGUID& self, const int eventID, const NFDataList& arg);
 
-	bool FindProperty(const NFGUID& self, const std::string& strPropertyName);
+	bool FindProperty(const NFGUID& self, const std::string& propertyName);
 
-	bool SetPropertyInt(const NFGUID& self, const std::string& strPropertyName, const NFINT64 nValue);
-	bool SetPropertyFloat(const NFGUID& self, const std::string& strPropertyName, const double dValue);
-	bool SetPropertyString(const NFGUID& self, const std::string& strPropertyName, const std::string& strValue);
-	bool SetPropertyObject(const NFGUID& self, const std::string& strPropertyName, const NFGUID& objectValue);
-	bool SetPropertyVector2(const NFGUID& self, const std::string& strPropertyName, const NFVector2& value);
-	bool SetPropertyVector3(const NFGUID& self, const std::string& strPropertyName, const NFVector3& value);
+	bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 nValue);
+	bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double dValue);
+	bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& value);
+	bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& objectValue);
+	bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& value);
+	bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& value);
 
-	NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName);
-	int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
-	double GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName);
-	std::string GetPropertyString(const NFGUID& self, const std::string& strPropertyName);
-	NFGUID GetPropertyObject(const NFGUID& self, const std::string& strPropertyName);
-	NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& strPropertyName);
-	NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& strPropertyName);
+	NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
+	int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
+	double GetPropertyFloat(const NFGUID& self, const std::string& propertyName);
+	std::string GetPropertyString(const NFGUID& self, const std::string& propertyName);
+	NFGUID GetPropertyObject(const NFGUID& self, const std::string& propertyName);
+	NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& propertyName);
+	NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& propertyName);
 
-	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-    bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-    bool AddEventCallBack(const NFGUID& self, const int nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
-	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
+	bool AddPropertyCallBack(const NFGUID& self, std::string& propertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+    bool AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+    bool AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
+	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
 
-	int AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var);
-	bool RemRow(const NFGUID& self, std::string& strRecordName, const int nRow);
+	int AddRow(const NFGUID& self, std::string& recordName, const NFDataList& var);
+	bool RemRow(const NFGUID& self, std::string& recordName, const int row);
 
-	bool SetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value);
-	bool SetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
-	bool SetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
-	bool SetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value);
-	bool SetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value);
-	bool SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value);
+	bool SetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFINT64 value);
+	bool SetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const double value);
+	bool SetRecordString(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const std::string& value);
+	bool SetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFGUID& value);
+	bool SetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFVector2& value);
+	bool SetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFVector3& value);
 
-	NFINT64 GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	std::string GetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	NFGUID GetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	NFVector2 GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	NFVector3 GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+	NFINT64 GetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	double GetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	std::string GetRecordString(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	NFGUID GetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	NFVector2 GetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	NFVector3 GetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
 
 	NFINT64 GetNowTime();
 	NFGUID CreateID();
@@ -125,20 +125,20 @@ protected:
 	NFINT64 APPType();
 
 	//FOR ELEMENT MODULE
-	bool ExistElementObject(const std::string& strConfigName);
-	std::vector<std::string> GetEleList(const std::string& strClassName);
+	bool ExistElementObject(const std::string& configName);
+	std::vector<std::string> GetEleList(const std::string& className);
 
-	NFINT64 GetElePropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
-	double GetElePropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
-	std::string GetElePropertyString(const std::string& strConfigName, const std::string& strPropertyName);
-	NFVector2 GetElePropertyVector2(const std::string& strConfigName, const std::string& strPropertyName);
-	NFVector3 GetElePropertyVector3(const std::string& strConfigName, const std::string& strPropertyName);
+	NFINT64 GetElePropertyInt(const std::string& configName, const std::string& propertyName);
+	double GetElePropertyFloat(const std::string& configName, const std::string& propertyName);
+	std::string GetElePropertyString(const std::string& configName, const std::string& propertyName);
+	NFVector2 GetElePropertyVector2(const std::string& configName, const std::string& propertyName);
+	NFVector3 GetElePropertyVector3(const std::string& configName, const std::string& propertyName);
 
 	//FOR NET MODULE
-	void RemoveClientMsgCallBack(const int nMsgID);
-	void AddClientMsgCallBack(const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-	void RemoveServerMsgCallBack(const int nServerType, const int nMsgID);
-	void AddServerMsgCallBack(const int nServerType, const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveClientMsgCallBack(const int msgID);
+	void AddClientMsgCallBack(const int msgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveServerMsgCallBack(const int serverType, const int msgID);
+	void AddServerMsgCallBack(const int serverType, const int msgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 	void RemoveHttpCallBack(const std::string& path);
 	void AddHttpCallBack(const std::string& path, const int httpType, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 
@@ -146,14 +146,14 @@ protected:
     const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 
-	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
-	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
-    void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
+	void SendByServerFD(const NFSOCK nFD, const uint16_t msgID, const std::string& strData);
+	void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData);
+    void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData);
 
     //for net module
-    void SendMsgToGate(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
-    void SendGroupMsgToGate(const uint16_t nMsgID, const std::string& strData);
-    void SendToAllPlayer(const uint16_t nMsgID, const std::string& strData);
+    void SendMsgToGate(const NFGUID player, const uint16_t msgID, const std::string& strData);
+    void SendGroupMsgToGate(const uint16_t msgID, const std::string& strData);
+    void SendToAllPlayer(const uint16_t msgID, const std::string& strData);
 
 	//for log
 	void LogInfo(const std::string& strData);
@@ -181,15 +181,15 @@ protected:
     template<typename T1, typename... T2>
     bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2... arg);
 
-    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
     int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
-    int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
+    int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float time, const int count);
 
-	int OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float fTime, const int nCount);
+	int OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float time, const int count);
 
-    int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFDataList& argVar);
+    int OnLuaEventCB(const NFGUID& self, const int eventID, const NFDataList& argVar);
 
-    int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnClassEventCB(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
     
 	void OnScriptReload();
 

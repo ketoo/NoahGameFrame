@@ -56,7 +56,7 @@ public:
     virtual bool AfterInit() override;
 
 private:
-	void OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientChatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 protected:
 

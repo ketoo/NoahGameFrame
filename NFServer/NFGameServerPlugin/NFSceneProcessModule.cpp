@@ -87,40 +87,47 @@ bool NFSceneProcessModule::ReadyExecute()
 	return true;
 }
 
-bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList & argList)
+bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFVector3& pos, const NFDataList & argList)
 {
-	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
-		int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-		if (nNewGroupID > 0)
+		if (groupID < 0)
 		{
-			return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
+			if (nNewGroupID > 0)
+			{
+				return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
+			}
+		}
+		else if (groupID > 0)
+		{
+			return m_pSceneModule->RequestEnterScene(self, sceneID, groupID, type, pos, argList);
 		}
 	}
 	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
-		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
-		const int nMaxPlayer = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroupPlayers());
+		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::MaxGroup());
+		const int nMaxPlayer = m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::MaxGroupPlayers());
 		for (int i = 1; i <= nMaxGroup; ++i)
 		{
-			return m_pSceneModule->RequestEnterScene(self, nSceneID, 1, nType, pos, argList);
+			return m_pSceneModule->RequestEnterScene(self, sceneID, 1, type, pos, argList);
 		}
 
 		return false;
 	}
 	else
 	{
-		if (nGroupID > 0)
+		if (groupID > 0)
 		{
-			return m_pSceneModule->RequestEnterScene(self, nSceneID, nGroupID, nType, pos, argList);
+			return m_pSceneModule->RequestEnterScene(self, sceneID, groupID, type, pos, argList);
 		}
 		else
 		{
-			int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
 			if (nNewGroupID > 0)
 			{
-				return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
+				return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
 			}
 		}
 	}
@@ -128,64 +135,66 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 	return false;
 }
 
-int NFSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
 	//change AI onwer
 
 	return 0;
 }
 
-int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
-	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 
 	}
 	else if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
-		m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+		m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
 		return 0;
 	}
 	else
 	{
 		NFDataList varObjectList;
-		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
-			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+			m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
+			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
 		}
 	}
 
 	return 0;
 }
 
-int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
-    if (strClassName == NFrame::Player::ThisName())
+    if (className == NFrame::Player::ThisName())
     {
-        if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+        if (CLASS_OBJECT_EVENT::COE_DESTROY == classEvent)
         {
-			int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-			int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-			NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+			int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+			int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+			NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 
             if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
             {
-                m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+            	//wa need to wait for this player for a moment if the player disconnected from server.
+                m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-                m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
+                m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
             }
 			else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 			{
+				//wa need to wait for this player if the player disconnected from server.
 				NFDataList varObjectList;
-				if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+				if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 				{
-					m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+					m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-					m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
+					m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
 				}
 			}
         }
@@ -194,37 +203,34 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
     return 0;
 }
 
-int NFSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
 	//you can use object pool to enhance performance
-	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
-		m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, NFDataList::Empty());
+		m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 	}
-	else if (eSceneType  == NFMsg::ESceneType::MULTI_CLONE_SCENE)
+	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 	{
 		NFDataList varObjectList;
-		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
-			m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, NFDataList::Empty());
+			m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 		}
-	}
-	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
-	{
 	}
 
 	return 0;
 }
 
-int NFSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
-	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
 	}
@@ -247,18 +253,18 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
     rapidxml::xml_document<>  xFileDoc;
     xFileDoc.parse<0>(xFileSource.data());
 
-	int nSceneID = lexical_cast<int>(strSceneIDName);
+	int sceneID = lexical_cast<int>(strSceneIDName);
 
     rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
     for (rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling())
     {
-        std::string strSeedID = pSeedFileNode->first_attribute(NFrame::IObject::ID().c_str())->value();
-		std::string strConfigID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
+        std::string seedID = pSeedFileNode->first_attribute(NFrame::IObject::ID().c_str())->value();
+		std::string configID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
         float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute("X")->value());
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute("Y")->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute("Z")->value());
 		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
-		m_pSceneModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
+		m_pSceneModule->AddSeedData(sceneID, seedID, configID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 
 	}
 
@@ -277,12 +283,12 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 				float fPosX = lexical_cast<float>(xPosition.String(0));
 				float fPosY = lexical_cast<float>(xPosition.String(1));
 				float fPosZ = lexical_cast<float>(xPosition.String(2));
-				m_pSceneModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+				m_pSceneModule->AddRelivePosition(sceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}
-	/*
-	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::TagPos());
+
+	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePosEx());
 	NFDataList xTagPositionList;
 	xTagPositionList.Split(strTagPosition, ";");
 	for (int i = 0; i < xTagPositionList.GetCount(); ++i)
@@ -297,30 +303,29 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 				float fPosX = lexical_cast<float>(xPosition.String(0));
 				float fPosY = lexical_cast<float>(xPosition.String(1));
 				float fPosZ = lexical_cast<float>(xPosition.String(2));
-				m_pSceneModule->AddTagPosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+				m_pSceneModule->AddTagPosition(sceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}
-	
-	*/
+
 
     return true;
 }
 
 bool NFSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDName)
 {
-	const int nSceneID = lexical_cast<int>(strSceneIDName);
-	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
-	const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
+	const int sceneID = lexical_cast<int>(strSceneIDName);
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
+	const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::MaxGroup());
 	if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		//line 10
 		for (int i = 0; i < 1; ++i)
 		{
-			int nGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-			if (nGroupID > 0)
+			int groupID = m_pKernelModule->RequestGroupScene(sceneID);
+			if (groupID > 0)
 			{
-				m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID);
+				m_pSceneModule->CreateSceneNPC(sceneID, groupID);
 			}
 			else
 			{

@@ -64,91 +64,91 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
 
-    virtual bool ExistScene(const int nSceneID);
+    virtual bool ExistScene(const int sceneID);
 
 	virtual bool ExistObject(const NFGUID& ident);
     virtual bool ObjectReady(const NFGUID& ident);
-	virtual bool ExistObject(const NFGUID& ident, const int nSceneID, const int nGroupID);
+	virtual bool ExistObject(const NFGUID& ident, const int sceneID, const int groupID);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
-    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFDataList& arg);
+    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int sceneID, const int groupID, const std::string& className, const std::string& configIndex, const NFDataList& arg);
 
     virtual bool DestroyAll();
     virtual bool DestroySelf(const NFGUID& self);
     virtual bool DestroyObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual bool FindProperty(const NFGUID& self, const std::string& strPropertyName);
+    virtual bool FindProperty(const NFGUID& self, const std::string& propertyName);
 
-    virtual bool SetPropertyInt(const NFGUID& self, const std::string& strPropertyName, const NFINT64 nValue);
-    virtual bool SetPropertyFloat(const NFGUID& self, const std::string& strPropertyName, const double dValue);
-    virtual bool SetPropertyString(const NFGUID& self, const std::string& strPropertyName, const std::string& strValue);
-    virtual bool SetPropertyObject(const NFGUID& self, const std::string& strPropertyName, const NFGUID& objectValue);
-	virtual bool SetPropertyVector2(const NFGUID& self, const std::string& strPropertyName, const NFVector2& value);
-	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& strPropertyName, const NFVector3& value);
+    virtual bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 nValue);
+    virtual bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double dValue);
+    virtual bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& value);
+    virtual bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& objectValue);
+	virtual bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& value);
+	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& value);
 
-    virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName);
-	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
-    virtual double GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName);
-    virtual const std::string& GetPropertyString(const NFGUID& self, const std::string& strPropertyName);
-    virtual const NFGUID& GetPropertyObject(const NFGUID& self, const std::string& strPropertyName);
-	virtual const NFVector2& GetPropertyVector2(const NFGUID& self, const std::string& strPropertyName);
-	virtual const NFVector3& GetPropertyVector3(const NFGUID& self, const std::string& strPropertyName);
+    virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
+	virtual int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
+    virtual double GetPropertyFloat(const NFGUID& self, const std::string& propertyName);
+    virtual const std::string& GetPropertyString(const NFGUID& self, const std::string& propertyName);
+    virtual const NFGUID& GetPropertyObject(const NFGUID& self, const std::string& propertyName);
+	virtual const NFVector2& GetPropertyVector2(const NFGUID& self, const std::string& propertyName);
+	virtual const NFVector3& GetPropertyVector3(const NFGUID& self, const std::string& propertyName);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFGUID& self, const std::string& strRecordName);
-    virtual bool ClearRecord(const NFGUID& self, const std::string& strRecordName);
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFGUID& self, const std::string& recordName);
+    virtual bool ClearRecord(const NFGUID& self, const std::string& recordName);
 
-    virtual bool SetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
-    virtual bool SetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
-    virtual bool SetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
-    virtual bool SetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& objectValue);
-	virtual bool SetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFVector2& value);
-	virtual bool SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFVector3& value);
+    virtual bool SetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const int col, const NFINT64 nValue);
+    virtual bool SetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const int col, const double dwValue);
+    virtual bool SetRecordString(const NFGUID& self, const std::string& recordName, const int row, const int col, const std::string& value);
+    virtual bool SetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const int col, const NFGUID& objectValue);
+	virtual bool SetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const int col, const NFVector2& value);
+	virtual bool SetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const int col, const NFVector3& value);
 
-    virtual bool SetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value);
-    virtual bool SetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
-    virtual bool SetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
-    virtual bool SetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value);
-	virtual bool SetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value);
-	virtual bool SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value);
+    virtual bool SetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFINT64 value);
+    virtual bool SetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const double value);
+    virtual bool SetRecordString(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const std::string& value);
+    virtual bool SetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFGUID& value);
+	virtual bool SetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFVector2& value);
+	virtual bool SetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag, const NFVector3& value);
 
-    virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual const std::string& GetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const int col);
+    virtual double GetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const int col);
+    virtual const std::string& GetRecordString(const NFGUID& self, const std::string& recordName, const int row, const int col);
+    virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const int col);
+	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const int col);
+	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const int col);
 
-    virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual const std::string& GetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+    virtual double GetRecordFloat(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+    virtual const std::string& GetRecordString(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+    virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
+	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
 
     ////////////////////////////////////////////////////////////////
     virtual NFGUID CreateGUID();
 
-    virtual bool CreateScene(const int nSceneID);
-    virtual bool DestroyScene(const int nSceneID);
+    virtual bool CreateScene(const int sceneID);
+    virtual bool DestroyScene(const int sceneID);
 
     virtual int GetOnLineCount();
     virtual int GetMaxOnLineCount();
 
-    virtual int RequestGroupScene(const int nSceneID);
-    virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
-    virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
+    virtual int RequestGroupScene(const int sceneID);
+    virtual bool ReleaseGroupScene(const int sceneID, const int groupID);
+    virtual bool ExitGroupScene(const int sceneID, const int groupID);
 
-	virtual int GetGroupObjectList(const int nSceneID, const int nGroupID, const bool bPlayer, const NFGUID& noSelf);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list, const NFGUID& noSelf);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list, const bool bPlayer);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list, const bool bPlayer, const NFGUID& noSelf);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFDataList& list);
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFDataList& list, const NFGUID& noSelf);
+	virtual int GetGroupObjectList(const int sceneID, const int groupID, const bool bPlayer, const NFGUID& noSelf);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, NFDataList& list);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, NFDataList& list, const NFGUID& noSelf);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, NFDataList& list, const bool bPlayer);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, NFDataList& list, const bool bPlayer, const NFGUID& noSelf);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, const std::string& className, NFDataList& list);
+	virtual bool GetGroupObjectList(const int sceneID, const int groupID, const std::string& className, NFDataList& list, const NFGUID& noSelf);
 	
-	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArgArg, NFDataList& list);
+	virtual int GetObjectByProperty(const int sceneID, const int groupID, const std::string& propertyName, const NFDataList& valueArgArg, NFDataList& list);
 
 	virtual int Random(int nStart, int nEnd);//return [nStart, nEnd)
 	virtual float Random();//return [0f, 1f)
@@ -160,7 +160,7 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
 
-    virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList);
+    virtual bool DoEvent(const NFGUID& self, const std::string& className, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList);
 
 protected:
 
@@ -169,16 +169,16 @@ protected:
     virtual bool RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
     virtual bool RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
 
-	virtual bool RegisterClassPropertyEvent(const std::string& strClassName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-	virtual bool RegisterClassRecordEvent(const std::string& strClassName, const RECORD_EVENT_FUNCTOR_PTR& cb);
+	virtual bool RegisterClassPropertyEvent(const std::string& className, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+	virtual bool RegisterClassRecordEvent(const std::string& className, const RECORD_EVENT_FUNCTOR_PTR& cb);
 protected:
 
-    virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
+    virtual bool AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
     void InitRandom();
 
-    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-    int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnClassCommonEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
+    int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
     void ProcessMemFree();

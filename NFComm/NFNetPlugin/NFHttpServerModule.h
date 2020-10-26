@@ -48,7 +48,7 @@ public:
 
     virtual bool Execute();
 
-    virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK");
+    virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& msg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK");
 
 private:
 	virtual bool OnReceiveNetPack(NF_SHARE_PTR<NFHttpRequest> req);

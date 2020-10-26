@@ -13,7 +13,7 @@
     <ClCompile Include="UI\NFGameView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\NFHierachyView.cpp">
+    <ClCompile Include="UI\NFHierarchyView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\NFProfileView.cpp">
@@ -80,7 +80,7 @@
     <ClInclude Include="UI\NFGameView.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\NFHierachyView.h">
+    <ClInclude Include="UI\NFHierarchyView.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\NFProfileView.h">

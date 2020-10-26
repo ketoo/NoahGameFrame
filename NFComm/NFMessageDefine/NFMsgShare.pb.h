@@ -115,6 +115,32 @@ template<> ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqLe
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
+enum PosSyncUnit_EMoveType : int {
+  PosSyncUnit_EMoveType_EMT_WALK = 0,
+  PosSyncUnit_EMoveType_EET_SPEEDY = 1,
+  PosSyncUnit_EMoveType_EET_TELEPORT = 2,
+  PosSyncUnit_EMoveType_PosSyncUnit_EMoveType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  PosSyncUnit_EMoveType_PosSyncUnit_EMoveType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool PosSyncUnit_EMoveType_IsValid(int value);
+constexpr PosSyncUnit_EMoveType PosSyncUnit_EMoveType_EMoveType_MIN = PosSyncUnit_EMoveType_EMT_WALK;
+constexpr PosSyncUnit_EMoveType PosSyncUnit_EMoveType_EMoveType_MAX = PosSyncUnit_EMoveType_EET_TELEPORT;
+constexpr int PosSyncUnit_EMoveType_EMoveType_ARRAYSIZE = PosSyncUnit_EMoveType_EMoveType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PosSyncUnit_EMoveType_descriptor();
+template<typename T>
+inline const std::string& PosSyncUnit_EMoveType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, PosSyncUnit_EMoveType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function PosSyncUnit_EMoveType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    PosSyncUnit_EMoveType_descriptor(), enum_t_value);
+}
+inline bool PosSyncUnit_EMoveType_Parse(
+    const std::string& name, PosSyncUnit_EMoveType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PosSyncUnit_EMoveType>(
+    PosSyncUnit_EMoveType_descriptor(), name, value);
+}
 enum EffectData_EResultType : int {
   EffectData_EResultType_EET_FAIL = 0,
   EffectData_EResultType_EET_SUCCESS = 1,
@@ -1377,15 +1403,46 @@ class PosSyncUnit :
 
   // nested types ----------------------------------------------------
 
+  typedef PosSyncUnit_EMoveType EMoveType;
+  static constexpr EMoveType EMT_WALK =
+    PosSyncUnit_EMoveType_EMT_WALK;
+  static constexpr EMoveType EET_SPEEDY =
+    PosSyncUnit_EMoveType_EET_SPEEDY;
+  static constexpr EMoveType EET_TELEPORT =
+    PosSyncUnit_EMoveType_EET_TELEPORT;
+  static inline bool EMoveType_IsValid(int value) {
+    return PosSyncUnit_EMoveType_IsValid(value);
+  }
+  static constexpr EMoveType EMoveType_MIN =
+    PosSyncUnit_EMoveType_EMoveType_MIN;
+  static constexpr EMoveType EMoveType_MAX =
+    PosSyncUnit_EMoveType_EMoveType_MAX;
+  static constexpr int EMoveType_ARRAYSIZE =
+    PosSyncUnit_EMoveType_EMoveType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  EMoveType_descriptor() {
+    return PosSyncUnit_EMoveType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& EMoveType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, EMoveType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function EMoveType_Name.");
+    return PosSyncUnit_EMoveType_Name(enum_t_value);
+  }
+  static inline bool EMoveType_Parse(const std::string& name,
+      EMoveType* value) {
+    return PosSyncUnit_EMoveType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
     kMoverFieldNumber = 1,
-    kNowFieldNumber = 2,
-    kPosFieldNumber = 3,
-    kDirectionFieldNumber = 4,
-    kStatusFieldNumber = 5,
-    kTimeFieldNumber = 6,
+    kPosFieldNumber = 2,
+    kOrientationFieldNumber = 3,
+    kStatusFieldNumber = 4,
+    kTypeFieldNumber = 5,
   };
   // .NFMsg.Ident mover = 1;
   bool has_mover() const;
@@ -1402,22 +1459,7 @@ class PosSyncUnit :
   ::NFMsg::Ident* _internal_mutable_mover();
   public:
 
-  // .NFMsg.Vector3 now = 2;
-  bool has_now() const;
-  private:
-  bool _internal_has_now() const;
-  public:
-  void clear_now();
-  const ::NFMsg::Vector3& now() const;
-  ::NFMsg::Vector3* release_now();
-  ::NFMsg::Vector3* mutable_now();
-  void set_allocated_now(::NFMsg::Vector3* now);
-  private:
-  const ::NFMsg::Vector3& _internal_now() const;
-  ::NFMsg::Vector3* _internal_mutable_now();
-  public:
-
-  // .NFMsg.Vector3 pos = 3;
+  // .NFMsg.Vector3 pos = 2;
   bool has_pos() const;
   private:
   bool _internal_has_pos() const;
@@ -1432,22 +1474,22 @@ class PosSyncUnit :
   ::NFMsg::Vector3* _internal_mutable_pos();
   public:
 
-  // .NFMsg.Vector3 direction = 4;
-  bool has_direction() const;
+  // .NFMsg.Vector3 orientation = 3;
+  bool has_orientation() const;
   private:
-  bool _internal_has_direction() const;
+  bool _internal_has_orientation() const;
   public:
-  void clear_direction();
-  const ::NFMsg::Vector3& direction() const;
-  ::NFMsg::Vector3* release_direction();
-  ::NFMsg::Vector3* mutable_direction();
-  void set_allocated_direction(::NFMsg::Vector3* direction);
+  void clear_orientation();
+  const ::NFMsg::Vector3& orientation() const;
+  ::NFMsg::Vector3* release_orientation();
+  ::NFMsg::Vector3* mutable_orientation();
+  void set_allocated_orientation(::NFMsg::Vector3* orientation);
   private:
-  const ::NFMsg::Vector3& _internal_direction() const;
-  ::NFMsg::Vector3* _internal_mutable_direction();
+  const ::NFMsg::Vector3& _internal_orientation() const;
+  ::NFMsg::Vector3* _internal_mutable_orientation();
   public:
 
-  // int32 status = 5;
+  // int32 status = 4;
   void clear_status();
   ::PROTOBUF_NAMESPACE_ID::int32 status() const;
   void set_status(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1456,13 +1498,13 @@ class PosSyncUnit :
   void _internal_set_status(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // float time = 6;
-  void clear_time();
-  float time() const;
-  void set_time(float value);
+  // .NFMsg.PosSyncUnit.EMoveType type = 5;
+  void clear_type();
+  ::NFMsg::PosSyncUnit_EMoveType type() const;
+  void set_type(::NFMsg::PosSyncUnit_EMoveType value);
   private:
-  float _internal_time() const;
-  void _internal_set_time(float value);
+  ::NFMsg::PosSyncUnit_EMoveType _internal_type() const;
+  void _internal_set_type(::NFMsg::PosSyncUnit_EMoveType value);
   public:
 
   // @@protoc_insertion_point(class_scope:NFMsg.PosSyncUnit)
@@ -1471,11 +1513,10 @@ class PosSyncUnit :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* mover_;
-  ::NFMsg::Vector3* now_;
   ::NFMsg::Vector3* pos_;
-  ::NFMsg::Vector3* direction_;
+  ::NFMsg::Vector3* orientation_;
   ::PROTOBUF_NAMESPACE_ID::int32 status_;
-  float time_;
+  int type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -1587,9 +1628,10 @@ class ReqAckPlayerPosSync :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSyncUnitFieldNumber = 1,
+    kSyncUnitFieldNumber = 2,
+    kSequenceFieldNumber = 1,
   };
-  // repeated .NFMsg.PosSyncUnit sync_unit = 1;
+  // repeated .NFMsg.PosSyncUnit sync_unit = 2;
   int sync_unit_size() const;
   private:
   int _internal_sync_unit_size() const;
@@ -1607,12 +1649,22 @@ class ReqAckPlayerPosSync :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::NFMsg::PosSyncUnit >&
       sync_unit() const;
 
+  // int32 sequence = 1;
+  void clear_sequence();
+  ::PROTOBUF_NAMESPACE_ID::int32 sequence() const;
+  void set_sequence(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_sequence() const;
+  void _internal_set_sequence(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerPosSync)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::NFMsg::PosSyncUnit > sync_unit_;
+  ::PROTOBUF_NAMESPACE_ID::int32 sequence_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -3168,61 +3220,7 @@ inline void PosSyncUnit::set_allocated_mover(::NFMsg::Ident* mover) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.mover)
 }
 
-// .NFMsg.Vector3 now = 2;
-inline bool PosSyncUnit::_internal_has_now() const {
-  return this != internal_default_instance() && now_ != nullptr;
-}
-inline bool PosSyncUnit::has_now() const {
-  return _internal_has_now();
-}
-inline const ::NFMsg::Vector3& PosSyncUnit::_internal_now() const {
-  const ::NFMsg::Vector3* p = now_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
-      &::NFMsg::_Vector3_default_instance_);
-}
-inline const ::NFMsg::Vector3& PosSyncUnit::now() const {
-  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.now)
-  return _internal_now();
-}
-inline ::NFMsg::Vector3* PosSyncUnit::release_now() {
-  // @@protoc_insertion_point(field_release:NFMsg.PosSyncUnit.now)
-  
-  ::NFMsg::Vector3* temp = now_;
-  now_ = nullptr;
-  return temp;
-}
-inline ::NFMsg::Vector3* PosSyncUnit::_internal_mutable_now() {
-  
-  if (now_ == nullptr) {
-    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
-    now_ = p;
-  }
-  return now_;
-}
-inline ::NFMsg::Vector3* PosSyncUnit::mutable_now() {
-  // @@protoc_insertion_point(field_mutable:NFMsg.PosSyncUnit.now)
-  return _internal_mutable_now();
-}
-inline void PosSyncUnit::set_allocated_now(::NFMsg::Vector3* now) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(now_);
-  }
-  if (now) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      now = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, now, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  now_ = now;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.now)
-}
-
-// .NFMsg.Vector3 pos = 3;
+// .NFMsg.Vector3 pos = 2;
 inline bool PosSyncUnit::_internal_has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
@@ -3276,61 +3274,61 @@ inline void PosSyncUnit::set_allocated_pos(::NFMsg::Vector3* pos) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.pos)
 }
 
-// .NFMsg.Vector3 direction = 4;
-inline bool PosSyncUnit::_internal_has_direction() const {
-  return this != internal_default_instance() && direction_ != nullptr;
+// .NFMsg.Vector3 orientation = 3;
+inline bool PosSyncUnit::_internal_has_orientation() const {
+  return this != internal_default_instance() && orientation_ != nullptr;
 }
-inline bool PosSyncUnit::has_direction() const {
-  return _internal_has_direction();
+inline bool PosSyncUnit::has_orientation() const {
+  return _internal_has_orientation();
 }
-inline const ::NFMsg::Vector3& PosSyncUnit::_internal_direction() const {
-  const ::NFMsg::Vector3* p = direction_;
+inline const ::NFMsg::Vector3& PosSyncUnit::_internal_orientation() const {
+  const ::NFMsg::Vector3* p = orientation_;
   return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
       &::NFMsg::_Vector3_default_instance_);
 }
-inline const ::NFMsg::Vector3& PosSyncUnit::direction() const {
-  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.direction)
-  return _internal_direction();
+inline const ::NFMsg::Vector3& PosSyncUnit::orientation() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.orientation)
+  return _internal_orientation();
 }
-inline ::NFMsg::Vector3* PosSyncUnit::release_direction() {
-  // @@protoc_insertion_point(field_release:NFMsg.PosSyncUnit.direction)
+inline ::NFMsg::Vector3* PosSyncUnit::release_orientation() {
+  // @@protoc_insertion_point(field_release:NFMsg.PosSyncUnit.orientation)
   
-  ::NFMsg::Vector3* temp = direction_;
-  direction_ = nullptr;
+  ::NFMsg::Vector3* temp = orientation_;
+  orientation_ = nullptr;
   return temp;
 }
-inline ::NFMsg::Vector3* PosSyncUnit::_internal_mutable_direction() {
+inline ::NFMsg::Vector3* PosSyncUnit::_internal_mutable_orientation() {
   
-  if (direction_ == nullptr) {
+  if (orientation_ == nullptr) {
     auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
-    direction_ = p;
+    orientation_ = p;
   }
-  return direction_;
+  return orientation_;
 }
-inline ::NFMsg::Vector3* PosSyncUnit::mutable_direction() {
-  // @@protoc_insertion_point(field_mutable:NFMsg.PosSyncUnit.direction)
-  return _internal_mutable_direction();
+inline ::NFMsg::Vector3* PosSyncUnit::mutable_orientation() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.PosSyncUnit.orientation)
+  return _internal_mutable_orientation();
 }
-inline void PosSyncUnit::set_allocated_direction(::NFMsg::Vector3* direction) {
+inline void PosSyncUnit::set_allocated_orientation(::NFMsg::Vector3* orientation) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(direction_);
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(orientation_);
   }
-  if (direction) {
+  if (orientation) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
     if (message_arena != submessage_arena) {
-      direction = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, direction, submessage_arena);
+      orientation = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, orientation, submessage_arena);
     }
     
   } else {
     
   }
-  direction_ = direction;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.direction)
+  orientation_ = orientation;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.orientation)
 }
 
-// int32 status = 5;
+// int32 status = 4;
 inline void PosSyncUnit::clear_status() {
   status_ = 0;
 }
@@ -3350,31 +3348,51 @@ inline void PosSyncUnit::set_status(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.status)
 }
 
-// float time = 6;
-inline void PosSyncUnit::clear_time() {
-  time_ = 0;
+// .NFMsg.PosSyncUnit.EMoveType type = 5;
+inline void PosSyncUnit::clear_type() {
+  type_ = 0;
 }
-inline float PosSyncUnit::_internal_time() const {
-  return time_;
+inline ::NFMsg::PosSyncUnit_EMoveType PosSyncUnit::_internal_type() const {
+  return static_cast< ::NFMsg::PosSyncUnit_EMoveType >(type_);
 }
-inline float PosSyncUnit::time() const {
-  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.time)
-  return _internal_time();
+inline ::NFMsg::PosSyncUnit_EMoveType PosSyncUnit::type() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.type)
+  return _internal_type();
 }
-inline void PosSyncUnit::_internal_set_time(float value) {
+inline void PosSyncUnit::_internal_set_type(::NFMsg::PosSyncUnit_EMoveType value) {
   
-  time_ = value;
+  type_ = value;
 }
-inline void PosSyncUnit::set_time(float value) {
-  _internal_set_time(value);
-  // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.time)
+inline void PosSyncUnit::set_type(::NFMsg::PosSyncUnit_EMoveType value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.type)
 }
 
 // -------------------------------------------------------------------
 
 // ReqAckPlayerPosSync
 
-// repeated .NFMsg.PosSyncUnit sync_unit = 1;
+// int32 sequence = 1;
+inline void ReqAckPlayerPosSync::clear_sequence() {
+  sequence_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ReqAckPlayerPosSync::_internal_sequence() const {
+  return sequence_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ReqAckPlayerPosSync::sequence() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerPosSync.sequence)
+  return _internal_sequence();
+}
+inline void ReqAckPlayerPosSync::_internal_set_sequence(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  sequence_ = value;
+}
+inline void ReqAckPlayerPosSync::set_sequence(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_sequence(value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerPosSync.sequence)
+}
+
+// repeated .NFMsg.PosSyncUnit sync_unit = 2;
 inline int ReqAckPlayerPosSync::_internal_sync_unit_size() const {
   return sync_unit_.size();
 }
@@ -4124,6 +4142,11 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(std::string* chat_info) {
 
 PROTOBUF_NAMESPACE_OPEN
 
+template <> struct is_proto_enum< ::NFMsg::PosSyncUnit_EMoveType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::PosSyncUnit_EMoveType>() {
+  return ::NFMsg::PosSyncUnit_EMoveType_descriptor();
+}
 template <> struct is_proto_enum< ::NFMsg::EffectData_EResultType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EffectData_EResultType>() {

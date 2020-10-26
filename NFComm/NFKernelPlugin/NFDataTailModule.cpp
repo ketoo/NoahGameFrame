@@ -61,51 +61,51 @@ bool NFDataTailModule::AfterInit()
     return true;
 }
 
-int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
-    if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
+    if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == classEvent)
 	{
 	    TrailObjectData(self);
 	}
 
     std::ostringstream stream;
-    switch (eClassEvent)
+    switch (classEvent)
     {
         case CLASS_OBJECT_EVENT::COE_CREATE_NODATA:
-        stream << " " + strClassName + " COE_CREATE_NODATA";
+        stream << " " + className + " COE_CREATE_NODATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_ATTACHDATA:
-        stream << " " + strClassName + " COE_CREATE_BEFORE_ATTACHDATA";
+        stream << " " + className + " COE_CREATE_BEFORE_ATTACHDATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA:
-        stream << " " + strClassName + " COE_CREATE_LOADDATA";
+        stream << " " + className + " COE_CREATE_LOADDATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA:
-        stream << " " + strClassName + " COE_CREATE_AFTER_ATTACHDATA";
+        stream << " " + className + " COE_CREATE_AFTER_ATTACHDATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT:
-        stream << " " + strClassName + " COE_CREATE_BEFORE_EFFECT";
+        stream << " " + className + " COE_CREATE_BEFORE_EFFECT";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA:
-        stream << " " + strClassName + " COE_CREATE_EFFECTDATA";
+        stream << " " + className + " COE_CREATE_EFFECTDATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT:
-        stream << " " + strClassName + " COE_CREATE_AFTER_EFFECT";
+        stream << " " + className + " COE_CREATE_AFTER_EFFECT";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_HASDATA:
-        stream << " " + strClassName + " COE_CREATE_HASDATA";
+        stream << " " + className + " COE_CREATE_HASDATA";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_FINISH:
-        stream << " " + strClassName + " COE_CREATE_FINISH";
+        stream << " " + className + " COE_CREATE_FINISH";
         break;
         case CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH:
-        stream << " " + strClassName + " COE_CREATE_CLIENT_FINISH";
+        stream << " " + className + " COE_CREATE_CLIENT_FINISH";
         break;
         case CLASS_OBJECT_EVENT::COE_BEFOREDESTROY:
-        stream << " " + strClassName + " COE_BEFOREDESTROY";
+        stream << " " + className + " COE_BEFOREDESTROY";
         break;
         case CLASS_OBJECT_EVENT::COE_DESTROY:
-        stream << " " + strClassName + " COE_DESTROY";
+        stream << " " + className + " COE_DESTROY";
         break;
     }
 
@@ -137,9 +137,11 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
             std::ostringstream stream;
 
             stream << " Start trail ";
+			stream << xProperty->GetKey();
+			stream << "==>";
             stream << xProperty->ToString();
 
-            m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xProperty->GetKey(), stream.str(),  __FUNCTION__, __LINE__);
+            m_pLogModule->LogDebug(self, stream.str(),  __FUNCTION__, __LINE__);
 
             xProperty = xPropertyManager->Next();
         }
@@ -174,11 +176,11 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
     }
 }
 
-int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
 
-    stream << strPropertyName;
+    stream << propertyName;
     stream << ":";
     stream << oldVar.ToString();
     stream << "==>";
@@ -194,7 +196,7 @@ int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::strin
 int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
-    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
+    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.recordName);
     if (nullptr == xRecord)
     {
         return 0;
@@ -205,11 +207,11 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Add:
         {
             NFDataList xDataList;
-            bool bRet = xRecord->QueryRow(xEventData.nRow, xDataList);
+            bool bRet = xRecord->QueryRow(xEventData.row, xDataList);
             if (bRet)
             {
                 stream << xRecord->GetName();
-                stream << " Add Row[" << xEventData.nRow << "]";
+                stream << " Add Row[" << xEventData.row << "]";
 
                 for (int j = 0; j < xDataList.GetCount(); ++j)
                 {
@@ -225,7 +227,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Del:
         {
             stream << xRecord->GetName();
-            stream << " Del Row[" << xEventData.nRow << "]";
+            stream << " Del Row[" << xEventData.row << "]";
             //m_pLogModule->LogDebug(self, stream.str());
 
             PrintStackTrace();
@@ -234,7 +236,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Swap:
         {
             stream << xRecord->GetName();
-            stream << " Swap Row[" << xEventData.nRow << "] Row[" << xEventData.nCol << "]";
+            stream << " Swap Row[" << xEventData.row << "] Row[" << xEventData.col << "]";
             //m_pLogModule->LogDebug(self, stream.str());
         }
         break;
@@ -243,7 +245,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Update:
         {
             stream << xRecord->GetName();
-            stream << " UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
+            stream << " UpData Row[" << xEventData.row << "] Col[" << xEventData.col << "]";
             stream << oldVar.ToString();
             stream << "==>" << newVar.ToString();
             //m_pLogModule->LogDebug(self, stream.str());
@@ -301,19 +303,5 @@ int NFDataTailModule::TrailObjectData(const NFGUID& self)
 void NFDataTailModule::PrintStackTrace()
 {
     return;
-#if NF_PLATFORM != NF_PLATFORM_WIN
-
-	int size = 16;
-	void * array[16];
-	int stack_num = backtrace(array, size);
-	char ** stacktrace = backtrace_symbols(array, stack_num);
-	for (int i = 0; i < stack_num; ++i)
-	{
-		//printf("%s\n", stacktrace[i]);
-		m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i], __FUNCTION__, __LINE__);
-	}
-
-	free(stacktrace);
-#endif
 
 }

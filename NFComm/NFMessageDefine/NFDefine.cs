@@ -34,7 +34,7 @@ namespace NFMsg {
             "FAoQQ0hBUkFDVEVSX05VTU9VVBBwEhUKEUNIQVJBQ1RFUl9JTlZBTElEEHES",
             "FgoSQ0hBUkFDVEVSX05PVEVYSVNUEHISEwoPQ0hBUkFDVEVSX1VTSU5HEHMS",
             "FAoQQ0hBUkFDVEVSX0xPQ0tFRBB0EhEKDVpPTkVfT1ZFUkxPQUQQdRIOCgpO",
-            "T1RfT05MSU5FEHYq5BAKCkVHYW1lTXNnSUQSCgoGVU5LTk9XEAASEAoMRVZF",
+            "T1RfT05MSU5FEHYq6Q8KCkVHYW1lTXNnSUQSCgoGVU5LTk9XEAASEAoMRVZF",
             "TlRfUkVTVUxUEAESEwoPRVZFTlRfVFJBTlNQT1JUEAISEAoMQ0xPU0VfU09D",
             "S0VUEAMSGAoUV1RNX1dPUkxEX1JFR0lTVEVSRUQQChIaChZXVE1fV09STERf",
             "VU5SRUdJU1RFUkVEEAsSFQoRV1RNX1dPUkxEX1JFRlJFU0gQDBIYChRMVE1f",
@@ -50,49 +50,45 @@ namespace NFMsg {
             "RUFSVF9CRUFUEGQSDQoJUkVRX0xPR0lOEGUSDQoJQUNLX0xPR0lOEGYSDgoK",
             "UkVRX0xPR09VVBBnEhIKDlJFUV9XT1JMRF9MSVNUEG4SEgoOQUNLX1dPUkxE",
             "X0xJU1QQbxIVChFSRVFfQ09OTkVDVF9XT1JMRBBwEhUKEUFDS19DT05ORUNU",
-            "X1dPUkxEEHESGwoXUkVRX0tJQ0tfQ0xJRU5UX0lOV09STEQQchITCg9SRVFf",
-            "Q09OTkVDVF9LRVkQeBITCg9BQ0tfQ09OTkVDVF9LRVkQehIWChFSRVFfU0VM",
-            "RUNUX1NFUlZFUhCCARIWChFBQ0tfU0VMRUNUX1NFUlZFUhCDARISCg1SRVFf",
-            "Uk9MRV9MSVNUEIQBEhIKDUFDS19ST0xFX0xJU1QQhQESFAoPUkVRX0NSRUFU",
-            "RV9ST0xFEIYBEhQKD1JFUV9ERUxFVEVfUk9MRRCHARIVChBSRVFfUkVDT1ZF",
-            "Ul9ST0xFEIgBEhcKElJFUV9MT0FEX1JPTEVfREFUQRCMARIXChJBQ0tfTE9B",
-            "RF9ST0xFX0RBVEEQjQESFwoSUkVRX1NBVkVfUk9MRV9EQVRBEI4BEhcKEkFD",
-            "S19TQVZFX1JPTEVfREFUQRCPARITCg5SRVFfRU5URVJfR0FNRRCWARITCg5B",
-            "Q0tfRU5URVJfR0FNRRCXARITCg5SRVFfTEVBVkVfR0FNRRCYARITCg5BQ0tf",
-            "TEVBVkVfR0FNRRCZARISCg1SRVFfU1dBUF9HQU1FEJoBEhMKDlJFUV9TV0FQ",
-            "X1NDRU5FEJsBEhMKDkFDS19TV0FQX1NDRU5FEJwBEhgKE1JFUV9TV0FQX0hP",
-            "TUVfU0NFTkUQnQESGAoTQUNLX1NXQVBfSE9NRV9TQ0VORRCeARIaChVSRVFf",
-            "RU5URVJfR0FNRV9GSU5JU0gQnwESGgoVQUNLX0VOVEVSX0dBTUVfRklOSVNI",
-            "EKABEhUKEEFDS19PQkpFQ1RfRU5UUlkQyAESFQoQQUNLX09CSkVDVF9MRUFW",
-            "RRDJARIeChlBQ0tfT0JKRUNUX1BST1BFUlRZX0VOVFJZEMoBEhwKF0FDS19P",
-            "QkpFQ1RfUkVDT1JEX0VOVFJZEMsBEhUKEEFDS19QUk9QRVJUWV9JTlQQ0gES",
-            "FwoSQUNLX1BST1BFUlRZX0ZMT0FUENMBEhgKE0FDS19QUk9QRVJUWV9TVFJJ",
-            "TkcQ1AESGAoTQUNLX1BST1BFUlRZX09CSkVDVBDWARIZChRBQ0tfUFJPUEVS",
-            "VFlfVkVDVE9SMhDXARIZChRBQ0tfUFJPUEVSVFlfVkVDVE9SMxDYARIXChJB",
-            "Q0tfUFJPUEVSVFlfQ0xFQVIQ2QESEAoLQUNLX0FERF9ST1cQ3AESEwoOQUNL",
-            "X1JFTU9WRV9ST1cQ3QESEQoMQUNLX1NXQVBfUk9XEN4BEhMKDkFDS19SRUNP",
-            "UkRfSU5UEN8BEhUKEEFDS19SRUNPUkRfRkxPQVQQ4AESFgoRQUNLX1JFQ09S",
-            "RF9TVFJJTkcQ4gESFgoRQUNLX1JFQ09SRF9PQkpFQ1QQ4wESFwoSQUNLX1JF",
-            "Q09SRF9WRUNUT1IyEOQBEhcKEkFDS19SRUNPUkRfVkVDVE9SMxDlARIVChBB",
-            "Q0tfUkVDT1JEX0NMRUFSEPoBEhQKD0FDS19SRUNPUkRfU09SVBD7ARIWChFB",
-            "Q0tfREFUQV9GSU5JU0hFRBCEAhIRCgxSRVFfQUlfT05XRVIQjgISDQoIUkVR",
-            "X01PVkUQrAISDQoIQUNLX01PVkUQrQISFAoPUkVRX01PVkVfSU1NVU5FEK4C",
-            "EhQKD0FDS19NT1ZFX0lNTVVORRCvAhIRCgxSRVFfUE9TX1NZTkMQsgISEQoM",
-            "QUNLX1BPU19TWU5DELMCEg0KCFJFUV9DSEFUEN4CEg0KCEFDS19DSEFUEN8C",
-            "EhYKEVJFUV9TS0lMTF9PQkpFQ1RYEJADEhYKEUFDS19TS0lMTF9PQkpFQ1RY",
-            "EJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNLX1NLSUxMX1BPUxCTAxIW",
-            "ChFBQ0tfT05MSU5FX05PVElGWRDYBBIXChJBQ0tfT0ZGTElORV9OT1RJRlkQ",
-            "2QQqRwoJRUl0ZW1UeXBlEg0KCUVJVF9FUVVJUBAAEgsKB0VJVF9HRU0QARIO",
-            "CgpFSVRfU1VQUExZEAISDgoKRUlUX1NDUk9MTBADKqcBCgpFU2tpbGxUeXBl",
-            "EhYKEkJSSUVGX1NJTkdMRV9TS0lMTBAAEhUKEUJSSUVGX0dST1VQX1NLSUxM",
-            "EAESFwoTQlVMTEVUX1NJTkdMRV9TS0lMTBACEhgKFEJVTExFVF9SRUJPVU5E",
-            "X1NLSUxMEAMSHAoYQlVMTEVUX1RBUkdFVF9CT01CX1NLSUxMEAQSGQoVQlVM",
-            "TEVUX1BPU19CT01CX1NLSUxMEAUqjgEKCkVTY2VuZVR5cGUSEAoMTk9STUFM",
-            "X1NDRU5FEAASFgoSU0lOR0xFX0NMT05FX1NDRU5FEAESFQoRTVVMVElfQ0xP",
-            "TkVfU0NFTkUQAhISCg5QVlBfTU9ERV9TQ0VORRAKEhIKDk1WTV9NT0RFX1ND",
-            "RU5FEAsSFwoTU1VSVklWQUxfTU9ERV9TQ0VORRAMKjgKCEVOUENUeXBlEg4K",
-            "Ck5PUk1BTF9OUEMQABIMCghIRVJPX05QQxABEg4KClRVUlJFVF9OUEMQAmIG",
-            "cHJvdG8z"));
+            "X1dPUkxEEHESGQoVUkVRX0tJQ0tFRF9GUk9NX1dPUkxEEHISEwoPUkVRX0NP",
+            "Tk5FQ1RfS0VZEHgSEwoPQUNLX0NPTk5FQ1RfS0VZEHoSFgoRUkVRX1NFTEVD",
+            "VF9TRVJWRVIQggESFgoRQUNLX1NFTEVDVF9TRVJWRVIQgwESEgoNUkVRX1JP",
+            "TEVfTElTVBCEARISCg1BQ0tfUk9MRV9MSVNUEIUBEhQKD1JFUV9DUkVBVEVf",
+            "Uk9MRRCGARIUCg9SRVFfREVMRVRFX1JPTEUQhwESFQoQUkVRX1JFQ09WRVJf",
+            "Uk9MRRCIARIXChJSRVFfTE9BRF9ST0xFX0RBVEEQjAESFwoSQUNLX0xPQURf",
+            "Uk9MRV9EQVRBEI0BEhcKElJFUV9TQVZFX1JPTEVfREFUQRCOARIXChJBQ0tf",
+            "U0FWRV9ST0xFX0RBVEEQjwESEwoOUkVRX0VOVEVSX0dBTUUQlgESEwoOQUNL",
+            "X0VOVEVSX0dBTUUQlwESEwoOUkVRX0xFQVZFX0dBTUUQmAESEwoOQUNLX0xF",
+            "QVZFX0dBTUUQmQESEwoOUkVRX1NXQVBfU0NFTkUQmwESEwoOQUNLX1NXQVBf",
+            "U0NFTkUQnAESGAoTUkVRX1NXQVBfSE9NRV9TQ0VORRCdARIYChNBQ0tfU1dB",
+            "UF9IT01FX1NDRU5FEJ4BEhoKFVJFUV9FTlRFUl9HQU1FX0ZJTklTSBCfARIa",
+            "ChVBQ0tfRU5URVJfR0FNRV9GSU5JU0gQoAESFQoQQUNLX09CSkVDVF9FTlRS",
+            "WRDIARIVChBBQ0tfT0JKRUNUX0xFQVZFEMkBEh4KGUFDS19PQkpFQ1RfUFJP",
+            "UEVSVFlfRU5UUlkQygESHAoXQUNLX09CSkVDVF9SRUNPUkRfRU5UUlkQywES",
+            "FQoQQUNLX1BST1BFUlRZX0lOVBDSARIXChJBQ0tfUFJPUEVSVFlfRkxPQVQQ",
+            "0wESGAoTQUNLX1BST1BFUlRZX1NUUklORxDUARIYChNBQ0tfUFJPUEVSVFlf",
+            "T0JKRUNUENYBEhkKFEFDS19QUk9QRVJUWV9WRUNUT1IyENcBEhkKFEFDS19Q",
+            "Uk9QRVJUWV9WRUNUT1IzENgBEhcKEkFDS19QUk9QRVJUWV9DTEVBUhDZARIQ",
+            "CgtBQ0tfQUREX1JPVxDcARITCg5BQ0tfUkVNT1ZFX1JPVxDdARIRCgxBQ0tf",
+            "U1dBUF9ST1cQ3gESEwoOQUNLX1JFQ09SRF9JTlQQ3wESFQoQQUNLX1JFQ09S",
+            "RF9GTE9BVBDgARIWChFBQ0tfUkVDT1JEX1NUUklORxDiARIWChFBQ0tfUkVD",
+            "T1JEX09CSkVDVBDjARIXChJBQ0tfUkVDT1JEX1ZFQ1RPUjIQ5AESFwoSQUNL",
+            "X1JFQ09SRF9WRUNUT1IzEOUBEhUKEEFDS19SRUNPUkRfQ0xFQVIQ+gESFAoP",
+            "QUNLX1JFQ09SRF9TT1JUEPsBEhYKEUFDS19EQVRBX0ZJTklTSEVEEIQCEg0K",
+            "CFJFUV9NT1ZFEKwCEg0KCEFDS19NT1ZFEK0CEg0KCFJFUV9DSEFUEN4CEg0K",
+            "CEFDS19DSEFUEN8CEhYKEVJFUV9TS0lMTF9PQkpFQ1RYEJADEhYKEUFDS19T",
+            "S0lMTF9PQkpFQ1RYEJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNLX1NL",
+            "SUxMX1BPUxCTAxIWChFBQ0tfT05MSU5FX05PVElGWRDYBBIXChJBQ0tfT0ZG",
+            "TElORV9OT1RJRlkQ2QQqRwoJRUl0ZW1UeXBlEg0KCUVJVF9FUVVJUBAAEgsK",
+            "B0VJVF9HRU0QARIOCgpFSVRfU1VQUExZEAISDgoKRUlUX1NDUk9MTBADKrcB",
+            "CgpFU2tpbGxUeXBlEhYKEkJSSUVGX1NJTkdMRV9TS0lMTBAAEhUKEUJSSUVG",
+            "X0dST1VQX1NLSUxMEAESFwoTQlVMTEVUX1NJTkdMRV9TS0lMTBACEhgKFEJV",
+            "TExFVF9SRUJPVU5EX1NLSUxMEAMSHAoYQlVMTEVUX1RBUkdFVF9CT01CX1NL",
+            "SUxMEAQSGQoVQlVMTEVUX1BPU19CT01CX1NLSUxMEAUSDgoKRlVOQ19TS0lM",
+            "TBAGKk0KCkVTY2VuZVR5cGUSEAoMTk9STUFMX1NDRU5FEAASFgoSU0lOR0xF",
+            "X0NMT05FX1NDRU5FEAESFQoRTVVMVElfQ0xPTkVfU0NFTkUQAipGCghFTlBD",
+            "VHlwZRIOCgpOT1JNQUxfTlBDEAASDAoISEVST19OUEMQARIOCgpUVVJSRVRf",
+            "TlBDEAISDAoIRlVOQ19OUEMQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
@@ -226,7 +222,7 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_CONNECT_WORLD")] AckConnectWorld = 113,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("REQ_KICK_CLIENT_INWORLD")] ReqKickClientInworld = 114,
+    [pbr::OriginalName("REQ_KICKED_FROM_WORLD")] ReqKickedFromWorld = 114,
     /// <summary>
     /// </summary>
     [pbr::OriginalName("REQ_CONNECT_KEY")] ReqConnectKey = 120,
@@ -280,9 +276,6 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_LEAVE_GAME")] AckLeaveGame = 153,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("REQ_SWAP_GAME")] ReqSwapGame = 154,
-    /// <summary>
-    /// </summary>
     [pbr::OriginalName("REQ_SWAP_SCENE")] ReqSwapScene = 155,
     /// <summary>
     /// </summary>
@@ -321,7 +314,7 @@ namespace NFMsg {
     /// </summary>
     [pbr::OriginalName("ACK_PROPERTY_STRING")] AckPropertyString = 212,
     /// <summary>
-    ///EGMI_ACK_PROPERTY_DOUBLE					= 213;			//
+    ///EGMI_ACK_PROPERTY_DOUBLE				= 213;			//
     /// </summary>
     [pbr::OriginalName("ACK_PROPERTY_OBJECT")] AckPropertyObject = 214,
     [pbr::OriginalName("ACK_PROPERTY_VECTOR2")] AckPropertyVector2 = 215,
@@ -333,7 +326,7 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_RECORD_INT")] AckRecordInt = 223,
     [pbr::OriginalName("ACK_RECORD_FLOAT")] AckRecordFloat = 224,
     /// <summary>
-    ///EGMI_ACK_RECORD_DOUBLE					= 225;
+    ///EGMI_ACK_RECORD_DOUBLE				= 225;
     /// </summary>
     [pbr::OriginalName("ACK_RECORD_STRING")] AckRecordString = 226,
     [pbr::OriginalName("ACK_RECORD_OBJECT")] AckRecordObject = 227,
@@ -342,13 +335,8 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_RECORD_CLEAR")] AckRecordClear = 250,
     [pbr::OriginalName("ACK_RECORD_SORT")] AckRecordSort = 251,
     [pbr::OriginalName("ACK_DATA_FINISHED")] AckDataFinished = 260,
-    [pbr::OriginalName("REQ_AI_ONWER")] ReqAiOnwer = 270,
     [pbr::OriginalName("REQ_MOVE")] ReqMove = 300,
     [pbr::OriginalName("ACK_MOVE")] AckMove = 301,
-    [pbr::OriginalName("REQ_MOVE_IMMUNE")] ReqMoveImmune = 302,
-    [pbr::OriginalName("ACK_MOVE_IMMUNE")] AckMoveImmune = 303,
-    [pbr::OriginalName("REQ_POS_SYNC")] ReqPosSync = 306,
-    [pbr::OriginalName("ACK_POS_SYNC")] AckPosSync = 307,
     [pbr::OriginalName("REQ_CHAT")] ReqChat = 350,
     [pbr::OriginalName("ACK_CHAT")] AckChat = 351,
     [pbr::OriginalName("REQ_SKILL_OBJECTX")] ReqSkillObjectx = 400,
@@ -403,24 +391,22 @@ namespace NFMsg {
     ///this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
     /// </summary>
     [pbr::OriginalName("BULLET_POS_BOMB_SKILL")] BulletPosBombSkill = 5,
+    [pbr::OriginalName("FUNC_SKILL")] FuncSkill = 6,
   }
 
   public enum ESceneType {
     /// <summary>
-    ///public town
+    ///public town, only has one group available for players is 1
     /// </summary>
     [pbr::OriginalName("NORMAL_SCENE")] NormalScene = 0,
     /// <summary>
-    ///single boss underground city
+    ///private room, only has one player per group and it will be destroyed if the player leaved from group.
     /// </summary>
     [pbr::OriginalName("SINGLE_CLONE_SCENE")] SingleCloneScene = 1,
     /// <summary>
-    ///world boss underground city
+    ///private room, only has more than one player per group and it will be destroyed if all players leaved from group.
     /// </summary>
     [pbr::OriginalName("MULTI_CLONE_SCENE")] MultiCloneScene = 2,
-    [pbr::OriginalName("PVP_MODE_SCENE")] PvpModeScene = 10,
-    [pbr::OriginalName("MVM_MODE_SCENE")] MvmModeScene = 11,
-    [pbr::OriginalName("SURVIVAL_MODE_SCENE")] SurvivalModeScene = 12,
   }
 
   public enum ENPCType {
@@ -433,6 +419,9 @@ namespace NFMsg {
     /// <summary>
     /// </summary>
     [pbr::OriginalName("TURRET_NPC")] TurretNpc = 2,
+    /// <summary>
+    /// </summary>
+    [pbr::OriginalName("FUNC_NPC")] FuncNpc = 3,
   }
 
   #endregion

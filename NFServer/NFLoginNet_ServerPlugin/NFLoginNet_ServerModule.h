@@ -57,22 +57,22 @@ public:
     virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
-    virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
+    virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& account, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
 protected:
-    void OnSocketClientEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketClientEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
-    void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnSelectWorldProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnViewWorldProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnViewWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void OnHeartBeat(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLogOut(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnHeartBeat(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnLogOut(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 protected:
 

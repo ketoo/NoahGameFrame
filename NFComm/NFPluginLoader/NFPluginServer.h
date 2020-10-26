@@ -36,7 +36,6 @@
 #include <functional>
 #include <atomic>
 #include "NFPluginManager.h"
-#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
@@ -52,9 +51,6 @@
 #endif
 
 #endif
-
-
-
 
 class NFPluginServer
 {
@@ -88,7 +84,7 @@ private:
 
 	void InitDaemon();
 
-	static bool GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& strContent);
+	static bool GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& content);
 };
 
 #endif

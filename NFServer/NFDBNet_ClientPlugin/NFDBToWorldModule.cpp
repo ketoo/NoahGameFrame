@@ -73,7 +73,7 @@ bool NFDBToWorldModule::AfterInit()
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
 			exit(0);
 		}
@@ -84,25 +84,25 @@ bool NFDBToWorldModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			const int nServerArea = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Area());
-			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD
+			if (serverType == NF_SERVER_TYPES::NF_ST_WORLD
 				&& nServerArea == nCurArea)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+				const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				ConnectData xServerData;
 
-				xServerData.nGameID = nServerID;
-				xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
-				xServerData.strIP = strIP;
+				xServerData.nGameID = serverID;
+				xServerData.eServerType = (NF_SERVER_TYPES)serverType;
+				xServerData.ip = ip;
 				xServerData.nPort = nPort;
-				xServerData.strName = strId;
+				xServerData.name = strId;
 
 				m_pNetClientModule->AddServer(xServerData);
 			}
@@ -129,27 +129,27 @@ void NFDBToWorldModule::Register(NFINet* pNet)
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (nServerType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == nServerID)
+			const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			if (serverType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == serverID)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+				const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				NFMsg::ServerInfoReportList xMsg;
 				NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
-				pData->set_server_id(nServerID);
+				pData->set_server_id(serverID);
 				pData->set_server_name(strId);
 				pData->set_server_cur_count(0);
-				pData->set_server_ip(strIP);
+				pData->set_server_ip(ip);
 				pData->set_server_port(nPort);
-				pData->set_server_max_online(nMaxConnect);
+				pData->set_server_max_online(maxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
-				pData->set_server_type(nServerType);
+				pData->set_server_type(serverType);
 
 				NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
 				if (pServerData)
@@ -179,25 +179,25 @@ void NFDBToWorldModule::ServerReport()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (pPluginManager->GetAppID() == nServerID)
+			const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			if (pPluginManager->GetAppID() == serverID)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+				const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				NFMsg::ServerInfoReport reqMsg;
 
-				reqMsg.set_server_id(nServerID);
+				reqMsg.set_server_id(serverID);
 				reqMsg.set_server_name(strId);
 				reqMsg.set_server_cur_count(0);
-				reqMsg.set_server_ip(strIP);
+				reqMsg.set_server_ip(ip);
 				reqMsg.set_server_port(nPort);
-				reqMsg.set_server_max_online(nMaxConnect);
+				reqMsg.set_server_max_online(maxConnect);
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
-				reqMsg.set_server_type(nServerType);
+				reqMsg.set_server_type(serverType);
 
 				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
@@ -205,28 +205,28 @@ void NFDBToWorldModule::ServerReport()
 	}
 }
 
-void NFDBToWorldModule::InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBToWorldModule::InvalidMessage(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	printf("NFNet || unMsgID=%d\n", nMsgID);
+	printf("NFNet || umsgID=%d\n", msgID);
 }
 
-void NFDBToWorldModule::OnSocketMSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFDBToWorldModule::OnSocketMSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
 	}
 	else if (eEvent & NF_NET_EVENT_ERROR)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
 	}
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 		Register(pNet);
 	}
 }
@@ -251,11 +251,11 @@ void NFDBToWorldModule::LogServerInfo(const std::string& strServerInfo)
 	m_pLogModule->LogInfo(NFGUID(), strServerInfo, "");
 }
 
-void NFDBToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFDBToWorldModule::OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(msgID, msg, len, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -268,9 +268,9 @@ void NFDBToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int n
 		ConnectData xServerData;
 
 		xServerData.nGameID = xData.server_id();
-		xServerData.strIP = xData.server_ip();
+		xServerData.ip = xData.server_ip();
 		xServerData.nPort = xData.server_port();
-		xServerData.strName = xData.server_name();
+		xServerData.name = xData.server_name();
 		xServerData.nWorkLoad = xData.server_cur_count();
 		xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
 

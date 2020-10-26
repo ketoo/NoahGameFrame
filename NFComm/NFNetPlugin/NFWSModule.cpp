@@ -82,7 +82,7 @@ NFWSModule::NFWSModule(NFIPluginManager* p)
     pPluginManager = p;
 
     mnBufferSize = 0;
-    nLastTime = GetPluginManager()->GetNowTime();
+	mLastTime = GetPluginManager()->GetNowTime();
     m_pNet = NULL;
 }
 
@@ -109,11 +109,11 @@ bool NFWSModule::AfterInit()
 	return true;
 }
 
-void NFWSModule::Initialization(const char* strIP, const unsigned short nPort)
+void NFWSModule::Initialization(const char* ip, const unsigned short nPort)
 {
     m_pNet = NF_NEW NFNet(this, &NFWSModule::OnReceiveNetPack, &NFWSModule::OnSocketNetEvent, true);
     m_pNet->ExpandBufferSize(mnBufferSize);
-    m_pNet->Initialization(strIP, nPort);
+    m_pNet->Initialization(ip, nPort);
 }
 
 int NFWSModule::Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount)
@@ -137,26 +137,26 @@ unsigned int NFWSModule::ExpandBufferSize(const unsigned int size)
     return mnBufferSize;
 }
 
-void NFWSModule::RemoveReceiveCallBack(const int nMsgID)
+void NFWSModule::RemoveReceiveCallBack(const int msgID)
 {
-    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
+    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(msgID);
     if (mxReceiveCallBack.end() != it)
     {
         mxReceiveCallBack.erase(it);
     }
 }
 
-bool NFWSModule::AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb)
+bool NFWSModule::AddReceiveCallBack(const int msgID, const NET_RECEIVE_FUNCTOR_PTR& cb)
 {
-    if (mxReceiveCallBack.find(nMsgID) == mxReceiveCallBack.end())
+    if (mxReceiveCallBack.find(msgID) == mxReceiveCallBack.end())
     {
 		std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
 		xList.push_back(cb);
-		mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(nMsgID, xList));
+		mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
         return true;
     }
 
-	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
+	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(msgID);
 	it->second.push_back(cb);
 
     return true;
@@ -188,50 +188,55 @@ bool NFWSModule::Execute()
 
     return m_pNet->Execute();
 }
-bool NFWSModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex)
+
+bool NFWSModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex)
 {
 	NFMsg::MsgBase xMsg;
 	if (!xData.SerializeToString(xMsg.mutable_msg_data()))
 	{
 		std::ostringstream stream;
-		stream << " SendMsgPB Message to  " << nSockIndex;
-		stream << " Failed For Serialize of MsgData, MessageID " << nMsgID;
+		stream << " SendMsgPB Message to  " << sockIndex;
+		stream << " Failed For Serialize of MsgData, MessageID " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
 		return false;
 	}
+
 	NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
 	*pPlayerID = NFINetModule::NFToPB(NFGUID());
-	std::string strMsg;
-	if (!xMsg.SerializeToString(&strMsg))
+
+	std::string msg;
+	if (!xMsg.SerializeToString(&msg))
 	{
 		std::ostringstream stream;
-		stream << " SendMsgPB Message to  " << nSockIndex;
-		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		stream << " SendMsgPB Message to  " << sockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
 		return false;
 	}
-	SendMsgWithOutHead(nMsgID, strMsg.c_str(),strMsg.length(),nSockIndex);
+	SendMsgWithOutHead(msgID, msg.c_str(),msg.length(),sockIndex);
 
 	return true;
 }
-bool NFWSModule::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
+
+bool NFWSModule::SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex /*= 0*/)
 {
     std::string strOutData;
-    int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
-    if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    int nAllLen = EnCode(msgID, msg, len, strOutData);
+    if (nAllLen == len + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
         auto frame = EncodeFrame(strOutData.data(), strOutData.size(), false);
-        return SendRawMsg(frame, nSockIndex);
+        return SendRawMsg(frame, sockIndex);
     }
 
     return false;
 }
-int NFWSModule::EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData)
+
+int NFWSModule::EnCode(const uint16_t umsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData)
 {
     NFMsgHead xHead;
-    xHead.SetMsgID(unMsgID);
+    xHead.SetMsgID(umsgID);
     xHead.SetBodyLength(unDataLen);
 
     char szHead[NFIMsgHead::NF_Head::NF_HEAD_LENGTH] = { 0 };
@@ -243,10 +248,11 @@ int NFWSModule::EnCode(const uint16_t unMsgID, const char* strData, const uint32
 
     return xHead.GetBodyLength() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH;
 }
-bool NFWSModule::SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text)
+
+bool NFWSModule::SendMsg(const std::string& msg, const NFSOCK sockIndex, const bool text)
 {
     auto frame = EncodeFrame(msg.data(), msg.size(), text);
-    return SendRawMsg(frame, nSockIndex);
+    return SendRawMsg(frame, sockIndex);
 }
 
 bool NFWSModule::SendMsgToAllClient(const std::string& msg, const bool text)
@@ -268,47 +274,52 @@ NFINet* NFWSModule::GetNet()
     return m_pNet;
 }
 
-void NFWSModule::OnError(const NFSOCK nSockIndex, const std::error_code & e)
+void NFWSModule::OnError(const NFSOCK sockIndex, const std::error_code & e)
 {
     // may write/print error log
     // then close socket
-
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NF_CRASH_TRY
+#endif
     for (auto& cb : mxEventCallBackList)
     {
         NET_EVENT_FUNCTOR_PTR& pFunPtr = cb;
         NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-        //NF_CRASH_TRY
-        pFunc->operator()(nSockIndex, NF_NET_EVENT::NF_NET_EVENT_ERROR, m_pNet);
-        //NF_CRASH_END_TRY
+
+        pFunc->operator()(sockIndex, NF_NET_EVENT::NF_NET_EVENT_ERROR, m_pNet);
     }
 
-    std::ostringstream stream;
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NF_CRASH_END
+#endif
+
+	std::ostringstream stream;
     stream << "WebSocket error: ";
     stream << e.value();
     stream << " ";
     stream << e.message();
     m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
-    m_pNet->CloseNetObject(nSockIndex);
+    m_pNet->CloseNetObject(sockIndex);
 }
 
-bool NFWSModule::SendRawMsg(const std::string & msg, const NFSOCK nSockIndex)
+bool NFWSModule::SendRawMsg(const std::string & msg, const NFSOCK sockIndex)
 {
-    bool bRet = m_pNet->SendMsg(msg.c_str(), (uint32_t)msg.length(), nSockIndex);
+    bool bRet = m_pNet->SendMsg(msg.c_str(), (uint32_t)msg.length(), sockIndex);
     if (!bRet)
     {
         std::ostringstream stream;
-        stream << " SendMsg failed fd " << nSockIndex;
+        stream << " SendMsg failed fd " << sockIndex;
         m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
     }
 
     return bRet;
 }
 
-void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
-    if (nMsgID <= 0)
+    if (msgID < 0)
     {
-        NetObject* pNetObject = m_pNet->GetNetObject(nSockIndex);
+        NetObject* pNetObject = m_pNet->GetNetObject(sockIndex);
         if (nullptr != pNetObject)
         {
             switch (pNetObject->GetConnectKeyState())
@@ -319,38 +330,38 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
                 auto pos = data.find("\r\n\r\n");
                 if (pos != string_view_t::npos)
                 {
-                    auto ec = HandShake(nSockIndex, data.data(), pos);
+                    auto ec = HandShake(sockIndex, data.data(), pos);
                     if (ec)
                     {
                         //mark need send then close here:
-                        SendRawMsg("HTTP/1.1 400 Bad Request\r\n\r\n", nSockIndex);
+                        SendRawMsg("HTTP/1.1 400 Bad Request\r\n\r\n", sockIndex);
                         //log ec.message()
-                        //OnError(nSockIndex, ec);
+                        //OnError(sockIndex, ec);
                         return;
                     }
                     pNetObject->RemoveBuff(0, pos+4);
                     pNetObject->SetConnectKeyState(ws_handshaked);
                     //may have more data, check it
-                    ec = DecodeFrame(nSockIndex, pNetObject);
+                    ec = DecodeFrame(sockIndex, pNetObject);
                     if (ec)
                     {
-                        OnError(nSockIndex, ec);
+                        OnError(sockIndex, ec);
                         return;
                     }
                 }
                 else if (data.size() > HANDSHAKE_MAX_SIZE)
                 {
-                    OnError(nSockIndex, websocket::make_error_code(websocket::error::buffer_overflow));
+                    OnError(sockIndex, websocket::make_error_code(websocket::error::buffer_overflow));
                     return;
                 }
                 break;
             }
             case ws_handshaked:
             {
-                auto ec = DecodeFrame(nSockIndex, pNetObject);
+                auto ec = DecodeFrame(sockIndex, pNetObject);
                 if (ec)
                 {
-                    OnError(nSockIndex, ec);
+                    OnError(sockIndex, ec);
                     return;
                 }
                 break;
@@ -362,9 +373,11 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
     }
     else
     {
-        m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
-
-        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
+        m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(msgID), __FUNCTION__, __LINE__);
+#if NF_PLATFORM != NF_PLATFORM_WIN
+		NF_CRASH_TRY
+#endif
+        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(msgID);
         if (mxReceiveCallBack.end() != it)
         {
             std::list<NET_RECEIVE_FUNCTOR_PTR>& xFunList = it->second;
@@ -372,9 +385,8 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
             {
                 NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
                 NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-                //NF_CRASH_TRY
-                pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-                //NF_CRASH_END_TRY
+
+                pFunc->operator()(sockIndex, msgID, msg, len);
             }
         } 
         else
@@ -383,11 +395,13 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
             {
                 NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
                 NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-                //NF_CRASH_TRY
-                pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-                //NF_CRASH_END_TRY
+
+                pFunc->operator()(sockIndex, msgID, msg, len);
             }
         }
+#if NF_PLATFORM != NF_PLATFORM_WIN
+        NF_CRASH_END
+#endif
     }
 
     NFPerformance performance;
@@ -397,19 +411,19 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
         os << "---------------net module performance problem------------------- ";
         os << performance.TimeScope();
         os << "---------- ";
-        m_pLogModule->LogWarning(NFGUID(0, nMsgID), os, __FUNCTION__, __LINE__);
+        m_pLogModule->LogWarning(NFGUID(0, msgID), os, __FUNCTION__, __LINE__);
     }
 
 }
 
-void NFWSModule::OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFWSModule::OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     for (std::list<NET_EVENT_FUNCTOR_PTR>::iterator it = mxEventCallBackList.begin();
          it != mxEventCallBackList.end(); ++it)
     {
         NET_EVENT_FUNCTOR_PTR& pFunPtr = *it;
         NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-        pFunc->operator()(nSockIndex, eEvent, pNet);
+        pFunc->operator()(sockIndex, eEvent, pNet);
     }
 }
 
@@ -425,17 +439,17 @@ void NFWSModule::KeepAlive()
         return;
     }
 
-    if (nLastTime + 10 > GetPluginManager()->GetNowTime())
+    if (mLastTime + 10 > GetPluginManager()->GetNowTime())
     {
         return;
     }
 
-    nLastTime = GetPluginManager()->GetNowTime();
+	mLastTime = GetPluginManager()->GetNowTime();
 }
 
-std::error_code NFWSModule::HandShake(const NFSOCK nSockIndex, const char * msg, const uint32_t nLen)
+std::error_code NFWSModule::HandShake(const NFSOCK sockIndex, const char * msg, const uint32_t len)
 {
-    string_view_t data{ msg,nLen };
+    string_view_t data{ msg,len };
     string_view_t method;
     string_view_t ignore;
     string_view_t version;
@@ -504,21 +518,12 @@ std::error_code NFWSModule::HandShake(const NFSOCK nSockIndex, const char * msg,
         response.append("\r\n", 2);
     }
     response.append("\r\n", 2);
-    SendRawMsg(response, nSockIndex);
+    SendRawMsg(response, sockIndex);
 
-    //mark: call on connect
-    for (auto& cb : mxEventCallBackList)
-    {
-        NET_EVENT_FUNCTOR_PTR& pFunPtr = cb;
-        NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-        //NF_CRASH_TRY
-        pFunc->operator()(nSockIndex, NF_NET_EVENT::NF_NET_EVENT_CONNECTED, m_pNet);
-        //NF_CRASH_END_TRY
-    }
     return std::error_code();
 }
 
-std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetObject)
+std::error_code NFWSModule::DecodeFrame(const NFSOCK sockIndex, NetObject* pNetObject)
 {
     const char* data = pNetObject->GetBuff();
     size_t size = pNetObject->GetBuffLen();
@@ -662,20 +667,29 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetO
     // write on message callback here
     // callback(data+need,reallen)
 
-    int nMsgiD = static_cast<int>(fh.op);
-    const char* pbData = data+need;
-    NFMsgHead xHead;
-    int nMsgBodyLength = DeCode(pbData, reallen, xHead);
-    if (nMsgBodyLength > 0 && xHead.GetMsgID() > 0){
-        OnReceiveNetPack(nSockIndex, xHead.GetMsgID(), pbData+NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
-    }
+	if (fh.op == opcode::binary)
+	{
+		const char* pbData = data + need;
+		NFMsgHead xHead;
+		int nMsgBodyLength = DeCode(pbData, reallen, xHead);
+		if (nMsgBodyLength > 0 && xHead.GetMsgID() > 0)
+		{
+			OnReceiveNetPack(sockIndex, xHead.GetMsgID(), pbData + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+		}
+	}
+	else if (fh.op == opcode::text)
+	{
+		const char* pbData = data + need;
+		OnReceiveNetPack(sockIndex, 0, pbData, reallen);
+	}
 
     //remove control frame
     size_t offset = need + reallen;
     pNetObject->RemoveBuff(0, offset);
 
-    return DecodeFrame(nSockIndex,pNetObject);
+    return DecodeFrame(sockIndex,pNetObject);
 }
+
 int NFWSModule::DeCode(const char* strData, const uint32_t unAllLen, NFMsgHead& xHead)
 { 
     if (unAllLen < NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
@@ -690,8 +704,10 @@ int NFWSModule::DeCode(const char* strData, const uint32_t unAllLen, NFMsgHead& 
     {   
         return -3;
     }
+
     return xHead.GetBodyLength();
 }
+
 std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
 {
     //may write a buffer with headreserved space
@@ -737,7 +753,7 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
 
 std::string NFWSModule::HashKey(const char * key, size_t len)
 {
-    uint8_t keybuf[60];
+    uint8_t keybuf[60] = {0};
     std::memcpy(keybuf, key, len);
     std::memcpy(keybuf + len, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", 36);
 

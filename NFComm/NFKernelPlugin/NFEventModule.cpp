@@ -27,7 +27,7 @@
 
 bool NFEventModule::Init()
 {
-	m_pKernelodule = GetPluginManager()->FindModule<NFIKernelModule>();
+	m_pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>();
 
     return true;
 }
@@ -55,13 +55,13 @@ bool NFEventModule::Execute()
 	//remove
 	if (mModuleRemoveListEx.Count() > 0)
 	{
-		int nEventID = 0;
-		bool bRet = mModuleRemoveListEx.First(nEventID);
+		int eventID = 0;
+		bool bRet = mModuleRemoveListEx.First(eventID);
 		while (bRet)
 		{
-			mModuleEventInfoMapEx.RemoveElement(nEventID);
+			mModuleEventInfoMapEx.RemoveElement(eventID);
 
-			bRet = mModuleRemoveListEx.Next(nEventID);
+			bRet = mModuleRemoveListEx.Next(eventID);
 		}
 	}
 
@@ -82,18 +82,18 @@ bool NFEventModule::Execute()
 
 }
 
-bool NFEventModule::DoEvent(const int nEventID, const NFDataList & valueList)
+bool NFEventModule::DoEvent(const int eventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 
-	auto xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
+	auto xEventListPtr = mModuleEventInfoMapEx.GetElement(eventID);
 	if (xEventListPtr)
 	{
 		MODULE_EVENT_FUNCTOR pFunPtr;
 		bool bRet = xEventListPtr->First(pFunPtr);
 		while (bRet)
 		{
-			pFunPtr.operator()(nEventID, valueList);
+			pFunPtr.operator()(eventID, valueList);
 
 			bRet = xEventListPtr->Next(pFunPtr);
 		}
@@ -104,17 +104,17 @@ bool NFEventModule::DoEvent(const int nEventID, const NFDataList & valueList)
 	return bRet;
 }
 
-bool NFEventModule::ExistEventCallBack(const int nEventID)
+bool NFEventModule::ExistEventCallBack(const int eventID)
 {
-	return mModuleEventInfoMapEx.ExistElement(nEventID);
+	return mModuleEventInfoMapEx.ExistElement(eventID);
 }
 
-bool NFEventModule::RemoveEventCallBack(const int nEventID)
+bool NFEventModule::RemoveEventCallBack(const int eventID)
 {
-	return mModuleEventInfoMapEx.RemoveElement(nEventID);
+	return mModuleEventInfoMapEx.RemoveElement(eventID);
 }
 
-bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataList & valueList)
+bool NFEventModule::DoEvent(const NFGUID self, const int eventID, const NFDataList & valueList)
 {
 	{
 		//for common event call back
@@ -122,7 +122,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataL
 		bool bFunRet = mCommonEventInfoMapEx.First(pFunPtr);
 		while (bFunRet)
 		{
-			pFunPtr.operator()(self, nEventID, valueList);
+			pFunPtr.operator()(self, eventID, valueList);
 
 			bFunRet = mCommonEventInfoMapEx.Next(pFunPtr);
 		}
@@ -130,7 +130,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataL
 
 	bool bRet = false;
 
-	if (!m_pKernelodule->ExistObject(self))
+	if (!m_pKernelModule->ExistObject(self))
 	{
 		return bRet;
 	}
@@ -141,7 +141,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataL
 		return bRet;
 	}
 
-	auto xEventListPtr = xEventMapPtr->GetElement(nEventID);
+	auto xEventListPtr = xEventMapPtr->GetElement(eventID);
 	if (!xEventListPtr)
 	{
 		return bRet;
@@ -151,7 +151,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataL
 	bool bFunRet = xEventListPtr->First(pFunPtr);
 	while (bFunRet)
 	{
-		pFunPtr.operator()(self, nEventID, valueList);
+		pFunPtr.operator()(self, eventID, valueList);
 
 		bFunRet = xEventListPtr->Next(pFunPtr);
 	}
@@ -159,7 +159,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataL
 	return bRet;
 }
 
-bool NFEventModule::ExistEventCallBack(const NFGUID self, const int nEventID)
+bool NFEventModule::ExistEventCallBack(const NFGUID self, const int eventID)
 {
 	auto xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
@@ -167,10 +167,10 @@ bool NFEventModule::ExistEventCallBack(const NFGUID self, const int nEventID)
 		return false;
 	}
 
-	return xEventMapPtr->ExistElement(nEventID);
+	return xEventMapPtr->ExistElement(eventID);
 }
 
-bool NFEventModule::RemoveEventCallBack(const NFGUID self, const int nEventID)
+bool NFEventModule::RemoveEventCallBack(const NFGUID self, const int eventID)
 {
 	auto xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
@@ -178,7 +178,7 @@ bool NFEventModule::RemoveEventCallBack(const NFGUID self, const int nEventID)
 		return false;
 	}
 
-	return xEventMapPtr->RemoveElement(nEventID);
+	return xEventMapPtr->RemoveElement(eventID);
 }
 
 bool NFEventModule::RemoveEventCallBack(const NFGUID self)
@@ -186,13 +186,13 @@ bool NFEventModule::RemoveEventCallBack(const NFGUID self)
 	return mObjectEventInfoMapEx.RemoveElement(self);
 }
 
-bool NFEventModule::AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb)
+bool NFEventModule::AddEventCallBack(const int eventID, const MODULE_EVENT_FUNCTOR cb)
 {
-	auto xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
+	auto xEventListPtr = mModuleEventInfoMapEx.GetElement(eventID);
 	if (!xEventListPtr)
 	{
 		xEventListPtr = NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR>>(NF_NEW NFList<MODULE_EVENT_FUNCTOR>());
-		mModuleEventInfoMapEx.AddElement(nEventID, xEventListPtr);
+		mModuleEventInfoMapEx.AddElement(eventID, xEventListPtr);
 	}
 
 	xEventListPtr->Add(cb);
@@ -200,9 +200,9 @@ bool NFEventModule::AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNC
 	return false;
 }
 
-bool NFEventModule::AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb)
+bool NFEventModule::AddEventCallBack(const NFGUID self, const int eventID, const OBJECT_EVENT_FUNCTOR cb)
 {
-	if (!m_pKernelodule->ExistObject(self))
+	if (!m_pKernelModule->ExistObject(self))
 	{
 		return false;
 	}
@@ -214,11 +214,11 @@ bool NFEventModule::AddEventCallBack(const NFGUID self, const int nEventID, cons
 		mObjectEventInfoMapEx.AddElement(self, xEventMapPtr);
 	}
 
-	auto xEventListPtr =  xEventMapPtr->GetElement(nEventID);
+	auto xEventListPtr =  xEventMapPtr->GetElement(eventID);
 	if (!xEventListPtr)
 	{
 		xEventListPtr = NF_SHARE_PTR<NFList<OBJECT_EVENT_FUNCTOR>>(NF_NEW NFList<OBJECT_EVENT_FUNCTOR>());
-		xEventMapPtr->AddElement(nEventID, xEventListPtr);
+		xEventMapPtr->AddElement(eventID, xEventListPtr);
 	}
 
 	xEventListPtr->Add(cb);

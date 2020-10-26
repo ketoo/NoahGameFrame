@@ -84,12 +84,12 @@ public:
     virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell) = 0;
 
 
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND around = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, ECELL_AROUND around = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, const std::string& className, NFDataList& list, ECELL_AROUND around = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, const std::string& className, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9) = 0;
 
 
     //////////////////////////////////////////////////////////////////////////

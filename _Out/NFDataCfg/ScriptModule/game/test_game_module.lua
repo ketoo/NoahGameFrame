@@ -81,20 +81,20 @@ function test_game_module:max_prop_cb(id, propertyName, oldVar, newVar)
 	
 end
 
-function test_game_module:task_list_cb(id, recordName, nOpType, nRow, nCol, oldVar, newVar)
+function test_game_module:task_list_cb(id, recordName, nOpType, row, col, oldVar, newVar)
 	print("Hello Lua task_list_cb ")
 	if nOpType == RecordOptype.Add then
 		print(" nOpType:".. tostring(nOpType) .. "");
 	end
 
 	if nOpType == RecordOptype.Update then
-		if nCol == 0 then
+		if col == 0 then
 			local nOldVar = oldVar:string();
 			local nNewVar = newVar:string();
 
 			print(" nOpType:".. tostring(nOpType).. " oldVar:".. tostring(nOldVar) .." newVar:" .. tostring(nNewVar) .. "");
 		end
-		if nCol == 1 then
+		if col == 1 then
 		local nOldVar = oldVar:int();
 		local nNewVar = newVar:int();
 
@@ -104,7 +104,7 @@ function test_game_module:task_list_cb(id, recordName, nOpType, nRow, nCol, oldV
 
 end
 
-function test_game_module:event_cb(id, nEventID, arg)
+function test_game_module:event_cb(id, eventID, arg)
 	local nValue = arg:int(0);
 	local fValue = arg:float(1);
 	local strValue = arg:string(2);
@@ -113,27 +113,27 @@ function test_game_module:event_cb(id, nEventID, arg)
 	local head = ident.head;
 	local data = ident.data;
 
-	print("Hello Lua EventCallBack nEventID:".. nEventID .. "");
+	print("Hello Lua EventCallBack eventID:".. eventID .. "");
 	print("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." ident:".. ident:tostring() .. "");
 end
 
-function test_game_module:schedule(id, strHeartBeat, fTime, nCount)
+function test_game_module:schedule(id, heartBeat, time, count)
 	local obj = NFDataList();
 	--local s = os.clock()
 	local s = script_module:time();
 	if oldTime == nil then
 		oldTime = s
 	end
-	print("Hello Lua HeartCallBac666666:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "");
+	print("Hello Lua HeartCallBac666666:".. heartBeat .. " Time:" .. (s-oldTime) .. "");
 	oldTime = s;
 end
 
-function test_game_module:module_schedule(strHeartBeat, fTime, nCount)
-	print("Hello Lua Module HeartCallBack666:".. strHeartBeat .. " Time:" .. fTime .. "");
+function test_game_module:module_schedule(heartBeat, time, count)
+	print("Hello Lua Module HeartCallBack666:".. heartBeat .. " Time:" .. time .. "");
 	
 end
 
-function test_game_module:class_common_event(id, strClassName, eventID, varData)
+function test_game_module:class_common_event(id, className, eventID, varData)
 
-	print("class_common_event, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "");
+	print("class_common_event, ClassName: " .. tostring(className) .. " EventID: " .. tostring(eventID) .. "");
 end

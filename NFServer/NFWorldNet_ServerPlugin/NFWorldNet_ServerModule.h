@@ -55,13 +55,20 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData);
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData);
-    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
+	virtual bool IsPrimaryWorldServer();
+	virtual int GetWorldAreaID();
 
-    virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const std::string& xData);
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message& xData);
+
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const std::string& xData);
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData);
+    virtual bool SendMsgToGamePlayer(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
+
+    virtual NF_SHARE_PTR<ServerData> GetSuitProxyToEnter();
+	virtual NF_SHARE_PTR<ServerData> GetSuitGameToEnter(const int arg);
 
     virtual int GetPlayerGameID(const NFGUID self);
     virtual const std::vector<NFGUID>& GetOnlinePlayers();
@@ -73,31 +80,31 @@ protected:
 	virtual bool AddOffLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb);
 protected:
 
-    void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
 
-    void OnOnlineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnOnlineProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnOfflineProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen);
+    void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t len);
     void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
 protected:
 
-    void OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnGameServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnRefreshGameServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnGameServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnGameServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnRefreshGameServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    void OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void OnDBServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnDBServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRefreshDBServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnDBServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnDBServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnRefreshDBServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 	void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);
@@ -117,6 +124,8 @@ protected:
     void LogGameServer();
 
 private:
+	int mAreaID = 0;
+
 	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOnLineCallBackFunc;
 	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOffLineCallBackFunc;
 

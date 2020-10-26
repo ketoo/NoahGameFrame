@@ -97,6 +97,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFAutoBroadcastModule.h" />
+    <ClInclude Include="NFGameManagerModule.h" />
     <ClInclude Include="NFGameServerNet_ServerModule.h" />
     <ClInclude Include="NFGameServerNet_ServerPlugin.h" />
     <ClInclude Include="NFSceneAutoBroadcastModule.h" />
@@ -111,6 +112,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFAutoBroadcastModule.cpp" />
+    <ClCompile Include="NFGameManagerModule.cpp" />
     <ClCompile Include="NFGameServerNet_ServerModule.cpp" />
     <ClCompile Include="NFGameServerNet_ServerPlugin.cpp" />
     <ClCompile Include="NFSceneAutoBroadcastModule.cpp" />

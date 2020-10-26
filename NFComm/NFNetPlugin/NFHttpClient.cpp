@@ -335,8 +335,8 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
         it++;
     }
 
-    size_t nLen = strPostData.length();
-    if (nLen > 0)
+    size_t len = strPostData.length();
+    if (len > 0)
     {
         struct evbuffer* output_buffer = evhttp_request_get_output_buffer(req);
         if (output_buffer == NULL)
@@ -345,9 +345,9 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
             return false;
         }
 
-        evbuffer_add(output_buffer, strPostData.c_str(), nLen);
+        evbuffer_add(output_buffer, strPostData.c_str(), len);
         char buf[256] = {0};
-        evutil_snprintf(buf, sizeof(buf) - 1, "%lu", (unsigned long) nLen);
+        evutil_snprintf(buf, sizeof(buf) - 1, "%lu", (unsigned long) len);
         evhttp_add_header(output_headers, "Content-Length", buf);
     }
 
@@ -489,7 +489,7 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
     }
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-			NF_CRASH_END_TRY
+			NF_CRASH_END
 #endif
     
 

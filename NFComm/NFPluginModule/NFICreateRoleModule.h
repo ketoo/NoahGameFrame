@@ -24,18 +24,16 @@
 */
 
 
-#ifndef NFI_SYNC_MODULE_H
-#define NFI_SYNC_MODULE_H
+#ifndef NFI_CREATE_ROLE_MODULE_H
+#define NFI_CREATE_ROLE_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFISyncModule
-    : public NFIModule
+class NFICreateRoleModule : public NFIModule
 {
 public:
-    virtual bool RequireMove(const NFGUID self, const NFVector3& pos, const int type) = 0;
-    virtual bool RequireStop(const NFGUID self) = 0;
+	virtual void SetDefaultSceneID(const int sceneID) = 0;
 };
 
 #endif

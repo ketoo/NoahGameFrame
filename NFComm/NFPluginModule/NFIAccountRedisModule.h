@@ -33,9 +33,9 @@ class NFIAccountRedisModule
 {
 
 public:
-	virtual bool VerifyAccount(const std::string& strAccount, const std::string& strPwd) = 0;
-	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd) = 0;
-	virtual bool ExistAccount(const std::string& strAccount) = 0;
+	virtual bool VerifyAccount(const std::string& account, const std::string& strPwd) = 0;
+	virtual bool AddAccount(const std::string& account, const std::string& strPwd) = 0;
+	virtual bool ExistAccount(const std::string& account) = 0;
 };
 
 #endif

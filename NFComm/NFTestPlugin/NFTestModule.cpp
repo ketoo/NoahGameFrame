@@ -37,7 +37,7 @@ bool NFTestModule::Awake()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->Awake();
 	}
 
@@ -54,7 +54,7 @@ bool NFTestModule::Init()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->Init();
 	}
 
@@ -67,7 +67,7 @@ bool NFTestModule::AfterInit()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->AfterInit();
 	}
 
@@ -80,7 +80,7 @@ bool NFTestModule::CheckConfig()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->CheckConfig();
 	}
 
@@ -93,7 +93,7 @@ bool NFTestModule::ReadyExecute()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->ReadyExecute();
 	}
 
@@ -106,7 +106,7 @@ bool NFTestModule::Execute()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->Execute();
 	}
 
@@ -119,7 +119,7 @@ bool NFTestModule::BeforeShut()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->BeforeShut();
 	}
 
@@ -132,7 +132,7 @@ bool NFTestModule::Shut()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->Shut();
 	}
 
@@ -145,7 +145,7 @@ bool NFTestModule::Finalize()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->Finalize();
 	}
 
@@ -158,7 +158,7 @@ bool NFTestModule::OnReloadPlugin()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
-		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->name);
 		pTestModule->OnReloadPlugin();
 	}
 

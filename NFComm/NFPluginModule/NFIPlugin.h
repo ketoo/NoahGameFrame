@@ -36,7 +36,7 @@
 	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFIModule* pRegisterModule##className= new className(pManager); \
-    pRegisterModule##className->strName = (#className); \
+    pRegisterModule##className->name = (#classBaseName); \
     pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );\
     this->AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 
@@ -50,15 +50,6 @@
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnRegistered( pManager->FindPlugin((#className)) );
-
-/*
-#define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
-    pRegisterComponent##className->strName = (#className); \
-    pManager->AddComponent( (#className), pRegisterComponent##className );
-
-#define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
-        dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
-*/
 
 class NFIPluginManager;
 
@@ -116,7 +107,7 @@ public:
 			bool bRet = pModule->Awake();
 			if (!bRet)
 			{
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
 				assert(0);
 			}
 		}
@@ -134,7 +125,7 @@ public:
 			bool bRet = pModule->Init();
 			if (!bRet)
 			{
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
 				assert(0);
 			}
 		}
@@ -152,7 +143,7 @@ public:
             bool bRet = pModule->AfterInit();
             if (!bRet)
             {
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
                 assert(0);
             }
         }

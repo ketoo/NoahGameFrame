@@ -34,15 +34,15 @@
 
 NFClassModule::NFClassModule()
 {
-    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+	mConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 }
 
 NFClassModule::NFClassModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+	mConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 
-    std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
+    std::cout << "Using [" << pPluginManager->GetConfigPath() + mConfigFileName << "]" << std::endl;
 
 	if (!this->mbBackup)
 	{
@@ -87,7 +87,7 @@ bool NFClassModule::Init()
 {
 	for (int i = 0; i < mThreadClasses.size(); ++i)
 	{
-		mThreadClasses[i].classModule->Awake();
+		mThreadClasses[i].classModule->Init();
 	}
     return true;
 }
@@ -96,7 +96,7 @@ bool NFClassModule::Shut()
 {
 	for (int i = 0; i < mThreadClasses.size(); ++i)
 	{
-		mThreadClasses[i].classModule->Awake();
+		mThreadClasses[i].classModule->Shut();
 	}
 
     ClearAll();
@@ -170,11 +170,11 @@ bool NFClassModule::AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
     {
         if (pPropertyNode)
         {
-            const char* strPropertyName = pPropertyNode->first_attribute("Id")->value();
-            if (pClass->GetPropertyManager()->GetElement(strPropertyName))
+            const char* propertyName = pPropertyNode->first_attribute("Id")->value();
+            if (pClass->GetPropertyManager()->GetElement(propertyName))
             {
                 //error
-                NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
+                NFASSERT(0, propertyName, __FILE__, __FUNCTION__);
                 continue;
             }
 
@@ -198,14 +198,14 @@ bool NFClassModule::AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             NFData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
             {
-                //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
+                //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << propertyName << " type error!!!" << std::endl;
 
-                NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
+                NFASSERT(0, propertyName, __FILE__, __FUNCTION__);
             }
 
-            //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
+            //printf( " Property:%s[%s]\n", propertyName, pstrType );
 
-            NF_SHARE_PTR<NFIProperty> xProperty = pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType());
+            NF_SHARE_PTR<NFIProperty> xProperty = pClass->GetPropertyManager()->AddProperty(NFGUID(), propertyName, varProperty.GetType());
             xProperty->SetPublic(bPublic);
             xProperty->SetPrivate(bPrivate);
             xProperty->SetSave(bSave);
@@ -311,20 +311,20 @@ bool NFClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NF_S
     {
         if (pComponentNode)
         {
-            const char* strComponentName = pComponentNode->first_attribute("Name")->value();
+            const char* componentName = pComponentNode->first_attribute("Name")->value();
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
             bool bEnable = lexical_cast<bool>(strEnable);
             if (bEnable)
             {
-                if (pClass->GetComponentManager()->GetElement(strComponentName))
+                if (pClass->GetComponentManager()->GetElement(componentName))
                 {
                     //error
-                    NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
+                    NFASSERT(0, componentName, __FILE__, __FUNCTION__);
                     continue;
                 }
-                NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), strComponentName));
-                pClass->GetComponentManager()->AddComponent(strComponentName, xComponent);
+                NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), componentName));
+                pClass->GetComponentManager()->AddComponent(componentName, xComponent);
             }
         }
     }
@@ -341,11 +341,11 @@ bool NFClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<
 
     //////////////////////////////////////////////////////////////////////////
     std::string strFile = pPluginManager->GetConfigPath() + pstrClassFilePath;
-	std::string strContent;
-	pPluginManager->GetFileContent(strFile, strContent);
+	std::string content;
+	pPluginManager->GetFileContent(strFile, content);
 
 	rapidxml::xml_document<> xDoc;
-    xDoc.parse<0>((char*)strContent.c_str());
+    xDoc.parse<0>((char*)content.c_str());
     //////////////////////////////////////////////////////////////////////////
 
     //support for unlimited layer class inherits
@@ -397,23 +397,23 @@ bool NFClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClas
     while (pParent)
     {
         //inherited some properties form class of parent
-        std::string strFileName = "";
-        pParent->First(strFileName);
-        while (!strFileName.empty())
+        std::string fileName = "";
+        pParent->First(fileName);
+        while (!fileName.empty())
         {
-            if (pClass->Find(strFileName))
+            if (pClass->Find(fileName))
             {
-                strFileName.clear();
+                fileName.clear();
                 continue;
             }
 
-            if (AddClassInclude(strFileName.c_str(), pClass))
+            if (AddClassInclude(fileName.c_str(), pClass))
             {
-                pClass->Add(strFileName);
+                pClass->Add(fileName);
             }
 
-            strFileName.clear();
-            pParent->Next(strFileName);
+            fileName.clear();
+            pParent->Next(fileName);
         }
 
         pParent = pParent->GetParent();
@@ -430,15 +430,15 @@ bool NFClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClas
     return true;
 }
 
-bool NFClassModule::AddClass(const std::string& strClassName, const std::string& strParentName)
+bool NFClassModule::AddClass(const std::string& className, const std::string& strParentName)
 {
     NF_SHARE_PTR<NFIClass> pParentClass = GetElement(strParentName);
-    NF_SHARE_PTR<NFIClass> pChildClass = GetElement(strClassName);
+    NF_SHARE_PTR<NFIClass> pChildClass = GetElement(className);
     if (!pChildClass)
     {
-        pChildClass = NF_SHARE_PTR<NFIClass>(NF_NEW NFClass(strClassName));
-        AddElement(strClassName, pChildClass);
-        //pChildClass = CreateElement( strClassName );
+        pChildClass = NF_SHARE_PTR<NFIClass>(NF_NEW NFClass(className));
+        AddElement(className, pChildClass);
+        //pChildClass = CreateElement( className );
 
         pChildClass->SetTypeName("");
         pChildClass->SetInstancePath("");
@@ -480,12 +480,12 @@ bool NFClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> 
 bool NFClassModule::Load()
 {
     //////////////////////////////////////////////////////////////////////////
-	std::string strFile = pPluginManager->GetConfigPath() + msConfigFileName;
-	std::string strContent;
-	pPluginManager->GetFileContent(strFile, strContent);
+	std::string strFile = pPluginManager->GetConfigPath() + mConfigFileName;
+	std::string content;
+	pPluginManager->GetFileContent(strFile, content);
 
 	rapidxml::xml_document<> xDoc;
-	xDoc.parse<0>((char*)strContent.c_str());
+	xDoc.parse<0>((char*)content.c_str());
     //////////////////////////////////////////////////////////////////////////
     //support for unlimited layer class inherits
     rapidxml::xml_node<>* root = xDoc.first_node();
@@ -507,9 +507,9 @@ bool NFClassModule::Save()
     return true;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFClassModule::GetClassPropertyManager(const std::string& strClassName)
+NF_SHARE_PTR<NFIPropertyManager> NFClassModule::GetClassPropertyManager(const std::string& className)
 {
-    NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
+    NF_SHARE_PTR<NFIClass> pClass = GetElement(className);
     if (pClass)
     {
         return pClass->GetPropertyManager();
@@ -518,9 +518,9 @@ NF_SHARE_PTR<NFIPropertyManager> NFClassModule::GetClassPropertyManager(const st
     return NULL;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFClassModule::GetClassRecordManager(const std::string& strClassName)
+NF_SHARE_PTR<NFIRecordManager> NFClassModule::GetClassRecordManager(const std::string& className)
 {
-    NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
+    NF_SHARE_PTR<NFIClass> pClass = GetElement(className);
     if (pClass)
     {
         return pClass->GetRecordManager();
@@ -534,9 +534,9 @@ bool NFClassModule::Clear()
     return true;
 }
 
-bool NFClassModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
+bool NFClassModule::AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
-    NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
+    NF_SHARE_PTR<NFIClass> pClass = GetElement(className);
     if (nullptr == pClass)
     {
         return false;
@@ -545,15 +545,15 @@ bool NFClassModule::AddClassCallBack(const std::string& strClassName, const CLAS
     return pClass->AddClassCallBack(cb);
 }
 
-bool NFClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList)
+bool NFClassModule::DoEvent(const NFGUID& objectID, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList)
 {
-    NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
+    NF_SHARE_PTR<NFIClass> pClass = GetElement(className);
     if (nullptr == pClass)
     {
         return false;
     }
 
-    return pClass->DoEvent(objectID, eClassEvent, valueList);
+    return pClass->DoEvent(objectID, classEvent, valueList);
 }
 
 bool NFClassModule::AfterInit()

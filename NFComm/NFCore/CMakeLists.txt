@@ -1,7 +1,7 @@
 file(GLOB NFCore_ROOT_Cpp
 	*.cpp)
 file(GLOB NFCore_ROOT_Hpp
-	*.hpp)
+	*.cc)
 file(GLOB NFCore_ROOT_H
 	*.h)
 

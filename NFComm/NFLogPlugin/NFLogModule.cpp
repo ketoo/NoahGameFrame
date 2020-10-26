@@ -31,9 +31,10 @@
 #include "NFComm/NFCore/easylogging++.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-#include <execinfo.h>
+#include "NFComm/NFCore/NFException.hpp"
 #endif
 
+INITIALIZE_EASYLOGGINGPP
 
 unsigned int NFLogModule::idx = 0;
 
@@ -111,8 +112,8 @@ bool NFLogModule::Awake()
 		pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
 	}
 
-	const std::string& strFileName = pConfiguration->value();
-	pConfiguration->setValue(pPluginManager->GetConfigPath() + strFileName);
+	const std::string& fileName = pConfiguration->value();
+	pConfiguration->setValue(pPluginManager->GetConfigPath() + fileName);
 
 	std::cout << "LogConfig: " << strAppLogName << std::endl;
 
@@ -124,7 +125,8 @@ bool NFLogModule::Awake()
 
 bool NFLogModule::Init()
 {
-   
+	m_pKernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
+
     return true;
 }
 
@@ -223,60 +225,23 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     return true;
 }
 
-bool NFLogModule::LogElement(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
+bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s %s %d", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str());
-    }
+	std::ostringstream os;
+	auto record = m_pKernelModule->FindRecord(ident, recordName);
+	if (record)
+	{
 
-    return true;
-}
+		if (line > 0)
+		{
+			Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str(), func, line);
+		}
+		else
+		{
+			Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str());
+		}
+	}
 
-bool NFLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strProperty, const std::string& strDesc, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s %s %d", ident.ToString().c_str(), strProperty.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s", ident.ToString().c_str(), strProperty.c_str(), strDesc.c_str());
-    }
-
-    return true;
-
-}
-
-bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s %s %d", ident.ToString().c_str(), strRecord.c_str(), nRow, nCol, strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s", ident.ToString().c_str(), strRecord.c_str(), nRow, nCol, strDesc.c_str());
-    }
-
-    return true;
-
-}
-
-bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strRecord, const std::string& strDesc, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), strRecord.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), strRecord.c_str(), strDesc.c_str());
-    }
 
     return true;
 }
@@ -298,43 +263,9 @@ bool NFLogModule::LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const st
 
 void NFLogModule::LogStack()
 {
-
-    //To Add
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    time_t t = time(0);
-    char szDmupName[MAX_PATH];
-    tm* ptm = localtime(&t);
-
-    sprintf(szDmupName, "%d_%d_%d_%d_%d_%d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
-    
-    HANDLE hDumpFile = CreateFileA(szDmupName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-
-    
-    MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
-    //dumpInfo.ExceptionPointers = pException;
-    dumpInfo.ThreadId = GetCurrentThreadId();
-    dumpInfo.ClientPointers = TRUE;
-
-    
-    MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
-
-    CloseHandle(hDumpFile);
-#else
-	int size = 16;
-	void * array[16];
-	int stack_num = backtrace(array, size);
-	char ** stacktrace = backtrace_symbols(array, stack_num);
-	for (int i = 0; i < stack_num; ++i)
-	{
-		//printf("%s\n", stacktrace[i]);
-        
-        Log(NLL_FATAL_NORMAL, "%s", stacktrace[i]);
-	}
-
-	free(stacktrace);
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NFException::CrashHandler(0);
 #endif
- 
-    
 }
 bool NFLogModule::LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/)
 {
@@ -674,63 +605,6 @@ bool NFLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream,
     }
 
     return true;
-}
-
-void NFLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_NORMAL*/)
-{
-#if NF_PLATFORM != NF_PLATFORM_WIN
-
-    int size = 8;
-    void * array[8];
-    int stack_num = backtrace(array, size);
-    char ** stacktrace = backtrace_symbols(array, stack_num);
-    for (int i = 0; i < stack_num; ++i)
-    {
-    	//printf("%s\n", stacktrace[i]);
-        Log(NLL_FATAL_NORMAL, "%s", stacktrace[i]);
-    }
-    
-
-    free(stacktrace);
-#else
-
-	static const int MAX_STACK_FRAMES = 8;
-	
-	void *pStack[MAX_STACK_FRAMES];
- 
-	HANDLE process = GetCurrentProcess();
-	SymInitialize(process, NULL, TRUE);
-	WORD frames = CaptureStackBackTrace(0, MAX_STACK_FRAMES, pStack, NULL);
- 
-    Log(NLL_FATAL_NORMAL, "stack traceback: ");
-	//LOG(FATAL) << "stack traceback: " << std::endl;
-	for (WORD i = 0; i < frames; ++i) {
-		DWORD64 address = (DWORD64)(pStack[i]);
- 
-		DWORD64 displacementSym = 0;
-		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
-		PSYMBOL_INFO pSymbol = (PSYMBOL_INFO)buffer;
-		pSymbol->SizeOfStruct = sizeof(SYMBOL_INFO);
-		pSymbol->MaxNameLen = MAX_SYM_NAME;
- 
-		DWORD displacementLine = 0;
-		IMAGEHLP_LINE64 line;
-		//SymSetOptions(SYMOPT_LOAD_LINES);
-		line.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
- 
-		if (SymFromAddr(process, address, &displacementSym, pSymbol)
-		 && SymGetLineFromAddr64(process, address, &displacementLine, &line))
-        {
-            Log(NLL_FATAL_NORMAL, "\t %s at %s : %d (0x%16d)", pSymbol->Name, line.FileName, line.LineNumber, pSymbol->Address);
-			//LOG(FATAL) << "\t" << pSymbol->Name << " at " << line.FileName << ":" << line.LineNumber << "(0x" << std::hex << pSymbol->Address << std::dec << ")" << std::endl;
-		}
-		else
-        {
-            Log(NLL_FATAL_NORMAL, "\terror %d", GetLastError());
-			//LOG(FATAL) << "\terror: " << GetLastError() << std::endl;
-		}
-	}
-#endif
 }
 
 void NFLogModule::SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker)

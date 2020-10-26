@@ -52,17 +52,17 @@ public:
     virtual bool AfterInit() override;
 
 	///////////
-	virtual NFGUID CreateEquip( const NFGUID& self, const std::string& strConfigName, const int nCount = 1);
-	virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount);
+	virtual NFGUID CreateEquip( const NFGUID& self, const std::string& configName, const int count = 1);
+	virtual bool CreateItem(const NFGUID& self, const std::string& configName, const int count);
 
 	virtual int ItemCount(const NFGUID& self, const std::string& strItemConfigID);
 
 	virtual bool DeleteEquip(const NFGUID& self, const NFGUID& id);
-    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
-    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int count);
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int count);
 
 protected:
-	bool CreateItemInNormalBag(const NFGUID& self, const std::string& strConfigName, const int nCount);
+	bool CreateItemInNormalBag(const NFGUID& self, const std::string& configName, const int count);
 
 private:
     NFIKernelModule* m_pKernelModule;

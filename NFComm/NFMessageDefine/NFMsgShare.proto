@@ -56,18 +56,25 @@ message AckPlayerLeaveList//对象离去列表
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 message PosSyncUnit
-{
+{	
+	enum EMoveType
+	{
+		EMT_WALK = 0;
+		EET_SPEEDY = 1;
+		EET_TELEPORT = 2;
+	}
+
 	Ident 	mover = 1;
-    Vector3 now = 2;
-    Vector3 pos = 3;
-    Vector3 direction = 4;
-    int32 status = 5;
-    float time = 6;
+    Vector3 pos = 2;
+    Vector3 orientation = 3;
+    int32 status = 4;
+	EMoveType type = 5;
 }
 
 message ReqAckPlayerPosSync
 {
-	repeated PosSyncUnit sync_unit = 1;
+    int32 sequence = 1;
+	repeated PosSyncUnit sync_unit = 2;
 }
 
 ////////////////////////////

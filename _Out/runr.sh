@@ -1,9 +1,7 @@
 #!/bin/bash
 
 export LC_ALL="C"
-
-ulimit -c unlimited
-source /etc/profile
+echo "ulimit -c unlimited" >> /etc/profile
 
 
 sysOS=`uname -s`
@@ -38,7 +36,7 @@ sleep 1
 
 sleep 1
 
-./NFServer -d Plugin=Plugin.xml Server=GameServer ID=6
+./NFServer -d Plugin=Plugin.xml Server=GameServer ID=16001
 
 sleep 1
 

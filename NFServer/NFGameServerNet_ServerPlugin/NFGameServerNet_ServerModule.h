@@ -41,6 +41,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
+#include "NFComm/NFPluginModule/NFISyncPosModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -58,67 +59,42 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID);
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID);
+    virtual void SendMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const NFGUID& self);
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const int sceneID, const int groupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const int sceneID, const int groupID, const NFGUID exceptID);
 
-	virtual void SendMsgToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID);
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID);
+	virtual void SendMsgToGate(const uint16_t msgID, const std::string& msg, const NFGUID& self);
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, const std::string& msg, const int sceneID, const int groupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, const std::string& msg, const int sceneID, const int groupID, const NFGUID exceptID);
 
-    virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
-    virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
-    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
+    virtual bool AddPlayerGateInfo(const NFGUID& roleID, const NFGUID& clientID, const int gateID);
+    virtual bool RemovePlayerGateInfo(const NFGUID& roleID);
+    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& roleID);
 
-    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
-    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK nSockIndex);
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int gateID);
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK sockIndex);
 
-
-protected:
-    void OnSocketPSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-    void OnClientDisconnect(const NFSOCK nSockIndex);
-    void OnClientConnected(const NFSOCK nSockIndex);
 
 protected:
-    void OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketPSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnClientDisconnect(const NFSOCK sockIndex);
+    void OnClientConnected(const NFSOCK sockIndex);
 
 protected:
-    void OnClientLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnClientSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnClientReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnClientReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnClientReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnClientEnterGameFinishProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+protected:
+    void OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+	void OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+	void OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+	void OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+
+	void OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
-    void OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-protected:
-	void OnClientPropertyIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyFloatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyStringProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyObjectProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyVector2Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyVector3Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	void OnClientAddRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRemoveRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientSwapRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordFloatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordStringProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordObjectProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordVector2Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordVector3Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-protected:
-
-	//////////////////////////////////////////
-
+    void OnTransWorld(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 private:
     
@@ -128,7 +104,8 @@ private:
     NFMapEx<int, GateServerInfo> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
+	NFISyncPosModule* m_pSyncPosModule;
+	NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
     NFISceneProcessModule* m_pSceneProcessModule;

@@ -35,7 +35,7 @@ class NFISceneProcessModule
 {
 public:
 
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int sceneID, const int nGrupID, const int type, const NFVector3& pos, const NFDataList& argList) = 0;
 };
 
 #endif

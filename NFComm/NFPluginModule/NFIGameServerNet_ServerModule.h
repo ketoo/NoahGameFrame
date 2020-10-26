@@ -46,19 +46,19 @@ public:
         GateBaseInfo()
         {
             nActorID = 0;
-            nGateID = 0;
+            gateID = 0;
 			eStatus = E_LOADING;
         }
 
         GateBaseInfo(const int gateID, const NFGUID xIdent)
         {
-            nActorID = 0;
-            nGateID = gateID;
-            xClientID = xIdent;
+            this->nActorID = 0;
+			this->gateID = gateID;
+			this->xClientID = xIdent;
         }
 
         int nActorID;
-		int nGateID;
+		int gateID;
 		ERoleStatus eStatus;
         NFGUID xClientID;
     };
@@ -72,22 +72,22 @@ public:
 
 public:
 
-    //virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& xMsg, const NFGUID& self) = 0;
-    virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self) = 0;
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID) = 0;
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID) = 0;
+    //virtual void SendMsgPBToGate(const uint16_t msgID, const std::string& xMsg, const NFGUID& self) = 0;
+    virtual void SendMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const NFGUID& self) = 0;
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const int sceneID, const int groupID) = 0;
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, google::protobuf::Message& xMsg, const int sceneID, const int groupID, const NFGUID exceptID) = 0;
 
-	virtual void SendMsgToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self) = 0;
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID) = 0;
-	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID) = 0;
+	virtual void SendMsgToGate(const uint16_t msgID, const std::string& msg, const NFGUID& self) = 0;
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, const std::string& msg, const int sceneID, const int groupID) = 0;
+	virtual void SendGroupMsgPBToGate(const uint16_t msgID, const std::string& msg, const int sceneID, const int groupID, const NFGUID exceptID) = 0;
 
 
-    virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID) = 0;
-    virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID) = 0;
+    virtual bool AddPlayerGateInfo(const NFGUID& roleID, const NFGUID& clientID, const int gateID) = 0;
+    virtual bool RemovePlayerGateInfo(const NFGUID& roleID) = 0;
 
-    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID) = 0;   
-	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID) = 0;
-	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK nSockIndex) = 0;
+    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& roleID) = 0;
+	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int gateID) = 0;
+	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK sockIndex) = 0;
 };
 
 #endif

@@ -51,25 +51,25 @@ bool NFProxyServerNet_WSModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
+            const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+            if (serverType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == serverID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-                //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
-                int nWSPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::WSPort());
+                const int port = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+                const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                const int cpuCount = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+                //const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+                //const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+                int wsPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::WSPort());
 
-                //webserver only run one instance in each server
-                if (nWSPort > 0)
+                //web server only run one instance in each server
+                if (wsPort > 0)
                 {
-                    int nRet = m_pWSModule->Initialization(nMaxConnect, nWSPort, nCpus);
+                    int nRet = m_pWSModule->Initialization(maxConnect, wsPort, cpuCount);
                     if (nRet < 0)
                     {
                         std::ostringstream strLog;
-                        strLog << "Cannot init websocket server net, Port = " << nWSPort;
+                        strLog << "Cannot init websocket server net, Port = " << wsPort;
                         m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
                         NFASSERT(nRet, "Cannot init websocket server net", __FILE__, __FUNCTION__);
                         exit(0);
@@ -97,32 +97,32 @@ bool NFProxyServerNet_WSModule::Execute()
 	return true;
 }
 
-void NFProxyServerNet_WSModule::OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFProxyServerNet_WSModule::OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
-    m_pWSModule->SendMsg(std::string(msg, nLen), nSockIndex);
+	m_pWSModule->SendMsgToAllClient(std::string(msg, len));
 }
 
-void NFProxyServerNet_WSModule::OnSocketClientEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFProxyServerNet_WSModule::OnSocketClientEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
-        OnClientConnected(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+        OnClientConnected(sockIndex);
     }
 }
 
@@ -151,13 +151,13 @@ void NFProxyServerNet_WSModule::OnClientDisconnect(const NFSOCK nAddress)
                     return;
                 }
 
-                std::string strMsg;
-                if (!xMsg.SerializeToString(&strMsg))
+                std::string msg;
+                if (!xMsg.SerializeToString(&msg))
                 {
                     return;
                 }
 
-				m_pNetClientModule->SendByServerIDWithOutHead(nGameID, NFMsg::EGameMsgID::REQ_LEAVE_GAME, strMsg);
+				m_pNetClientModule->SendByServerIDWithOutHead(nGameID, NFMsg::EGameMsgID::REQ_LEAVE_GAME, msg);
                  */
   
             }
@@ -170,12 +170,16 @@ void NFProxyServerNet_WSModule::OnClientDisconnect(const NFSOCK nAddress)
 void NFProxyServerNet_WSModule::OnClientConnected(const NFSOCK nAddress)
 {
 	//bind client'id with socket id
-    NFGUID xClientIdent = m_pKernelModule->CreateGUID();
     NetObject* pNetObject = m_pWSModule->GetNet()->GetNetObject(nAddress);
-    if (pNetObject)
+    if (pNetObject && pNetObject->GetClientID().IsNull())
     {
+		NFGUID xClientIdent = m_pKernelModule->CreateGUID();
         pNetObject->SetClientID(xClientIdent);
-    }
+		mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<NFSOCK>(new NFSOCK(nAddress)));
 
-    mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<NFSOCK>(new NFSOCK(nAddress)));
+
+		// 1. create a tcp client to connect to the TCP service provided by proxy server.
+		// 2. transfer the ws data come from websocket to the TCP service provided by proxy server.
+		// 3.transfer the tcp data come from proxy server to the websocket service to send to clients.
+    }
 }

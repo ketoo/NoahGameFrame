@@ -37,6 +37,11 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include "NFComm/NFCore/NFException.hpp"
+#endif
 
 class TickElement
 {
@@ -62,14 +67,16 @@ public:
 	virtual bool Init();
 	virtual bool Execute();
 
-	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount);
+	virtual bool AddSchedule(const NFGUID self, const std::string& scheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float time, const int count);
 	virtual bool RemoveSchedule(const NFGUID self);
-	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName);
-	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName);
-	virtual NF_SHARE_PTR<NFScheduleElement> GetSchedule(const NFGUID self, const std::string& strScheduleName);
+	virtual bool RemoveSchedule(const NFGUID self, const std::string& scheduleName);
+	virtual bool ExistSchedule(const NFGUID self, const std::string& scheduleName);
+	virtual NF_SHARE_PTR<NFScheduleElement> GetSchedule(const NFGUID self, const std::string& scheduleName);
 
 protected:
-	int OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
+	int OnClassCommonEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var);
+
+	int OnGroupCommonEvent(const NFGUID& self, const int scene, const int group, const int type, const NFDataList& arg);
 
 protected:
 	NFMapEx<NFGUID, NFMapEx<std::string, NFScheduleElement >> mObjectScheduleMap;
@@ -78,7 +85,8 @@ protected:
 
 	NFILogModule* m_pLogModule;
 	NFIKernelModule* m_pKernelModule;
-	
+	NFISceneModule* m_pSceneModule;
+
 };
 
 #endif

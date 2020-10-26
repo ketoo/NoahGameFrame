@@ -1,40 +1,45 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GameID" Cache="0" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Account" Cache="0" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="BattlePoint" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="ClanID" Cache="0" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="ConnectKey" Cache="0" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Diamond" Cache="0" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="EXP" Cache="0" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="GMLevel" Cache="0" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="GameID" Cache="0" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Gold" Cache="0" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAXEXP" Cache="1" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Head" Cache="0" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Job" Cache="0" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="LastOfflineTime" Cache="0" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="Level" Cache="0" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="MAXEXP" Cache="0" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="NoticeID" Cache="0" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="Race" Cache="1" Desc="种族" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NoticeID" Cache="0" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OnlineCount" Cache="0" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="OnlineTime" Cache="0" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="Race" Cache="0" Desc="种族" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="ReconnectReason" Cache="0" Desc="这个是切换服务器重连标志, 每次登陆后清空，需要重连时设置" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="SP" Cache="0" Desc="体力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Sex" Cache="1" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="SkillNormal" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="SkillSpecial1" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="SkillSpecial2" Cache="1" Desc="Skill2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="SkillTHUMP" Cache="1" Desc="Skill3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ScenarioProgress" Cache="0" Desc="剧情进度" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Sex" Cache="0" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="SkillNormal" Cache="0" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="SkillSpecial1" Cache="0" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="SkillSpecial2" Cache="0" Desc="Skill2" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="SkillTHUMP" Cache="0" Desc="Skill3" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="TeamID" Cache="0" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="TotalTime" Cache="0" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="HeroEquipmentList" Cache="1"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroEquipmentList" Cache="0"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="HeroID"/><!--- Desc-->
 			<Col Type ="object"	Tag="EquipmentID"/>
 			<Col Type ="int"	Tag="SlotIndex"/>
 		</Record>
-		<Record Id="HeroList" Cache="1"	 Col="8"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroList" Cache="0"	 Col="8"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ItemConfigID"/>
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -44,11 +49,11 @@
 			<Col Type ="int"	Tag="Star"/>
 			<Col Type ="int"	Tag="HP"/>
 		</Record>
-		<Record Id="Inventory" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
+		<Record Id="Inventory" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/>
 		</Record>
-		<Record Id="InventoryEquipment" Cache="1"	 Col="12"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
+		<Record Id="InventoryEquipment" Cache="0"	 Col="14"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="string"	Tag="RandPropertyID"/>
@@ -60,6 +65,8 @@
 			<Col Type ="string"	Tag="Stone2"/>
 			<Col Type ="string"	Tag="Stone3"/>
 			<Col Type ="string"	Tag="Stone4"/>
+			<Col Type ="int"	Tag="Lock"/>
+			<Col Type ="int"	Tag="Future"/>
 			<Col Type ="string"	Tag="UserData"/>
 		</Record>
 	</Records>

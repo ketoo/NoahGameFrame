@@ -31,40 +31,40 @@ enum EGameEventCode
 
 enum EGameMsgID
 {
-	UNKNOW						= 0;         //
-	EVENT_RESULT				= 1;         // for events
-	EVENT_TRANSPORT				= 2;         // for events
-	CLOSE_SOCKET				= 3;         // want to close some one
+	UNKNOW									= 0;         //
+	EVENT_RESULT							= 1;         // for events
+	EVENT_TRANSPORT							= 2;         // for events
+	CLOSE_SOCKET							= 3;         // want to close some one
 
-	WTM_WORLD_REGISTERED		= 10;
-	WTM_WORLD_UNREGISTERED		= 11;
-	WTM_WORLD_REFRESH			= 12;
+	WTM_WORLD_REGISTERED					= 10;
+	WTM_WORLD_UNREGISTERED					= 11;
+	WTM_WORLD_REFRESH						= 12;
 
-	LTM_LOGIN_REGISTERED		= 20;
-	LTM_LOGIN_UNREGISTERED		= 21;
-	LTM_LOGIN_REFRESH			= 22;
+	LTM_LOGIN_REGISTERED					= 20;
+	LTM_LOGIN_UNREGISTERED					= 21;
+	LTM_LOGIN_REFRESH						= 22;
 
-	PTWG_PROXY_REGISTERED		= 30;
-	PTWG_PROXY_UNREGISTERED		= 31;
-	PTWG_PROXY_REFRESH			= 32;
+	PTWG_PROXY_REGISTERED					= 30;
+	PTWG_PROXY_UNREGISTERED					= 31;
+	PTWG_PROXY_REFRESH						= 32;
 
-	GTW_GAME_REGISTERED			= 40;
-	GTW_GAME_UNREGISTERED		= 41;
-	GTW_GAME_REFRESH			= 42;
+	GTW_GAME_REGISTERED						= 40;
+	GTW_GAME_UNREGISTERED					= 41;
+	GTW_GAME_REFRESH						= 42;
 
 	
-	DTW_DB_REGISTERED			= 60;
-	DTW_DB_UNREGISTERED			= 61;
-	DTW_DB_REFRESH				= 62;
+	DTW_DB_REGISTERED						= 60;
+	DTW_DB_UNREGISTERED						= 61;
+	DTW_DB_REFRESH							= 62;
 
-	STS_NET_INFO				= 70;
+	STS_NET_INFO							= 70;
 	
-	REQ_LAG_TEST				= 80;
-	ACK_GATE_LAG_TEST			= 81;
-	ACK_GAME_LAG_TEST			= 82;
+	REQ_LAG_TEST							= 80;
+	ACK_GATE_LAG_TEST						= 81;
+	ACK_GAME_LAG_TEST						= 82;
 	
-	STS_SERVER_REPORT          	= 90;
-	STS_HEART_BEAT				= 100;
+	STS_SERVER_REPORT						= 90;
+	STS_HEART_BEAT							= 100;
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	REQ_LOGIN								= 101;     	//
@@ -75,7 +75,7 @@ enum EGameMsgID
 	ACK_WORLD_LIST							= 111;			//
 	REQ_CONNECT_WORLD						= 112;			//
 	ACK_CONNECT_WORLD						= 113;
-	REQ_KICK_CLIENT_INWORLD					= 114;			//
+	REQ_KICKED_FROM_WORLD					= 114;			//
 
 	REQ_CONNECT_KEY							= 120;         //
 	ACK_CONNECT_KEY							= 122;         //
@@ -97,7 +97,7 @@ enum EGameMsgID
 	ACK_ENTER_GAME							= 151;			//
 	REQ_LEAVE_GAME							= 152;			//
 	ACK_LEAVE_GAME							= 153;			//
-	REQ_SWAP_GAME							= 154;			//
+
 	REQ_SWAP_SCENE							= 155;			//
 	ACK_SWAP_SCENE							= 156;			//
 	REQ_SWAP_HOME_SCENE						= 157;			//
@@ -113,20 +113,20 @@ enum EGameMsgID
 	ACK_OBJECT_RECORD_ENTRY					= 203;			//
 
 	ACK_PROPERTY_INT						= 210;			//
-	ACK_PROPERTY_FLOAT						= 211;			//
+	ACK_PROPERTY_FLOAT							= 211;			//
 	ACK_PROPERTY_STRING						= 212;			//
-	//EGMI_ACK_PROPERTY_DOUBLE					= 213;			//
+	//EGMI_ACK_PROPERTY_DOUBLE				= 213;			//
 	ACK_PROPERTY_OBJECT						= 214;			//
-	ACK_PROPERTY_VECTOR2                   	= 215;
-	ACK_PROPERTY_VECTOR3                   	= 216;
-	ACK_PROPERTY_CLEAR                   	= 217;
+	ACK_PROPERTY_VECTOR2        			= 215;
+	ACK_PROPERTY_VECTOR3        			= 216;
+	ACK_PROPERTY_CLEAR          			= 217;
 
 	ACK_ADD_ROW								= 220;
 	ACK_REMOVE_ROW							= 221;
 	ACK_SWAP_ROW							= 222;
 	ACK_RECORD_INT							= 223;
 	ACK_RECORD_FLOAT						= 224;
-	//EGMI_ACK_RECORD_DOUBLE					= 225;
+	//EGMI_ACK_RECORD_DOUBLE				= 225;
 	ACK_RECORD_STRING						= 226;
 	ACK_RECORD_OBJECT						= 227;
 	ACK_RECORD_VECTOR2						= 228;
@@ -137,15 +137,9 @@ enum EGameMsgID
 
 	ACK_DATA_FINISHED						= 260;
 
-	REQ_AI_ONWER							= 270;
-
 
 	REQ_MOVE								= 300;
 	ACK_MOVE								= 301;
-	REQ_MOVE_IMMUNE							= 302;
-	ACK_MOVE_IMMUNE							= 303;
-	REQ_POS_SYNC							= 306;
-	ACK_POS_SYNC							= 307;
 
 	REQ_CHAT								= 350;
 	ACK_CHAT								= 351;
@@ -165,7 +159,7 @@ enum EGameMsgID
 
 enum EItemType
 {
-    EIT_EQUIP   			= 0; //the equipment which can add props
+	EIT_EQUIP   			= 0; //the equipment which can add props
 	EIT_GEM   				= 1; //the gem ca be embed to the equipment
 	EIT_SUPPLY   			= 2; //expendable items for player, such as a medicine that cures
 	EIT_SCROLL   			= 3; //special items that can call a hero or others, special items can do what you want to do
@@ -179,16 +173,14 @@ enum ESkillType
 	BULLET_REBOUND_SKILL		= 3;//this kind of bullet can damage multiple objects via rebound
 	BULLET_TARGET_BOMB_SKILL	= 4;//this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
 	BULLET_POS_BOMB_SKILL		= 5;//this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
+	FUNC_SKILL					= 6;
 };
 
 enum ESceneType
 {
-	NORMAL_SCENE 			= 0;//public town
-	SINGLE_CLONE_SCENE 		= 1;//single boss underground city
-	MULTI_CLONE_SCENE 		= 2;//world boss underground city
-	PVP_MODE_SCENE 			= 10;
-	MVM_MODE_SCENE	 		= 11;
-	SURVIVAL_MODE_SCENE 	= 12;
+	NORMAL_SCENE 			= 0; //public town, only has one group available for players is 1
+	SINGLE_CLONE_SCENE 		= 1; //private room, only has one player per group and it will be destroyed if the player leaved from group.
+	MULTI_CLONE_SCENE 		= 2; //private room, only has more than one player per group and it will be destroyed if all players leaved from group.
 }
 
 enum ENPCType
@@ -196,4 +188,5 @@ enum ENPCType
     NORMAL_NPC	= 0;			  //
     HERO_NPC 	= 1;              //
     TURRET_NPC 	= 2;              //
+    FUNC_NPC 	= 3;              //
 };

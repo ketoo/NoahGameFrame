@@ -86,13 +86,13 @@ struct NFData
 public:
 	NFData()
 	{
-		nType = TDATA_UNKNOWN;
+		type = TDATA_UNKNOWN;
 	}
 
 	NFData(NFDATA_TYPE eType)
 	{
 		bind = true;
-		nType = eType;
+		type = eType;
 	}
 	
 	NFData(int value)
@@ -139,13 +139,13 @@ public:
 	NFData(const NFData& value)
 	{
 		bind = value.bind;
-		nType = value.nType;
+		type = value.type;
 		variantData = value.variantData;
 	}
 
 	~NFData()
 	{
-		nType = TDATA_UNKNOWN;
+		type = TDATA_UNKNOWN;
 	}
 
 	inline bool operator==(const NFData& src) const
@@ -215,7 +215,7 @@ public:
 	void Reset()
 	{
 		variantData = mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3>();
-		nType = TDATA_UNKNOWN;
+		type = TDATA_UNKNOWN;
 		/*switch (GetType())
 		{
 			case TDATA_INT:
@@ -318,67 +318,67 @@ public:
 
 	NFDATA_TYPE GetType() const
 	{
-		return nType;
+		return type;
 	}
 
 
 	void SetInt(const NFINT64 var)
 	{
-		if (nType == TDATA_INT || TDATA_UNKNOWN == nType)
+		if (type == TDATA_INT || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_INT;
+			type = TDATA_INT;
 			variantData = (NFINT64)var;
 		}
 	}
 
 	void SetFloat(const double var)
 	{
-		if (nType == TDATA_FLOAT || TDATA_UNKNOWN == nType)
+		if (type == TDATA_FLOAT || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_FLOAT;
+			type = TDATA_FLOAT;
 			variantData = (double)var;
 		}
 	}
 
 	void SetString(const std::string& var)
 	{
-		if (nType == TDATA_STRING || TDATA_UNKNOWN == nType)
+		if (type == TDATA_STRING || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_STRING;
+			type = TDATA_STRING;
 			variantData = (std::string)var;
 		}
 	}
 
 	void SetObject(const NFGUID var)
 	{
-		if (nType == TDATA_OBJECT || TDATA_UNKNOWN == nType)
+		if (type == TDATA_OBJECT || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_OBJECT;
+			type = TDATA_OBJECT;
 			variantData = (NFGUID)var;
 		}
 	}
 
 	void SetVector2(const NFVector2 var)
 	{
-		if (nType == TDATA_VECTOR2 || TDATA_UNKNOWN == nType)
+		if (type == TDATA_VECTOR2 || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_VECTOR2;
+			type = TDATA_VECTOR2;
 			variantData = (NFVector2)var;
 		}
 	}
 
 	void SetVector3(const NFVector3 var)
 	{
-		if (nType == TDATA_VECTOR3 || TDATA_UNKNOWN == nType)
+		if (type == TDATA_VECTOR3 || TDATA_UNKNOWN == type)
 		{
-			nType = TDATA_VECTOR3;
+			type = TDATA_VECTOR3;
 			variantData = (NFVector3)var;
 		}
 	}
 
 	NFINT64 GetInt() const
 	{
-		if (TDATA_INT == nType)
+		if (TDATA_INT == type)
 		{
 			//return boost::get<NFINT64>(variantData);
 			return variantData.get<NFINT64>();
@@ -389,7 +389,7 @@ public:
 
 	int GetInt32() const
 	{
-		if (TDATA_INT == nType)
+		if (TDATA_INT == type)
 		{
 			//return boost::get<NFINT64>(variantData);
 			return (int)variantData.get<NFINT64>();
@@ -400,7 +400,7 @@ public:
 
 	double GetFloat() const
 	{
-		if (TDATA_FLOAT == nType)
+		if (TDATA_FLOAT == type)
 		{
 			//return boost::get<double>(variantData);
 			return variantData.get<double>();
@@ -410,7 +410,7 @@ public:
 	}
 	const std::string& GetString() const
 	{
-		if (TDATA_STRING == nType)
+		if (TDATA_STRING == type)
 		{
 			//return boost::get<const std::string&>(variantData);
 			return variantData.get<std::string>();
@@ -421,7 +421,7 @@ public:
 
 	const char* GetCharArr() const
 	{
-		if (TDATA_STRING == nType)
+		if (TDATA_STRING == type)
 		{
 			//return boost::get<const std::string&>(variantData);
 			return variantData.get<std::string>().c_str();
@@ -432,7 +432,7 @@ public:
 
 	const NFGUID& GetObject() const
 	{
-		if (TDATA_OBJECT == nType)
+		if (TDATA_OBJECT == type)
 		{
 			//return boost::get<const NFGUID&>(variantData);
 			return variantData.get<NFGUID>();
@@ -443,7 +443,7 @@ public:
 
 	const NFVector2& GetVector2() const
 	{
-		if (TDATA_VECTOR2 == nType)
+		if (TDATA_VECTOR2 == type)
 		{
 			return variantData.get<NFVector2>();
 		}
@@ -453,7 +453,7 @@ public:
 
 	const NFVector3& GetVector3() const
 	{
-		if (TDATA_VECTOR3 == nType)
+		if (TDATA_VECTOR3 == type)
 		{
 			return variantData.get<NFVector3>();
 		}
@@ -465,7 +465,7 @@ public:
 	{
 		std::string strData;
 
-		switch (nType)
+		switch (type)
 		{
 		case TDATA_INT:
 			strData = lexical_cast<std::string> (GetInt());
@@ -502,7 +502,7 @@ public:
 	{
 		try
 		{
-			switch (nType)
+			switch (type)
 			{
 			case TDATA_INT:
 				SetInt(lexical_cast<int64_t> (strData));
@@ -556,7 +556,7 @@ public:
 
 private:
 
-	NFDATA_TYPE nType;
+	NFDATA_TYPE type;
 	bool bind = false;
 
 public:
@@ -576,6 +576,18 @@ public:
             mvList.push_back(NF_SHARE_PTR<NFData>(NF_NEW NFData()));
         }
     }
+
+	NFDataList(const std::string& data, const std::string& strSplit) : NFMemoryCounter(GET_CLASS_NAME(NFDataList))
+	{
+		mnUseSize = 0;
+		mvList.reserve(STACK_SIZE);
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList.push_back(NF_SHARE_PTR<NFData>(NF_NEW NFData()));
+		}
+
+		this->Split(data, strSplit);
+	}
 
 	virtual ~NFDataList()
 	{
@@ -792,20 +804,20 @@ public:
 		return TDATA_UNKNOWN;
 	}
     
-	virtual bool TypeEx(const  int nType, ...) const
+	virtual bool TypeEx(const  int type, ...) const
 	{
 
 		bool bRet = true;
 
-		if (TDATA_UNKNOWN == nType)
+		if (TDATA_UNKNOWN == type)
 		{
 			bRet = false;
 			return bRet;
 		}
 
-		NFDATA_TYPE pareType = (NFDATA_TYPE)nType;
+		NFDATA_TYPE pareType = (NFDATA_TYPE)type;
 		va_list arg_ptr;
-		va_start(arg_ptr, nType);
+		va_start(arg_ptr, type);
 		int index = 0;
 
 		while (pareType != TDATA_UNKNOWN)
@@ -829,7 +841,6 @@ public:
     
 	virtual bool Split(const std::string& str, const std::string& strSplit)
 	{
-
 		Clear();
 
 		std::string strData(str);

@@ -66,17 +66,17 @@ public:
 
 protected:
 
-    void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	void OnClientDisconnect(const NFSOCK nAddress);
 	void OnClientConnected(const NFSOCK nAddress);
 
 
-	void OnRequireRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnCreateRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnDeleteRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnLoadRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnSaveRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 
 protected:

@@ -54,25 +54,12 @@ public:
 	virtual bool AfterInit();
 
 	virtual bool ExistRoleName(const std::string& strRoleName);
-	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id, const int nHomeSceneID);
-	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
+	virtual bool CreateRole(const std::string& account, const std::string& strRoleName, const NFGUID& id, const int nHomeSceneID);
+	virtual bool GetRoleInfo(const std::string& account, std::string& strRoleName, NFGUID& id);
 
 	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
 	virtual bool SavePlayerData(const NFGUID& self, const NFMsg::RoleDataPack& roleData);
 
-	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
-	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData);
-	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData);
-
-	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values);
-
-	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName);
-	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName);
-	virtual double GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName);
-	virtual std::string GetPropertyString(const NFGUID& self, const std::string& strPropertyName);
-	virtual NFGUID GetPropertyObject(const NFGUID& self, const std::string& strPropertyName);
-	virtual NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& strPropertyName);
-	virtual NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& strPropertyName);
 
 protected:
 	std::string GetOnlineGameServerKey();

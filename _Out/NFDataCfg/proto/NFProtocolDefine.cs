@@ -251,7 +251,7 @@ namespace NFrame
 		public static readonly String State = "State";// int
 		// Property
 		public static readonly String AwardData = "AwardData";// string
-		public static readonly String AwardProperty = "AwardProperty";// int
+		public static readonly String AwardProperty = "AwardProperty";// string
 		public static readonly String AwardPropertyValue = "AwardPropertyValue";// int
 		public static readonly String BuyPrice = "BuyPrice";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
@@ -477,6 +477,8 @@ namespace NFrame
 		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Account = "Account";// string
+		public static readonly String BattlePoint = "BattlePoint";// int
+		public static readonly String ClanID = "ClanID";// object
 		public static readonly String ConnectKey = "ConnectKey";// string
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
@@ -495,12 +497,15 @@ namespace NFrame
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
 		public static readonly String Race = "Race";// int
+		public static readonly String ReconnectReason = "ReconnectReason";// int
 		public static readonly String SP = "SP";// int
+		public static readonly String ScenarioProgress = "ScenarioProgress";// int
 		public static readonly String Sex = "Sex";// int
 		public static readonly String SkillNormal = "SkillNormal";// string
 		public static readonly String SkillSpecial1 = "SkillSpecial1";// string
 		public static readonly String SkillSpecial2 = "SkillSpecial2";// string
 		public static readonly String SkillTHUMP = "SkillTHUMP";// string
+		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		// Include Property, come from EffectData 
 		public static readonly String ATK_DARK = "ATK_DARK";// int
@@ -583,7 +588,9 @@ namespace NFrame
 			public const int Stone2 = 8;//string
 			public const int Stone3 = 9;//string
 			public const int Stone4 = 10;//string
-			public const int UserData = 11;//string
+			public const int Lock = 11;//int
+			public const int Future = 12;//int
+			public const int UserData = 13;//string
 
 		}
 		public class CommValue
@@ -661,10 +668,13 @@ namespace NFrame
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
+		public static readonly String RelivePosEx = "RelivePosEx";// string
 		public static readonly String ResPath = "ResPath";// string
+		public static readonly String ResourcePos = "ResourcePos";// string
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string
+		public static readonly String SubType = "SubType";// int
 		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int
 		// Record

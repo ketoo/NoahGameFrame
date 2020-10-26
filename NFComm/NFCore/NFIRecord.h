@@ -48,14 +48,14 @@ struct RECORD_EVENT_DATA
 	RECORD_EVENT_DATA()
 	{
 		nOpType = UNKNOW;
-		nRow = 0;
-		nCol = 0;
+		row = 0;
+		col = 0;
 	}
 
 	RecordOptype nOpType;
-	int nRow;
-	int nCol;
-	std::string strRecordName;
+	int row;
+	int col;
+	std::string recordName;
 };
 
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&)> RECORD_EVENT_FUNCTOR;
@@ -76,91 +76,92 @@ public:
     virtual ~NFIRecord() {}
 
 	virtual std::string ToString() = 0;
-	virtual bool IsUsed(const int nRow) const  = 0;
-    virtual bool SetUsed(const int nRow, const int bUse)  = 0;
-	virtual bool PreAllocMemoryForRow(const int nRow) = 0;
+	virtual bool IsUsed(const int row) const  = 0;
+    virtual bool SetUsed(const int row, const int bUse)  = 0;
+	virtual bool PreAllocMemoryForRow(const int row) = 0;
 
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
+	virtual int GetUsedRows() const  = 0;
 
-    virtual NFDATA_TYPE GetColType(const int nCol) const = 0;
-    virtual const std::string& GetColTag(const int nCol) const = 0;
-
-    
-    virtual int AddRow(const int nRow) = 0;
-    virtual int AddRow(const int nRow, const NFDataList& var) = 0;
-
-	virtual bool SetRow(const int nRow, const NFDataList& var) = 0;
-
-    virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value) = 0;
-    virtual bool SetFloat(const int nRow, const int nCol, const double value) = 0;
-    virtual bool SetString(const int nRow, const int nCol, const std::string& value) = 0;
-    virtual bool SetObject(const int nRow, const int nCol, const NFGUID& value) = 0;
-	virtual bool SetVector2(const int nRow, const int nCol, const NFVector2& value) = 0;
-	virtual bool SetVector3(const int nRow, const int nCol, const NFVector3& value) = 0;
-
-    virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
-    virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value) = 0;
-    virtual bool SetString(const int nRow, const std::string& strColTag, const std::string& value) = 0;
-    virtual bool SetObject(const int nRow, const std::string& strColTag, const NFGUID& value) = 0;
-	virtual bool SetVector2(const int nRow, const std::string& strColTag, const NFVector2& value) = 0;
-	virtual bool SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
+    virtual NFDATA_TYPE GetColType(const int col) const = 0;
+    virtual const std::string& GetColTag(const int col) const = 0;
 
     
-    virtual bool QueryRow(const int nRow, NFDataList& varList) = 0;
+    virtual int AddRow(const int row) = 0;
+    virtual int AddRow(const int row, const NFDataList& var) = 0;
+
+	virtual bool SetRow(const int row, const NFDataList& var) = 0;
+
+    virtual bool SetInt(const int row, const int col, const NFINT64 value) = 0;
+    virtual bool SetFloat(const int row, const int col, const double value) = 0;
+    virtual bool SetString(const int row, const int col, const std::string& value) = 0;
+    virtual bool SetObject(const int row, const int col, const NFGUID& value) = 0;
+	virtual bool SetVector2(const int row, const int col, const NFVector2& value) = 0;
+	virtual bool SetVector3(const int row, const int col, const NFVector3& value) = 0;
+
+    virtual bool SetInt(const int row, const std::string& colTag, const NFINT64 value) = 0;
+    virtual bool SetFloat(const int row, const std::string& colTag, const double value) = 0;
+    virtual bool SetString(const int row, const std::string& colTag, const std::string& value) = 0;
+    virtual bool SetObject(const int row, const std::string& colTag, const NFGUID& value) = 0;
+	virtual bool SetVector2(const int row, const std::string& colTag, const NFVector2& value) = 0;
+	virtual bool SetVector3(const int row, const std::string& colTag, const NFVector3& value) = 0;
+
+    
+    virtual bool QueryRow(const int row, NFDataList& varList) = 0;
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
-    virtual NFINT64 GetInt(const int nRow, const int nCol) const = 0;
-	virtual int GetInt32(const int nRow, const int nCol) const { return (int)GetInt(nRow, nCol); };
-	virtual double GetFloat(const int nRow, const int nCol) const = 0;
-    virtual const std::string& GetString(const int nRow, const int nCol) const = 0;
-    virtual const NFGUID& GetObject(const int nRow, const int nCol) const = 0;
-	virtual const NFVector2& GetVector2(const int nRow, const int nCol) const = 0;
-	virtual const NFVector3& GetVector3(const int nRow, const int nCol) const = 0;
+    virtual NFINT64 GetInt(const int row, const int col) const = 0;
+	virtual int GetInt32(const int row, const int col) const { return (int)GetInt(row, col); };
+	virtual double GetFloat(const int row, const int col) const = 0;
+    virtual const std::string& GetString(const int row, const int col) const = 0;
+    virtual const NFGUID& GetObject(const int row, const int col) const = 0;
+	virtual const NFVector2& GetVector2(const int row, const int col) const = 0;
+	virtual const NFVector3& GetVector3(const int row, const int col) const = 0;
 
-    virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const = 0;
-	inline int GetInt32(const int nRow, const std::string& strColTag) const { return (int)GetInt(nRow, strColTag); };
-	virtual double GetFloat(const int nRow, const std::string& strColTag) const = 0;
-    virtual const std::string& GetString(const int nRow, const std::string& strColTag) const = 0;
-    virtual const NFGUID& GetObject(const int nRow, const std::string& strColTag) const = 0;
-	virtual const NFVector2& GetVector2(const int nRow, const std::string& strColTag) const = 0;
-	virtual const NFVector3& GetVector3(const int nRow, const std::string& strColTag) const = 0;
+    virtual NFINT64 GetInt(const int row, const std::string& colTag) const = 0;
+	inline int GetInt32(const int row, const std::string& colTag) const { return (int)GetInt(row, colTag); };
+	virtual double GetFloat(const int row, const std::string& colTag) const = 0;
+    virtual const std::string& GetString(const int row, const std::string& colTag) const = 0;
+    virtual const NFGUID& GetObject(const int row, const std::string& colTag) const = 0;
+	virtual const NFVector2& GetVector2(const int row, const std::string& colTag) const = 0;
+	virtual const NFVector3& GetVector3(const int row, const std::string& colTag) const = 0;
 
-    virtual int FindRowByColValue(const int nCol, const NFData& var, NFDataList& varResult) = 0;
-    virtual int FindInt(const int nCol, const NFINT64 value, NFDataList& varResult) = 0;
-    virtual int FindFloat(const int nCol, const double value, NFDataList& varResult) = 0;
-	virtual int FindString(const int nCol, const std::string& value, NFDataList& varResult) = 0;
-    virtual int FindObject(const int nCol, const NFGUID& value, NFDataList& varResult) = 0;
-	virtual int FindVector2(const int nCol, const NFVector2& value, NFDataList& varResult) = 0;
-	virtual int FindVector3(const int nCol, const NFVector3& value, NFDataList& varResult) = 0;
+    virtual int FindRowByColValue(const int col, const NFData& var, NFDataList& varResult) = 0;
+    virtual int FindInt(const int col, const NFINT64 value, NFDataList& varResult) = 0;
+    virtual int FindFloat(const int col, const double value, NFDataList& varResult) = 0;
+	virtual int FindString(const int col, const std::string& value, NFDataList& varResult) = 0;
+    virtual int FindObject(const int col, const NFGUID& value, NFDataList& varResult) = 0;
+	virtual int FindVector2(const int col, const NFVector2& value, NFDataList& varResult) = 0;
+	virtual int FindVector3(const int col, const NFVector3& value, NFDataList& varResult) = 0;
 	
 	//return the row and only can used when the col is the primary key
-	virtual int FindRowByColValue(const int nCol, const NFData& var) = 0;
-	virtual int FindInt(const int nCol, const NFINT64 value) = 0;
-	virtual int FindFloat(const int nCol, const double value) = 0;
-	virtual int FindString(const int nCol, const std::string& value) = 0;
-	virtual int FindObject(const int nCol, const NFGUID& value) = 0;
-	virtual int FindVector2(const int nCol, const NFVector2& value) = 0;
-	virtual int FindVector3(const int nCol, const NFVector3& value) = 0;
+	virtual int FindRowByColValue(const int col, const NFData& var) = 0;
+	virtual int FindInt(const int col, const NFINT64 value) = 0;
+	virtual int FindFloat(const int col, const double value) = 0;
+	virtual int FindString(const int col, const std::string& value) = 0;
+	virtual int FindObject(const int col, const NFGUID& value) = 0;
+	virtual int FindVector2(const int col, const NFVector2& value) = 0;
+	virtual int FindVector3(const int col, const NFVector3& value) = 0;
 
-    virtual int FindRowByColValue(const std::string& strColTag, const NFData& var, NFDataList& varResult) = 0;
-    virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFDataList& varResult) = 0;
-    virtual int FindFloat(const std::string& strColTag, const double value, NFDataList& varResult) = 0;
-	virtual int FindString(const std::string& strColTag, const std::string& value, NFDataList& varResult) = 0;
-    virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFDataList& varResult) = 0;
-	virtual int FindVector2(const std::string& strColTag, const NFVector2& value, NFDataList& varResult) = 0;
-	virtual int FindVector3(const std::string& strColTag, const NFVector3& value, NFDataList& varResult) = 0;
+    virtual int FindRowByColValue(const std::string& colTag, const NFData& var, NFDataList& varResult) = 0;
+    virtual int FindInt(const std::string& colTag, const NFINT64 value, NFDataList& varResult) = 0;
+    virtual int FindFloat(const std::string& colTag, const double value, NFDataList& varResult) = 0;
+	virtual int FindString(const std::string& colTag, const std::string& value, NFDataList& varResult) = 0;
+    virtual int FindObject(const std::string& colTag, const NFGUID& value, NFDataList& varResult) = 0;
+	virtual int FindVector2(const std::string& colTag, const NFVector2& value, NFDataList& varResult) = 0;
+	virtual int FindVector3(const std::string& colTag, const NFVector3& value, NFDataList& varResult) = 0;
  
 	//return the row and only can used when the col is the primary key
-	virtual int FindRowByColValue(const std::string& strColTag, const NFData& var) = 0;
-	virtual int FindInt(const std::string& strColTag, const NFINT64 value) = 0;
-	virtual int FindFloat(const std::string& strColTag, const double value) = 0;
-	virtual int FindString(const std::string& strColTag, const std::string& value) = 0;
-	virtual int FindObject(const std::string& strColTag, const NFGUID& value) = 0;
-	virtual int FindVector2(const std::string& strColTag, const NFVector2& value) = 0;
-	virtual int FindVector3(const std::string& strColTag, const NFVector3& value) = 0;
+	virtual int FindRowByColValue(const std::string& colTag, const NFData& var) = 0;
+	virtual int FindInt(const std::string& colTag, const NFINT64 value) = 0;
+	virtual int FindFloat(const std::string& colTag, const double value) = 0;
+	virtual int FindString(const std::string& colTag, const std::string& value) = 0;
+	virtual int FindObject(const std::string& colTag, const NFGUID& value) = 0;
+	virtual int FindVector2(const std::string& colTag, const NFVector2& value) = 0;
+	virtual int FindVector3(const std::string& colTag, const NFVector3& value) = 0;
 
-    virtual bool Remove(const int nRow) = 0;
+    virtual bool Remove(const int row) = 0;
     virtual bool Remove(NFDataList& varRows) //need to optimize
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
@@ -194,7 +195,7 @@ public:
 	virtual void SetUpload(const bool bUpload) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;
-    virtual void SetName(const std::string& strName) = 0;
+    virtual void SetName(const std::string& name) = 0;
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
 };

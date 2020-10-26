@@ -242,6 +242,10 @@ bool NFRedisClient::HMGET(const std::string &key, const string_vector &fields, s
 			{
 				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
 			}
+			else if (pReply->element[k]->type == REDIS_REPLY_NIL)
+			{
+				values.emplace_back("");
+			}
 		}
 	}
 
