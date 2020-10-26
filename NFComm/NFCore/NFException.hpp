@@ -44,7 +44,6 @@
 #include <future>
 #include <functional>
 #include <atomic>
-#include <execinfo.h>
 #include <fstream>
 #include <iomanip>
 #include <sstream>
@@ -52,6 +51,7 @@
 #include <NFComm/NFPluginModule/NFPlatform.h>
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
+#include <execinfo.h>
 #include <unistd.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -63,7 +63,6 @@
 #include <sys/prctl.h>
 #endif
 
-#endif
 
 
 class NFExceptFrame
@@ -154,6 +153,11 @@ catch (...)\
 }\
 }\
 }
+
+
+
+
+#endif
 
 /*
 void fun()

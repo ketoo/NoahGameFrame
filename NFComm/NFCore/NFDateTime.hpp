@@ -220,7 +220,7 @@ public:
 		{
 			std::stringstream ss(data);
 			ss >> std::get_time(&_tm, "%Y-%m-%d %H:%M:%S");
-			_totalSecond = timegm(&_tm);
+			_totalSecond = mktime(&_tm);
 		}
 		catch (...)
 		{
@@ -234,9 +234,9 @@ public:
 
 
 	NFDateTime(int year, int month, int day, int hour, int minute, int second) :
-			_tm{ second, minute, hour, day, month - 1, year - 1900, 0, 0, -1, 0, "UTC"}
+			_tm{ second, minute, hour, day, month, year -1900, 0, 0, -1}
 	{
-		_totalSecond = timegm(&_tm);
+		_totalSecond = mktime(&_tm);
 	}
 
 	static NFDateTime Now()

@@ -26,8 +26,11 @@
 
 #include "NFException.hpp"
 
+#if  NF_PLATFORM != NF_PLATFORM_WIN
+
 static NFExceptFrame pExceptStack;
 NFExceptFrame& NFException::ExceptStack()
 {
-	return pExceptStack;
+    return pExceptStack;
 }
+#endif //  NF_PLATFORM != NF_PLATFORM_WIN
