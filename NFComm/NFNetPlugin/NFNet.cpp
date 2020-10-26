@@ -386,19 +386,15 @@ bool NFNet::Dismantle(NetObject* pObject)
             if (mRecvCB)
             {
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-                __try
-#else
+#if NF_PLATFORM != NF_PLATFORM_WIN
                 try
-#endif
                 {
+#endif
+                
                     mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+                
+#if NF_PLATFORM != NF_PLATFORM_WIN
                 }
-#if NF_PLATFORM == NF_PLATFORM_WIN
-                    __except (ApplicationCrashHandler(GetExceptionInformation()))
-    {
-    }
-#else
                 catch (const std::exception & e)
                 {
                     NFException::StackTrace(xHead.GetMsgID());

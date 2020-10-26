@@ -134,6 +134,7 @@
     <ClInclude Include="NFException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="easylogging++.cc" />
     <ClCompile Include="NFException.cpp" />
     <ClCompile Include="NFMemoryCounter.cpp" />
     <ClCompile Include="NFObject.cpp" />
