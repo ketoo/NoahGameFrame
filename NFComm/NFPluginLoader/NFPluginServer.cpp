@@ -108,9 +108,7 @@ void NFPluginServer::Final()
 
 void NFPluginServer::ProcessParameter()
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
-#else
+#if NF_PLATFORM != NF_PLATFORM_WIN
     //run it as a daemon process
     if (strArgvList.find("-d") != string::npos)
     {
