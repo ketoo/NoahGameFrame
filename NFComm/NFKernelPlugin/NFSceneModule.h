@@ -311,7 +311,7 @@ public:
 	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex = -1);
 
 	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos);
-	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex);
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex= -1);
 
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID);
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList);
