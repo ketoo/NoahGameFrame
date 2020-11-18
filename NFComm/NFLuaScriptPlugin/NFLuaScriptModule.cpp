@@ -55,9 +55,9 @@ bool NFLuaScriptModule::Awake()
 
     Register();
 
-	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
+	std::string strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
 
-	TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+	TRY_LOAD_SCRIPT_FLE(strRootFile.c_str());
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", this);
 
@@ -96,12 +96,7 @@ bool NFLuaScriptModule::ReadyExecute()
 
 bool NFLuaScriptModule::Execute()
 {
-    //1分钟reload一次
-#ifdef NF_DEBUG_MODE
     if (pPluginManager->GetNowTime() - mnTime > 10)
-#else
-    if (pPluginManager->GetNowTime() - mnTime > 60)
-#endif
     {
         mnTime = pPluginManager->GetNowTime();
 
@@ -286,41 +281,41 @@ int NFLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& cla
 void NFLuaScriptModule::OnScriptReload()
 {
     NFINT64 nAppType = APPType();
-    std::string strRootFileh = "";
+    std::string strRootFile = "";
     switch ((NF_SERVER_TYPES)(nAppType))
     {
         case NF_SERVER_TYPES::NF_ST_GAME:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/game/game_script_reload.lua";
+			strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/game/game_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_LOGIN:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/login/login_script_reload.lua";
+			strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/login/login_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_WORLD:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/world/world_script_reload.lua";
+			strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/world/world_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_PROXY:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/proxy/proxy_script_reload.lua";
+			strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/proxy/proxy_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_MASTER:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/master/master_script_reload.lua";
+			strRootFile = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/master/master_script_reload.lua";
         }
         break;
         default:
         break;
     }
     
-    if (!strRootFileh.empty())
+    if (!strRootFile.empty())
     {
-		TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+		TRY_LOAD_SCRIPT_FLE(strRootFile.c_str());
     }
 }
 

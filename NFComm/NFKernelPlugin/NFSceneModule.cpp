@@ -1157,7 +1157,6 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, type, arg);
 		}
 
-		pObject->SetPropertyVector3(NFrame::IObject::Position(), v);
 
 		////////
 		BeforeEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
@@ -1165,8 +1164,11 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
 		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
 
+
 		const NFGUID newCell = m_pCellModule->ComputeCellID(v);
 		OnMoveCellEvent(self, nTargetGroupID, nTargetGroupID, NFGUID(), newCell);
+
+		pObject->SetPropertyVector3(NFrame::IObject::MoveTo(), v);
 
 		/////////
 		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);

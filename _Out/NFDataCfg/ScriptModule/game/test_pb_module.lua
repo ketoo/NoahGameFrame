@@ -16,9 +16,9 @@ end
 
 function test_pb_module:after_init()
 	print("test_pb_module after_init!----");
-	--test1();
-	--test2();
-	--test3();
+	test1();
+	test2();
+	test3();
 	
 	
 end
@@ -41,7 +41,8 @@ function test1()
 	
 	local data = script_module:encode("NFMsg.PropertyInt", tbl);
 	local test_tbl =  script_module:decode("NFMsg.PropertyInt", data);
-	--print_table(test_tbl);
+
+	print_table(test_tbl);
 	
 	assert(tbl.property_name == test_tbl.property_name, "property_name not equal "..tbl.property_name);
 	assert(tbl.data == test_tbl.data, "property_data not equal "..tbl.data);

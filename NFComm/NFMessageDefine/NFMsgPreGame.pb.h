@@ -3622,7 +3622,6 @@ class RoleOnlineNotify :
     kPropertyVector3ListFieldNumber = 25,
     kNameFieldNumber = 5,
     kSelfFieldNumber = 1,
-    kClanFieldNumber = 2,
     kGameFieldNumber = 3,
     kProxyFieldNumber = 4,
     kBpFieldNumber = 6,
@@ -3766,21 +3765,6 @@ class RoleOnlineNotify :
   ::NFMsg::Ident* _internal_mutable_self();
   public:
 
-  // .NFMsg.Ident clan = 2;
-  bool has_clan() const;
-  private:
-  bool _internal_has_clan() const;
-  public:
-  void clear_clan();
-  const ::NFMsg::Ident& clan() const;
-  ::NFMsg::Ident* release_clan();
-  ::NFMsg::Ident* mutable_clan();
-  void set_allocated_clan(::NFMsg::Ident* clan);
-  private:
-  const ::NFMsg::Ident& _internal_clan() const;
-  ::NFMsg::Ident* _internal_mutable_clan();
-  public:
-
   // int32 game = 3;
   void clear_game();
   ::PROTOBUF_NAMESPACE_ID::int32 game() const;
@@ -3821,7 +3805,6 @@ class RoleOnlineNotify :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::NFMsg::PropertyVector3 > property_vector3_list_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::NFMsg::Ident* self_;
-  ::NFMsg::Ident* clan_;
   ::PROTOBUF_NAMESPACE_ID::int32 game_;
   ::PROTOBUF_NAMESPACE_ID::int32 proxy_;
   ::PROTOBUF_NAMESPACE_ID::int32 bp_;
@@ -7055,60 +7038,6 @@ inline void RoleOnlineNotify::set_allocated_self(::NFMsg::Ident* self) {
   }
   self_ = self;
   // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.self)
-}
-
-// .NFMsg.Ident clan = 2;
-inline bool RoleOnlineNotify::_internal_has_clan() const {
-  return this != internal_default_instance() && clan_ != nullptr;
-}
-inline bool RoleOnlineNotify::has_clan() const {
-  return _internal_has_clan();
-}
-inline const ::NFMsg::Ident& RoleOnlineNotify::_internal_clan() const {
-  const ::NFMsg::Ident* p = clan_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline const ::NFMsg::Ident& RoleOnlineNotify::clan() const {
-  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.clan)
-  return _internal_clan();
-}
-inline ::NFMsg::Ident* RoleOnlineNotify::release_clan() {
-  // @@protoc_insertion_point(field_release:NFMsg.RoleOnlineNotify.clan)
-  
-  ::NFMsg::Ident* temp = clan_;
-  clan_ = nullptr;
-  return temp;
-}
-inline ::NFMsg::Ident* RoleOnlineNotify::_internal_mutable_clan() {
-  
-  if (clan_ == nullptr) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    clan_ = p;
-  }
-  return clan_;
-}
-inline ::NFMsg::Ident* RoleOnlineNotify::mutable_clan() {
-  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.clan)
-  return _internal_mutable_clan();
-}
-inline void RoleOnlineNotify::set_allocated_clan(::NFMsg::Ident* clan) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(clan_);
-  }
-  if (clan) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      clan = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, clan, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  clan_ = clan;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.clan)
 }
 
 // int32 game = 3;

@@ -5,26 +5,26 @@ require("NFScriptEnum");
 script_module = nil;
 function init_script_system(xLuaScriptModule)
 	script_module = xLuaScriptModule;
-	
-	print("Hello Lua script_module");
+
+	script_module:log_info("Hello Lua, init script_module");
 
 	local app_id = script_module:app_id();
 	local app_type = script_module:app_type();
 
 	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
-		print("Hello NF_ST_GAME");
+		script_module:log_info("Hello Lua, NF_ST_GAME");
 		require("./game/game_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
-		print("Hello NF_ST_WORLD");
+		script_module:log_info("Hello Lua, NF_ST_WORLD");
 		require("./world/world_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_PROXY == app_type then
-		print("Hello NF_ST_PROXY");
+		script_module:log_info("Hello Lua, NF_ST_PROXY");
 		require("./proxy/proxy_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_LOGIN == app_type then
-		print("Hello NF_ST_LOGIN");
+		script_module:log_info("Hello Lua, NF_ST_LOGIN");
 		require("./login/login_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_MASTER == app_type then
-		print("Hello NF_ST_MASTER");
+		script_module:log_info("Hello Lua, NF_ST_MASTER");
 		require("./master/master_script_list");
 	else
 	end
@@ -36,27 +36,26 @@ function load_script_file(fileList)
 		if package.loaded[fileList[i].tblName] then
 			package.loaded[fileList[i].tblName] = nil
 		end
-		
-		print("start to load " .. fileList[i].tblName);
-		
+
+		script_module:log_info("start to load " .. fileList[i].tblName);
+
 		local oldTbl =_G[fileList[i].tblName];
 		local object = require(fileList[i].tblName);
 		if true == object then
 			local newTbl =_G[fileList[i].tblName];
 			register_module(newTbl, fileList[i].tblName);
 			if oldTbl ~= nil then
-				print("reload_script_file " .. fileList[i].tblName .. " successed");
+				script_module:log_info("reload_script_file " .. fileList[i].tblName .. " successed");
 			end
 		else
-			print("load_script_file " .. fileList[i].tblName .. " failed");
-			
+			script_module:log_info("load_script_file " .. fileList[i].tblName .. " failed");
 		end
 	end
 end
 
 --[[
-if you write code under the rule of NF, then you don't need these functions that show below,
-but if you write code with free style and want to hot fix feature then you need these functions below.
+if you write code under the rule of NF, then you don't need these functions listed below,
+but if you write code with free style and still want hot fix feature then you need these functions listed below.
 
 function reload_script_file( tblName )
 	local old_module = _G[tblName]
@@ -95,12 +94,13 @@ end
 --]]
 
 function register_module(tbl, name)
+	script_module:log_info("try to register module " .. name);
 	script_module:register_module(name, tbl);
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			if ScriptList[i].tblName == name then
 				ScriptList[i].tbl = tbl;
-				io.write("----register_module ".. name .. " successed\n");
+				script_module:log_info("register module " .. name .. " successed");
 			end
 		end
 		for i=1, #(ScriptList) do
@@ -122,6 +122,7 @@ function find_module(name)
 end
 ---------------------------------------------
 function module_awake(...)
+	print("lua module awake");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:awake(...);
@@ -131,6 +132,7 @@ end
 
 
 function module_init(...)
+	print("lua module init");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:init(...);
@@ -139,6 +141,7 @@ function module_init(...)
 end
 
 function module_after_init(...)
+	print("lua module after init");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:after_init(...);
@@ -147,6 +150,7 @@ function module_after_init(...)
 end
 
 function module_ready_execute(...)
+	print("lua module execute");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 		ScriptList[i].tbl:ready_execute(...);
@@ -155,6 +159,7 @@ function module_ready_execute(...)
 end
 
 function module_before_shut(...)
+	print("lua module before shut");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:before_shut(...);
@@ -163,6 +168,7 @@ function module_before_shut(...)
 end
 
 function module_shut(...)
+	print("lua module shut");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:shut(...);
@@ -170,14 +176,14 @@ function module_shut(...)
 	end
 end
 
-function print_table(table, level)
+function print_table(table)
 	if table == nil then
 		print("the table is nil");
 		return;
 	end
 	
 	local key = ""
-	level = level or 1
+	level =  1
 	local indent = ""
 	for i = 1, level do
 	indent = indent.."  "

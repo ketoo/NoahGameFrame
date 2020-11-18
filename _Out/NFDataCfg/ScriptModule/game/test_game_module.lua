@@ -1,12 +1,14 @@
 test_game_module = {}
 
-local other_module = nil;
+local test_module;
 function test_game_module:reload()
-	--other_module = script_module:find_module("other_module");
+	--print(script_module);
+	--test_module = script_module:find_module("test_http_module");
 end
 
 function test_game_module:awake()
-	test_game_module.reload();
+	print("test_game_module awake!----");
+	--test_game_module.reload();
 end
 
 function test_game_module:init()
@@ -17,6 +19,7 @@ end
 
 function test_game_module:after_init()
 	print("test_game_module after_init!----");
+	test_module.test()
 
 	local playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
 

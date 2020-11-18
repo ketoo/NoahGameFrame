@@ -26,6 +26,10 @@ end
 function test_http_module:shut()
 end
 
+function test_http_module:test()
+	print("-----------------testtesttesttesttest--------------------------------\n");
+end
+
 --------------------------------------------------------------------------------
 
 
