@@ -247,7 +247,7 @@ bool NFLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::
 	return false;
 }
 
-int NFLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
+int NFLuaScriptModule::OnClassEventCB(const NFGUID& objectId, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
     auto funcNameList = mxClassEventFuncMap.GetElement(className);
     if (funcNameList)
@@ -259,7 +259,7 @@ int NFLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& cla
 			try
 			{
 				LuaIntf::LuaRef func(mLuaContext, strFuncNme.c_str());
-				func.call(self, className, (int)classEvent, (NFDataList)var);
+				func.call("", objectId, className, (int)classEvent, (NFDataList)var);
 			}
 			catch (LuaIntf::LuaException& e)
 			{
@@ -336,7 +336,36 @@ bool NFLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& pro
 
 int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
-    return CallLuaFuncFromMap(mxLuaPropertyCallBackFuncMap, propertyName, self, propertyName, oldVar, newVar);
+	auto funcList = mxLuaPropertyCallBackFuncMap.GetElement(propertyName);
+	if (funcList)
+	{
+		auto funcNameList = funcList->GetElement(self);
+		if (funcNameList)
+		{
+			std::string funcName;
+			auto Ret = funcNameList->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call("", self, propertyName, oldVar, newVar);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = funcNameList->Next(funcName);
+			}
+		}
+	}
+
+
+	return 0;
 }
 
 bool NFLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
@@ -356,7 +385,35 @@ bool NFLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& recor
 
 int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-    return CallLuaFuncFromMap(mxLuaRecordCallBackFuncMap, xEventData.recordName, self, xEventData.recordName, xEventData.nOpType, xEventData.row, xEventData.col, oldVar, newVar);
+	auto funcList = mxLuaRecordCallBackFuncMap.GetElement(xEventData.recordName);
+	if (funcList)
+	{
+		auto funcNameList = funcList->GetElement(self);
+		if (funcNameList)
+		{
+			std::string funcName;
+			auto Ret = funcNameList->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call<LuaIntf::LuaRef>("", self, xEventData.recordName, xEventData.nOpType, xEventData.row, xEventData.col, oldVar, newVar);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = funcNameList->Next(funcName);
+			}
+		}
+	}
+
+    return 0;
 }
 
 bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
@@ -377,7 +434,36 @@ bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const int eventID, 
 
 int NFLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int eventID, const NFDataList& argVar)
 {
-    return CallLuaFuncFromMap(mxLuaEventCallBackFuncMap, (int)eventID, self, eventID, (NFDataList&)argVar);
+
+	auto funcList = mxLuaEventCallBackFuncMap.GetElement(eventID);
+	if (funcList)
+	{
+		auto funcNameList = funcList->GetElement(self);
+		if (funcNameList)
+		{
+			std::string funcName;
+			auto Ret = funcNameList->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call<LuaIntf::LuaRef>("", self, eventID, (NFDataList&)argVar);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = funcNameList->Next(funcName);
+			}
+		}
+	}
+
+    return 0;
 }
 
 bool NFLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count)
@@ -412,12 +498,43 @@ bool NFLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBea
 
 int NFLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float time, const int count)
 {
-    return CallLuaFuncFromMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, time, count);
-}
 
-int NFLuaScriptModule::OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float time, const int count)
-{
-    return CallLuaFuncFromMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, strHeartBeatName, time, count);
+	auto funcList = mxLuaHeartBeatCallBackFuncMap.GetElement(strHeartBeatName);
+	if (funcList)
+	{
+		auto funcNameList = funcList->GetElement(self);
+		if (funcNameList)
+		{
+			std::string funcName;
+			auto Ret = funcNameList->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					if (self.IsNull())
+					{
+						func.call<LuaIntf::LuaRef>("", strHeartBeatName, time, count);
+					}
+					else
+					{
+						func.call<LuaIntf::LuaRef>("", self, strHeartBeatName, time, count);
+					}
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = funcNameList->Next(funcName);
+			}
+		}
+	}
+
+    return 0;
 }
 
 int NFLuaScriptModule::AddRow(const NFGUID& self, std::string& recordName, const NFDataList& var)
@@ -653,80 +770,6 @@ bool NFLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>&
         }
     }
 
-}
-
-template<typename T1, typename ...T2>
-bool NFLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2 ... arg)
-{
-    auto funcList = funcMap.GetElement(key);
-    if (funcList)
-    {
-        auto funcNameList = funcList->GetElement(self);
-        if (funcNameList)
-        {
-            string funcName;
-            auto Ret = funcNameList->First(funcName);
-            while (Ret)
-            {
-                try
-                {
-                    LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
-                    func.call(self, key, arg ...);
-					return true;
-                }
-                catch (LuaIntf::LuaException& e)
-                {
-                    cout << e.what() << endl;
-                    return false;
-                }
-				catch (...)
-				{
-                    return false;
-				}
-
-                Ret = funcNameList->Next(funcName);
-            }
-        }
-    }
-
-    return true;
-}
-
-template<typename T1, typename ...T2>
-bool NFLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2 ... arg)
-{
-    auto funcList = funcMap.GetElement(key);
-    if (funcList)
-    {
-        auto funcNameList = funcList->GetElement(NFGUID());
-        if (funcNameList)
-        {
-            string funcName;
-            auto Ret = funcNameList->First(funcName);
-            while (Ret)
-            {
-                try
-                {
-                    LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
-                    func.call(key, arg...);
-					return true;
-                }
-                catch (LuaIntf::LuaException& e)
-                {
-                    cout << e.what() << endl;
-                    return false;
-                }
-				catch (...)
-				{
-                    return false;
-				}
-
-                Ret = funcNameList->Next(funcName);
-            }
-        }
-    }
-
-    return true;
 }
 
 void NFLuaScriptModule::RemoveClientMsgCallBack(const int msgID)
@@ -1104,6 +1147,7 @@ bool NFLuaScriptModule::Register()
 		.addFunction("set_prop_object", &NFLuaScriptModule::SetPropertyObject)
 		.addFunction("set_prop_vector2", &NFLuaScriptModule::SetPropertyVector2)
 		.addFunction("set_prop_vector3", &NFLuaScriptModule::SetPropertyVector3)
+
 
 		.addFunction("get_prop_int", &NFLuaScriptModule::GetPropertyInt)
 		.addFunction("get_prop_float", &NFLuaScriptModule::GetPropertyFloat)

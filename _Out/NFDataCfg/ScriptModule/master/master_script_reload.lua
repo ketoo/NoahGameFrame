@@ -11,7 +11,7 @@ else
 		script_module:log_info("start to reload master scripts as old_version_code == " .. old_version_code .. " and now version code = "..version_code);
 		
 		script_module:set_version_code(version_code);
-		load_script_file(MasterScriptReloadList);
+		load_script_file(MasterScriptReloadList, true);
 	end
 end
 

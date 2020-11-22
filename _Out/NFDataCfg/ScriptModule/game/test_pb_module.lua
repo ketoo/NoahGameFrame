@@ -4,6 +4,7 @@ function test_pb_module:reload()
 end
 
 function test_pb_module:awake()
+	test_pb_module:reload()
 end
 
 function test_pb_module:init()
@@ -15,7 +16,7 @@ end
 
 
 function test_pb_module:after_init()
-	print("test_pb_module after_init!----");
+	script_module:log_info("test_pb_module after_init!----");
 	test1();
 	test2();
 	test3();
@@ -65,8 +66,8 @@ function test2()
 	print_table(tbl);
 	
 	local data = script_module:encode("NFMsg.PropertyVector3", tbl);
-	
-	print(">>>>>>>>>");
+
+	script_module:log_info(">>>>>>>>>");
 	
 	local test_tbl =  script_module:decode("NFMsg.PropertyVector3", data);
 	

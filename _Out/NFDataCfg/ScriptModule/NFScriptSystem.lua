@@ -6,7 +6,7 @@ script_module = nil;
 function init_script_system(xLuaScriptModule)
 	script_module = xLuaScriptModule;
 
-	script_module:log_info("Hello Lua, init script_module");
+	script_module:log_info("Hello Lua, init script_module, " .. tostring(script_module));
 
 	local app_id = script_module:app_id();
 	local app_type = script_module:app_type();
@@ -31,7 +31,7 @@ function init_script_system(xLuaScriptModule)
 
 end
 
-function load_script_file(fileList)
+function load_script_file(fileList, isReload)
 	for i=1, #(fileList) do
 		if package.loaded[fileList[i].tblName] then
 			package.loaded[fileList[i].tblName] = nil
@@ -43,69 +43,46 @@ function load_script_file(fileList)
 		local object = require(fileList[i].tblName);
 		if true == object then
 			local newTbl =_G[fileList[i].tblName];
-			register_module(newTbl, fileList[i].tblName);
+			register_module(newTbl, fileList[i].tblName, isReload);
+			fileList[i].tbl = newTbl
+
 			if oldTbl ~= nil then
-				script_module:log_info("reload_script_file " .. fileList[i].tblName .. " successed");
+				script_module:log_info("reload_script_file " .. fileList[i].tblName .. " succeed");
 			end
 		else
 			script_module:log_info("load_script_file " .. fileList[i].tblName .. " failed");
 		end
 	end
-end
 
---[[
-if you write code under the rule of NF, then you don't need these functions listed below,
-but if you write code with free style and still want hot fix feature then you need these functions listed below.
-
-function reload_script_file( tblName )
-	local old_module = _G[tblName]
-    package.loaded[tblName] = nil
-	local object = require(tblName);
-	if nil == object then
-		print("  reload_script_file " .. tblName .. " failed\n");
-	else
-		print("  reload_script_file " .. tblName .. " successed\n");
-	end
-	
-    local new_module = _G[tblName]
-    for k, v in pairs(new_module) do
-        old_module[k] = v
-    end
-end
-
-function reload_script_table( nameList )
-	io.write("----Begin reload lua list----\n");
-
-	local ret = 0;
-	for i=1, #(nameList) do
-		ret = 1;
-		print("reload script : " .. tostring(nameList[i].tblName) .. "\n");
-		reload_script_file(nameList[i].tblName)
-	end
-
-	io.write("----End reload lua list----\n");
-
-	if ret == 1 then
-		for i=1, #(ScriptList) do
-			ScriptList[i].tbl.reload();
+	if true == isReload then
+		for i=1, #(fileList) do
+			fileList[i].tbl:awake()
 		end
+		for i=1, #(fileList) do
+			fileList[i].tbl:init()
+		end
+		for i=1, #(fileList) do
+			fileList[i].tbl:after_init()
+		end
+
 	end
 end
---]]
 
-function register_module(tbl, name)
+function register_module(tbl, name, isReload)
 	script_module:log_info("try to register module " .. name);
 	script_module:register_module(name, tbl);
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			if ScriptList[i].tblName == name then
 				ScriptList[i].tbl = tbl;
-				script_module:log_info("register module " .. name .. " successed");
+				script_module:log_info("register module " .. name .. " succeed");
 			end
 		end
-		for i=1, #(ScriptList) do
-			if  ScriptList[i].tbl ~= nil then
-				ScriptList[i].tbl.reload();
+		if true == isReload then
+			for i=1, #(ScriptList) do
+				if  ScriptList[i].tbl ~= nil then
+					ScriptList[i].tbl:reload();
+				end
 			end
 		end
 	end
@@ -122,7 +99,7 @@ function find_module(name)
 end
 ---------------------------------------------
 function module_awake(...)
-	print("lua module awake");
+	script_module:log_info("lua module awake");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:awake(...);
@@ -132,7 +109,7 @@ end
 
 
 function module_init(...)
-	print("lua module init");
+	script_module:log_info("lua module init");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:init(...);
@@ -141,7 +118,7 @@ function module_init(...)
 end
 
 function module_after_init(...)
-	print("lua module after init");
+	script_module:log_info("lua module after init");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:after_init(...);
@@ -150,7 +127,7 @@ function module_after_init(...)
 end
 
 function module_ready_execute(...)
-	print("lua module execute");
+	script_module:log_info("lua module execute");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 		ScriptList[i].tbl:ready_execute(...);
@@ -159,7 +136,7 @@ function module_ready_execute(...)
 end
 
 function module_before_shut(...)
-	print("lua module before shut");
+	script_module:log_info("lua module before shut");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:before_shut(...);
@@ -168,7 +145,7 @@ function module_before_shut(...)
 end
 
 function module_shut(...)
-	print("lua module shut");
+	script_module:log_info("lua module shut");
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			ScriptList[i].tbl:shut(...);
@@ -179,6 +156,7 @@ end
 function print_table(table)
 	if table == nil then
 		print("the table is nil");
+		print(debug.traceback())
 		return;
 	end
 	
