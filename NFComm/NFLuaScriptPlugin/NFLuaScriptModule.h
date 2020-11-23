@@ -36,16 +36,55 @@
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "Dependencies/LuaIntf/LuaRef.h"
-#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFLuaPBModule.h"
+/*
+void call0(lua_State* lua_state,const char* name)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		lua_pcall(lua_state, 0, 0, 0);
+	}
+}
+
+template<typename T1>
+void call1(lua_State* lua_state,const char* name, T1 arg1)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		luabridge::Stack<T1>::push(lua_state, arg1);
+		lua_pcall(lua_state, 1, 0, 0);
+	}
+}
+
+template<typename T1, typename T2>
+void call2(lua_State* lua_state,const char* name, T1 arg1, T2 arg2)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		luabridge::Stack<T1>::push(lua_state, arg1);
+		luabridge::Stack<T2>::push(lua_state, arg2);
+		lua_pcall(lua_state, 2, 0, 0);
+	}
+}
+*/
+
+class NFILuaScriptModule
+		: public NFIModule
+{
+public:
+
+};
 
 class NFLuaScriptModule
     : public NFILuaScriptModule
@@ -175,17 +214,9 @@ protected:
     template<typename T>
     bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, T key, std::string& luaFunc);
 
-    template<typename T1, typename... T2>
-    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
-
-    template<typename T1, typename... T2>
-    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2... arg);
-
     int OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
     int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float time, const int count);
-
-	int OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float time, const int count);
 
     int OnLuaEventCB(const NFGUID& self, const int eventID, const NFDataList& argVar);
 

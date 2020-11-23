@@ -27,18 +27,23 @@
 #ifndef NF_LUA_HTTP_MODULE_H
 #define NF_LUA_HTTP_MODULE_H
 
-#include "Dependencies/LuaIntf/LuaIntf.h"
-#include "Dependencies/LuaIntf/LuaRef.h"
+//#include "Dependencies/LuaIntf/LuaIntf.h"
+//#include "Dependencies/LuaIntf/LuaRef.h"
+#include <lua.hpp>
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFILuaHttpModule.h"
+
+class NFILuaHttpModule
+		: public NFIModule
+{
+public:
+};
 
 class NFLuaHttpModule
     : public NFILuaHttpModule

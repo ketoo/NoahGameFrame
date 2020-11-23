@@ -622,7 +622,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgPreGame_2eproto::offsets[
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, self_),
-  PROTOBUF_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, clan_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, game_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, proxy_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, name_),
@@ -672,8 +671,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 155, -1, sizeof(::NFMsg::ReqRecoverRole)},
   { 163, -1, sizeof(::NFMsg::ServerHeartBeat)},
   { 169, -1, sizeof(::NFMsg::RoleOnlineNotify)},
-  { 186, -1, sizeof(::NFMsg::RoleOfflineNotify)},
-  { 195, -1, sizeof(::NFMsg::RoleDataPack)},
+  { 185, -1, sizeof(::NFMsg::RoleOfflineNotify)},
+  { 194, -1, sizeof(::NFMsg::RoleDataPack)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -753,30 +752,29 @@ const char descriptor_table_protodef_NFMsgPreGame_2eproto[] PROTOBUF_SECTION_VAR
   "\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\"@\n\016ReqR"
   "ecoverRole\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001("
   "\014\022\017\n\007game_id\030\003 \001(\005\" \n\017ServerHeartBeat\022\r\n"
-  "\005count\030\001 \001(\005\"\273\003\n\020RoleOnlineNotify\022\032\n\004sel"
-  "f\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014.NF"
-  "Msg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\022\014"
-  "\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001(\005\022-\n\021property_int"
-  "_list\030\024 \003(\0132\022.NFMsg.PropertyInt\0221\n\023prope"
-  "rty_float_list\030\025 \003(\0132\024.NFMsg.PropertyFlo"
-  "at\0223\n\024property_string_list\030\026 \003(\0132\025.NFMsg"
-  ".PropertyString\0223\n\024property_object_list\030"
-  "\027 \003(\0132\025.NFMsg.PropertyObject\0225\n\025property"
-  "_vector2_list\030\030 \003(\0132\026.NFMsg.PropertyVect"
-  "or2\0225\n\025property_vector3_list\030\031 \003(\0132\026.NFM"
-  "sg.PropertyVector3\"h\n\021RoleOfflineNotify\022"
-  "\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001("
-  "\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004"
-  " \001(\005\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg"
-  ".Ident\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectP"
-  "ropertyList\022\'\n\006record\030\003 \001(\0132\027.NFMsg.Obje"
-  "ctRecordList*Z\n\014EServerState\022\r\n\tEST_CRAS"
-  "H\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST"
-  "_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r"
-  "\n\tELM_LOGIN\020\000\022\020\n\014ELM_REGISTER\020\001\022\033\n\027ELM_A"
-  "UTO_REGISTER_LOGIN\020\002*@\n\021ReqServerListTyp"
-  "e\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_E"
-  "RVER\020\001b\006proto3"
+  "\005count\030\001 \001(\005\"\237\003\n\020RoleOnlineNotify\022\032\n\004sel"
+  "f\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005p"
+  "roxy\030\004 \001(\005\022\014\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001(\005\022-\n\021"
+  "property_int_list\030\024 \003(\0132\022.NFMsg.Property"
+  "Int\0221\n\023property_float_list\030\025 \003(\0132\024.NFMsg"
+  ".PropertyFloat\0223\n\024property_string_list\030\026"
+  " \003(\0132\025.NFMsg.PropertyString\0223\n\024property_"
+  "object_list\030\027 \003(\0132\025.NFMsg.PropertyObject"
+  "\0225\n\025property_vector2_list\030\030 \003(\0132\026.NFMsg."
+  "PropertyVector2\0225\n\025property_vector3_list"
+  "\030\031 \003(\0132\026.NFMsg.PropertyVector3\"h\n\021RoleOf"
+  "flineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022"
+  "\032\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001("
+  "\005\022\r\n\005proxy\030\004 \001(\005\"~\n\014RoleDataPack\022\030\n\002id\030\001"
+  " \001(\0132\014.NFMsg.Ident\022+\n\010property\030\002 \001(\0132\031.N"
+  "FMsg.ObjectPropertyList\022\'\n\006record\030\003 \001(\0132"
+  "\027.NFMsg.ObjectRecordList*Z\n\014EServerState"
+  "\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_B"
+  "USY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\n"
+  "ELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014ELM_REGISTE"
+  "R\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGIN\020\002*@\n\021ReqS"
+  "erverListType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020"
+  "RSLT_GAMES_ERVER\020\001b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgPreGame_2eproto_deps[2] = {
   &::descriptor_table_NFDefine_2eproto,
@@ -809,7 +807,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFM
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgPreGame_2eproto_once;
 static bool descriptor_table_NFMsgPreGame_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgPreGame_2eproto = {
-  &descriptor_table_NFMsgPreGame_2eproto_initialized, descriptor_table_protodef_NFMsgPreGame_2eproto, "NFMsgPreGame.proto", 2974,
+  &descriptor_table_NFMsgPreGame_2eproto_initialized, descriptor_table_protodef_NFMsgPreGame_2eproto, "NFMsgPreGame.proto", 2946,
   &descriptor_table_NFMsgPreGame_2eproto_once, descriptor_table_NFMsgPreGame_2eproto_sccs, descriptor_table_NFMsgPreGame_2eproto_deps, 22, 2,
   schemas, file_default_instances, TableStruct_NFMsgPreGame_2eproto::offsets,
   file_level_metadata_NFMsgPreGame_2eproto, 22, file_level_enum_descriptors_NFMsgPreGame_2eproto, file_level_service_descriptors_NFMsgPreGame_2eproto,
@@ -6187,34 +6185,21 @@ void ServerHeartBeat::InternalSwap(ServerHeartBeat* other) {
 void RoleOnlineNotify::InitAsDefaultInstance() {
   ::NFMsg::_RoleOnlineNotify_default_instance_._instance.get_mutable()->self_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
-  ::NFMsg::_RoleOnlineNotify_default_instance_._instance.get_mutable()->clan_ = const_cast< ::NFMsg::Ident*>(
-      ::NFMsg::Ident::internal_default_instance());
 }
 class RoleOnlineNotify::_Internal {
  public:
   static const ::NFMsg::Ident& self(const RoleOnlineNotify* msg);
-  static const ::NFMsg::Ident& clan(const RoleOnlineNotify* msg);
 };
 
 const ::NFMsg::Ident&
 RoleOnlineNotify::_Internal::self(const RoleOnlineNotify* msg) {
   return *msg->self_;
 }
-const ::NFMsg::Ident&
-RoleOnlineNotify::_Internal::clan(const RoleOnlineNotify* msg) {
-  return *msg->clan_;
-}
 void RoleOnlineNotify::clear_self() {
   if (GetArenaNoVirtual() == nullptr && self_ != nullptr) {
     delete self_;
   }
   self_ = nullptr;
-}
-void RoleOnlineNotify::clear_clan() {
-  if (GetArenaNoVirtual() == nullptr && clan_ != nullptr) {
-    delete clan_;
-  }
-  clan_ = nullptr;
 }
 void RoleOnlineNotify::clear_property_int_list() {
   property_int_list_.Clear();
@@ -6258,11 +6243,6 @@ RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
   } else {
     self_ = nullptr;
   }
-  if (from._internal_has_clan()) {
-    clan_ = new ::NFMsg::Ident(*from.clan_);
-  } else {
-    clan_ = nullptr;
-  }
   ::memcpy(&game_, &from.game_,
     static_cast<size_t>(reinterpret_cast<char*>(&bp_) -
     reinterpret_cast<char*>(&game_)) + sizeof(bp_));
@@ -6285,7 +6265,6 @@ RoleOnlineNotify::~RoleOnlineNotify() {
 void RoleOnlineNotify::SharedDtor() {
   name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete self_;
-  if (this != internal_default_instance()) delete clan_;
 }
 
 void RoleOnlineNotify::SetCachedSize(int size) const {
@@ -6314,10 +6293,6 @@ void RoleOnlineNotify::Clear() {
     delete self_;
   }
   self_ = nullptr;
-  if (GetArenaNoVirtual() == nullptr && clan_ != nullptr) {
-    delete clan_;
-  }
-  clan_ = nullptr;
   ::memset(&game_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&bp_) -
       reinterpret_cast<char*>(&game_)) + sizeof(bp_));
@@ -6335,13 +6310,6 @@ const char* RoleOnlineNotify::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_self(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // .NFMsg.Ident clan = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_clan(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -6478,14 +6446,6 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
         1, _Internal::self(this), target, stream);
-  }
-
-  // .NFMsg.Ident clan = 2;
-  if (this->has_clan()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        2, _Internal::clan(this), target, stream);
   }
 
   // int32 game = 3;
@@ -6632,13 +6592,6 @@ size_t RoleOnlineNotify::ByteSizeLong() const {
         *self_);
   }
 
-  // .NFMsg.Ident clan = 2;
-  if (this->has_clan()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *clan_);
-  }
-
   // int32 game = 3;
   if (this->game() != 0) {
     total_size += 1 +
@@ -6704,9 +6657,6 @@ void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
   if (from.has_self()) {
     _internal_mutable_self()->::NFMsg::Ident::MergeFrom(from._internal_self());
   }
-  if (from.has_clan()) {
-    _internal_mutable_clan()->::NFMsg::Ident::MergeFrom(from._internal_clan());
-  }
   if (from.game() != 0) {
     _internal_set_game(from._internal_game());
   }
@@ -6748,7 +6698,6 @@ void RoleOnlineNotify::InternalSwap(RoleOnlineNotify* other) {
   name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(self_, other->self_);
-  swap(clan_, other->clan_);
   swap(game_, other->game_);
   swap(proxy_, other->proxy_);
   swap(bp_, other->bp_);
