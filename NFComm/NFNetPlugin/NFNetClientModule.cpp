@@ -108,8 +108,7 @@ unsigned int NFNetClientModule::ExpandBufferSize(const unsigned int size)
     return mnBufferSize;
 }
 
-int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID,
-                                           NET_RECEIVE_FUNCTOR_PTR functorPtr)
+int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, NET_RECEIVE_FUNCTOR_PTR functorPtr)
 {
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
     if (!xCallBack)
@@ -118,10 +117,19 @@ int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uin
         mxCallBack.AddElement(eType, xCallBack);
     }
 
-	std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
-	xList.push_back(functorPtr);
 
-    xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
+
+	auto cbList = xCallBack->mxReceiveCallBack.find(msgID);
+	if (cbList == xCallBack->mxReceiveCallBack.end())
+	{
+		std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
+		xList.push_back(functorPtr);
+		xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
+	}
+	else
+	{
+		cbList->second.push_back(functorPtr);
+	}
 
     return 0;
 }
@@ -716,7 +724,7 @@ void NFNetClientModule::LogServerInfo()
 {
 	bool error = false;
 	std::ostringstream stream;
-	stream << "This is a client, begin to print Server Info-------------------" << std::endl;
+	stream << "\nThis is a client, begin to print Server Info-------------------" << std::endl;
 
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
@@ -731,7 +739,7 @@ void NFNetClientModule::LogServerInfo()
         pServerData = mxServerMap.NextNude();
     }
 
-	stream << "This is a client, end to print Server Info---------------------" << std::endl;
+	stream << "\nThis is a client, end to print Server Info---------------------" << std::endl;
 
     if (error)
 	{

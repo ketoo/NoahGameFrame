@@ -90,17 +90,17 @@ public:
     virtual bool Execute() override;
 
     virtual int GetAppID() const override;
-
     virtual void SetAppID(const int appID) override;
 
-    virtual bool IsRunningDocker() const override;
+	virtual int GetAppType() const override;
+	virtual void SetAppType(const int type) override;
 
+    virtual bool IsRunningDocker() const override;
     virtual void SetRunningDocker(bool bDocker) override;
 
     virtual bool IsStaticPlugin() const override;
 
     virtual NFINT64 GetInitTime() const override;
-
     virtual NFINT64 GetNowTime() const override;
 
     virtual const std::string& GetConfigPath() const override;
@@ -144,19 +144,21 @@ protected:
     bool UnLoadStaticPlugin(const std::string& pluginDLLName);
 
 private:
-    int mnAppID;
-    bool mbIsDocker;
-    bool mbStaticPlugin;
-    NFINT64 mnInitTime;
-	NFINT64 mnNowTime;
+    int appID = 0;
+	int appType = 0;
+    bool mbIsDocker = false;
+    bool mbStaticPlugin = false;
+    NFINT64 mnInitTime = 0;
+	NFINT64 mnNowTime = 0;
 	NFINT64 mnCPUCount = 1;
-    std::string mstrConfigPath;
-    std::string mstrConfigName;
-    std::string mstrAppName;
-    std::string mstrLogConfigName;
 
-    NFIPlugin* mCurrentPlugin;
-    NFIModule* mCurrenModule;
+    std::string configPath;
+    std::string configName;
+    std::string appName;
+    std::string logConfigName;
+
+    NFIPlugin* currentPlugin;
+    NFIModule* currentModule;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFDynLib*> PluginLibMap;

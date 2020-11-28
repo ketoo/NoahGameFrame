@@ -28,6 +28,8 @@
 
 bool NFLoginNet_ServerModule::Init()
 {
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_LOGIN);
+
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();

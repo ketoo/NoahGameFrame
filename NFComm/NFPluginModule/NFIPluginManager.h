@@ -207,6 +207,9 @@ public:
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int appID) = 0;
 
+	virtual int GetAppType() const = 0;
+	virtual void SetAppType(const int type) = 0;
+
     virtual bool IsRunningDocker() const = 0;
     virtual void SetRunningDocker(bool bDocker) = 0;
 

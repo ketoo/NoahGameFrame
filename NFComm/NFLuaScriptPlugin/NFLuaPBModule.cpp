@@ -40,6 +40,7 @@ bool NFLuaPBModule::Awake()
 
 bool NFLuaPBModule::Init()
 {
+	std::cout << "init123445.." << std::endl;
     return true;
 }
 
