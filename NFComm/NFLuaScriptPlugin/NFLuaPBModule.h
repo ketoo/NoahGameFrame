@@ -107,6 +107,8 @@ private:
 	int GetEnumValue(google::protobuf::Message& message, const LuaIntf::LuaRef& luaValue, const google::protobuf::FieldDescriptor* field) const;
 
 protected:
+	NFILogModule* m_pLogModule;
+
     int64_t mnTime;
     std::string strVersionCode;
 	lua_State* m_pLuaState;
