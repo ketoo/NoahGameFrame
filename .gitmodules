@@ -4,3 +4,6 @@
 [submodule "Dependencies/concurrentqueue"]
 	path = Dependencies/concurrentqueue
 	url = https://github.com/cameron314/concurrentqueue.git
+[submodule "Dependencies/LuaIntf"]
+	path = Dependencies/LuaIntf
+	url = https://github.com/ketoo/lua-intf.git
