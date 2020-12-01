@@ -112,18 +112,6 @@ bool NFKernelModule::Execute()
 
 	m_pSceneModule->Execute();
 
-	NF_SHARE_PTR<NFIObject> pObject = First();
-	while (pObject)
-	{
-		mnCurExeObject = pObject->Self();
-		pObject->Execute();
-
-		mnCurExeObject.nHead64 = 0;
-		mnCurExeObject.nData64 = 0;
-
-		pObject = Next();
-	}
-
 	return true;
 }
 

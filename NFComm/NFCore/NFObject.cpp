@@ -46,21 +46,6 @@ NFObject::~NFObject()
 
 }
 
-bool NFObject::Init()
-{
-    return true;
-}
-
-bool NFObject::Shut()
-{
-    return true;
-}
-
-bool NFObject::Execute()
-{
-    return true;
-}
-
 bool NFObject::AddRecordCallBack(const std::string& recordName, const RECORD_EVENT_FUNCTOR_PTR& cb)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetRecordManager()->GetElement(recordName);

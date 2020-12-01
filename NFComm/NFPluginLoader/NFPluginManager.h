@@ -130,8 +130,8 @@ public:
 
     virtual bool GetFileContent(const std::string &fileName, std::string &content) override;
 
-	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue);
-	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName);
+	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) override;
+	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) override;
 
 protected:
 

@@ -69,8 +69,6 @@ public:
 	{
 	}
 
-    virtual bool Execute() = 0;
-
     virtual NFGUID Self() = 0;
 
     template<typename BaseType>

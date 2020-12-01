@@ -96,6 +96,7 @@ public:
 
     virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
+	bool SendMsgToAllClient(const char* msg, const size_t len) override;
 
     virtual bool SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len) override ;
 
@@ -110,8 +111,6 @@ public:
 private:
 	bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
 
-    bool SendMsgToAllClient(const char* msg, const size_t len);
-    
     bool SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
 
 
