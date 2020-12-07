@@ -157,12 +157,16 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 	}
 	else
 	{
-		NFDataList varObjectList;
-		if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		const NFGUID masterID = m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MasterID());
+		if (masterID.IsNull())
 		{
-			m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
+			NFDataList varObjectList;
+			if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+			{
+				m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
+				m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
+			}
 		}
 	}
 

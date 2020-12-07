@@ -302,14 +302,11 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 	if (m_pKernelModule->ExistObject(self))
 	{
 		NFMsg::RoleOnlineNotify xMsg;
-		//const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 		const int& gateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
 		const std::string& playerName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
 		const int bp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::BattlePoint());
-		const NFGUID clan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ClanID());
 
 		*xMsg.mutable_self() = NFINetModule::NFToPB(self);
-		*xMsg.mutable_clan() = NFINetModule::NFToPB(clan);
 		xMsg.set_game(pPluginManager->GetAppID());
 		xMsg.set_proxy(gateID);
 		xMsg.set_name(playerName);
@@ -596,7 +593,7 @@ void NFGameServerToWorldModule::OnWorldRecordStringProcess(const NFSOCK sockInde
 	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogError(nPlayerID, "Upload From Client String set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "String set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -604,7 +601,7 @@ void NFGameServerToWorldModule::OnWorldRecordStringProcess(const NFSOCK sockInde
 	{
 		const NFMsg::RecordString &xRecordString = xMsg.property_list().Get(i);
 		pRecord->SetString(xRecordString.row(), xRecordString.col(), xRecordString.data());
-		m_pLogModule->LogInfo(nPlayerID, "Upload From Client String set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(nPlayerID, "String set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
 }
 

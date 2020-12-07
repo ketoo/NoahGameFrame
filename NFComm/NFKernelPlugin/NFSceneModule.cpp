@@ -247,8 +247,8 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		int nOldGroupID = pObject->GetPropertyInt32(NFrame::Scene::GroupID());
 		if (nOldGroupID <= 0)
 		{
-			m_pLogModule->LogError(self, "no this group == 0 " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
-			return false;
+			//m_pLogModule->LogError(self, "no this group == 0 " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
+			//return false;
 		}
 
 		NF_SHARE_PTR<NFSceneInfo> pOldSceneInfo = this->GetElement(nOldSceneID);
@@ -1157,7 +1157,6 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, type, arg);
 		}
 
-		pObject->SetPropertyVector3(NFrame::IObject::Position(), v);
 
 		////////
 		BeforeEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
@@ -1165,8 +1164,11 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
 		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
 
+
 		const NFGUID newCell = m_pCellModule->ComputeCellID(v);
 		OnMoveCellEvent(self, nTargetGroupID, nTargetGroupID, NFGUID(), newCell);
+
+		pObject->SetPropertyVector3(NFrame::IObject::MoveTo(), v);
 
 		/////////
 		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);

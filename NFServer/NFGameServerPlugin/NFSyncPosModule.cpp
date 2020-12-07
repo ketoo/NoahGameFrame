@@ -140,6 +140,7 @@ int NFSyncPosModule::OnPlayerClassEvent(const NFGUID & self, const std::string &
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::MoveTo(), this, &NFSyncPosModule::OnPlayerGMPositionEvent);
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::GMMoveTo(), this, &NFSyncPosModule::OnPlayerGMPositionEvent);
 	}
 
@@ -152,7 +153,7 @@ int NFSyncPosModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::str
 	NFMsg::PosSyncUnit* syncUnit = xMsg.add_sync_unit();
 	if (syncUnit)
 	{
-		NFVector3 v = newVar.GetVector3();
+		const NFVector3& v = newVar.GetVector3();
 		*syncUnit->mutable_pos() = NFINetModule::NFToPB(v);
 		*syncUnit->mutable_mover() = NFINetModule::NFToPB(self);
 		syncUnit->set_type(NFMsg::PosSyncUnit_EMoveType::PosSyncUnit_EMoveType_EET_TELEPORT);

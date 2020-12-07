@@ -69,28 +69,27 @@ namespace NFMsg {
             "DVJlcURlbGV0ZVJvbGUSDwoHYWNjb3VudBgBIAEoDBIMCgRuYW1lGAIgASgM",
             "Eg8KB2dhbWVfaWQYAyABKAUiQAoOUmVxUmVjb3ZlclJvbGUSDwoHYWNjb3Vu",
             "dBgBIAEoDBIMCgRuYW1lGAIgASgMEg8KB2dhbWVfaWQYAyABKAUiIAoPU2Vy",
-            "dmVySGVhcnRCZWF0Eg0KBWNvdW50GAEgASgFIrsDChBSb2xlT25saW5lTm90",
-            "aWZ5EhoKBHNlbGYYASABKAsyDC5ORk1zZy5JZGVudBIaCgRjbGFuGAIgASgL",
-            "MgwuTkZNc2cuSWRlbnQSDAoEZ2FtZRgDIAEoBRINCgVwcm94eRgEIAEoBRIM",
-            "CgRuYW1lGAUgASgMEgoKAmJwGAYgASgFEi0KEXByb3BlcnR5X2ludF9saXN0",
-            "GBQgAygLMhIuTkZNc2cuUHJvcGVydHlJbnQSMQoTcHJvcGVydHlfZmxvYXRf",
-            "bGlzdBgVIAMoCzIULk5GTXNnLlByb3BlcnR5RmxvYXQSMwoUcHJvcGVydHlf",
-            "c3RyaW5nX2xpc3QYFiADKAsyFS5ORk1zZy5Qcm9wZXJ0eVN0cmluZxIzChRw",
-            "cm9wZXJ0eV9vYmplY3RfbGlzdBgXIAMoCzIVLk5GTXNnLlByb3BlcnR5T2Jq",
-            "ZWN0EjUKFXByb3BlcnR5X3ZlY3RvcjJfbGlzdBgYIAMoCzIWLk5GTXNnLlBy",
-            "b3BlcnR5VmVjdG9yMhI1ChVwcm9wZXJ0eV92ZWN0b3IzX2xpc3QYGSADKAsy",
-            "Fi5ORk1zZy5Qcm9wZXJ0eVZlY3RvcjMiaAoRUm9sZU9mZmxpbmVOb3RpZnkS",
-            "GgoEc2VsZhgBIAEoCzIMLk5GTXNnLklkZW50EhoKBGNsYW4YAiABKAsyDC5O",
-            "Rk1zZy5JZGVudBIMCgRnYW1lGAMgASgFEg0KBXByb3h5GAQgASgFIn4KDFJv",
-            "bGVEYXRhUGFjaxIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50EisKCHByb3Bl",
-            "cnR5GAIgASgLMhkuTkZNc2cuT2JqZWN0UHJvcGVydHlMaXN0EicKBnJlY29y",
-            "ZBgDIAEoCzIXLk5GTXNnLk9iamVjdFJlY29yZExpc3QqWgoMRVNlcnZlclN0",
-            "YXRlEg0KCUVTVF9DUkFTSBAAEg4KCkVTVF9OQVJNQUwQARIMCghFU1RfQlVT",
-            "WRACEgwKCEVTVF9GSVJFEAMSDwoLRVNUX01BSU5URU4QBCpKCgpFTG9naW5N",
-            "b2RlEg0KCUVMTV9MT0dJThAAEhAKDEVMTV9SRUdJU1RFUhABEhsKF0VMTV9B",
-            "VVRPX1JFR0lTVEVSX0xPR0lOEAIqQAoRUmVxU2VydmVyTGlzdFR5cGUSFQoR",
-            "UlNMVF9XT1JMRF9TRVJWRVIQABIUChBSU0xUX0dBTUVTX0VSVkVSEAFiBnBy",
-            "b3RvMw=="));
+            "dmVySGVhcnRCZWF0Eg0KBWNvdW50GAEgASgFIp8DChBSb2xlT25saW5lTm90",
+            "aWZ5EhoKBHNlbGYYASABKAsyDC5ORk1zZy5JZGVudBIMCgRnYW1lGAMgASgF",
+            "Eg0KBXByb3h5GAQgASgFEgwKBG5hbWUYBSABKAwSCgoCYnAYBiABKAUSLQoR",
+            "cHJvcGVydHlfaW50X2xpc3QYFCADKAsyEi5ORk1zZy5Qcm9wZXJ0eUludBIx",
+            "ChNwcm9wZXJ0eV9mbG9hdF9saXN0GBUgAygLMhQuTkZNc2cuUHJvcGVydHlG",
+            "bG9hdBIzChRwcm9wZXJ0eV9zdHJpbmdfbGlzdBgWIAMoCzIVLk5GTXNnLlBy",
+            "b3BlcnR5U3RyaW5nEjMKFHByb3BlcnR5X29iamVjdF9saXN0GBcgAygLMhUu",
+            "TkZNc2cuUHJvcGVydHlPYmplY3QSNQoVcHJvcGVydHlfdmVjdG9yMl9saXN0",
+            "GBggAygLMhYuTkZNc2cuUHJvcGVydHlWZWN0b3IyEjUKFXByb3BlcnR5X3Zl",
+            "Y3RvcjNfbGlzdBgZIAMoCzIWLk5GTXNnLlByb3BlcnR5VmVjdG9yMyJoChFS",
+            "b2xlT2ZmbGluZU5vdGlmeRIaCgRzZWxmGAEgASgLMgwuTkZNc2cuSWRlbnQS",
+            "GgoEY2xhbhgCIAEoCzIMLk5GTXNnLklkZW50EgwKBGdhbWUYAyABKAUSDQoF",
+            "cHJveHkYBCABKAUifgoMUm9sZURhdGFQYWNrEhgKAmlkGAEgASgLMgwuTkZN",
+            "c2cuSWRlbnQSKwoIcHJvcGVydHkYAiABKAsyGS5ORk1zZy5PYmplY3RQcm9w",
+            "ZXJ0eUxpc3QSJwoGcmVjb3JkGAMgASgLMhcuTkZNc2cuT2JqZWN0UmVjb3Jk",
+            "TGlzdCpaCgxFU2VydmVyU3RhdGUSDQoJRVNUX0NSQVNIEAASDgoKRVNUX05B",
+            "Uk1BTBABEgwKCEVTVF9CVVNZEAISDAoIRVNUX0ZJUkUQAxIPCgtFU1RfTUFJ",
+            "TlRFThAEKkoKCkVMb2dpbk1vZGUSDQoJRUxNX0xPR0lOEAASEAoMRUxNX1JF",
+            "R0lTVEVSEAESGwoXRUxNX0FVVE9fUkVHSVNURVJfTE9HSU4QAipAChFSZXFT",
+            "ZXJ2ZXJMaXN0VHlwZRIVChFSU0xUX1dPUkxEX1NFUlZFUhAAEhQKEFJTTFRf",
+            "R0FNRVNfRVJWRVIQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EServerState), typeof(global::NFMsg.ELoginMode), typeof(global::NFMsg.ReqServerListType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -113,7 +112,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqDeleteRole), global::NFMsg.ReqDeleteRole.Parser, new[]{ "Account", "Name", "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqRecoverRole), global::NFMsg.ReqRecoverRole.Parser, new[]{ "Account", "Name", "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ServerHeartBeat), global::NFMsg.ServerHeartBeat.Parser, new[]{ "Count" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "Self", "Clan", "Game", "Proxy", "Name", "Bp", "PropertyIntList", "PropertyFloatList", "PropertyStringList", "PropertyObjectList", "PropertyVector2List", "PropertyVector3List" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "Self", "Game", "Proxy", "Name", "Bp", "PropertyIntList", "PropertyFloatList", "PropertyStringList", "PropertyObjectList", "PropertyVector2List", "PropertyVector3List" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOfflineNotify), global::NFMsg.RoleOfflineNotify.Parser, new[]{ "Self", "Clan", "Game", "Proxy" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleDataPack), global::NFMsg.RoleDataPack.Parser, new[]{ "Id", "Property", "Record" }, null, null, null, null)
           }));
@@ -4182,7 +4181,6 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RoleOnlineNotify(RoleOnlineNotify other) : this() {
       self_ = other.self_ != null ? other.self_.Clone() : null;
-      clan_ = other.clan_ != null ? other.clan_.Clone() : null;
       game_ = other.game_;
       proxy_ = other.proxy_;
       name_ = other.name_;
@@ -4209,17 +4207,6 @@ namespace NFMsg {
       get { return self_; }
       set {
         self_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "clan" field.</summary>
-    public const int ClanFieldNumber = 2;
-    private global::NFMsg.Ident clan_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident Clan {
-      get { return clan_; }
-      set {
-        clan_ = value;
       }
     }
 
@@ -4341,7 +4328,6 @@ namespace NFMsg {
         return true;
       }
       if (!object.Equals(Self, other.Self)) return false;
-      if (!object.Equals(Clan, other.Clan)) return false;
       if (Game != other.Game) return false;
       if (Proxy != other.Proxy) return false;
       if (Name != other.Name) return false;
@@ -4359,7 +4345,6 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (self_ != null) hash ^= Self.GetHashCode();
-      if (clan_ != null) hash ^= Clan.GetHashCode();
       if (Game != 0) hash ^= Game.GetHashCode();
       if (Proxy != 0) hash ^= Proxy.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
@@ -4386,10 +4371,6 @@ namespace NFMsg {
       if (self_ != null) {
         output.WriteRawTag(10);
         output.WriteMessage(Self);
-      }
-      if (clan_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Clan);
       }
       if (Game != 0) {
         output.WriteRawTag(24);
@@ -4423,9 +4404,6 @@ namespace NFMsg {
       int size = 0;
       if (self_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Self);
-      }
-      if (clan_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Clan);
       }
       if (Game != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Game);
@@ -4462,12 +4440,6 @@ namespace NFMsg {
         }
         Self.MergeFrom(other.Self);
       }
-      if (other.clan_ != null) {
-        if (clan_ == null) {
-          Clan = new global::NFMsg.Ident();
-        }
-        Clan.MergeFrom(other.Clan);
-      }
       if (other.Game != 0) {
         Game = other.Game;
       }
@@ -4502,13 +4474,6 @@ namespace NFMsg {
               Self = new global::NFMsg.Ident();
             }
             input.ReadMessage(Self);
-            break;
-          }
-          case 18: {
-            if (clan_ == null) {
-              Clan = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(Clan);
             break;
           }
           case 24: {
