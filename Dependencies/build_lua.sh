@@ -9,11 +9,11 @@ cd lua-5.3.6
 
 sysOS=`uname -s`
 
-if [ $sysOS == "Darwin" ];then
+if [ $sysOS == "Linux" ];then
 make linux
 cp ./src/*.h ../vcpkg/installed/x64-linux/include/
 
-elif [ $sysOS == "Linux" ];then
+elif [ $sysOS == "Darwin" ];then
 make macosx
 cp ./src/*.h ../vcpkg/installed/x64-osx/include/
 fi
