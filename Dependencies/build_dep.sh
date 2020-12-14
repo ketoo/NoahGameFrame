@@ -57,6 +57,7 @@ git submodule update --init --recursive
 chmod 777 *.sh
 
 ./build_hiredis.sh
+./build_lua.sh
 ./build_vcpkg.sh
 
 if [ $sysOS == "Darwin" ];then
