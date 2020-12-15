@@ -9,7 +9,7 @@ fi
 unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
-    echo "[ubuntu] sudo apt-get -y install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
+    echo "[ubuntu] sudo apt-get -y install curl zip unzip tar or [centos] yum -y install unzip or [mac] brew install unzip"
     exit 1
 fi
 
