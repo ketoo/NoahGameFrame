@@ -2,7 +2,7 @@
 
 rm -rf lua-5.3.6
 
-curl -R -O http://www.lua.org/ftp/lua-5.3.6.tar.gz
+wget http://www.lua.org/ftp/lua-5.3.6.tar.gz
 tar zxf lua-5.3.6.tar.gz
 cd lua-5.3.6
 

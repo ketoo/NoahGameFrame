@@ -171,6 +171,7 @@ private:
     struct NetEvent
 	{
 		NF_NET_EVENT event;
+		//std::string* data;
 		char* data = nullptr;
 		int len = 0;
 	};
