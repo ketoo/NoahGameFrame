@@ -234,6 +234,7 @@ Create a Lua Script File, and Must Contain following functions
 - init()
 - ready_execute()
 - after_init()
+
 - before_shut()
 - shut()
 
