@@ -168,11 +168,13 @@ private:
     NET_EVENT_FUNCTOR mEventCB;
 
     //async thread to process net event & msg and main thread to process logic business
-    struct Netevent
+    struct NetEvent
 	{
-
+		NF_NET_EVENT event;
+		char* data = nullptr;
+		int len = 0;
 	};
-	moodycamel::ConcurrentQueue<int> msgQueue;
+	moodycamel::ConcurrentQueue<NetEvent> msgQueue;
     //////////////////////////////////////////////////////////////////////////
 };
 
