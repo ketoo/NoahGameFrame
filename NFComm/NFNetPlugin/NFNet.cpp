@@ -293,7 +293,7 @@ bool NFNet::SendMsgToAllClient(const char* msg, const size_t len)
 		return false;
 	}
 
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
+	auto it = mmObject.begin();
     for (; it != mmObject.end(); ++it)
     {
         NetObject* pNetObject = (NetObject*)it->second;
@@ -325,7 +325,7 @@ bool NFNet::SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex)
 		return false;
 	}
 
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
+	auto it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pNetObject = (NetObject*)it->second;
@@ -347,7 +347,7 @@ bool NFNet::SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex)
 
 bool NFNet::SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList)
 {
-    std::list<NFSOCK>::const_iterator it = fdList.begin();
+	auto it = fdList.begin();
     for (; it != fdList.end(); ++it)
     {
         SendMsg(msg, len, *it);
@@ -358,7 +358,7 @@ bool NFNet::SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& 
 
 bool NFNet::CloseNetObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
+	auto it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pObject = it->second;
@@ -600,7 +600,7 @@ int NFNet::InitServerNet()
 
 bool NFNet::CloseSocketAll()
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
+	auto it = mmObject.begin();
     for (; it != mmObject.end(); ++it)
     {
 		NFSOCK nFD = it->first;
@@ -616,7 +616,7 @@ bool NFNet::CloseSocketAll()
 
 NetObject* NFNet::GetNetObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
+	auto it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         return it->second;
@@ -627,7 +627,7 @@ NetObject* NFNet::GetNetObject(const NFSOCK sockIndex)
 
 void NFNet::CloseObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
+	auto it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pObject = it->second;

@@ -40,6 +40,11 @@ bool NFLuaPBModule::Awake()
 
 bool NFLuaPBModule::Init()
 {
+	std::cout << "init123445.." << std::endl;
+
+	m_pLogModule = this->pPluginManager->FindModule<NFILogModule>();
+
+
     return true;
 }
 
@@ -80,8 +85,7 @@ void NFLuaPBModule::ImportProtoFile(const std::string & strFile)
 	const google::protobuf::FileDescriptor* pDesc = m_pImporter->Import(strFile);
 	if (!pDesc)
 	{
-		std::cout << "unknow protocol  file to import struct name: " << strFile << std::endl;
-		//throw NFException("unknow protocol  file to import struct name: " + strFile);
+		m_pLogModule->LogError("unknow protocol  file to import struct name: " + strFile );
 	};
 }
 

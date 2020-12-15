@@ -10,7 +10,7 @@
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
-   Licensed under the Apache License, Version 2.0 (the "License");
+   Licensed under the Apache License, Version 2.0 (the "License") override ;
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
@@ -158,29 +158,29 @@ private:
     NFClassModule();
 public:
     NFClassModule(NFIPluginManager* p);
-    virtual ~NFClassModule();
+    virtual ~NFClassModule() override ;
 	
 	
-	virtual bool Awake();
-    virtual bool Init();
-    virtual bool AfterInit();
+	virtual bool Awake() override ;
+    virtual bool Init() override ;
+    virtual bool AfterInit() override ;
 
-	virtual bool Shut();
+	virtual bool Shut() override ;
 
-    virtual bool Load();
-    virtual bool Save();
-    virtual bool Clear();
+    virtual bool Load() override ;
+    virtual bool Save() override ;
+    virtual bool Clear() override ;
 
     virtual NFIClassModule* GetThreadClassModule() override;
 	virtual NFIClassModule* GetThreadClassModule(const int index) override;
 
-    virtual bool AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb);
-    virtual bool DoEvent(const NFGUID& objectID, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList);
+    virtual bool AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb) override ;
+    virtual bool DoEvent(const NFGUID& objectID, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList) override ;
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& className);
-    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& className);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& className) override ;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& className) override ;
 
-    virtual bool AddClass(const std::string& className, const std::string& strParentName);
+    virtual bool AddClass(const std::string& className, const std::string& strParentName) override ;
 
 protected:
     virtual NFDATA_TYPE ComputerType(const char* pstrTypeName, NFData& var);

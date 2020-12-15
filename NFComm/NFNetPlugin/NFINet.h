@@ -177,17 +177,17 @@ public:
     }
 
     // Message Head[ MsgID(2) | MsgSize(4) ]
-    virtual int EnCode(char* strData)
+    virtual int EnCode(char* data)
     {
         uint32_t nOffset = 0;
 
         uint16_t msgID = NF_HTONS(mumsgID);
-        memcpy(strData + nOffset, (void*) (&msgID), sizeof(mumsgID));
+        memcpy(data + nOffset, (void*) (&msgID), sizeof(mumsgID));
         nOffset += sizeof(mumsgID);
 
         uint32_t nPackSize = munSize + NF_HEAD_LENGTH;
         uint32_t nSize = NF_HTONL(nPackSize);
-        memcpy(strData + nOffset, (void*) (&nSize), sizeof(munSize));
+        memcpy(data + nOffset, (void*) (&nSize), sizeof(munSize));
         nOffset += sizeof(munSize);
 
         if (nOffset != NF_HEAD_LENGTH)
@@ -199,17 +199,17 @@ public:
     }
 
     // Message Head[ MsgID(2) | MsgSize(4) ]
-    virtual int DeCode(const char* strData)
+    virtual int DeCode(const char* data)
     {
         uint32_t nOffset = 0;
 
         uint16_t msgID = 0;
-        memcpy(&msgID, strData + nOffset, sizeof(mumsgID));
+        memcpy(&msgID, data + nOffset, sizeof(mumsgID));
         mumsgID = NF_NTOHS(msgID);
         nOffset += sizeof(mumsgID);
 
         uint32_t nPackSize = 0;
-        memcpy(&nPackSize, strData + nOffset, sizeof(munSize));
+        memcpy(&nPackSize, data + nOffset, sizeof(munSize));
         munSize = NF_NTOHL(nPackSize) - NF_HEAD_LENGTH;
         nOffset += sizeof(munSize);
 
@@ -260,16 +260,16 @@ typedef std::shared_ptr<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 class NetObject
 {
 public:
-    NetObject(NFINet* pNet, NFSOCK fd, sockaddr_in& addr, void* pBev)
+    NetObject(NFINet* pNet, NFSOCK sock, sockaddr_in& addr, void* pBev)
     {
-        mnLogicState = 0;
-        mnGameID = 0;
-        nFD = fd;
+		logicState = 0;
+		gameID = 0;
+        fd = sock;
         bNeedRemove = false;
 
-        m_pNet = pNet;
+		netObject = pNet;
 
-        m_pUserData = pBev;
+		userData = pBev;
         memset(&sin, 0, sizeof(sin));
         sin = addr;
     }
@@ -280,74 +280,74 @@ public:
 	
     int AddBuff(const char* str, size_t len)
     {
-        mstrBuff.append(str, len);
+        ringBuff.append(str, len);
 
-        return (int) mstrBuff.length();
+        return (int) ringBuff.length();
     }
 
-    int CopyBuffTo(char* str, uint32_t nStart, uint32_t len)
+    int CopyBuffTo(char* str, uint32_t start, uint32_t len)
     {
-        if (nStart + len > mstrBuff.length())
+        if (start + len > ringBuff.length())
         {
             return 0;
         }
 
-        memcpy(str, mstrBuff.data() + nStart, len);
+        memcpy(str, ringBuff.data() + start, len);
 
         return len;
     }
 
-    int RemoveBuff(uint32_t nStart, uint32_t len)
+    int RemoveBuff(uint32_t start, uint32_t len)
     {
-        if (nStart + len > mstrBuff.length())
+        if (start + len > ringBuff.length())
         {
             return 0;
         }
 
-        mstrBuff.erase(nStart, len);
+        ringBuff.erase(start, len);
 
-        return (int) mstrBuff.length();
+        return (int) ringBuff.length();
     }
 
     const char* GetBuff()
     {
-        return mstrBuff.data();
+        return ringBuff.data();
     }
 
     int GetBuffLen() const
     {
-        return (int) mstrBuff.length();
+        return (int) ringBuff.length();
     }
 
     void* GetUserData()
     {
-        return m_pUserData;
+        return userData;
     }
 
     NFINet* GetNet()
     {
-        return m_pNet;
+        return netObject;
     }
 
     //////////////////////////////////////////////////////////////////////////
     const std::string& GetSecurityKey() const
     {
-        return mstrSecurityKey;
+        return securityKey;
     }
 
-    void SetSecurityKey(const std::string& strKey)
+    void SetSecurityKey(const std::string& key)
     {
-        mstrSecurityKey = strKey;
+		securityKey = key;
     }
 
     int GetConnectKeyState() const
     {
-        return mnLogicState;
+        return logicState;
     }
 
-    void SetConnectKeyState(const int nState)
+    void SetConnectKeyState(const int state)
     {
-        mnLogicState = nState;
+		logicState = state;
     }
 
     bool NeedRemove()
@@ -362,75 +362,75 @@ public:
 
     const std::string& GetAccount() const
     {
-        return mstrUserData;
+        return account;
     }
 
-    void SetAccount(const std::string& strData)
+    void SetAccount(const std::string& data)
     {
-        mstrUserData = strData;
+		account = data;
     }
 
     int GetGameID() const
     {
-        return mnGameID;
+        return gameID;
     }
 
     void SetGameID(const int nData)
     {
-        mnGameID = nData;
+		gameID = nData;
     }
 
     const NFGUID& GetUserID()
     {
-        return mnUserID;
+        return userID;
     }
 
     void SetUserID(const NFGUID& nUserID)
     {
-        mnUserID = nUserID;
+		userID = nUserID;
     }
 
     const NFGUID& GetClientID()
     {
-        return mnClientID;
+        return clientID;
     }
 
     void SetClientID(const NFGUID& xClientID)
     {
-        mnClientID = xClientID;
+		clientID = xClientID;
     }
 
     const NFGUID& GetHashIdentID()
-    {
-        return mnHashIdentID;
+		{
+        return hashIdentID;
     }
 
     void SetHashIdentID(const NFGUID& xHashIdentID)
     {
-        mnHashIdentID = xHashIdentID;
+		hashIdentID = xHashIdentID;
     }
 
     NFSOCK GetRealFD()
     {
-        return nFD;
+        return fd;
     }
 
 private:
     sockaddr_in sin;
-    void* m_pUserData;
+    void* userData;
     //ringbuff
-    std::string mstrBuff;
-    std::string mstrUserData;
-    std::string mstrSecurityKey;
+    std::string ringBuff;
+    std::string account;
+    std::string securityKey;
 
-    int32_t mnLogicState;
-    int32_t mnGameID;
-    NFGUID mnUserID;//player id
-    NFGUID mnClientID;//temporary client id
-    NFGUID mnHashIdentID;//hash ident, special for distributed
-    NFINet* m_pNet;
+    int32_t logicState;
+    int32_t gameID;
+    NFGUID userID;//player id
+    NFGUID clientID;//temporary client id
+    NFGUID hashIdentID;//hash ident, special for distributed
+    NFINet* netObject;
     //
-    NFSOCK nFD;
+    NFSOCK fd;
     bool bNeedRemove;
 };
 

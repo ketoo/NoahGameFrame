@@ -26,12 +26,15 @@
 
 #ifndef NF_LUA_PB_MODULE_H
 #define NF_LUA_PB_MODULE_H
+
+#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/compiler/importer.h>
 #include <google/protobuf/dynamic_message.h>
-#include "Dependencies/LuaIntf/LuaIntf.h"
-#include "Dependencies/LuaIntf/LuaRef.h"
+#include "Dependencies/LuaIntf/LuaIntf/LuaIntf.h"
+#include "Dependencies/LuaIntf/LuaIntf/LuaRef.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
@@ -107,6 +110,8 @@ private:
 	int GetEnumValue(google::protobuf::Message& message, const LuaIntf::LuaRef& luaValue, const google::protobuf::FieldDescriptor* field) const;
 
 protected:
+	NFILogModule* m_pLogModule;
+
     int64_t mnTime;
     std::string strVersionCode;
 	lua_State* m_pLuaState;

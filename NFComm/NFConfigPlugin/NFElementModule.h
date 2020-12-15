@@ -10,7 +10,7 @@
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
-   Licensed under the Apache License, Version 2.0 (the "License");
+   Licensed under the Apache License, Version 2.0 (the "License") override ;
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
@@ -84,41 +84,42 @@ class NFElementModule
 {
 private:
     NFElementModule(NFElementModule* p);
+
 public:
     NFElementModule(NFIPluginManager* p);
     virtual ~NFElementModule();
 	
-	virtual bool Awake();
-    virtual bool Init();
-    virtual bool Shut();
+	virtual bool Awake() override ;
+    virtual bool Init() override ;
+    virtual bool Shut() override ;
 
-    virtual bool AfterInit();
-    virtual bool BeforeShut();
-    virtual bool Execute();
+    virtual bool AfterInit() override ;
+    virtual bool BeforeShut() override ;
+    virtual bool Execute() override ;
 
-    virtual bool Load();
-    virtual bool Save();
-    virtual bool Clear();
+    virtual bool Load() override ;
+    virtual bool Save() override ;
+    virtual bool Clear() override ;
 
     NFIElementModule* GetThreadElementModule() override;
 
-    virtual bool LoadSceneInfo(const std::string& fileName, const std::string& className);
+    virtual bool LoadSceneInfo(const std::string& fileName, const std::string& className) override ;
 
-    virtual bool ExistElement(const std::string& configName);
-    virtual bool ExistElement(const std::string& className, const std::string& configName);
+    virtual bool ExistElement(const std::string& configName) override ;
+    virtual bool ExistElement(const std::string& className, const std::string& configName) override ;
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager(const std::string& configName);
-    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager(const std::string& configName);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager(const std::string& configName) override ;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager(const std::string& configName) override ;
 
-    virtual NFINT64 GetPropertyInt(const std::string& configName, const std::string& propertyName);
-	virtual int GetPropertyInt32(const std::string& configName, const std::string& propertyName);
-    virtual double GetPropertyFloat(const std::string& configName, const std::string& propertyName);
-	virtual const std::string& GetPropertyString(const std::string& configName, const std::string& propertyName);
-	virtual const NFVector2 GetPropertyVector2(const std::string& configName, const std::string& propertyName);
-	virtual const NFVector3 GetPropertyVector3(const std::string& configName, const std::string& propertyName);
+    virtual NFINT64 GetPropertyInt(const std::string& configName, const std::string& propertyName) override ;
+	virtual int GetPropertyInt32(const std::string& configName, const std::string& propertyName) override ;
+    virtual double GetPropertyFloat(const std::string& configName, const std::string& propertyName) override ;
+	virtual const std::string& GetPropertyString(const std::string& configName, const std::string& propertyName) override ;
+	virtual const NFVector2 GetPropertyVector2(const std::string& configName, const std::string& propertyName) override ;
+	virtual const NFVector3 GetPropertyVector3(const std::string& configName, const std::string& propertyName) override ;
 
-	virtual const std::vector<std::string> GetListByProperty(const std::string& className, const std::string& propertyName, const NFINT64 nValue);
-	virtual const std::vector<std::string> GetListByProperty(const std::string& className, const std::string& propertyName, const std::string& nValue);
+	virtual const std::vector<std::string> GetListByProperty(const std::string& className, const std::string& propertyName, const NFINT64 nValue) override ;
+	virtual const std::vector<std::string> GetListByProperty(const std::string& className, const std::string& propertyName, const std::string& nValue) override ;
 
 protected:
     virtual NF_SHARE_PTR<NFIProperty> GetProperty(const std::string& configName, const std::string& propertyName);
