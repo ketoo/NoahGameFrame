@@ -87,7 +87,7 @@ void NFNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const
     if (xCallBack)
     {
         std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = xCallBack->mxReceiveCallBack.find(msgID);
-        if (xCallBack->mxReceiveCallBack.end() == it)
+        if (xCallBack->mxReceiveCallBack.end() != it)
         {
             xCallBack->mxReceiveCallBack.erase(it);
         }
@@ -108,7 +108,8 @@ unsigned int NFNetClientModule::ExpandBufferSize(const unsigned int size)
     return mnBufferSize;
 }
 
-int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, NET_RECEIVE_FUNCTOR_PTR functorPtr)
+int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID,
+                                           NET_RECEIVE_FUNCTOR_PTR functorPtr)
 {
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
     if (!xCallBack)
@@ -117,18 +118,17 @@ int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uin
         mxCallBack.AddElement(eType, xCallBack);
     }
 
-
-
-	auto cbList = xCallBack->mxReceiveCallBack.find(msgID);
-	if (cbList == xCallBack->mxReceiveCallBack.end())
+	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator itor = xCallBack->mxReceiveCallBack.find(msgID);
+	if (itor == xCallBack->mxReceiveCallBack.end())
 	{
 		std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
 		xList.push_back(functorPtr);
-		xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
+
+    	xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
 	}
 	else
 	{
-		cbList->second.push_back(functorPtr);
+		xCallBack->mxReceiveCallBack.at(msgID).push_back(functorPtr);
 	}
 
     return 0;
@@ -724,7 +724,7 @@ void NFNetClientModule::LogServerInfo()
 {
 	bool error = false;
 	std::ostringstream stream;
-	stream << "\nThis is a client, begin to print Server Info-------------------" << std::endl;
+	stream << "This is a client, begin to print Server Info-------------------" << std::endl;
 
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
@@ -739,7 +739,7 @@ void NFNetClientModule::LogServerInfo()
         pServerData = mxServerMap.NextNude();
     }
 
-	stream << "\nThis is a client, end to print Server Info---------------------" << std::endl;
+	stream << "This is a client, end to print Server Info---------------------" << std::endl;
 
     if (error)
 	{

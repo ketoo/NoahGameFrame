@@ -28,7 +28,6 @@
 
 #include <set>
 #include <algorithm>
-#include "NFINet.h"
 #include <thread>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
@@ -36,6 +35,8 @@
 #include <event2/util.h>
 #include <event2/thread.h>
 #include <event2/event_compat.h>
+#include "NFINet.h"
+#include "Dependencies/concurrentqueue/concurrentqueue.h"
 
 #pragma pack(push, 1)
 
@@ -166,6 +167,12 @@ private:
     NET_RECEIVE_FUNCTOR mRecvCB;
     NET_EVENT_FUNCTOR mEventCB;
 
+    //async thread to process net event & msg and main thread to process logic business
+    struct Netevent
+	{
+
+	};
+	moodycamel::ConcurrentQueue<int> msgQueue;
     //////////////////////////////////////////////////////////////////////////
 };
 

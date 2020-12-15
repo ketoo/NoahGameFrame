@@ -110,8 +110,6 @@ bool NFKernelModule::Execute()
 		mtDeleteSelfList.clear();
 	}
 
-	m_pSceneModule->Execute();
-
 	return true;
 }
 

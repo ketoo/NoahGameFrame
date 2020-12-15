@@ -116,6 +116,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFLuaHttpModule.cpp" />
+    <ClCompile Include="NFLuaNetModule.cpp" />
     <ClCompile Include="NFLuaPBModule.cpp" />
     <ClCompile Include="NFLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />

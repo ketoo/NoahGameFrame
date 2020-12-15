@@ -264,9 +264,9 @@ bool NFInventoryModule::EnoughItem(const NFGUID& self, const std::string& strIte
 	int row = pRecord->FindString(NFrame::Player::Inventory::ConfigID, strItemConfigID);
 	if (row >= 0)
 	{
-		int count = pRecord->GetInt32(row, NFrame::Player::Inventory::ItemCount);
+		int itemCount = pRecord->GetInt32(row, NFrame::Player::Inventory::ItemCount);
 
-		if (count >= count)
+		if (itemCount >= count)
 		{
 			return true;
 		}
