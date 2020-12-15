@@ -12,10 +12,12 @@ sysOS=`uname -s`
 if [ $sysOS == "Linux" ];then
 make linux
 cp ./src/*.h ../vcpkg/installed/x64-linux/include/
+cp ./src/*.hpp ../vcpkg/installed/x64-linux/include/
 
 elif [ $sysOS == "Darwin" ];then
 make macosx
 cp ./src/*.h ../vcpkg/installed/x64-osx/include/
+cp ./src/*.hpp ../vcpkg/installed/x64-osx/include/
 fi
 
 
