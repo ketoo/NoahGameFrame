@@ -4,7 +4,7 @@ test_object_module.playerObject = nil
 test_object_module.test_http_module = nil
 
 function test_object_module:reload()
-    test_http_module.test_object_module = find_module("test_http_module")
+    test_object_module.test_http_module = find_module("test_http_module")
 end
 
 function test_object_module:awake()
