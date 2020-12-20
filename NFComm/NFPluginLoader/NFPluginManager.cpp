@@ -1025,3 +1025,13 @@ void NFPluginManager::SetAppType(const int type)
 {
 	appType = type;
 }
+
+bool NFPluginManager::UsingBackThread() const
+{
+	return usingBackThread;
+}
+
+void NFPluginManager::SetUsingBackThread(const bool b)
+{
+	usingBackThread = b;
+}

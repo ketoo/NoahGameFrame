@@ -126,6 +126,9 @@ public:
 	virtual int GetAppCPUCount() const override;
 	virtual void SetAppCPUCount(const int count) override;
 
+	virtual bool UsingBackThread() const override;
+	virtual void SetUsingBackThread(const bool b) override;
+
     virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
     virtual bool GetFileContent(const std::string &fileName, std::string &content) override;
@@ -147,7 +150,9 @@ private:
     int appID = 0;
 	int appType = 0;
     bool mbIsDocker = false;
-    bool mbStaticPlugin = false;
+	bool mbStaticPlugin = false;
+	bool usingBackThread = false;
+
     NFINT64 mnInitTime = 0;
 	NFINT64 mnNowTime = 0;
 	NFINT64 mnCPUCount = 1;

@@ -167,13 +167,17 @@ private:
     NET_RECEIVE_FUNCTOR mRecvCB;
     NET_EVENT_FUNCTOR mEventCB;
 
-    //async thread to process net event & msg and main thread to process logic business
+    //1: async thread to process net event & msg and main thread to process logic business(decode binary data to message object)
+    //2: pass a functor when startup net module to decode binary data to message object with async thread
     struct NetEvent
 	{
 		NF_NET_EVENT event;
+		int fd = 0;
 		//std::string* data;
 		char* data = nullptr;
 		int len = 0;
+
+		void* dataObject = nullptr;
 	};
 	moodycamel::ConcurrentQueue<NetEvent> msgQueue;
     //////////////////////////////////////////////////////////////////////////
