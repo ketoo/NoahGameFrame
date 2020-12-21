@@ -290,7 +290,7 @@ New Feature in future: Blue Print System
 
 Demo:
 
-![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
+![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/blueprint_add.gif)
 
 
 -------------------
