@@ -12,6 +12,10 @@ cd vcpkg
 
 ./bootstrap-vcpkg.sh
 
+git clone https://github.com/ketoo/pb.git
+rm -rf ports/protobuf
+cp -r pb ports/protobuf
+
 if [ $sysOS == "Darwin" ];then
 
     ./vcpkg install libevent:x64-osx
