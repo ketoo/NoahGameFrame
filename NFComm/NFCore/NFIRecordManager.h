@@ -29,7 +29,7 @@
 #include "NFIRecord.h"
 #include "NFMap.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-
+#include "NFComm/NFPluginModule/NFIRecrodWrapperModule.h"
 class _NFExport NFIRecordManager
     : public NFMapEx<std::string, NFIRecord>
 {
@@ -39,8 +39,8 @@ public:
     virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFGUID& self, const std::string& recordName, const NF_SHARE_PTR<NFDataList>& TData, const NF_SHARE_PTR<NFDataList>& tagData, const int nRows) = 0;
     virtual const NFGUID& Self() = 0;
 	virtual std::string ToString() = 0;
-    //////////////////////////////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////////////////////////////
     virtual bool SetRecordInt(const std::string& recordName, const int row, const int col, const NFINT64 nValue) = 0;
     virtual bool SetRecordFloat(const std::string& recordName, const int row, const int col, const double dwValue) = 0;
     virtual bool SetRecordString(const std::string& recordName, const int row, const int col, const std::string& value) = 0;
@@ -69,7 +69,9 @@ public:
 	virtual const NFVector2& GetRecordVector2(const std::string& recordName, const int row, const std::string& colTag) = 0;
 	virtual const NFVector3& GetRecordVector3(const std::string& recordName, const int row, const std::string& colTag) = 0;
 
-    //////////////////////////////////////////////////////////////////////////
+    virtual int GetRecordValidRowCount(const std::string& recordName) = 0;
+
+    /////////////////////////////////////////////////////////////////////////
 };
 
 

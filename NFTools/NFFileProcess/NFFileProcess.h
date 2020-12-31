@@ -60,8 +60,10 @@ public:
 	public:
 		std::map<std::string, std::string> xPropertyList;
 	};
-
+	typedef std::vector<ElementData*> TYPE_ELE_LIST;
 	std::map<std::string, ElementData*> xElementList;//key, iniList
+
+	std::map<std::string,TYPE_ELE_LIST> recordElement;
 };
 
 class ClassData
@@ -95,9 +97,10 @@ private:
 	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool LoadIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadRecordIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
-	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, ClassData * pClassData,bool isIni=false);
 	bool LoadDataAndProcessIncludes(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool SaveForCPP();

@@ -28,7 +28,8 @@
 
 #include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIRecrodWrapperModule.h"
 struct RECORD_EVENT_DATA
 {
 	enum RecordOptype
@@ -85,6 +86,7 @@ public:
 	virtual int GetUsedRows() const  = 0;
 
     virtual NFDATA_TYPE GetColType(const int col) const = 0;
+    virtual NFDATA_TYPE GetColType(const string col) const = 0;
     virtual const std::string& GetColTag(const int col) const = 0;
 
     
@@ -183,7 +185,9 @@ public:
 	virtual const bool GetRef() = 0;
 	virtual const bool GetForce() = 0;
 	virtual const bool GetUpload() = 0;
+    virtual const bool GetReadOnly() = 0;
     virtual const std::string& GetName() const = 0;
+    virtual const std::string& GetClassName() const = 0;
 
     virtual NF_SHARE_PTR<NFDataList> GetInitData() const = 0;
     virtual const NF_SHARE_PTR<NFDataList> GetTag() const = 0;
@@ -196,6 +200,14 @@ public:
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;
     virtual void SetName(const std::string& name) = 0;
+    //是否是配置
+    virtual void SetReadOnly(const bool bPrivate) = 0;
+    //用于读取配置
+    virtual void SetClassName(const std::string& name) = 0;
+    virtual void SetPluginManger(NFIPluginManager * pluginManger) =0;
+    virtual void SetStatic(bool bStatic) =0;
+    virtual bool GetStatic() =0;
+    virtual int GetValidRowCount() = 0;
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
 };

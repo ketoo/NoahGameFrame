@@ -186,6 +186,7 @@ bool NFClassModule::AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
 			const char* pstrRef = pPropertyNode->first_attribute("Ref")->value();
 			const char* pstrForce = pPropertyNode->first_attribute("Force")->value();
 			const char* pstrUpload = pPropertyNode->first_attribute("Upload")->value();
+			// const char* pstrUpload = pPropertyNode->first_attribute("Upload")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
@@ -247,6 +248,7 @@ bool NFClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_P
 			const char* pstrRef = pRecordNode->first_attribute("Ref")->value();
 			const char* pstrForce = pRecordNode->first_attribute("Force")->value();
 			const char* pstrUpload = pRecordNode->first_attribute("Upload")->value();
+			const char* pstrReadOnly = pRecordNode->first_attribute("ReadOnly")->value();
 
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
@@ -261,6 +263,7 @@ bool NFClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_P
 			bool bRef = lexical_cast<bool>(pstrCache);
 			bool bForce = lexical_cast<bool>(pstrCache);
 			bool bUpload = lexical_cast<bool>(pstrUpload);
+			bool bReadOnly = lexical_cast<bool>(pstrReadOnly);
 
 			NF_SHARE_PTR<NFDataList> recordVar(NF_NEW NFDataList());
 			NF_SHARE_PTR<NFDataList> recordTag(NF_NEW NFDataList());
@@ -298,6 +301,7 @@ bool NFClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_P
 			xRecord->SetRef(bRef);
 			xRecord->SetForce(bForce);
 			xRecord->SetUpload(bUpload);
+			xRecord->SetReadOnly(bReadOnly);
         }
     }
 

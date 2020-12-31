@@ -143,6 +143,9 @@ int NFSceneModule::RequestGroupScene(const int sceneID)
 						xRecord->SetSave(pConfigRecordInfo->GetSave());
 						xRecord->SetCache(pConfigRecordInfo->GetCache());
 						xRecord->SetUpload(pConfigRecordInfo->GetUpload());
+						xRecord->SetReadOnly(pConfigRecordInfo->GetReadOnly());
+						xRecord->SetClassName(NFrame::Group::ThisName());
+						xRecord->SetPluginManger(pPluginManager);
 
 						RECORD_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnSceneRecordCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 						RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));

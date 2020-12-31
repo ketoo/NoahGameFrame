@@ -23,44 +23,28 @@
    limitations under the License.
 */
 
-#ifndef NF_HELLO_WORLD1_H
-#define NF_HELLO_WORLD1_H
+#ifndef NFI_RECORD_WRAPPER_MODULE_H
+#define NFI_RECORD_WRAPPER_MODULE_H
 
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFIScheduleModule.h"
-#include "NFComm/NFPluginModule/NFIPlugin.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFGUID.h"
+#include "NFIModule.h"
+#include "NFILogModule.h"
+#include "NFIPluginManager.h"
+#include "NFComm/NFNetPlugin/NFINet.h"
+#include "NFComm/NFCore/NFIRecord.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 
-class NFIHelloWorld1
-	: public NFIModule
-{
-};
 
-class NFHelloWorld1
-    : public NFIHelloWorld1
+////////////////////////////////////////////////////////////////////////////
+class NFIRecord;
+class NFIRecordWrapper
+    : public NFIModule
 {
 public:
-    NFHelloWorld1(NFIPluginManager* p)
-    {
-        m_bIsExecute = true;
-        pPluginManager = p;
-    }
-
-    virtual bool Init();
-    virtual bool AfterInit();
-
-    virtual bool Execute();
-
-    virtual bool BeforeShut();
-    virtual bool Shut();
-
-protected:
-    NFIKernelModule* m_pKernelModule;
-    NFIElementModule* m_pElementModule;
-	NFIEventModule* m_pEventModule;
-	NFIScheduleModule* m_pScheduleModule;
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(string className,string recordName) =0;
+    virtual NFData ReadRecordIniDataByName(string recordName) = 0;
 };
 
 #endif

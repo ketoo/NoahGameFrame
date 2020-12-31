@@ -34,12 +34,12 @@
 		<Property Id="TotalTime" Cache="0" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="HeroEquipmentList" Cache="0"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
+		<Record Id="HeroEquipmentList" Cache="0"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 ReadOnly="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="HeroID"/><!--- Desc-->
 			<Col Type ="object"	Tag="EquipmentID"/>
 			<Col Type ="int"	Tag="SlotIndex"/>
 		</Record>
-		<Record Id="HeroList" Cache="0"	 Col="8"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="1"	 Upload="0"	 >
+		<Record Id="HeroList" Cache="0"	 Col="8"	 Force="0"	 Private="1"	 Public="0"	 ReadOnly="0"	 Ref="0"	 Row="64"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ItemConfigID"/>
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -49,11 +49,11 @@
 			<Col Type ="int"	Tag="Star"/>
 			<Col Type ="int"	Tag="HP"/>
 		</Record>
-		<Record Id="Inventory" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
+		<Record Id="Inventory" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 ReadOnly="0"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/>
 		</Record>
-		<Record Id="InventoryEquipment" Cache="0"	 Col="14"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="1"	 Upload="0"	 >
+		<Record Id="InventoryEquipment" Cache="0"	 Col="14"	 Force="0"	 Private="1"	 Public="0"	 ReadOnly="0"	 Ref="0"	 Row="256"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="string"	Tag="RandPropertyID"/>
@@ -68,6 +68,11 @@
 			<Col Type ="int"	Tag="Lock"/>
 			<Col Type ="int"	Tag="Future"/>
 			<Col Type ="string"	Tag="UserData"/>
+		</Record>
+		<Record Id="TestRecordIni" Cache="0"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 ReadOnly="1"	 Ref="0"	 Row="512"	 Save="1"	 Upload="0"	 >
+			<Col Type ="string"	Tag="HeroID"/><!--- Desc-->
+			<Col Type ="string"	Tag="EquipmentID"/>
+			<Col Type ="int"	Tag="SlotIndex"/>
 		</Record>
 	</Records>
 	<Includes>

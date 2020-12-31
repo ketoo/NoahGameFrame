@@ -521,7 +521,14 @@ const NFVector3& NFObject::GetRecordVector3(const std::string& recordName, const
 
 	return NULL_VECTOR3;
 }
-
+int NFObject::GetRecordValidRowCount(const std::string& recordName){
+    NF_SHARE_PTR<NFIRecord> pRecord = GetRecordManager()->GetElement(recordName);
+	if (pRecord)
+	{
+		return pRecord->GetValidRowCount();
+	}
+    return 0;
+}
 NF_SHARE_PTR<NFIRecordManager> NFObject::GetRecordManager()
 {
     return m_pRecordManager;
@@ -541,7 +548,6 @@ void NFObject::SetPropertyManager(NF_SHARE_PTR<NFIPropertyManager> xPropertyMana
 {
 	m_pPropertyManager = xPropertyManager;
 }
-
 NFGUID NFObject::Self()
 {
     return mSelf;

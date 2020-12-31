@@ -81,6 +81,7 @@ public:
 	virtual const NFVector2& GetRecordVector2(const std::string& recordName, const int row, const std::string& colTag);
 	virtual const NFVector3& GetRecordVector3(const std::string& recordName, const int row, const std::string& colTag);
     //////////////////////////////////////////////////////////////////////////
+    virtual int GetRecordValidRowCount(const std::string& recordName);
 private:
     NFGUID mSelf;
 

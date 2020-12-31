@@ -43,6 +43,7 @@ NFRecord::NFRecord()
 
     mstrRecordName = "";
     mnMaxRow = 0;
+    maxUsedRow = 0;
 
 }
 
@@ -60,7 +61,7 @@ NFRecord::NFRecord(const NFGUID& self, const std::string& recordName, const NF_S
 	mbUpload = false;
 
     mstrRecordName = recordName;
-
+    maxUsedRow =0;
     mnMaxRow = nMaxRow;
     
     mVecUsedState.resize(mnMaxRow);
@@ -158,6 +159,14 @@ NFDATA_TYPE NFRecord::GetColType(const int col) const
 {
     return mVarRecordType->Type(col);
 }
+NFDATA_TYPE NFRecord::GetColType(const string colString) const
+{
+    int col = GetCol(colString);
+    if(col<0){
+        return NFDATA_TYPE::TDATA_UNKNOWN;
+    }
+    return mVarRecordType->Type(col);
+}
 
 const std::string& NFRecord::GetColTag(const int col) const
 {
@@ -215,7 +224,7 @@ int NFRecord::AddRow(const int row, const NFDataList& var)
             return -1;
         }
     }
-
+    maxUsedRow++;
     SetUsed(nFindRow, 1);
 
     for (int i = 0; i < GetCols(); ++i)
@@ -287,6 +296,9 @@ bool NFRecord::SetRow(const int row, const NFDataList & var)
 
 bool NFRecord::SetInt(const int row, const int col, const NFINT64 value)
 {
+    if(mbStatic){
+        return false;
+    }
     if (!ValidPos(row, col))
     {
         return false;
@@ -348,6 +360,9 @@ bool NFRecord::SetInt(const int row, const std::string& colTag, const NFINT64 va
 
 bool NFRecord::SetFloat(const int row, const int col, const double value)
 {
+    if(mbStatic){
+        return false;
+    }
     if (!ValidPos(row, col))
     {
         return false;
@@ -409,6 +424,9 @@ bool NFRecord::SetFloat(const int row, const std::string& colTag, const double v
 
 bool NFRecord::SetString(const int row, const int col, const std::string& value)
 {
+    if(mbStatic){
+        return false;
+    }
     if (!ValidPos(row, col))
     {
         return false;
@@ -471,6 +489,9 @@ bool NFRecord::SetString(const int row, const std::string& colTag, const std::st
 
 bool NFRecord::SetObject(const int row, const int col, const NFGUID& value)
 {
+    if(mbStatic){
+        return false;
+    }
     if (!ValidPos(row, col))
     {
         return false;
@@ -533,6 +554,9 @@ bool NFRecord::SetObject(const int row, const std::string& colTag, const NFGUID&
 
 bool NFRecord::SetVector2(const int row, const int col, const NFVector2& value)
 {
+    if(mbStatic){
+        return false;
+    }
 	if (!ValidPos(row, col))
 	{
 		return false;
@@ -589,6 +613,9 @@ bool NFRecord::SetVector2(const int row, const int col, const NFVector2& value)
 
 bool NFRecord::SetVector3(const int row, const int col, const NFVector3& value)
 {
+    if(mbStatic){
+        return false;
+    }
 	if (!ValidPos(row, col))
 	{
 		return false;
@@ -658,6 +685,9 @@ bool NFRecord::SetVector3(const int row, const std::string& colTag, const NFVect
 
 bool NFRecord::QueryRow(const int row, NFDataList& varList)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->QueryRow(row,varList);
+    }
     if (!ValidRow(row))
     {
         return false;
@@ -720,6 +750,9 @@ bool NFRecord::QueryRow(const int row, NFDataList& varList)
 
 NFINT64 NFRecord::GetInt(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetInt(row,col);
+    }
     if (!ValidPos(row, col))
     {
         return 0;
@@ -741,12 +774,16 @@ NFINT64 NFRecord::GetInt(const int row, const int col) const
 
 NFINT64 NFRecord::GetInt(const int row, const std::string& colTag) const
 {
+
     int col = GetCol(colTag);
     return GetInt(row, col);
 }
 
 double NFRecord::GetFloat(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetFloat(row,col);
+    }
     if (!ValidPos(row, col))
     {
         return 0.0f;
@@ -774,11 +811,14 @@ double NFRecord::GetFloat(const int row, const std::string& colTag) const
 
 const std::string& NFRecord::GetString(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetString(row,col);
+    }
     if (!ValidPos(row, col))
     {
         return NULL_STR;
     }
-
+    
     if (!IsUsed(row))
     {
         return NULL_STR;
@@ -801,6 +841,9 @@ const std::string& NFRecord::GetString(const int row, const std::string& colTag)
 
 const NFGUID& NFRecord::GetObject(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetObject(row,col);
+    }
     if (!ValidPos(row, col))
     {
         return NULL_OBJECT;
@@ -828,6 +871,9 @@ const NFGUID& NFRecord::GetObject(const int row, const std::string& colTag) cons
 
 const NFVector2& NFRecord::GetVector2(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetVector2(row,col);
+    }
 	if (!ValidPos(row, col))
 	{
 		return NULL_VECTOR2;
@@ -855,6 +901,9 @@ const NFVector2& NFRecord::GetVector2(const int row, const std::string& colTag) 
 
 const NFVector3& NFRecord::GetVector3(const int row, const int col) const
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetVector3(row,col);
+    }
 	if (!ValidPos(row, col))
 	{
 		return NULL_VECTOR3;
@@ -882,6 +931,9 @@ const NFVector3& NFRecord::GetVector3(const int row, const std::string& colTag) 
 
 int NFRecord::FindRowByColValue(const int col, const NFData& var, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindRowByColValue(col,var,varResult);
+    }
     if (!ValidCol(col))
     {
         return -1;
@@ -934,6 +986,9 @@ int NFRecord::FindRowByColValue(const std::string& colTag, const NFData& var, NF
 
 int NFRecord::FindInt(const int col, const NFINT64 value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindInt(col,value,varResult);
+    }
     if (!ValidCol(col))
     {
         return -1;
@@ -977,6 +1032,9 @@ int NFRecord::FindInt(const std::string& colTag, const NFINT64 value, NFDataList
 
 int NFRecord::FindFloat(const int col, const double value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindFloat(col,value,varResult);
+    }
     if (!ValidCol(col))
     {
         return -1;
@@ -1016,6 +1074,9 @@ int NFRecord::FindFloat(const std::string& colTag, const double value, NFDataLis
 
 int NFRecord::FindString(const int col, const std::string& value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindString(col,value,varResult);
+    }
     if (!ValidCol(col))
     {
         return -1;
@@ -1061,6 +1122,9 @@ int NFRecord::FindString(const std::string& colTag, const std::string& value, NF
 
 int NFRecord::FindObject(const int col, const NFGUID& value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindObject(col,value,varResult);
+    }
     if (!ValidCol(col))
     {
         return -1;
@@ -1104,6 +1168,9 @@ int NFRecord::FindObject(const std::string& colTag, const NFGUID& value, NFDataL
 
 int NFRecord::FindVector2(const int col, const NFVector2& value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindVector2(col,value,varResult);
+    }
 	if (!ValidCol(col))
 	{
 		return -1;
@@ -1147,6 +1214,9 @@ int NFRecord::FindVector2(const std::string& colTag, const NFVector2& value, NFD
 
 int NFRecord::FindVector3(const int col, const NFVector3& value, NFDataList& varResult)
 {
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->FindVector3(col,value,varResult);
+    }
 	if (!ValidCol(col))
 	{
 		return -1;
@@ -1358,6 +1428,9 @@ int NFRecord::FindVector3(const std::string & colTag, const NFVector3 & value)
 
 bool NFRecord::Remove(const int row)
 {
+    if(mbReadOnly){
+        return false;
+    }
     if (ValidRow(row))
     {
         if (IsUsed(row))
@@ -1385,6 +1458,9 @@ bool NFRecord::Remove(const int row)
 
 bool NFRecord::Clear()
 {
+    if(mbReadOnly){
+        return false;
+    }
     for (int i = GetRows() - 1; i >= 0; i--)
     {
         Remove(i);
@@ -1432,7 +1508,10 @@ const bool NFRecord::GetPrivate()
 {
     return mbPrivate;
 }
-
+const bool NFRecord::GetReadOnly()
+{
+    return mbReadOnly;
+}
 int NFRecord::GetPos(int row, int col) const
 {
     return row * mVarRecordType->GetCount() + col;
@@ -1442,6 +1521,11 @@ const std::string& NFRecord::GetName() const
 {
     return mstrRecordName;
 }
+const std::string& NFRecord::GetClassName() const
+{
+    return mstrRecordClassName;
+}
+
 
 void NFRecord::SetSave(const bool bSave)
 {
@@ -1477,10 +1561,36 @@ void NFRecord::SetPrivate(const bool bPrivate)
 {
     mbPrivate = bPrivate;
 }
+void NFRecord::SetReadOnly(const bool bPrivate)
+{
+    mbReadOnly = bPrivate;
+}
 
 void NFRecord::SetName(const std::string& name)
 {
     mstrRecordName = name;
+}
+void NFRecord::SetClassName(const std::string& name)
+{
+    mstrRecordClassName = name;
+}
+bool NFRecord::GetStatic()
+{
+    return mbStatic;
+}
+int NFRecord::GetValidRowCount(){
+    if(mbReadOnly && m_pStaticRecord && m_pStaticRecord->GetStatic()){
+        return m_pStaticRecord->GetValidRowCount();
+    }
+    return maxUsedRow+1;
+}
+void NFRecord::SetStatic(bool bStatic){
+    mbStatic = bStatic;
+}
+void NFRecord::SetPluginManger(NFIPluginManager *pPluginManger){
+    m_pPluginManger = pPluginManger;
+    m_pRecordWrapper = m_pPluginManger->FindModule<NFIRecordWrapper>();
+    m_pStaticRecord = m_pRecordWrapper->FindRecord(mstrRecordClassName,mstrRecordName);
 }
 
 NF_SHARE_PTR<NFDataList> NFRecord::GetInitData() const
@@ -1634,3 +1744,7 @@ int NFRecord::GetCol(const std::string& strTag) const
 
     return -1;
 }
+NF_SHARE_PTR<NFData> NFRecord::TryGetDataByReadOnly(const int row, const int col){
+    return nullptr;
+}
+

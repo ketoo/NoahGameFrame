@@ -600,6 +600,16 @@ namespace NFrame
 			static const int UserData = 13;//string
 
 		};
+		class TestRecordIni
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "TestRecordIni"; return x; };
+			static const int HeroID = 0;//string
+			static const int EquipmentID = 1;//string
+			static const int SlotIndex = 2;//int
+
+		};
 		class CommValue
 		{
 		public:

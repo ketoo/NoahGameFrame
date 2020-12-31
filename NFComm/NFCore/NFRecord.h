@@ -56,6 +56,7 @@ public:
 	virtual int GetUsedRows() const;
 
     virtual NFDATA_TYPE GetColType(const int col) const;
+    virtual NFDATA_TYPE GetColType(const string col) const;
     virtual const std::string& GetColTag(const int col) const;
 
     
@@ -148,8 +149,10 @@ public:
     virtual const bool GetPublic();
 
     virtual const bool GetPrivate();
+    virtual const bool GetReadOnly();
 
     virtual const std::string& GetName() const;
+    virtual const std::string& GetClassName() const;
 
     virtual void SetSave(const bool bSave);
 
@@ -164,8 +167,15 @@ public:
     virtual void SetPublic(const bool bPublic);
 
     virtual void SetPrivate(const bool bPrivate);
+    virtual void SetReadOnly(const bool bPrivate);
 
     virtual void SetName(const std::string& name);
+    virtual void SetStatic(bool bStatic);
+    virtual bool GetStatic();
+    virtual void SetClassName(const std::string& name);
+    virtual void SetPluginManger(NFIPluginManager *pPluginManger);
+    virtual int GetValidRowCount();
+
 
     virtual NF_SHARE_PTR<NFDataList> GetInitData() const;
     virtual const NF_SHARE_PTR<NFDataList> GetTag() const;
@@ -173,12 +183,12 @@ public:
     virtual const TRECORDVEC& GetRecordVec() const;
 protected:
     int GetPos(int row, int col) const;
-
     int GetCol(const std::string& strTag) const;
 
     bool ValidPos(int row, int col) const;
     bool ValidRow(int row) const;
     bool ValidCol(int col) const;
+    NF_SHARE_PTR<NFData> TryGetDataByReadOnly(const int row, const int col);
 
     void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
@@ -203,10 +213,19 @@ protected:
 	bool mbRef;
 	bool mbForce;
 	bool mbUpload;
+    bool mbReadOnly;
+    bool mbStatic;
     std::string mstrRecordName;
+    std::string mstrRecordClassName;
 
     typedef std::vector<RECORD_EVENT_FUNCTOR_PTR> TRECORDCALLBACKEX;
     TRECORDCALLBACKEX mtRecordCallback;
+
+    NFIPluginManager * m_pPluginManger;
+    NFIRecordWrapper * m_pRecordWrapper;
+    NF_SHARE_PTR<NFIRecord> m_pStaticRecord;
+
+    unsigned int maxUsedRow;
 };
 
 #endif

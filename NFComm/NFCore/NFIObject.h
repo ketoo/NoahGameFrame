@@ -139,6 +139,7 @@ public:
     virtual const NFGUID& GetRecordObject(const std::string& recordName, const int row, const std::string& colTag) = 0;
 	virtual const NFVector2& GetRecordVector2(const std::string& recordName, const int row, const std::string& colTag) = 0;
 	virtual const NFVector3& GetRecordVector3(const std::string& recordName, const int row, const std::string& colTag) = 0;
+    virtual int GetRecordValidRowCount(const std::string& recordName) = 0;
 
     //  virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& componentName, const std::string& strLanguageName) = 0;
     //  virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& componentName) = 0;

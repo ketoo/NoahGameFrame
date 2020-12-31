@@ -326,3 +326,11 @@ const NFVector3& NFRecordManager::GetRecordVector3(const std::string& recordName
 
 	return NULL_VECTOR3;
 }
+int NFRecordManager::GetRecordValidRowCount(const std::string& recordName){
+    NF_SHARE_PTR<NFIRecord> pRecord = GetElement(recordName);
+	if (pRecord)
+	{
+		return pRecord->GetValidRowCount();
+	}
+    return 0;
+}

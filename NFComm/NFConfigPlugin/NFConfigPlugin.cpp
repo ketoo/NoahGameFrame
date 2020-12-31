@@ -27,6 +27,7 @@
 #include "NFConfigPlugin.h"
 #include "NFClassModule.h"
 #include "NFElementModule.h"
+#include "NFRecordWrapperModule.h"
 #include "NFCommonConfigModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -64,6 +65,7 @@ void NFConfigPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFIClassModule, NFClassModule)
     REGISTER_MODULE(pPluginManager, NFIElementModule, NFElementModule)
 	REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCommonConfigModule);
+	REGISTER_MODULE(pPluginManager, NFIRecordWrapper,NFRecordReadWrapperModule);
 
 }
 
@@ -72,4 +74,5 @@ void NFConfigPlugin::Uninstall()
     UNREGISTER_MODULE(pPluginManager, NFIElementModule, NFElementModule)
     UNREGISTER_MODULE(pPluginManager, NFIClassModule, NFClassModule)
 	UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCommonConfigModule);
+    UNREGISTER_MODULE(pPluginManager, NFIRecordWrapper,NFRecordReadWrapperModule);
 }

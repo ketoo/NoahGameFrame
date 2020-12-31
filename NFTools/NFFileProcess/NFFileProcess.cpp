@@ -226,6 +226,11 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 	{
 		LoadDataAndProcessComponent(sheet, pClassData);
 	}
+	else if (strSheetName.find("recordini") != std::string::npos)
+	{
+		LoadDataAndProcessRecord(sheet, pClassData,true);
+		LoadRecordIniData(sheet, pClassData);
+	}
 	else if (strSheetName.find("record") != std::string::npos)
 	{
 		LoadDataAndProcessRecord(sheet, pClassData);
@@ -242,7 +247,62 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 
 	return true;
 }
+bool NFFileProcess::LoadRecordIniData(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	cout<<"strSheetName"<<strSheetName<<endl;
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
 
+	std::map<std::string, int> PropertyIndex;//col index
+	for (int c = dim.firstCol; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow+10, c);
+		if (cell)
+		{
+			PropertyIndex[cell->value] = c;
+		}
+	}
+	MiniExcelReader::Cell* recordNameCell = sheet.getCell(1, 2);
+	if(!recordNameCell){
+		cout<<"recordName error";
+		return false;
+	}
+	if(recordNameCell->value.empty()){
+		return false;
+	}
+	NFClassElement::TYPE_ELE_LIST& tp =  pClassData->xIniData.recordElement[recordNameCell->value];
+	
+	
+	////////////
+	for (int r = dim.firstRow + nRecordHeight; r <= dim.lastRow; r++)
+	{
+		MiniExcelReader::Cell* pIDCell = sheet.getCell(r, dim.firstCol);
+		if (pIDCell && !pIDCell->value.empty())
+		{
+			NFClassElement::ElementData* pIniObject = new NFClassElement::ElementData();
+			// pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
+			tp.push_back(pIniObject);
+			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
+			{
+				std::string strPropertyName = itProperty->first;
+				int nCol = itProperty->second;
+
+				MiniExcelReader::Cell* cell = sheet.getCell(r, nCol);
+				if (cell)
+				{
+					pIniObject->xPropertyList[strPropertyName] = cell->value;
+				}
+				else
+				{
+					pIniObject->xPropertyList[strPropertyName] = "";
+				}
+			}
+		}
+	}
+	
+	return false;
+}
 bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
@@ -405,55 +465,60 @@ bool NFFileProcess::LoadDataAndProcessComponent(MiniExcelReader::Sheet & sheet, 
 	return false;
 }
 
-bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, ClassData * pClassData,bool isIni)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
 	std::string strSheetName = sheet.getName();
 	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
-
-	for (int nIndex = 0; nIndex < 100; nIndex++)
+	int nIndex = 0;
+	int maxLine = 100;
+	if(isIni){
+		//配置文件,一个record 对应一个sheet
+		maxLine = 1;
+	}
+	for (int nIndex = 0; nIndex < maxLine; nIndex++)
 	{
 		int nStartRow = nIndex * nRecordHeight + 1;
 		int nEndRow = (nIndex + 1) * nRecordHeight;
 
 		MiniExcelReader::Cell* pTestCell = sheet.getCell(nStartRow, dim.firstCol);
-		if (pTestCell)
+		if(!pTestCell){
+			return false;
+		}
+		MiniExcelReader::Cell* pNameCell = sheet.getCell(nStartRow, dim.firstCol + 1);
+		std::string strRecordName = pNameCell->value;
+		
+		////////////
+
+		NFClassRecord* pClassRecord = new NFClassRecord();
+		pClassData->xStructData.xRecordList[strRecordName] = pClassRecord;
+		////////////
+
+		for (int r = nStartRow + 1; r <= nStartRow + nRecordDescHeight; r++)
 		{
-			MiniExcelReader::Cell* pNameCell = sheet.getCell(nStartRow, dim.firstCol + 1);
-			std::string recordName = pNameCell->value;
-			
-			////////////
+			MiniExcelReader::Cell* cellDesc = sheet.getCell(r, dim.firstCol);
+			MiniExcelReader::Cell* cellValue = sheet.getCell(r, dim.firstCol + 1);
 
-			NFClassRecord* pClassRecord = new NFClassRecord();
-			pClassData->xStructData.xRecordList[recordName] = pClassRecord;
-			////////////
+			pClassRecord->descList[cellDesc->value] = cellValue->value;
+		}
+		pClassRecord->descList["ReadOnly"] = isIni?"1":"0";
+		int nRecordCol = atoi(pClassRecord->descList["Col"].c_str());
+		for (int c = dim.firstCol; c <= nRecordCol; c++)
+		{
+			int r = nStartRow + nRecordDescHeight + 1;
+			MiniExcelReader::Cell* pCellColName = sheet.getCell(r, c);
+			MiniExcelReader::Cell* pCellColType = sheet.getCell(r + 1, c);
+			MiniExcelReader::Cell* pCellColDesc = sheet.getCell(r + 2, c);
 
-			for (int r = nStartRow + 1; r <= nStartRow + nRecordDescHeight; r++)
+			NFClassRecord::RecordColDesc* pRecordColDesc = new NFClassRecord::RecordColDesc();
+			pRecordColDesc->index = c - 1;
+			pRecordColDesc->type = pCellColType->value;
+			if (pCellColDesc)
 			{
-				MiniExcelReader::Cell* cellDesc = sheet.getCell(r, dim.firstCol);
-				MiniExcelReader::Cell* cellValue = sheet.getCell(r, dim.firstCol + 1);
-
-				pClassRecord->descList[cellDesc->value] = cellValue->value;
+				pRecordColDesc->desc = pCellColDesc->value;
 			}
 
-			int nRecordCol = atoi(pClassRecord->descList["Col"].c_str());
-			for (int c = dim.firstCol; c <= nRecordCol; c++)
-			{
-				int r = nStartRow + nRecordDescHeight + 1;
-				MiniExcelReader::Cell* pCellColName = sheet.getCell(r, c);
-				MiniExcelReader::Cell* pCellColType = sheet.getCell(r + 1, c);
-				MiniExcelReader::Cell* pCellColDesc = sheet.getCell(r + 2, c);
-
-				NFClassRecord::RecordColDesc* pRecordColDesc = new NFClassRecord::RecordColDesc();
-				pRecordColDesc->index = c - 1;
-				pRecordColDesc->type = pCellColType->value;
-				if (pCellColDesc)
-				{
-					pRecordColDesc->desc = pCellColDesc->value;
-				}
-
-				pClassRecord->colList[pCellColName->value] = pRecordColDesc;
-			}
+			pClassRecord->colList[pCellColName->value] = pRecordColDesc;
 		}
 	}
 
@@ -621,7 +686,7 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& recordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cpppppp ---> " << className  << "::" << recordName << std::endl;
+			std::cout << "save for cpp fuck---> " << className  << "::" << recordName << std::endl;
 
 			strRecordInfo += "\t\tclass " + recordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
@@ -1577,14 +1642,31 @@ bool NFFileProcess::SaveForIni()
 					strElementData += strKey + "=\"" + value + "\" ";
 				}
 				strElementData += "/>\n";
-
-
-
-
-
 				fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
 			}
-
+			//save record ini data
+			for(auto recordIt = pClassDta->xIniData.recordElement.begin();recordIt != pClassDta->xIniData.recordElement.end();recordIt++){
+				cout<<recordIt->first;
+				NFClassElement::TYPE_ELE_LIST recordInidata = recordIt->second;
+				std::string recodsFlag = "\t<Record Id=\""+recordIt->first+"\">\n";
+				fwrite(recodsFlag.c_str(), recodsFlag.length(), 1, iniWriter);
+				for (auto itElement = recordInidata.begin();itElement != recordInidata.end(); ++itElement)
+				{
+					NFClassElement::ElementData* pIniData = *itElement;
+					std::string strElementData = "\t\t<Object ";
+					for (std::map<std::string, std::string>::iterator itProperty = pIniData->xPropertyList.begin();
+						itProperty != pIniData->xPropertyList.end(); ++itProperty)
+					{
+						const std::string& strKey = itProperty->first;
+						const std::string& strValue = itProperty->second;
+						strElementData += strKey + "=\"" + strValue + "\" ";
+					}
+					strElementData += "/>\n";
+					fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+				}
+				recodsFlag = "\t</Record>\n";
+				fwrite(recodsFlag.c_str(), recodsFlag.length(), 1, iniWriter);
+			}
 			std::string strFileEnd = "</XML>";
 			fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
 		}

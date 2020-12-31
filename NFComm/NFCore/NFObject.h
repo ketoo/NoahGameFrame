@@ -107,7 +107,7 @@ public:
     virtual const NFGUID& GetRecordObject(const std::string& recordName, const int row, const std::string& colTag) override ;
 	virtual const NFVector2& GetRecordVector2(const std::string& recordName, const int row, const std::string& colTag) override ;
 	virtual const NFVector3& GetRecordVector3(const std::string& recordName, const int row, const std::string& colTag) override ;
-
+    virtual int GetRecordValidRowCount(const std::string& recordName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() override ;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() override ;
 

@@ -234,10 +234,71 @@ bool NFElementModule::CheckRef()
     return false;
 }
 
+bool NFElementModule::LoadRecordData(rapidxml::xml_node<>* rootNode, NF_SHARE_PTR<NFIClass> pLogicClass){
+    std::string configID = rootNode->first_attribute("Id")->value();
+    NF_SHARE_PTR<NFIRecordManager> pElementRecordManager = pLogicClass->GetRecordManager();
+    NF_SHARE_PTR<NFIRecord> record = pElementRecordManager->GetElement(configID);
+    if(!record){
+        return false;
+    }
+    int row = 0;
+    for (rapidxml::xml_node<>* attrNode = rootNode->first_node(); attrNode; attrNode = attrNode->next_sibling())
+    {
+        int col = 0;
+        record->AddRow(-1);
+        for (rapidxml::xml_attribute<>* pAttribute = attrNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute()){
+            
+            const char* pstrConfigName = pAttribute->name();
+            const char* pstrConfigValue = pAttribute->value();
+            NFDATA_TYPE type = record->GetColType(pstrConfigName);
+            switch (type)
+            {
+                case NFDATA_TYPE::TDATA_INT:
+                    if (!LegalNumber(pstrConfigValue))
+                    {
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                    }
+                    record->SetInt(row,pstrConfigName,lexical_cast<NFINT64>(pstrConfigValue));
+                    break;
+                case NFDATA_TYPE::TDATA_FLOAT:
+                    if (strlen(pstrConfigValue) <= 0 || !LegalFloat(pstrConfigValue))
+                    {
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                    }
+                    record->SetFloat(row,pstrConfigName,(double)atof(pstrConfigValue));
+                    break;
+               case NFDATA_TYPE::TDATA_STRING:
+                    record->SetString(row,pstrConfigName,pstrConfigValue);
+                    break;
+               case NFDATA_TYPE::TDATA_OBJECT:
+                    {
+                        NFGUID id;
+                        if (id.FromString(pstrConfigValue))
+                        {
+                            record->SetObject(row,pstrConfigName,id);
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            col++;
+        }
+        row++;
+    }
+    record->SetStatic(true);
+    return true;
+}
+
 bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
 {
     //attrNode is the node of a object
     std::string configID = attrNode->first_attribute("Id")->value();
+    std::string configName = attrNode->name();
+    if(configName == "Record"){
+        LoadRecordData(attrNode,pLogicClass);
+        return true;
+    }
     if (configID.empty())
     {
         NFASSERT(0, configID, __FILE__, __FUNCTION__);
@@ -287,7 +348,7 @@ bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass
 			xRecord->SetRef(pRecord->GetRef());
 			xRecord->SetForce(pRecord->GetForce());
 			xRecord->SetUpload(pRecord->GetUpload());
-
+			xRecord->SetReadOnly(pRecord->GetReadOnly());
             pRecord = pClassRecordManager->Next();
         }
 

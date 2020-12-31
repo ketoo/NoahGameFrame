@@ -125,6 +125,7 @@ protected:
     virtual NF_SHARE_PTR<NFIProperty> GetProperty(const std::string& configName, const std::string& propertyName);
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
+    bool LoadRecordData(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
     virtual bool CheckRef();
 	virtual bool LegalNumber(const char* str);
 	virtual bool LegalFloat(const char* str);

@@ -198,7 +198,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 							xRecord->SetSave(pConfigRecordInfo->GetSave());
 							xRecord->SetCache(pConfigRecordInfo->GetCache());
 							xRecord->SetUpload(pConfigRecordInfo->GetUpload());
-
+							xRecord->SetReadOnly(pConfigRecordInfo->GetReadOnly());
+							xRecord->SetClassName(className);
+							xRecord->SetPluginManger(pPluginManager);
 							//
 							pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFKernelModule::OnRecordCommonEvent);
 
@@ -390,7 +392,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 					xRecord->SetSave(pConfigRecordInfo->GetSave());
 					xRecord->SetCache(pConfigRecordInfo->GetCache());
 					xRecord->SetUpload(pConfigRecordInfo->GetUpload());
-
+					xRecord->SetReadOnly(pConfigRecordInfo->GetReadOnly());
+					xRecord->SetClassName(className);
+					xRecord->SetPluginManger(pPluginManager);
 					pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFKernelModule::OnRecordCommonEvent);
 
 					pConfigRecordInfo = pStaticClassRecordManager->Next();

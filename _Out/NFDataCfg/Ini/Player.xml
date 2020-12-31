@@ -1,3 +1,14 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Record Id="TestRecordIni">
+		<Object EquipmentID="equip1" HeroID="hero1" SlotIndex="1" />
+		<Object EquipmentID="equip2" HeroID="hero2" SlotIndex="2" />
+		<Object EquipmentID="equip3" HeroID="hero3" SlotIndex="3" />
+		<Object EquipmentID="equip4" HeroID="hero4" SlotIndex="4" />
+		<Object EquipmentID="equip5" HeroID="hero5" SlotIndex="5" />
+		<Object EquipmentID="equip6" HeroID="hero6" SlotIndex="6" />
+		<Object EquipmentID="equip7" HeroID="hero7" SlotIndex="7" />
+		<Object EquipmentID="equip8" HeroID="hero7" SlotIndex="9" />
+		<Object EquipmentID="equip9" HeroID="hero7" SlotIndex="19" />
+	</Record>
 </XML>
