@@ -147,7 +147,7 @@ int NFSyncPosModule::OnPlayerClassEvent(const NFGUID & self, const std::string &
 	return 0;
 }
 
-int NFSyncPosModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncPosModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFINT64 reason)
 {
 	NFMsg::ReqAckPlayerPosSync xMsg;
 	NFMsg::PosSyncUnit* syncUnit = xMsg.add_sync_unit();

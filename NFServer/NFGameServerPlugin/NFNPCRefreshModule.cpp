@@ -107,14 +107,14 @@ int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::strin
 			int nHPMax = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::MAXHP());
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
 
-            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFNPCRefreshModule::OnObjectHPEvent );
+            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFNPCRefreshModule::OnObjectHPEvent);
         }
     }
 
     return 0;
 }
 
-int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
     if ( newVar.GetInt() <= 0 )
     {

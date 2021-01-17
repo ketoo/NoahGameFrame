@@ -176,7 +176,7 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
     }
 }
 
-int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
     std::ostringstream stream;
 

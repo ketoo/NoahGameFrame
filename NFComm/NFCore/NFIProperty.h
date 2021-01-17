@@ -31,7 +31,7 @@
 #include "NFList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&)> PROPERTY_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFINT64)> PROPERTY_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 
 #pragma warning(disable: 4275)
@@ -48,12 +48,12 @@ public:
 	virtual void SetValue(const NFData& TData) = 0;
 	virtual void SetValue(const NFIProperty* property) = 0;
 
-	virtual bool SetInt(const NFINT64 value) = 0;
-	virtual bool SetFloat(const double value) = 0;
-	virtual bool SetString(const std::string& value) = 0;
-	virtual bool SetObject(const NFGUID& value) = 0;
-	virtual bool SetVector2(const NFVector2& value) = 0;
-	virtual bool SetVector3(const NFVector3& value) = 0;
+	virtual bool SetInt(const NFINT64 value, const NFINT64 reason = 0) = 0;
+	virtual bool SetFloat(const double value, const NFINT64 reason = 0) = 0;
+	virtual bool SetString(const std::string& value, const NFINT64 reason = 0) = 0;
+	virtual bool SetObject(const NFGUID& value, const NFINT64 reason = 0) = 0;
+	virtual bool SetVector2(const NFVector2& value, const NFINT64 reason = 0) = 0;
+	virtual bool SetVector3(const NFVector3& value, const NFINT64 reason = 0) = 0;
 
 	virtual const NFDATA_TYPE GetType() const = 0;
 	virtual const bool GeUsed() const = 0;

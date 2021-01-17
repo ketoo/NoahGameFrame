@@ -193,7 +193,7 @@ protected:
 	virtual int AddMoveOutEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
 
 	int OnObjectEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
-	int OnPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar);
+	int OnPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFINT64 reason);
 
 private:
 

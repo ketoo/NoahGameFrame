@@ -356,7 +356,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgShare_2eproto::offsets[] 
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, user_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, skill_id_),
-  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, use_index_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, client_index_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, server_index_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUseSkill, effect_data_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSwapScene, _internal_metadata_),
@@ -393,8 +394,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 63, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
   { 70, -1, sizeof(::NFMsg::EffectData)},
   { 78, -1, sizeof(::NFMsg::ReqAckUseSkill)},
-  { 87, -1, sizeof(::NFMsg::ReqAckSwapScene)},
-  { 99, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
+  { 88, -1, sizeof(::NFMsg::ReqAckSwapScene)},
+  { 100, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -441,23 +442,23 @@ const char descriptor_table_protodef_NFMsgShare_2eproto[] PROTOBUF_SECTION_VARIA
   "ct_rlt\030\003 \001(\0162\035.NFMsg.EffectData.EResultT"
   "ype\"f\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n\013EET_"
   "SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MISS\020\003\022"
-  "\014\n\010EET_CRIT\020\004\022\014\n\010EET_ULTI\020\005\"y\n\016ReqAckUse"
-  "Skill\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010ski"
-  "ll_id\030\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect"
-  "_data\030\004 \003(\0132\021.NFMsg.EffectData\"z\n\017ReqAck"
-  "SwapScene\022\025\n\rtransfer_type\030\001 \001(\005\022\020\n\010scen"
-  "e_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t"
-  "\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"\347\002\n\020R"
-  "eqAckPlayerChat\022\037\n\tplayer_id\030\001 \001(\0132\014.NFM"
-  "sg.Ident\022\023\n\013player_name\030\002 \001(\014\022>\n\014chat_ch"
-  "annel\030\003 \001(\0162(.NFMsg.ReqAckPlayerChat.EGa"
-  "meChatChannel\0228\n\tchat_type\030\004 \001(\0162%.NFMsg"
-  ".ReqAckPlayerChat.EGameChatType\022\021\n\tchat_"
-  "info\030\005 \001(\014\"P\n\020EGameChatChannel\022\017\n\013EGCC_G"
-  "LOBAL\020\000\022\r\n\tEGCC_CLAN\020\001\022\r\n\tEGCC_ROOM\020\002\022\r\n"
-  "\tEGCC_TEAM\020\003\">\n\rEGameChatType\022\r\n\tEGCT_TE"
-  "XT\020\000\022\016\n\nEGCT_VOICE\020\001\022\016\n\nEGCT_EMOJI\020\002b\006pr"
-  "oto3"
+  "\014\n\010EET_CRIT\020\004\022\014\n\010EET_ULTI\020\005\"\222\001\n\016ReqAckUs"
+  "eSkill\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010sk"
+  "ill_id\030\002 \001(\014\022\024\n\014client_index\030\003 \001(\005\022\024\n\014se"
+  "rver_index\030\004 \001(\003\022&\n\013effect_data\030\005 \003(\0132\021."
+  "NFMsg.EffectData\"z\n\017ReqAckSwapScene\022\025\n\rt"
+  "ransfer_type\030\001 \001(\005\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007"
+  "line_id\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z"
+  "\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"\347\002\n\020ReqAckPlayerCha"
+  "t\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ident\022\023\n\013pl"
+  "ayer_name\030\002 \001(\014\022>\n\014chat_channel\030\003 \001(\0162(."
+  "NFMsg.ReqAckPlayerChat.EGameChatChannel\022"
+  "8\n\tchat_type\030\004 \001(\0162%.NFMsg.ReqAckPlayerC"
+  "hat.EGameChatType\022\021\n\tchat_info\030\005 \001(\014\"P\n\020"
+  "EGameChatChannel\022\017\n\013EGCC_GLOBAL\020\000\022\r\n\tEGC"
+  "C_CLAN\020\001\022\r\n\tEGCC_ROOM\020\002\022\r\n\tEGCC_TEAM\020\003\">"
+  "\n\rEGameChatType\022\r\n\tEGCT_TEXT\020\000\022\016\n\nEGCT_V"
+  "OICE\020\001\022\016\n\nEGCT_EMOJI\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgShare_2eproto_deps[2] = {
   &::descriptor_table_NFDefine_2eproto,
@@ -481,7 +482,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFM
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgShare_2eproto_once;
 static bool descriptor_table_NFMsgShare_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgShare_2eproto = {
-  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1724,
+  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1750,
   &descriptor_table_NFMsgShare_2eproto_once, descriptor_table_NFMsgShare_2eproto_sccs, descriptor_table_NFMsgShare_2eproto_deps, 13, 2,
   schemas, file_default_instances, TableStruct_NFMsgShare_2eproto::offsets,
   file_level_metadata_NFMsgShare_2eproto, 13, file_level_enum_descriptors_NFMsgShare_2eproto, file_level_service_descriptors_NFMsgShare_2eproto,
@@ -3154,7 +3155,9 @@ ReqAckUseSkill::ReqAckUseSkill(const ReqAckUseSkill& from)
   } else {
     user_ = nullptr;
   }
-  use_index_ = from.use_index_;
+  ::memcpy(&server_index_, &from.server_index_,
+    static_cast<size_t>(reinterpret_cast<char*>(&client_index_) -
+    reinterpret_cast<char*>(&server_index_)) + sizeof(client_index_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckUseSkill)
 }
 
@@ -3162,8 +3165,8 @@ void ReqAckUseSkill::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckUseSkill_NFMsgShare_2eproto.base);
   skill_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&use_index_) -
-      reinterpret_cast<char*>(&user_)) + sizeof(use_index_));
+      reinterpret_cast<char*>(&client_index_) -
+      reinterpret_cast<char*>(&user_)) + sizeof(client_index_));
 }
 
 ReqAckUseSkill::~ReqAckUseSkill() {
@@ -3197,7 +3200,9 @@ void ReqAckUseSkill::Clear() {
     delete user_;
   }
   user_ = nullptr;
-  use_index_ = 0;
+  ::memset(&server_index_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&client_index_) -
+      reinterpret_cast<char*>(&server_index_)) + sizeof(client_index_));
   _internal_metadata_.Clear();
 }
 
@@ -3223,23 +3228,30 @@ const char* ReqAckUseSkill::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 use_index = 3;
+      // int32 client_index = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          use_index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          client_index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .NFMsg.EffectData effect_data = 4;
+      // int64 server_index = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          server_index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .NFMsg.EffectData effect_data = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_effect_data(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -3282,18 +3294,24 @@ failure:
         2, this->_internal_skill_id(), target);
   }
 
-  // int32 use_index = 3;
-  if (this->use_index() != 0) {
+  // int32 client_index = 3;
+  if (this->client_index() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_use_index(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_client_index(), target);
   }
 
-  // repeated .NFMsg.EffectData effect_data = 4;
+  // int64 server_index = 4;
+  if (this->server_index() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_server_index(), target);
+  }
+
+  // repeated .NFMsg.EffectData effect_data = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_effect_data_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, this->_internal_effect_data(i), target, stream);
+      InternalWriteMessage(5, this->_internal_effect_data(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3312,7 +3330,7 @@ size_t ReqAckUseSkill::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .NFMsg.EffectData effect_data = 4;
+  // repeated .NFMsg.EffectData effect_data = 5;
   total_size += 1UL * this->_internal_effect_data_size();
   for (const auto& msg : this->effect_data_) {
     total_size +=
@@ -3333,11 +3351,18 @@ size_t ReqAckUseSkill::ByteSizeLong() const {
         *user_);
   }
 
-  // int32 use_index = 3;
-  if (this->use_index() != 0) {
+  // int64 server_index = 4;
+  if (this->server_index() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_server_index());
+  }
+
+  // int32 client_index = 3;
+  if (this->client_index() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_use_index());
+        this->_internal_client_index());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3379,8 +3404,11 @@ void ReqAckUseSkill::MergeFrom(const ReqAckUseSkill& from) {
   if (from.has_user()) {
     _internal_mutable_user()->::NFMsg::Ident::MergeFrom(from._internal_user());
   }
-  if (from.use_index() != 0) {
-    _internal_set_use_index(from._internal_use_index());
+  if (from.server_index() != 0) {
+    _internal_set_server_index(from._internal_server_index());
+  }
+  if (from.client_index() != 0) {
+    _internal_set_client_index(from._internal_client_index());
   }
 }
 
@@ -3409,7 +3437,8 @@ void ReqAckUseSkill::InternalSwap(ReqAckUseSkill* other) {
   skill_id_.Swap(&other->skill_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(user_, other->user_);
-  swap(use_index_, other->use_index_);
+  swap(server_index_, other->server_index_);
+  swap(client_index_, other->client_index_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ReqAckUseSkill::GetMetadata() const {

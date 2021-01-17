@@ -131,7 +131,7 @@ int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string&
     return 0;
 }
 
-int NFBPVMEventModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFBPVMEventModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
     return 0;
 }

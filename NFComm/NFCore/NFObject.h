@@ -62,12 +62,12 @@ public:
     virtual bool FindProperty(const std::string& propertyName) override ;
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const std::string& propertyName, const NFDATA_TYPE varType) override;
 
-    virtual bool SetPropertyInt(const std::string& propertyName, const NFINT64 nValue) override ;
-    virtual bool SetPropertyFloat(const std::string& propertyName, const double dwValue) override ;
-    virtual bool SetPropertyString(const std::string& propertyName, const std::string& value) override ;
-    virtual bool SetPropertyObject(const std::string& propertyName, const NFGUID& obj) override ;
-	virtual bool SetPropertyVector2(const std::string& propertyName, const NFVector2& value) override ;
-	virtual bool SetPropertyVector3(const std::string& propertyName, const NFVector3& value) override ;
+    virtual bool SetPropertyInt(const std::string& propertyName, const NFINT64 nValue, const NFINT64 reason = 0) override ;
+    virtual bool SetPropertyFloat(const std::string& propertyName, const double dwValue, const NFINT64 reason = 0) override ;
+    virtual bool SetPropertyString(const std::string& propertyName, const std::string& value, const NFINT64 reason = 0) override ;
+    virtual bool SetPropertyObject(const std::string& propertyName, const NFGUID& obj, const NFINT64 reason = 0) override ;
+	virtual bool SetPropertyVector2(const std::string& propertyName, const NFVector2& value, const NFINT64 reason = 0) override ;
+	virtual bool SetPropertyVector3(const std::string& propertyName, const NFVector3& value, const NFINT64 reason = 0) override ;
 
     virtual NFINT64 GetPropertyInt(const std::string& propertyName) override ;
 	virtual int GetPropertyInt32(const std::string& propertyName) override ;

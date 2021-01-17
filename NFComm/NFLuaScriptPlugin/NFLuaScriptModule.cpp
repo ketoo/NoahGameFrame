@@ -334,7 +334,7 @@ bool NFLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& pro
     return false;
 }
 
-int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
 	auto funcList = mxLuaPropertyCallBackFuncMap.GetElement(propertyName);
 	if (funcList)

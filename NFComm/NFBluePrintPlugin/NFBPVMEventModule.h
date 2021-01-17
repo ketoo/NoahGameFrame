@@ -89,7 +89,7 @@ private:
     int OnEventCommonEvent(const NFGUID& self, const int eventID, const NFDataList& var);
 
     int OnClassCommonEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
-    int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+    int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
     void OnMessageEvent(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);

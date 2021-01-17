@@ -110,67 +110,67 @@ bool NFObject::FindProperty(const std::string& propertyName)
     return false;
 }
 
-bool NFObject::SetPropertyInt(const std::string& propertyName, const NFINT64 nValue)
+bool NFObject::SetPropertyInt(const std::string& propertyName, const NFINT64 nValue, const NFINT64 reason)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
     if (pProperty)
     {
-        return pProperty->SetInt(nValue);
+        return pProperty->SetInt(nValue, reason);
     }
 
     return false;
 }
 
-bool NFObject::SetPropertyFloat(const std::string& propertyName, const double dwValue)
+bool NFObject::SetPropertyFloat(const std::string& propertyName, const double dwValue, const NFINT64 reason)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
     if (pProperty)
     {
-        return pProperty->SetFloat(dwValue);
+        return pProperty->SetFloat(dwValue, reason);
     }
 
     return false;
 }
 
-bool NFObject::SetPropertyString(const std::string& propertyName, const std::string& value)
+bool NFObject::SetPropertyString(const std::string& propertyName, const std::string& value, const NFINT64 reason)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
     if (pProperty)
     {
-        return pProperty->SetString(value);
+        return pProperty->SetString(value, reason);
     }
 
     return false;
 }
 
-bool NFObject::SetPropertyObject(const std::string& propertyName, const NFGUID& obj)
+bool NFObject::SetPropertyObject(const std::string& propertyName, const NFGUID& obj, const NFINT64 reason)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
     if (pProperty)
     {
-        return pProperty->SetObject(obj);
+        return pProperty->SetObject(obj, reason);
     }
 
     return false;
 }
 
-bool NFObject::SetPropertyVector2(const std::string& propertyName, const NFVector2& value)
+bool NFObject::SetPropertyVector2(const std::string& propertyName, const NFVector2& value, const NFINT64 reason)
 {
 	NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
 	if (pProperty)
 	{
-		return pProperty->SetVector2(value);
+		return pProperty->SetVector2(value, reason);
 	}
 
 	return false;
 }
 
-bool NFObject::SetPropertyVector3(const std::string& propertyName, const NFVector3& value)
+bool NFObject::SetPropertyVector3(const std::string& propertyName, const NFVector3& value, const NFINT64 reason)
 {
 	NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(propertyName);
 	if (pProperty)
 	{
-		return pProperty->SetVector3(value);
+		return pProperty->SetVector3(value, reason);
 	}
 
 	return false;
