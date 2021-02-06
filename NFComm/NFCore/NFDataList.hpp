@@ -46,21 +46,14 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <variant>
 #include "NFMemoryCounter.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector2.hpp"
 #include "NFComm/NFCore/NFVector3.hpp"
 
-#ifdef _MSC_VER
-#if _MSC_VER <= 1800
-#include "common/variant.h"
-#else
-#include "common/variant.hpp"
-#endif
-#else
-#include "common/variant.hpp"
-#endif
+
 
 enum NFDATA_TYPE
 {
@@ -214,7 +207,7 @@ public:
 
 	void Reset()
 	{
-		variantData = mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3>();
+		variantData = std::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3>();
 		type = TDATA_UNKNOWN;
 		/*switch (GetType())
 		{
@@ -380,8 +373,7 @@ public:
 	{
 		if (TDATA_INT == type)
 		{
-			//return boost::get<NFINT64>(variantData);
-			return variantData.get<NFINT64>();
+			return std::get<NFINT64>(variantData);
 		}
 
 		return NULL_INT;
@@ -391,8 +383,7 @@ public:
 	{
 		if (TDATA_INT == type)
 		{
-			//return boost::get<NFINT64>(variantData);
-			return (int)variantData.get<NFINT64>();
+			return (int)std::get<NFINT64>(variantData);
 		}
 
 		return (int)NULL_INT;
@@ -402,8 +393,7 @@ public:
 	{
 		if (TDATA_FLOAT == type)
 		{
-			//return boost::get<double>(variantData);
-			return variantData.get<double>();
+			return std::get<double>(variantData);
 		}
 
 		return NULL_FLOAT;
@@ -412,30 +402,17 @@ public:
 	{
 		if (TDATA_STRING == type)
 		{
-			//return boost::get<const std::string&>(variantData);
-			return variantData.get<std::string>();
+			return std::get<std::string>(variantData);
 		}
 
 		return NULL_STR;
-	}
-
-	const char* GetCharArr() const
-	{
-		if (TDATA_STRING == type)
-		{
-			//return boost::get<const std::string&>(variantData);
-			return variantData.get<std::string>().c_str();
-		}
-
-		return NULL_STR.c_str();
 	}
 
 	const NFGUID& GetObject() const
 	{
 		if (TDATA_OBJECT == type)
 		{
-			//return boost::get<const NFGUID&>(variantData);
-			return variantData.get<NFGUID>();
+			return std::get<NFGUID>(variantData);
 		}
 
 		return NULL_OBJECT;
@@ -445,7 +422,7 @@ public:
 	{
 		if (TDATA_VECTOR2 == type)
 		{
-			return variantData.get<NFVector2>();
+			return std::get<NFVector2>(variantData);
 		}
 
 		return NULL_VECTOR2;
@@ -455,7 +432,7 @@ public:
 	{
 		if (TDATA_VECTOR3 == type)
 		{
-			return variantData.get<NFVector3>();
+			return std::get<NFVector3>(variantData);
 		}
 
 		return NULL_VECTOR3;
@@ -560,8 +537,8 @@ private:
 	bool bind = false;
 
 public:
-	//std::variant
-	mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
+	std::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
+	//mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
 };
 
 class NFDataList :public NFMemoryCounter
