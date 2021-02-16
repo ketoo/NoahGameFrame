@@ -95,9 +95,16 @@ void NFGameManagerModule::OnClientPropertyIntProcess(const NFSOCK sockIndex, con
 			{
 				m_pLogModule->LogInfo(objectID, "Upload From Client int set " + xProperty.property_name() + std::to_string(xProperty.data()), __FUNCTION__, __LINE__);
 
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
+					}
 				}
 				else
 				{
@@ -135,9 +142,16 @@ void NFGameManagerModule::OnClientPropertyFloatProcess(const NFSOCK sockIndex, c
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyFloat(objectID, xProperty.property_name(), xProperty.data());
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyFloat(objectID, xProperty.property_name(), xProperty.data());
+					}
 				}
 				else
 				{
@@ -175,9 +189,16 @@ void NFGameManagerModule::OnClientPropertyStringProcess(const NFSOCK sockIndex, 
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyString(objectID, xProperty.property_name(), xProperty.data());
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyString(objectID, xProperty.property_name(), xProperty.data());
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyString(objectID, xProperty.property_name(), xProperty.data());
+					}
 				}
 				else
 				{
@@ -215,9 +236,16 @@ void NFGameManagerModule::OnClientPropertyObjectProcess(const NFSOCK sockIndex, 
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyObject(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyObject(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyObject(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
 				}
 				else
 				{
@@ -256,9 +284,16 @@ void NFGameManagerModule::OnClientPropertyVector2Process(const NFSOCK sockIndex,
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyVector2(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyVector2(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyVector2(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
 				}
 				else
 				{
@@ -296,9 +331,16 @@ void NFGameManagerModule::OnClientPropertyVector3Process(const NFSOCK sockIndex,
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				if (!objectID.IsNull() && objectID == pObject->Self())
+				if (!objectID.IsNull())
 				{
-					m_pKernelModule->SetPropertyVector3(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					if (objectID == pObject->Self())
+					{
+						m_pKernelModule->SetPropertyVector3(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
+					else if (nGMLevel > 1)
+					{
+						m_pKernelModule->SetPropertyVector3(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					}
 				}
 				else
 				{
@@ -623,7 +665,7 @@ std::shared_ptr<NFIProperty> NFGameManagerModule::CalProperty(NF_SHARE_PTR<NFIOb
 	const std::string& account = pObject->GetPropertyString(NFrame::Player::Account());
 	gmLevel = m_pElementModule->GetPropertyInt(account, NFrame::GM::Level());
 #ifdef NF_DEBUG_MODE
-	gmLevel = 1;
+	gmLevel = 2;
 #endif
 
 	const int scene = pObject->GetPropertyInt(NFrame::IObject::SceneID());
