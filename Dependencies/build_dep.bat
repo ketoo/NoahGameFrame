@@ -13,7 +13,7 @@ vcpkg install libevent:x64-windows-static
 
 vcpkg install protobuf:x64-windows-static
 
-vcpkg install lua:x64-windows-static
+::vcpkg install lua:x64-windows-static
 
 vcpkg install sdl2:x64-windows-static
 

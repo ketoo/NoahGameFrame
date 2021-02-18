@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFGAMEDEMO_NFGAMEMANAGERMODULE_H
-#define NFGAMEDEMO_NFGAMEMANAGERMODULE_H
+#ifndef NFGAMEMANAGERMODULE_H
+#define NFGAMEMANAGERMODULE_H
 
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"

@@ -52,7 +52,7 @@ typedef NF_SHARE_PTR<PROPERTY_ENTER_EVENT_FUNCTOR> PROPERTY_ENTER_EVENT_FUNCTOR_
 typedef std::function<int(const NFDataList&, const NFGUID&)> RECORD_ENTER_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_ENTER_EVENT_FUNCTOR> RECORD_ENTER_EVENT_FUNCTOR_PTR;//AddRecordEnterCallBack
 
-typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&)> PROPERTY_SINGLE_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&, const NFINT64 reason)> PROPERTY_SINGLE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_SINGLE_EVENT_FUNCTOR> PROPERTY_SINGLE_EVENT_FUNCTOR_PTR;//AddPropertyEventCallBack
 
 typedef std::function<int(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFData&, const NFData&, const NFDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
@@ -148,9 +148,9 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&))
+	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&, const NFINT64 reason))
 	{
-		PROPERTY_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		PROPERTY_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, std::placeholders::_6);
 		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_SINGLE_EVENT_FUNCTOR(functor));
 		return AddPropertyEventCallBack(functorPtr);
 	}
@@ -251,7 +251,7 @@ public:
 	virtual bool AddRelivePosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
 	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex = -1) = 0;
 	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex) = 0;
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex= -1) = 0;
 
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID) = 0;
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList) = 0;

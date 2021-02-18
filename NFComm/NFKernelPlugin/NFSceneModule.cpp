@@ -122,7 +122,7 @@ int NFSceneModule::RequestGroupScene(const int sceneID)
 						xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
 						xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
 
-						PROPERTY_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnScenePropertyCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+						PROPERTY_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnScenePropertyCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 						PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
 						pPropertyManager->RegisterCallback(pStaticConfigPropertyInfo->GetKey(), functorPtr);
 
@@ -247,8 +247,8 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		int nOldGroupID = pObject->GetPropertyInt32(NFrame::Scene::GroupID());
 		if (nOldGroupID <= 0)
 		{
-			m_pLogModule->LogError(self, "no this group == 0 " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
-			return false;
+			//m_pLogModule->LogError(self, "no this group == 0 " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
+			//return false;
 		}
 
 		NF_SHARE_PTR<NFSceneInfo> pOldSceneInfo = this->GetElement(nOldSceneID);
@@ -1157,7 +1157,6 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, type, arg);
 		}
 
-		pObject->SetPropertyVector3(NFrame::IObject::Position(), v);
 
 		////////
 		BeforeEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
@@ -1165,8 +1164,11 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
 		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
 
+
 		const NFGUID newCell = m_pCellModule->ComputeCellID(v);
 		OnMoveCellEvent(self, nTargetGroupID, nTargetGroupID, NFGUID(), newCell);
+
+		pObject->SetPropertyVector3(NFrame::IObject::MoveTo(), v);
 
 		/////////
 		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
@@ -1181,14 +1183,14 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 	return false;
 }
 
-int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFINT64 reason)
 {
 	auto itList = mtGroupPropertyCommCallBackList.begin();
 	for (; itList != mtGroupPropertyCommCallBackList.end(); itList++)
 	{
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, propertyName, oldVar, newVar);
+		pFunc->operator()(self, propertyName, oldVar, newVar, reason);
 	}
 
 	auto it = mtGroupPropertyCallBackList.find(propertyName);
@@ -1199,7 +1201,7 @@ int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::st
 		{
 			PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
 			PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-			pFunc->operator()(self, propertyName, oldVar, newVar);
+			pFunc->operator()(self, propertyName, oldVar, newVar, reason);
 		}
 	}
 
@@ -1231,7 +1233,7 @@ int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EV
 	return 0;
 }
 
-int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFINT64 reason)
 {
 	const std::string& className = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
 	if (className == NFrame::Player::ThisName())
@@ -1256,7 +1258,7 @@ int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string 
 		return 0;
 	}
 
-	OnPropertyEvent(self, propertyName, oldVar, newVar, valueBroadCaseList);
+	OnPropertyEvent(self, propertyName, oldVar, newVar, valueBroadCaseList, reason);
 
 	return 0;
 }
@@ -1463,7 +1465,7 @@ int NFSceneModule::OnPlayerSceneEvent(const NFGUID & self, const std::string & p
 	//so no one at this group but u
 	
 	//therefore u just need post the new scene id to you self
-	OnPropertyEvent(self, propertyName, oldVar, newVar, NFDataList() << self);
+	OnPropertyEvent(self, propertyName, oldVar, newVar, NFDataList() << self, 0);
 	return 0;
 }
 
@@ -1709,14 +1711,14 @@ int NFSceneModule::OnRecordEnter(const NFDataList & argVar, const NFGUID & self)
 	return 0;
 }
 
-int NFSceneModule::OnPropertyEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
+int NFSceneModule::OnPropertyEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar, const NFINT64 reason)
 {
 	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mvPropertySingleCallback.begin();
 	for (; it != mvPropertySingleCallback.end(); it++)
 	{
 		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, propertyName, oldVar, newVar, argVar);
+		pFunc->operator()(self, propertyName, oldVar, newVar, argVar, reason);
 	}
 
 	return 0;

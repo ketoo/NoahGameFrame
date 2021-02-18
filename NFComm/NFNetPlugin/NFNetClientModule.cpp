@@ -87,7 +87,7 @@ void NFNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const
     if (xCallBack)
     {
         std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = xCallBack->mxReceiveCallBack.find(msgID);
-        if (xCallBack->mxReceiveCallBack.end() == it)
+        if (xCallBack->mxReceiveCallBack.end() != it)
         {
             xCallBack->mxReceiveCallBack.erase(it);
         }
@@ -118,10 +118,18 @@ int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uin
         mxCallBack.AddElement(eType, xCallBack);
     }
 
-	std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
-	xList.push_back(functorPtr);
+	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator itor = xCallBack->mxReceiveCallBack.find(msgID);
+	if (itor == xCallBack->mxReceiveCallBack.end())
+	{
+		std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
+		xList.push_back(functorPtr);
 
-    xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
+    	xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
+	}
+	else
+	{
+		xCallBack->mxReceiveCallBack.at(msgID).push_back(functorPtr);
+	}
 
     return 0;
 }

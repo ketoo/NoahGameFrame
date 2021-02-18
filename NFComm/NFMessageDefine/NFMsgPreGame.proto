@@ -183,7 +183,6 @@ message ServerHeartBeat
 message RoleOnlineNotify
 {
 	Ident self = 1;
-	Ident clan = 2;
 	int32 game = 3;
 	int32 proxy = 4;
 	bytes name = 5;

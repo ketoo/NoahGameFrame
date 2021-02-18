@@ -34,18 +34,55 @@
 //just define it as 0 if you want to use luaintf with C
 //#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
-#include "Dependencies/LuaIntf/LuaIntf.h"
-#include "Dependencies/LuaIntf/LuaRef.h"
-#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFLuaPBModule.h"
+/*
+void call0(lua_State* lua_state,const char* name)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		lua_pcall(lua_state, 0, 0, 0);
+	}
+}
+
+template<typename T1>
+void call1(lua_State* lua_state,const char* name, T1 arg1)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		luabridge::Stack<T1>::push(lua_state, arg1);
+		lua_pcall(lua_state, 1, 0, 0);
+	}
+}
+
+template<typename T1, typename T2>
+void call2(lua_State* lua_state,const char* name, T1 arg1, T2 arg2)
+{
+	lua_getglobal(lua_state, name);
+	if (lua_isfunction(lua_state, -1))
+	{
+		luabridge::Stack<T1>::push(lua_state, arg1);
+		luabridge::Stack<T2>::push(lua_state, arg2);
+		lua_pcall(lua_state, 2, 0, 0);
+	}
+}
+*/
+
+class NFILuaScriptModule
+		: public NFIModule
+{
+public:
+
+};
 
 class NFLuaScriptModule
     : public NFILuaScriptModule
@@ -68,10 +105,10 @@ public:
 
 
 protected:
-	void RegisterModule(const std::string& tableName, const LuaIntf::LuaRef& luatbl);
+	void RegisterModule(const std::string& tableName, const LuaIntf::LuaRef& luaTable);
 
 	//FOR KERNEL MODULE
-	NFGUID CreateObject(const NFGUID& self, const int sceneID, const int groupID, const std::string& className, const std::string& strIndex, const NFDataList& arg);
+	NFGUID CreateObject(const NFGUID& self, const int sceneID, const int groupID, const std::string& className, const std::string& objectIndex, const NFDataList& arg);
 	bool ExistObject(const NFGUID& self);
 	bool DestroyObject(const NFGUID & self);
 
@@ -81,12 +118,12 @@ protected:
 
 	bool FindProperty(const NFGUID& self, const std::string& propertyName);
 
-	bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 nValue);
-	bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double dValue);
-	bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& value);
-	bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& objectValue);
-	bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& value);
-	bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& value);
+	bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 propValue);
+	bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double propValue);
+	bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& propValue);
+	bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& propValue);
+	bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& propValue);
+	bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& propValue);
 
 	NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
 	int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
@@ -96,11 +133,11 @@ protected:
 	NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& propertyName);
 	NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& propertyName);
 
-	bool AddPropertyCallBack(const NFGUID& self, std::string& propertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-    bool AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-    bool AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
-	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
+	bool AddPropertyCallBack(const NFGUID& self, std::string& propertyName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+    bool AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+    bool AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
+	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc, const float time, const int count);
 
 	int AddRow(const NFGUID& self, std::string& recordName, const NFDataList& var);
 	bool RemRow(const NFGUID& self, std::string& recordName, const int row);
@@ -120,8 +157,8 @@ protected:
 	NFVector3 GetRecordVector3(const NFGUID& self, const std::string& recordName, const int row, const std::string& colTag);
 
 	NFINT64 GetNowTime();
-	NFGUID CreateID();
-	NFINT64 APPID();
+	NFGUID CreateId();
+	NFINT64 APPId();
 	NFINT64 APPType();
 
 	//FOR ELEMENT MODULE
@@ -135,38 +172,46 @@ protected:
 	NFVector3 GetElePropertyVector3(const std::string& configName, const std::string& propertyName);
 
 	//FOR NET MODULE
-	void RemoveClientMsgCallBack(const int msgID);
-	void AddClientMsgCallBack(const int msgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-	void RemoveServerMsgCallBack(const int serverType, const int msgID);
-	void AddServerMsgCallBack(const int serverType, const int msgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	//as server
+	void RemoveCallBackAsServer(const int msgID);
+	void AddMsgCallBackAsServer(const int msgID, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+
+	//as client
+	void RemoveMsgCallBackAsClient(const NF_SERVER_TYPES serverType, const int msgID);
+	void AddMsgCallBackAsClient(const NF_SERVER_TYPES serverType, const int msgID, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+
+/*
 	void RemoveHttpCallBack(const std::string& path);
-	void AddHttpCallBack(const std::string& path, const int httpType, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void AddHttpCallBack(const std::string& path, const int httpType, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+*/
 
-    void ImportProtoFile(const std::string& strFile);
-    const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
-	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
+    void ImportProtoFile(const std::string& fileName);
+    const std::string Encode(const std::string& msgTypeName, const LuaIntf::LuaRef& luaTable);
+	LuaIntf::LuaRef Decode(const std::string& msgTypeName, const std::string& data);
 
-	void SendByServerFD(const NFSOCK nFD, const uint16_t msgID, const std::string& strData);
-	void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData);
-    void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData);
+	void SendToServerByServerID(const int serverID, const uint16_t msgID, const std::string& data);
+	void SendToServerBySuit(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& data, const std::string& hash);
+	void SendToAllServerByServerType(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& data);
 
     //for net module
-    void SendMsgToGate(const NFGUID player, const uint16_t msgID, const std::string& strData);
-    void SendGroupMsgToGate(const uint16_t msgID, const std::string& strData);
-    void SendToAllPlayer(const uint16_t msgID, const std::string& strData);
+	void SendMsgToClientByFD(const NFSOCK fd, const uint16_t msgID, const std::string& data);
+
+	void SendMsgToPlayer(const NFGUID player, const uint16_t msgID, const std::string& data);
+	void SendToAllPlayer(const uint16_t msgID, const std::string& data);
+    void SendToGroupPlayer(const uint16_t msgID, const std::string& data);
 
 	//for log
-	void LogInfo(const std::string& strData);
-	void LogError(const std::string& strData);
-	void LogWarning(const std::string& strData);
-	void LogDebug(const std::string& strData);
+	void LogInfo(const std::string& logData);
+	void LogError(const std::string& logData);
+	void LogWarning(const std::string& logData);
+	void LogDebug(const std::string& logData);
 
     //hot fix
-	void SetVersionCode(const std::string& strData);
+	void SetVersionCode(const std::string& logData);
 	const std::string& GetVersionCode();
 
-	//FOR CLASS MDOULE
-    bool AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	//FOR CLASS MODULE
+    bool AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
 
 protected:
     template<typename T>
@@ -175,17 +220,9 @@ protected:
     template<typename T>
     bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, T key, std::string& luaFunc);
 
-    template<typename T1, typename... T2>
-    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
-
-    template<typename T1, typename... T2>
-    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2... arg);
-
-    int OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+    int OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
     int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float time, const int count);
-
-	int OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float time, const int count);
 
     int OnLuaEventCB(const NFGUID& self, const int eventID, const NFDataList& argVar);
 
@@ -193,9 +230,15 @@ protected:
     
 	void OnScriptReload();
 
+	void OnNetMsgCallBackAsServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnNetMsgCallBackAsClientForMasterServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnNetMsgCallBackAsClientForWorldServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnNetMsgCallBackAsClientForGameServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+
 protected:
     bool Register();
-	std::string FindFuncName(const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	std::string FindFuncName(const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc);
+
 
 protected:
     NFIElementModule* m_pElementModule;
@@ -221,6 +264,10 @@ protected:
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaHeartBeatCallBackFuncMap;
 
     NFMap<std::string, NFList<std::string>> mxClassEventFuncMap;
+
+
+	NFMap<int, NFList<std::string>> mxNetMsgCallBackFuncMapAsServer;
+	NFMap<NF_SERVER_TYPES, NFMap<int, NFList<std::string>>> mxNetMsgCallBackFuncMapAsClient;
 };
 
 #endif

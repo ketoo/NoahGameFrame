@@ -29,8 +29,10 @@
 NFPluginServer::NFPluginServer(const std::string& strArgv)
 {
     this->strArgvList = strArgv;
-
+    
+#if NF_PLATFORM != NF_PLATFORM_WIN
 	NF_CRASH_TRY_ROOT
+#endif  
 }
 
 void NFPluginServer::Execute()
@@ -41,7 +43,7 @@ void NFPluginServer::Execute()
 void NFPluginServer::PrintfLogo()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    
 #endif
 
     std::cout << "\n" << std::endl;
@@ -106,9 +108,7 @@ void NFPluginServer::Final()
 
 void NFPluginServer::ProcessParameter()
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
-#else
+#if NF_PLATFORM != NF_PLATFORM_WIN
     //run it as a daemon process
     if (strArgvList.find("-d") != string::npos)
     {

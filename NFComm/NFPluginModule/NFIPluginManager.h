@@ -207,6 +207,9 @@ public:
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int appID) = 0;
 
+	virtual int GetAppType() const = 0;
+	virtual void SetAppType(const int type) = 0;
+
     virtual bool IsRunningDocker() const = 0;
     virtual void SetRunningDocker(bool bDocker) = 0;
 
@@ -235,6 +238,9 @@ public:
 
 	virtual int GetAppCPUCount() const = 0;
 	virtual void SetAppCPUCount(const int count) = 0;
+
+	virtual bool UsingBackThread() const = 0;
+	virtual void SetUsingBackThread(const bool b) = 0;
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &fileName, std::string &content) = 0;

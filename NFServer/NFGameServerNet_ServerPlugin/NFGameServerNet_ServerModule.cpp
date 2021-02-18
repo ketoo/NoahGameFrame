@@ -31,6 +31,8 @@
 
 bool NFGameServerNet_ServerModule::Init()
 {
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_GAME);
+
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();

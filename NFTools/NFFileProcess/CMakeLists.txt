@@ -12,6 +12,7 @@ file(GLOB NFFileProcess_zlib_C ./zlib/*.c)
 file(GLOB NFFileProcess_zlib_Hpp ./zlib/*.h)
 file(GLOB NFFileProcess_ROOT_Cpp *.cpp)
 file(GLOB NFFileProcess_ROOT_Hpp *.h)
+file(GLOB NFFileProcess_zlib_Hpp ./Generator/*.hpp)
 
 source_group("MiniExcelReader" FILES ${NFFileProcess_MiniExcelReader_Cpp})
 source_group("MiniExcelReader" FILES ${NFFileProcess_MiniExcelReader_Hpp})

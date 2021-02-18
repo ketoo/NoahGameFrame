@@ -32,6 +32,8 @@ NFMasterNet_ServerModule::~NFMasterNet_ServerModule()
 
 bool NFMasterNet_ServerModule::Init()
 {
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_MASTER);
+
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();

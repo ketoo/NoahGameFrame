@@ -185,11 +185,11 @@
 
 NFPluginManager::NFPluginManager() : NFIPluginManager()
 {
-	mnAppID = 0;
+	appID = 0;
     mbIsDocker = false;
 
-	mCurrentPlugin = nullptr;
-	mCurrenModule = nullptr;
+	currentPlugin = nullptr;
+	currentModule = nullptr;
 
 #ifdef NF_DYNAMIC_PLUGIN
 	mbStaticPlugin = false;
@@ -202,10 +202,10 @@ NFPluginManager::NFPluginManager() : NFIPluginManager()
 
 	mGetFileContentFunctor = nullptr;
 
-	mstrConfigPath = "../";
+	configPath = "../";
 
 
-   mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
+	configName = "NFDataCfg/Debug/Plugin.xml";
 
 }
 
@@ -271,14 +271,14 @@ inline bool NFPluginManager::Init()
 bool NFPluginManager::LoadPluginConfig()
 {
 	std::string content;
-	std::string strFilePath = GetConfigPath() + mstrConfigName;
+	std::string strFilePath = GetConfigPath() + configName;
 	GetFileContent(strFilePath, content);
 
 	rapidxml::xml_document<> xDoc;
 	xDoc.parse<0>((char*)content.c_str());
 
     rapidxml::xml_node<>* pRoot = xDoc.first_node();
-    rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
+    rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(appName.c_str());
     if (pAppNameNode)
     {
 		for (rapidxml::xml_node<>* pPluginNode = pAppNameNode->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
@@ -330,8 +330,8 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFInventoryPlugin)
 
 #if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
-	CREATE_PLUGIN(this, NFRenderPlugin)
-	CREATE_PLUGIN(this, NFBluePrintPlugin)
+//CREATE_PLUGIN(this, NFRenderPlugin)
+//CREATE_PLUGIN(this, NFBluePrintPlugin)
 #endif
 		
 //DB
@@ -565,12 +565,12 @@ bool NFPluginManager::Execute()
 
 inline int NFPluginManager::GetAppID() const
 {
-	return mnAppID;
+	return appID;
 }
 
-inline void NFPluginManager::SetAppID(const int appID)
+inline void NFPluginManager::SetAppID(const int id)
 {
-    mnAppID = appID;
+	appID = id;
 }
 
 bool NFPluginManager::IsRunningDocker() const
@@ -600,12 +600,12 @@ inline NFINT64 NFPluginManager::GetNowTime() const
 
 inline const std::string & NFPluginManager::GetConfigPath() const
 {
-	return mstrConfigPath;
+	return configPath;
 }
 
 inline void NFPluginManager::SetConfigPath(const std::string & strPath)
 {
-	mstrConfigPath = strPath;
+	configPath = strPath;
 }
 
 void NFPluginManager::SetConfigName(const std::string & fileName)
@@ -621,60 +621,60 @@ void NFPluginManager::SetConfigName(const std::string & fileName)
 	}
 
 #ifdef NF_DEBUG_MODE
-	mstrConfigName = "NFDataCfg/Debug/" + fileName;
+	configName = "NFDataCfg/Debug/" + fileName;
 #else
-	mstrConfigName = "NFDataCfg/Release/" + fileName;
+	configName = "NFDataCfg/Release/" + fileName;
 #endif
 }
 
 const std::string& NFPluginManager::GetConfigName() const
 {
-	return mstrConfigName;
+	return configName;
 }
 
 const std::string& NFPluginManager::GetAppName() const
 {
-	return mstrAppName;
+	return appName;
 }
 
-void NFPluginManager::SetAppName(const std::string& appName)
+void NFPluginManager::SetAppName(const std::string& name)
 {
-	if (!mstrAppName.empty())
+	if (name.empty())
 	{
 		return;
 	}
 
-	mstrAppName = appName;
+	appName = name;
 }
 
 const std::string & NFPluginManager::GetLogConfigName() const
 {
-	return mstrLogConfigName;
+	return logConfigName;
 }
 
 void NFPluginManager::SetLogConfigName(const std::string & name)
 {
-	mstrLogConfigName = name;
+	logConfigName = name;
 }
 
 NFIPlugin * NFPluginManager::GetCurrentPlugin()
 {
-	return mCurrentPlugin;
+	return currentPlugin;
 }
 
 NFIModule * NFPluginManager::GetCurrentModule()
 {
-	return mCurrenModule;
+	return currentModule;
 }
 
 void NFPluginManager::SetCurrentPlugin(NFIPlugin * pPlugin)
 {
-	 mCurrentPlugin = pPlugin;
+	currentPlugin = pPlugin;
 }
 
 void NFPluginManager::SetCurrentModule(NFIModule * pModule)
 {
-	mCurrenModule = pModule;
+	currentModule = pModule;
 }
 
 void NFPluginManager::SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun)
@@ -1014,4 +1014,24 @@ int NFPluginManager::GetAppCPUCount() const
 void NFPluginManager::SetAppCPUCount(const int count)
 {
 	mnCPUCount = count;
+}
+
+int NFPluginManager::GetAppType() const
+{
+	return appType;
+}
+
+void NFPluginManager::SetAppType(const int type)
+{
+	appType = type;
+}
+
+bool NFPluginManager::UsingBackThread() const
+{
+	return usingBackThread;
+}
+
+void NFPluginManager::SetUsingBackThread(const bool b)
+{
+	usingBackThread = b;
 }

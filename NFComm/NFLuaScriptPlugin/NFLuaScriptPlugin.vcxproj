@@ -115,11 +115,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFLuaHttpModule.cpp" />
     <ClCompile Include="NFLuaPBModule.cpp" />
     <ClCompile Include="NFLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
-    <ClCompile Include="NFLuaWebSocketModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFCore\NFCore.vcxproj">
@@ -127,11 +125,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFLuaHttpModule.h" />
     <ClInclude Include="NFLuaPBModule.h" />
     <ClInclude Include="NFLuaScriptModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
-    <ClInclude Include="NFLuaWebSocketModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

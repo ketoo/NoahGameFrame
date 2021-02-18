@@ -7,10 +7,29 @@ function CreatEnumTable(tbl, index)
     return enumtbl 
 end
 
-RecordOptype =
+ObjectEvent =
+{
+    "COE_CREATE_NODATA",
+    "COE_CREATE_BEFORE_ATTACHDATA",
+    "COE_CREATE_LOADDATA",
+    "COE_CREATE_AFTER_ATTACHDATA",
+    "COE_CREATE_BEFORE_EFFECT",
+    "COE_CREATE_EFFECTDATA",
+    "COE_CREATE_AFTER_EFFECT",
+    "COE_CREATE_READY",
+    "COE_CREATE_HASDATA",
+    "COE_CREATE_FINISH",
+    "COE_CREATE_CLIENT_FINISH",
+    "COE_BEFOREDESTROY",
+    "COE_DESTROY",
+}
+ObjectEvent = CreatEnumTable(ObjectEvent, -1)
+
+RecordOpType =
 {
 	"Add",
 	"Del",
+    "AfterDel",
 	"Swap",
 	"Create",
 	"Update",
@@ -19,7 +38,7 @@ RecordOptype =
 	"Cover",
 	"UNKNOW",
 }
-RecordOptype = CreatEnumTable(RecordOptype, -1)
+RecordOpType = CreatEnumTable(RecordOpType, -1)
 
 NF_SERVER_TYPES =
 {

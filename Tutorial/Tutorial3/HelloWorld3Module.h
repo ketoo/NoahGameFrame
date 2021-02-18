@@ -58,8 +58,8 @@ public:
 protected:
     int OnEvent(const NFGUID& self, const int event, const NFDataList& arg);
     int OnClassCallBackEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT event, const NFDataList& arg);
-    int OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList);
-    int OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList);
+    int OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList, const int64_t reason);
+    int OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList, const int64_t reason);
 
     int OnHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 

@@ -29,6 +29,8 @@
 
 bool NFWorldNet_ServerModule::Init()
 {
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_WORLD);
+
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
@@ -833,7 +835,6 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK sockIndex, const int 
 
 		playerData->name = xMsg.name();
 		playerData->bp = xMsg.bp();
-		playerData->clan = NFINetModule::PBToNF(xMsg.clan());
 
 		mPlayersData.AddElement(selfId, playerData);
 	}

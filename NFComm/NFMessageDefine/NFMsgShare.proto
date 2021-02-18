@@ -99,8 +99,9 @@ message ReqAckUseSkill
 {
 	Ident 	user = 1;
 	bytes skill_id = 2;
-	int32  use_index = 3;//因为客户端要先展示
-	repeated EffectData 	effect_data = 4;
+	int32  client_index = 3;//因为客户端要先展示
+	int64  server_index = 4;//因为客户端要先展示
+	repeated EffectData 	effect_data = 5;
 }
 
 message ReqAckSwapScene
