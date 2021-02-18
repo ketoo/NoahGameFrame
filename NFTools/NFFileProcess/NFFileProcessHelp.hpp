@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #endif
+#include <corecrt_io.h>
 
 class NFFileProcessHelp
 {
