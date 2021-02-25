@@ -295,14 +295,6 @@ Demo:
 
 -------------------
 
-
-### About The Author
-
-* Mail: 342006@qq.com
-* BBS: http://bbs.noahframe.com
-
--------------------
-
 ### Amazing  open source projects:
 **breeze**
 * Auther: zsummer
