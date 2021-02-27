@@ -36,9 +36,9 @@ class NFIPropertyModule
 public:
     enum NFPropertyGroup
     {
-		NPG_JOBLEVEL,
+		NPG_JOB_LEVEL,
 		NPG_FIGHTING_HERO,
-		NPG_EFFECTVALUE,
+		NPG_EFFECT_VALUE,
 		NPG_REBIRTH_ADD,
 		NPG_EQUIP,
 		NPG_EQUIP_AWARD,

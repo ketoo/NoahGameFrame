@@ -127,7 +127,7 @@ int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA&
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
     {
-		if (activeExtraController && i == NFPropertyGroup::NPG_JOBLEVEL)
+		if (activeExtraController && i == NFPropertyGroup::NPG_JOB_LEVEL)
 		{
 			continue;
 		}
@@ -236,8 +236,8 @@ void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
         const std::string& colTag = pRecord->GetColTag(i);
         NFINT64 nValue = m_pElementModule->GetPropertyInt(effectData, colTag);
 
-		pRecord->SetUsed(NFPropertyGroup::NPG_JOBLEVEL, true);
-		pRecord->SetInt(NFPropertyGroup::NPG_JOBLEVEL, colTag, nValue);
+		pRecord->SetUsed(NFPropertyGroup::NPG_JOB_LEVEL, true);
+		pRecord->SetInt(NFPropertyGroup::NPG_JOB_LEVEL, colTag, nValue);
     }
 }
 
@@ -250,7 +250,7 @@ void NFPropertyModule::RefreshAllProperty(const NFGUID& self)
 
         for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
         {
-        	if (activeExtraController && i == NFPropertyGroup::NPG_JOBLEVEL)
+        	if (activeExtraController && i == NFPropertyGroup::NPG_JOB_LEVEL)
 			{
 				continue;
 			}
