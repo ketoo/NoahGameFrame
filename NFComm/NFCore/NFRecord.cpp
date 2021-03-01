@@ -234,6 +234,7 @@ int NFRecord::AddRow(const int row, const NFDataList& var)
 	xEventData.row = nFindRow;
 	xEventData.col = 0;
 	xEventData.recordName = mstrRecordName;
+	xEventData.recordData = this;
 
 	NFData tData;
     OnEventHandler(mSelf, xEventData, tData, tData);
@@ -278,6 +279,7 @@ bool NFRecord::SetRow(const int row, const NFDataList & var)
 		xEventData.row = row;
 		xEventData.col = i;
 		xEventData.recordName = mstrRecordName;
+		xEventData.recordData = this;
 
 		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
 	}
@@ -333,6 +335,7 @@ bool NFRecord::SetInt(const int row, const int col, const NFINT64 value)
 		xEventData.row = row;
 		xEventData.col = col;
 		xEventData.recordName = mstrRecordName;
+		xEventData.recordData = this;
 
 		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
 	}
@@ -394,6 +397,7 @@ bool NFRecord::SetFloat(const int row, const int col, const double value)
 		xEventData.row = row;
 		xEventData.col = col;
 		xEventData.recordName = mstrRecordName;
+		xEventData.recordData = this;
 
 		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
 	}
@@ -456,6 +460,7 @@ bool NFRecord::SetString(const int row, const int col, const std::string& value)
 		xEventData.row = row;
 		xEventData.col = col;
 		xEventData.recordName = mstrRecordName;
+		xEventData.recordData = this;
 
 		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
 	}
@@ -518,6 +523,7 @@ bool NFRecord::SetObject(const int row, const int col, const NFGUID& value)
 		xEventData.row = row;
 		xEventData.col = col;
 		xEventData.recordName = mstrRecordName;
+		xEventData.recordData = this;
 
 		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
 	}

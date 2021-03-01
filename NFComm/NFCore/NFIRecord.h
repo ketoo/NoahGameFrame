@@ -29,6 +29,8 @@
 #include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+class NFIRecord;
+
 struct RECORD_EVENT_DATA
 {
 	enum RecordOptype
@@ -56,6 +58,7 @@ struct RECORD_EVENT_DATA
 	int row;
 	int col;
 	std::string recordName;
+	NFIRecord* recordData;
 };
 
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&)> RECORD_EVENT_FUNCTOR;
