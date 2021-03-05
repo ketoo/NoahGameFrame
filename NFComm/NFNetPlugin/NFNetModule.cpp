@@ -390,7 +390,7 @@ NFINet* NFNetModule::GetNet()
 
 void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
-	m_pLogModule->LogInfo(pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID()) + " OnReceiveNetPack " + std::to_string(msgID), __FUNCTION__, __LINE__);
+	//m_pLogModule->LogInfo(pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID()) + " NFNetModule::OnReceiveNetPack " + std::to_string(msgID), __FILE__, __LINE__);
 
 	NFPerformance performance;
 
@@ -424,8 +424,8 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, cons
 #if NF_PLATFORM != NF_PLATFORM_WIN
 	NF_CRASH_END
 #endif
-
-	if (performance.CheckTimePoint(1))
+/*
+	if (performance.CheckTimePoint(5))
 	{
 		std::ostringstream os;
 		os << "---------------net module performance problem------------------- ";
@@ -434,6 +434,7 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, cons
 		os << msgID;
 		m_pLogModule->LogWarning(NFGUID(0, msgID), os, __FUNCTION__, __LINE__);
 	}
+ */
 }
 
 void NFNetModule::OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)

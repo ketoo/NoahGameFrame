@@ -90,17 +90,17 @@ public:
     virtual bool Execute() override;
 
     virtual int GetAppID() const override;
-
     virtual void SetAppID(const int appID) override;
 
-    virtual bool IsRunningDocker() const override;
+	virtual int GetAppType() const override;
+	virtual void SetAppType(const int type) override;
 
+    virtual bool IsRunningDocker() const override;
     virtual void SetRunningDocker(bool bDocker) override;
 
     virtual bool IsStaticPlugin() const override;
 
     virtual NFINT64 GetInitTime() const override;
-
     virtual NFINT64 GetNowTime() const override;
 
     virtual const std::string& GetConfigPath() const override;
@@ -126,12 +126,15 @@ public:
 	virtual int GetAppCPUCount() const override;
 	virtual void SetAppCPUCount(const int count) override;
 
+	virtual bool UsingBackThread() const override;
+	virtual void SetUsingBackThread(const bool b) override;
+
     virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
     virtual bool GetFileContent(const std::string &fileName, std::string &content) override;
 
-	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue);
-	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName);
+	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) override;
+	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) override;
 
 protected:
 
@@ -144,19 +147,23 @@ protected:
     bool UnLoadStaticPlugin(const std::string& pluginDLLName);
 
 private:
-    int mnAppID;
-    bool mbIsDocker;
-    bool mbStaticPlugin;
-    NFINT64 mnInitTime;
-	NFINT64 mnNowTime;
-	NFINT64 mnCPUCount = 1;
-    std::string mstrConfigPath;
-    std::string mstrConfigName;
-    std::string mstrAppName;
-    std::string mstrLogConfigName;
+    int appID = 0;
+	int appType = 0;
+    bool mbIsDocker = false;
+	bool mbStaticPlugin = false;
+	bool usingBackThread = false;
 
-    NFIPlugin* mCurrentPlugin;
-    NFIModule* mCurrenModule;
+    NFINT64 mnInitTime = 0;
+	NFINT64 mnNowTime = 0;
+	NFINT64 mnCPUCount = 1;
+
+    std::string configPath;
+    std::string configName;
+    std::string appName;
+    std::string logConfigName;
+
+    NFIPlugin* currentPlugin;
+    NFIModule* currentModule;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFDynLib*> PluginLibMap;

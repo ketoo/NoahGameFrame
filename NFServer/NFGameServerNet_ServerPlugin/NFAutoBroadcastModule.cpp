@@ -357,7 +357,7 @@ int NFAutoBroadcastModule::OnRecordEnter(const NFDataList& argVar, const NFGUID&
 	return 0;
 }
 
-int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar)
+int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar, const NFINT64 reason)
 {
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
@@ -379,6 +379,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
 		pDataInt->set_property_name(propertyName);
 		pDataInt->set_data(newVar.GetInt());
+		pDataInt->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -398,6 +399,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
 		pDataFloat->set_property_name(propertyName);
 		pDataFloat->set_data(newVar.GetFloat());
+		pDataFloat->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -417,6 +419,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
 		pDataString->set_property_name(propertyName);
 		pDataString->set_data(newVar.GetString());
+		pDataString->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -436,6 +439,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
 		pDataObject->set_property_name(propertyName);
 		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+		pDataObject->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -454,6 +458,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyVector2* pDataObject = xPropertyVector2.add_property_list();
 		pDataObject->set_property_name(propertyName);
 		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
+		pDataObject->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -472,6 +477,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 		NFMsg::PropertyVector3* pDataObject = xPropertyVector3.add_property_list();
 		pDataObject->set_property_name(propertyName);
 		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
+		pDataObject->set_reason(reason);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{

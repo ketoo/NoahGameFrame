@@ -113,14 +113,14 @@ bool NFLuaScriptModule::BeforeShut()
     return true;
 }
 
-void NFLuaScriptModule::RegisterModule(const std::string & tableName, const LuaIntf::LuaRef & luatbl)
+void NFLuaScriptModule::RegisterModule(const std::string & tableName, const LuaIntf::LuaRef & luaTable)
 {
-	mxTableName[tableName] = luatbl;
+	mxTableName[tableName] = luaTable;
 }
 
-NFGUID NFLuaScriptModule::CreateObject(const NFGUID & self, const int sceneID, const int groupID, const std::string & className, const std::string & strIndex, const NFDataList & arg)
+NFGUID NFLuaScriptModule::CreateObject(const NFGUID & self, const int sceneID, const int groupID, const std::string & className, const std::string & objectIndex, const NFDataList & arg)
 {
-	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->CreateObject(self, sceneID, groupID, className, strIndex, arg);
+	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->CreateObject(self, sceneID, groupID, className, objectIndex, arg);
 	if (xObject)
 	{
 		return xObject->Self();
@@ -157,34 +157,34 @@ bool NFLuaScriptModule::FindProperty(const NFGUID & self, const std::string & pr
 	return m_pKernelModule->FindProperty(self, propertyName);
 }
 
-bool NFLuaScriptModule::SetPropertyInt(const NFGUID & self, const std::string & propertyName, const NFINT64 nValue)
+bool NFLuaScriptModule::SetPropertyInt(const NFGUID & self, const std::string & propertyName, const NFINT64 propValue)
 {
-	return m_pKernelModule->SetPropertyInt(self, propertyName, nValue);
+	return m_pKernelModule->SetPropertyInt(self, propertyName, propValue);
 }
 
-bool NFLuaScriptModule::SetPropertyFloat(const NFGUID & self, const std::string & propertyName, const double dValue)
+bool NFLuaScriptModule::SetPropertyFloat(const NFGUID & self, const std::string & propertyName, const double propValue)
 {
-	return m_pKernelModule->SetPropertyFloat(self, propertyName, dValue);
+	return m_pKernelModule->SetPropertyFloat(self, propertyName, propValue);
 }
 
-bool NFLuaScriptModule::SetPropertyString(const NFGUID & self, const std::string & propertyName, const std::string & value)
+bool NFLuaScriptModule::SetPropertyString(const NFGUID & self, const std::string & propertyName, const std::string & propValue)
 {
-	return m_pKernelModule->SetPropertyString(self, propertyName, value);
+	return m_pKernelModule->SetPropertyString(self, propertyName, propValue);
 }
 
-bool NFLuaScriptModule::SetPropertyObject(const NFGUID & self, const std::string & propertyName, const NFGUID & objectValue)
+bool NFLuaScriptModule::SetPropertyObject(const NFGUID & self, const std::string & propertyName, const NFGUID & propValue)
 {
-	return m_pKernelModule->SetPropertyObject(self, propertyName, objectValue);
+	return m_pKernelModule->SetPropertyObject(self, propertyName, propValue);
 }
 
-bool NFLuaScriptModule::SetPropertyVector2(const NFGUID & self, const std::string & propertyName, const NFVector2 & value)
+bool NFLuaScriptModule::SetPropertyVector2(const NFGUID & self, const std::string & propertyName, const NFVector2 & propValue)
 {
-	return m_pKernelModule->SetPropertyVector2(self, propertyName, value);
+	return m_pKernelModule->SetPropertyVector2(self, propertyName, propValue);
 }
 
-bool NFLuaScriptModule::SetPropertyVector3(const NFGUID & self, const std::string & propertyName, const NFVector3 & value)
+bool NFLuaScriptModule::SetPropertyVector3(const NFGUID & self, const std::string & propertyName, const NFVector3 & propValue)
 {
-	return m_pKernelModule->SetPropertyVector3(self, propertyName, value);
+	return m_pKernelModule->SetPropertyVector3(self, propertyName, propValue);
 }
 
 NFINT64 NFLuaScriptModule::GetPropertyInt(const NFGUID & self, const std::string & propertyName)
@@ -222,7 +222,7 @@ NFVector3 NFLuaScriptModule::GetPropertyVector3(const NFGUID & self, const std::
 	return m_pKernelModule->GetPropertyVector3(self, propertyName);
 }
 
-bool NFLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
+bool NFLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc)
 {
 	auto funcNameList = mxClassEventFuncMap.GetElement(className);
 	if (!funcNameList)
@@ -233,7 +233,7 @@ bool NFLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::
 		m_pKernelModule->AddClassCallBack(className, this, &NFLuaScriptModule::OnClassEventCB);
 	}
 	
-	std::string strfuncName = FindFuncName(luatbl, luaFunc);
+	std::string strfuncName = FindFuncName(luaTable, luaFunc);
 	if (!strfuncName.empty())
 	{
 		if (!funcNameList->Find(strfuncName))
@@ -319,9 +319,9 @@ void NFLuaScriptModule::OnScriptReload()
     }
 }
 
-bool NFLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& propertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
+bool NFLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& propertyName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc)
 {
-	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	std::string luaFuncName = FindFuncName(luaTable, luaFunc);
 	if (!luaFuncName.empty())
 	{
 		if (AddLuaFuncToMap(mxLuaPropertyCallBackFuncMap, self, propertyName, luaFuncName))
@@ -334,7 +334,7 @@ bool NFLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& pro
     return false;
 }
 
-int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
 	auto funcList = mxLuaPropertyCallBackFuncMap.GetElement(propertyName);
 	if (funcList)
@@ -368,9 +368,9 @@ int NFLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& pr
 	return 0;
 }
 
-bool NFLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
+bool NFLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& recordName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc)
 {
-	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	std::string luaFuncName = FindFuncName(luaTable, luaFunc);
 	if (!luaFuncName.empty())
 	{
 		if (AddLuaFuncToMap(mxLuaRecordCallBackFuncMap, self, recordName, luaFuncName))
@@ -416,9 +416,9 @@ int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA
     return 0;
 }
 
-bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
+bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const int eventID, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc)
 {
-	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	std::string luaFuncName = FindFuncName(luaTable, luaFunc);
 	if (!luaFuncName.empty())
 	{
 		if (AddLuaFuncToMap(mxLuaEventCallBackFuncMap, self, (int)eventID, luaFuncName))
@@ -466,9 +466,9 @@ int NFLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int eventID, const
     return 0;
 }
 
-bool NFLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count)
+bool NFLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc, const float time, const int count)
 {
-	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	std::string luaFuncName = FindFuncName(luaTable, luaFunc);
 	if (!luaFuncName.empty())
 	{
 		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, luaFuncName))
@@ -480,9 +480,9 @@ bool NFLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const L
 	return false;
 }
 
-bool NFLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float time, const int count)
+bool NFLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luaTable, const LuaIntf::LuaRef& luaFunc, const float time, const int count)
 {
-	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	std::string luaFuncName = FindFuncName(luaTable, luaFunc);
 	if (!luaFuncName.empty())
 	{
 		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFuncName))
@@ -624,12 +624,12 @@ NFINT64 NFLuaScriptModule::GetNowTime()
 	return pPluginManager->GetNowTime();
 }
 
-NFGUID NFLuaScriptModule::CreateID()
+NFGUID NFLuaScriptModule::CreateId()
 {
 	return m_pKernelModule->CreateGUID();
 }
 
-NFINT64 NFLuaScriptModule::APPID()
+NFINT64 NFLuaScriptModule::APPId()
 {
 	return pPluginManager->GetAppID();
 }
@@ -772,297 +772,211 @@ bool NFLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>&
 
 }
 
-void NFLuaScriptModule::RemoveClientMsgCallBack(const int msgID)
+void NFLuaScriptModule::RemoveCallBackAsServer(const int msgID)
 {
 	m_pNetModule->RemoveReceiveCallBack(msgID);
 }
 
-void NFLuaScriptModule::AddClientMsgCallBack(const int msgID, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+void NFLuaScriptModule::AddMsgCallBackAsServer(const int msgID, const LuaIntf::LuaRef & luaTable, const LuaIntf::LuaRef & luaFunc)
 {
-	//m_pNetModule->AddEventCallBack
+	auto funcNameList = mxNetMsgCallBackFuncMapAsServer.GetElement(msgID);
+	if (!funcNameList)
+	{
+		funcNameList = new NFList<string>();
+		mxNetMsgCallBackFuncMapAsServer.AddElement(msgID, funcNameList);
+
+		m_pNetModule->AddReceiveCallBack(msgID, this, &NFLuaScriptModule::OnNetMsgCallBackAsServer);
+	}
+
+	std::string funcName = FindFuncName(luaTable, luaFunc);
+	if (!funcName.empty())
+	{
+		if (!funcNameList->Find(funcName))
+		{
+			funcNameList->Add(funcName);
+		}
+	}
 }
 
-void NFLuaScriptModule::RemoveServerMsgCallBack(const int serverType, const int msgID)
+void NFLuaScriptModule::RemoveMsgCallBackAsClient(const NF_SERVER_TYPES serverType, const int msgID)
 {
-	m_pNetClientModule->RemoveReceiveCallBack((NF_SERVER_TYPES)serverType, msgID);
+	m_pNetClientModule->RemoveReceiveCallBack(serverType, msgID);
 }
 
-void NFLuaScriptModule::AddServerMsgCallBack(const int serverType, const int msgID, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+void NFLuaScriptModule::AddMsgCallBackAsClient(const NF_SERVER_TYPES serverType, const int msgID, const LuaIntf::LuaRef & luaTable, const LuaIntf::LuaRef & luaFunc)
 {
-	//m_pNetClientModule->AddReceiveCallBack((NF_SERVER_TYPES)serverType, )
+	auto serverMap = mxNetMsgCallBackFuncMapAsClient.GetElement(serverType);
+	if (!serverMap)
+	{
+		serverMap = new NFMap<int, NFList<std::string>>();
+		mxNetMsgCallBackFuncMapAsClient.AddElement(serverType, serverMap);
+	}
+
+	auto funcNameList = serverMap->GetElement(msgID);
+	if (!funcNameList)
+	{
+		funcNameList = new NFList<string>();
+		serverMap->AddElement(msgID, funcNameList);
+
+		switch (serverType)
+		{
+			case NF_SERVER_TYPES::NF_ST_MASTER:
+				m_pNetClientModule->AddReceiveCallBack(serverType, msgID, this, &NFLuaScriptModule::OnNetMsgCallBackAsClientForMasterServer);
+				break;
+			case NF_SERVER_TYPES::NF_ST_WORLD:
+				m_pNetClientModule->AddReceiveCallBack(serverType, msgID, this, &NFLuaScriptModule::OnNetMsgCallBackAsClientForWorldServer);
+				break;
+			case NF_SERVER_TYPES::NF_ST_GAME:
+				m_pNetClientModule->AddReceiveCallBack(serverType, msgID, this, &NFLuaScriptModule::OnNetMsgCallBackAsClientForGameServer);
+				break;
+			default:
+				break;
+		}
+
+	}
+
+	std::string funcName = FindFuncName(luaTable, luaFunc);
+	if (!funcName.empty())
+	{
+		if (!funcNameList->Find(funcName))
+		{
+			funcNameList->Add(funcName);
+		}
+	}
 }
 
+/*
 void NFLuaScriptModule::RemoveHttpCallBack(const std::string & path)
 {
 }
 
-void NFLuaScriptModule::AddHttpCallBack(const std::string & path, const int httpType, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+void NFLuaScriptModule::AddHttpCallBack(const std::string & path, const int httpType, const LuaIntf::LuaRef & luaTable, const LuaIntf::LuaRef & luaFunc)
 {
 }
+*/
 
-void NFLuaScriptModule::ImportProtoFile(const std::string& strFile)
-{
-	NFLuaPBModule* p = (NFLuaPBModule*)m_pLuaPBModule;
-	p->ImportProtoFile(strFile);
-}
-
-const std::string NFLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
+void NFLuaScriptModule::ImportProtoFile(const std::string& fileName)
 {
 	NFLuaPBModule* p = (NFLuaPBModule*)m_pLuaPBModule;
-	return p->Encode(strMsgTypeName, luaTable);
+	p->ImportProtoFile(fileName);
 }
 
-LuaIntf::LuaRef NFLuaScriptModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+const std::string NFLuaScriptModule::Encode(const std::string& msgTypeName, const LuaIntf::LuaRef& luaTable)
 {
 	NFLuaPBModule* p = (NFLuaPBModule*)m_pLuaPBModule;
-	return p->Decode(strMsgTypeName, strData);
+	return p->Encode(msgTypeName, luaTable);
 }
 
-void NFLuaScriptModule::SendByServerFD(const NFSOCK nFD, const uint16_t msgID, const std::string& strData)
+LuaIntf::LuaRef NFLuaScriptModule::Decode(const std::string& msgTypeName, const std::string& data)
 {
-    m_pNetModule->SendMsgWithOutHead(msgID, strData, nFD);
+	NFLuaPBModule* p = (NFLuaPBModule*)m_pLuaPBModule;
+	return p->Decode(msgTypeName, data);
 }
 
-void NFLuaScriptModule::SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData)
+void NFLuaScriptModule::SendToServerByServerID(const int serverID, const uint16_t msgID, const std::string& data)
 {
     if (pPluginManager->GetAppID() == serverID)
     {
-        m_pLogModule->LogError("you can send message to youself");
+        m_pLogModule->LogError("you can send message to yourself");
         return;
     }
 
-    NF_SERVER_TYPES nowServerType = NF_SERVER_TYPES::NF_ST_NONE;
-    NF_SERVER_TYPES goalServerType = NF_SERVER_TYPES::NF_ST_NONE;
-
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-		for (int i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
-
-			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (pPluginManager->GetAppID() == nTempServerID)
-			{
-                nowServerType = (NF_SERVER_TYPES)(nTempServerType);
-                break;
-            }
-        }
-
-        for (int i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
-
-			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (serverID == nTempServerID)
-			{
-                goalServerType = (NF_SERVER_TYPES)(nTempServerType);
-                break;
-            }
-        }
-    }
-
-    if (goalServerType == NF_SERVER_TYPES::NF_ST_NONE || nowServerType == NF_SERVER_TYPES::NF_ST_NONE)
-    {
-        m_pLogModule->LogError("goal type: none or now type: none");
-        return;
-    }
-
-    switch (nowServerType)
-    {
-        case NF_SERVER_TYPES::NF_ST_GAME:
-        {
-            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
-            {
-                m_pNetClientModule->SendByServerID(serverID, msgID, strData);
-            }
-            else if (NF_SERVER_TYPES::NF_ST_PROXY == goalServerType)
-            {
-                //
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_WORLD:
-        {
-            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
-            {
-                //
-            }
-            else if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
-            {
-                m_pNetClientModule->SendByServerID(serverID, msgID, strData);
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_PROXY:
-        {
-            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
-            {
-                m_pNetClientModule->SendByServerID(serverID, msgID, strData);
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_MASTER:
-        {
-            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
-            {
-
-            }
-            else if (NF_SERVER_TYPES::NF_ST_LOGIN == goalServerType)
-            {
-
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_LOGIN:
-        {
-            if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
-            {
-                m_pNetClientModule->SendByServerID(serverID, msgID, strData);
-            }
-        }
-        break;
-        default:
-        break;
-    }
+	m_pNetClientModule->SendByServerID(serverID, msgID, data);
 }
 
-void NFLuaScriptModule::SendByServerType(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string & strData)
+void NFLuaScriptModule::SendToServerBySuit(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string & data, const std::string& hash)
 {
-    NF_SERVER_TYPES nowServerType = NF_SERVER_TYPES::NF_ST_NONE;
-    NF_SERVER_TYPES goalServerType = eType;
-
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-		for (int i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
-
-			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (pPluginManager->GetAppID() == nTempServerID)
-			{
-                nowServerType = (NF_SERVER_TYPES)(nTempServerType);
-                break;
-            }
-        }
-    }
-
-    if (goalServerType == NF_SERVER_TYPES::NF_ST_NONE || nowServerType == NF_SERVER_TYPES::NF_ST_NONE)
-    {
-        m_pLogModule->LogError("goal type: none or now type: none");
-        return;
-    }
-
-    if (goalServerType == nowServerType)
-    {
-        m_pLogModule->LogError("can not send the message to the same server type");
-        return;
-    }
-
-    switch (nowServerType)
-    {
-        case NF_SERVER_TYPES::NF_ST_GAME:
-        {
-            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
-            {
-                m_pNetClientModule->SendToAllServer(msgID, strData);
-            }
-            else if (NF_SERVER_TYPES::NF_ST_PROXY == goalServerType)
-            {
-                m_pNetModule->SendMsgToAllClientWithOutHead(msgID, strData);
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_WORLD:
-        {
-            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
-            {
-                m_pNetModule->SendMsgToAllClientWithOutHead(msgID, strData);
-            }
-            else if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
-            {
-                m_pNetClientModule->SendToAllServer(msgID, strData);
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_PROXY:
-        {
-            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
-            {
-                m_pNetClientModule->SendToAllServer(msgID, strData);
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_MASTER:
-        {
-            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
-            {
-                //m_pNetModule->SendMsgToAllClientWithOutHead(msgID, strData);
-            }
-            else if (NF_SERVER_TYPES::NF_ST_LOGIN == goalServerType)
-            {
-
-            }
-        }
-        break;
-        case NF_SERVER_TYPES::NF_ST_LOGIN:
-        {
-            if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
-            {
-                m_pNetClientModule->SendToAllServer(msgID, strData);
-            }
-        }
-        break;
-        default:
-        break;
-    }
+	m_pNetClientModule->SendBySuitWithOutHead(eType, hash, msgID,data );
 }
 
-void NFLuaScriptModule::SendMsgToGate(const NFGUID player, const uint16_t msgID, const std::string& strData)
+void NFLuaScriptModule::SendToAllServerByServerType(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string &data)
+{
+	m_pNetClientModule->SendToAllServer(eType, msgID,data );
+}
+
+void NFLuaScriptModule::SendMsgToClientByFD(const NFSOCK fd, const uint16_t msgID, const std::string &data)
+{
+	//for all servers
+	m_pNetModule->SendMsgWithOutHead(msgID, data, fd);
+}
+
+void NFLuaScriptModule::SendMsgToPlayer(const NFGUID player, const uint16_t msgID, const std::string& data)
 {
     //the app must be the game server
+	if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_GAME)
+	{
+
+	}
+	else if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_WORLD)
+	{
+
+	}
+	else if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_PROXY)
+	{
+	}
+	else
+	{
+		m_pLogModule->LogError("you are not: NF_ST_GAME || NF_ST_WORLD");
+	}
 }
 
-void NFLuaScriptModule::SendGroupMsgToGate(const uint16_t msgID, const std::string& strData)
+void NFLuaScriptModule::SendToGroupPlayer(const uint16_t msgID, const std::string& data)
 {
     //the app must be the game server
+	if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_GAME)
+	{
 
+	}
+	else
+	{
+		m_pLogModule->LogError("you are not an game server");
+	}
 }
 
-void NFLuaScriptModule::SendToAllPlayer(const uint16_t msgID, const std::string& strData)
+void NFLuaScriptModule::SendToAllPlayer(const uint16_t msgID, const std::string& data)
 {
-	m_pNetModule->SendMsgToAllClientWithOutHead(msgID, strData);
+	//if game server
+	//if world server
+	//if proxy server
+	if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_GAME)
+	{
+	}
+	else if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_WORLD)
+	{
+	}
+	else if (pPluginManager->GetAppType() == NF_SERVER_TYPES::NF_ST_PROXY)
+	{
+		m_pNetModule->SendMsgToAllClientWithOutHead(msgID, data);
+	}
+	else
+	{
+		m_pLogModule->LogError("you are not an game server or world server");
+	}
 }
 
-void NFLuaScriptModule::LogInfo(const std::string& strData)
+void NFLuaScriptModule::LogInfo(const std::string& logData)
 {
-	m_pLogModule->LogInfo(strData);
+	m_pLogModule->LogInfo(logData);
 }
 
-void NFLuaScriptModule::LogError(const std::string& strData)
+void NFLuaScriptModule::LogError(const std::string& logData)
 {
-	m_pLogModule->LogError(strData);
+	m_pLogModule->LogError(logData);
 }
 
-void NFLuaScriptModule::LogWarning(const std::string& strData)
+void NFLuaScriptModule::LogWarning(const std::string& logData)
 {
-	m_pLogModule->LogWarning(strData);
+	m_pLogModule->LogWarning(logData);
 }
 
-void NFLuaScriptModule::LogDebug(const std::string& strData)
+void NFLuaScriptModule::LogDebug(const std::string& logData)
 {
-	m_pLogModule->LogDebug(strData);
+	m_pLogModule->LogDebug(logData);
 }
 
-void NFLuaScriptModule::SetVersionCode(const std::string& strData)
+void NFLuaScriptModule::SetVersionCode(const std::string& logData)
 {
-    strVersionCode = strData;
+    strVersionCode = logData;
 }
 
 const std::string&  NFLuaScriptModule::GetVersionCode()
@@ -1181,8 +1095,8 @@ bool NFLuaScriptModule::Register()
 		.addFunction("rem_row", &NFLuaScriptModule::RemRow)
 
 		.addFunction("time", &NFLuaScriptModule::GetNowTime)
-		.addFunction("new_id", &NFLuaScriptModule::CreateID)
-		.addFunction("app_id", &NFLuaScriptModule::APPID)
+		.addFunction("new_id", &NFLuaScriptModule::CreateId)
+		.addFunction("app_id", &NFLuaScriptModule::APPId)
 		.addFunction("app_type", &NFLuaScriptModule::APPType)
 
 		.addFunction("exist_ele", &NFLuaScriptModule::ExistElementObject)
@@ -1193,21 +1107,23 @@ bool NFLuaScriptModule::Register()
 		.addFunction("get_ele_vector2", &NFLuaScriptModule::GetElePropertyVector2)
 		.addFunction("get_ele_vector3", &NFLuaScriptModule::GetElePropertyVector3)
 
-		.addFunction("remove_cli_msg_cb", &NFLuaScriptModule::RemoveClientMsgCallBack)//as server
-		.addFunction("add_cli_msg_cb", &NFLuaScriptModule::AddClientMsgCallBack)//as server
-		.addFunction("remove_svr_msg_cb", &NFLuaScriptModule::RemoveServerMsgCallBack)//as client
-		.addFunction("add_svr_msg_cb", &NFLuaScriptModule::AddServerMsgCallBack)//as client
+		.addFunction("remove_msg_cb_as_server", &NFLuaScriptModule::RemoveCallBackAsServer)//as server
+		.addFunction("add_msg_cb_as_server", &NFLuaScriptModule::AddMsgCallBackAsServer)//as server
+		.addFunction("remove_msg_cb_as_client", &NFLuaScriptModule::RemoveMsgCallBackAsClient)//as client
+		.addFunction("add_msg_cb_as_client", &NFLuaScriptModule::AddMsgCallBackAsClient)//as client
 
-		.addFunction("remove_http_cb", &NFLuaScriptModule::RemoveHttpCallBack)
-		.addFunction("add_http_cb", &NFLuaScriptModule::AddHttpCallBack)
+		//.addFunction("remove_http_cb", &NFLuaScriptModule::RemoveHttpCallBack)
+		//.addFunction("add_http_cb", &NFLuaScriptModule::AddHttpCallBack)
 
-		.addFunction("send_by_fd", &NFLuaScriptModule::SendByServerFD)//as client
-		.addFunction("send_by_id", &NFLuaScriptModule::SendByServerID)//as clent
-		.addFunction("send_by_type", &NFLuaScriptModule::SendByServerType)//as client
+		.addFunction("send_to_server_by_id", &NFLuaScriptModule::SendToServerByServerID)//as client
+		.addFunction("send_to_all_server_by_type", &NFLuaScriptModule::SendToAllServerByServerType)//as client
+		.addFunction("send_to_server_by_suit", &NFLuaScriptModule::SendToServerBySuit)//as client
 
-		.addFunction("send_to_player", &NFLuaScriptModule::SendMsgToGate)//as game
-		.addFunction("send_to_group_player", &NFLuaScriptModule::SendGroupMsgToGate)//as game
-		.addFunction("send_to_all_player", &NFLuaScriptModule::SendToAllPlayer)//as game
+		.addFunction("send_to_client_by_fd", &NFLuaScriptModule::SendMsgToClientByFD)//as server
+
+		.addFunction("send_to_player", &NFLuaScriptModule::SendMsgToPlayer)//as game server
+		.addFunction("send_to_group_player", &NFLuaScriptModule::SendToGroupPlayer)//as game server
+		.addFunction("send_to_all_player", &NFLuaScriptModule::SendToAllPlayer)//as game server
 
 		.addFunction("log_info", &NFLuaScriptModule::LogInfo)
 		.addFunction("log_error", &NFLuaScriptModule::LogError)
@@ -1226,15 +1142,15 @@ bool NFLuaScriptModule::Register()
     return true;
 }
 
-std::string NFLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+std::string NFLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luaTable, const LuaIntf::LuaRef & luaFunc)
 {
-	if (luatbl.isTable() && luaFunc.isFunction())
+	if (luaTable.isTable() && luaFunc.isFunction())
 	{
 		std::string strLuaTableName = "";
 		std::map<std::string, LuaIntf::LuaRef>::iterator it = mxTableName.begin();
 		for (it; it != mxTableName.end(); ++it)
 		{
-			if (it->second == luatbl)
+			if (it->second == luaTable)
 			{
 				strLuaTableName = it->first;
 			}
@@ -1242,7 +1158,7 @@ std::string NFLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luatbl, cons
 		
 		if (!strLuaTableName.empty())
 		{
-			for (auto itr = luatbl.begin(); itr != luatbl.end(); ++itr)
+			for (auto itr = luaTable.begin(); itr != luaTable.end(); ++itr)
 			{
 				const LuaIntf::LuaRef& key = itr.key();
 
@@ -1259,4 +1175,131 @@ std::string NFLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luatbl, cons
 	}
 
 	return NULL_STR;
+}
+
+void NFLuaScriptModule::OnNetMsgCallBackAsServer(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	auto msgCallBack = mxNetMsgCallBackFuncMapAsServer.GetElement(msgID);
+	if (msgCallBack)
+	{
+		std::string msgData(msg, len);
+		std::string funcName;
+		auto Ret = msgCallBack->First(funcName);
+		while (Ret)
+		{
+			try
+			{
+				LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+				func.call<LuaIntf::LuaRef>("", sockIndex, msgID, msgData);
+			}
+			catch (LuaIntf::LuaException& e)
+			{
+				cout << e.what() << endl;
+			}
+			catch (...)
+			{
+			}
+
+			Ret = msgCallBack->Next(funcName);
+		}
+	}
+}
+
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForMasterServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+{
+	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_MASTER);
+	if (serverData)
+	{
+		auto msgCallBack = serverData->GetElement(msgID);
+		if (msgCallBack)
+		{
+			std::string msgData(msg, len);
+
+			std::string funcName;
+			auto Ret = msgCallBack->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call<LuaIntf::LuaRef>("", sockIndex, msgID, msgData);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = msgCallBack->Next(funcName);
+			}
+		}
+	}
+}
+
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForWorldServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+{
+	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_WORLD);
+	if (serverData)
+	{
+		auto msgCallBack = serverData->GetElement(msgID);
+		if (msgCallBack)
+		{
+			std::string msgData(msg, len);
+
+			std::string funcName;
+			auto Ret = msgCallBack->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call<LuaIntf::LuaRef>("", sockIndex, msgID, msgData);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = msgCallBack->Next(funcName);
+			}
+		}
+	}
+}
+
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForGameServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+{
+	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_GAME);
+	if (serverData)
+	{
+		auto msgCallBack = serverData->GetElement(msgID);
+		if (msgCallBack)
+		{
+			std::string msgData(msg, len);
+
+			std::string funcName;
+			auto Ret = msgCallBack->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+					func.call<LuaIntf::LuaRef>("", sockIndex, msgID, msgData);
+				}
+				catch (LuaIntf::LuaException& e)
+				{
+					cout << e.what() << endl;
+				}
+				catch (...)
+				{
+				}
+
+				Ret = msgCallBack->Next(funcName);
+			}
+		}
+	}
 }

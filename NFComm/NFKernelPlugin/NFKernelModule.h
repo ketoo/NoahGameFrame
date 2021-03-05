@@ -80,12 +80,12 @@ public:
     //////////////////////////////////////////////////////////////////////////
     virtual bool FindProperty(const NFGUID& self, const std::string& propertyName);
 
-    virtual bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 nValue);
-    virtual bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double dValue);
-    virtual bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& value);
-    virtual bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& objectValue);
-	virtual bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& value);
-	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& value);
+    virtual bool SetPropertyInt(const NFGUID& self, const std::string& propertyName, const NFINT64 nValue, const NFINT64 reason = 0);
+    virtual bool SetPropertyFloat(const NFGUID& self, const std::string& propertyName, const double dValue, const NFINT64 reason = 0);
+    virtual bool SetPropertyString(const NFGUID& self, const std::string& propertyName, const std::string& value, const NFINT64 reason = 0);
+    virtual bool SetPropertyObject(const NFGUID& self, const std::string& propertyName, const NFGUID& objectValue, const NFINT64 reason = 0);
+	virtual bool SetPropertyVector2(const NFGUID& self, const std::string& propertyName, const NFVector2& value, const NFINT64 reason = 0);
+	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& propertyName, const NFVector3& value, const NFINT64 reason = 0);
 
     virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
 	virtual int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
@@ -178,7 +178,7 @@ protected:
     void InitRandom();
 
     int OnClassCommonEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
-    int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+    int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
     void ProcessMemFree();

@@ -28,7 +28,6 @@
 
 #include <set>
 #include <algorithm>
-#include "NFINet.h"
 #include <thread>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
@@ -36,6 +35,8 @@
 #include <event2/util.h>
 #include <event2/thread.h>
 #include <event2/event_compat.h>
+#include "NFINet.h"
+#include "Dependencies/concurrentqueue/concurrentqueue.h"
 
 #pragma pack(push, 1)
 
@@ -96,6 +97,7 @@ public:
 
     virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
+	bool SendMsgToAllClient(const char* msg, const size_t len) override;
 
     virtual bool SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len) override ;
 
@@ -110,8 +112,6 @@ public:
 private:
 	bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
 
-    bool SendMsgToAllClient(const char* msg, const size_t len);
-    
     bool SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
 
 
@@ -167,6 +167,19 @@ private:
     NET_RECEIVE_FUNCTOR mRecvCB;
     NET_EVENT_FUNCTOR mEventCB;
 
+    //1: async thread to process net event & msg and main thread to process logic business(decode binary data to message object)
+    //2: pass a functor when startup net module to decode binary data to message object with async thread
+    struct NetEvent
+	{
+		NF_NET_EVENT event;
+		int fd = 0;
+		//std::string* data;
+		char* data = nullptr;
+		int len = 0;
+
+		void* dataObject = nullptr;
+	};
+	moodycamel::ConcurrentQueue<NetEvent> msgQueue;
     //////////////////////////////////////////////////////////////////////////
 };
 

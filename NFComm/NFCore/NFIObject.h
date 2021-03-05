@@ -69,14 +69,12 @@ public:
 	{
 	}
 
-    virtual bool Execute() = 0;
-
     virtual NFGUID Self() = 0;
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const std::string& propertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+    bool AddPropertyCallBack(const std::string& propertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFINT64))
     {
-        PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
         PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
         return AddPropertyCallBack(propertyName, functorPtr);
     }
@@ -97,12 +95,12 @@ public:
     virtual bool FindProperty(const std::string& propertyName) = 0;
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const std::string& propertyName, const NFDATA_TYPE varType) = 0;
 
-    virtual bool SetPropertyInt(const std::string& propertyName, const NFINT64 nValue) = 0;
-    virtual bool SetPropertyFloat(const std::string& propertyName, const double dwValue) = 0;
-    virtual bool SetPropertyString(const std::string& propertyName, const std::string& value) = 0;
-    virtual bool SetPropertyObject(const std::string& propertyName, const NFGUID& obj) = 0;
-	virtual bool SetPropertyVector2(const std::string& propertyName, const NFVector2& value) = 0;
-	virtual bool SetPropertyVector3(const std::string& propertyName, const NFVector3& value) = 0;
+    virtual bool SetPropertyInt(const std::string& propertyName, const NFINT64 nValue, const NFINT64 reason = 0) = 0;
+    virtual bool SetPropertyFloat(const std::string& propertyName, const double dwValue, const NFINT64 reason = 0) = 0;
+    virtual bool SetPropertyString(const std::string& propertyName, const std::string& value, const NFINT64 reason = 0) = 0;
+    virtual bool SetPropertyObject(const std::string& propertyName, const NFGUID& obj, const NFINT64 reason = 0) = 0;
+	virtual bool SetPropertyVector2(const std::string& propertyName, const NFVector2& value, const NFINT64 reason = 0) = 0;
+	virtual bool SetPropertyVector3(const std::string& propertyName, const NFVector3& value, const NFINT64 reason = 0) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& propertyName) = 0;
 	virtual int GetPropertyInt32(const std::string& propertyName) = 0;

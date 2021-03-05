@@ -115,8 +115,6 @@ protected:
 	void ExecuteTaskResult();
 
 private:
-	int mCPUCount = 1;
-
 	NFQueue<NFThreadTask> mTaskResult;
 	std::vector<NF_SHARE_PTR<NFThreadCell>> mThreadPool;
 };

@@ -28,6 +28,14 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
+bool NFDBNet_ServerModule::Awake()
+{
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_DB);
+
+	return true;
+}
+
+
 bool NFDBNet_ServerModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
@@ -258,4 +266,3 @@ void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK sockIndex, const i
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->SavePlayerData(roleID, xMsg);
 }
-

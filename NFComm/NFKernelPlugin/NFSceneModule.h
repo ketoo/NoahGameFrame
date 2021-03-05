@@ -403,12 +403,12 @@ protected:
 
 protected:
 	//for scene && group
-	int OnScenePropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+	int OnScenePropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
 	int OnSceneRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 
 	//for players
-	int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+	int OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 	int OnClassCommonEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 
@@ -444,7 +444,7 @@ protected:
 	int OnPropertyEnter(const NFDataList& argVar, const NFGUID& self);
 	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
 
-	int OnPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
+	int OnPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar, const NFINT64 reason);
 	int OnRecordEvent(const NFGUID& self, const std::string& recordName, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 	
 	////////////////interface for broadcast event///////////////////////////////////

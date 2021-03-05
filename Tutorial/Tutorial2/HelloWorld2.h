@@ -53,7 +53,7 @@ public:
     virtual bool Shut();
 
 protected:
-    int OnPropertyCallBackEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList);
+    int OnPropertyCallBackEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList, const int64_t reason);
 
 
 

@@ -36,7 +36,7 @@ bool NFHelloWorld2::Init()
     return true;
 }
 
-int NFHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const int64_t reason)
 {
     
     std::cout << "OnPropertyCallBackEvent Property: " << propertyName << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;

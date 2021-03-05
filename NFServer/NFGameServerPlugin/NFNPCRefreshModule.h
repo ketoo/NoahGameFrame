@@ -62,7 +62,7 @@ public:
 protected:
     int OnObjectClassEvent( const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var );
 
-    int OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+    int OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
 
 	int OnNPCDeadDestroyHeart(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 	int OnBuildingDeadDestroyHeart( const NFGUID& self, const std::string& heartBeat, const float time, const int count);

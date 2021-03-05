@@ -29,6 +29,8 @@
 
 bool NFProxyServerNet_ServerModule::Init()
 {
+	this->pPluginManager->SetAppType(NF_SERVER_TYPES::NF_ST_PROXY);
+
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();

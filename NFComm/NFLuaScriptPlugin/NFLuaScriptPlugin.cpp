@@ -25,9 +25,7 @@
 
 
 #include "NFLuaScriptModule.h"
-#include "NFLuaWebSocketModule.h"
 #include "NFLuaPBModule.h"
-#include "NFLuaNetModule.h"
 #include "NFLuaScriptPlugin.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -58,17 +56,13 @@ const std::string NFLuaScriptPlugin::GetPluginName()
 
 void NFLuaScriptPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFILuaNetModule, NFLuaNetModule)
 	REGISTER_MODULE(pPluginManager, NFILuaScriptModule, NFLuaScriptModule)
 	REGISTER_MODULE(pPluginManager, NFILuaPBModule, NFLuaPBModule)
-	REGISTER_MODULE(pPluginManager, NFILuaWebSocketModule, NFLuaWebSocketModule)
 
 }
 
 void NFLuaScriptPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFILuaWebSocketModule, NFLuaWebSocketModule)
 	UNREGISTER_MODULE(pPluginManager, NFILuaPBModule, NFLuaPBModule)
 	UNREGISTER_MODULE(pPluginManager, NFILuaScriptModule, NFLuaScriptModule)
-	UNREGISTER_MODULE(pPluginManager, NFILuaNetModule, NFLuaNetModule)
 }

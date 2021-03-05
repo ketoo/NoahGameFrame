@@ -9,7 +9,7 @@ fi
 unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
-    echo "[ubuntu] sudo apt-get -y install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
+    echo "[ubuntu] sudo apt-get -y install curl zip unzip tar or [centos] yum -y install unzip or [mac] brew install unzip"
     exit 1
 fi
 
@@ -31,10 +31,10 @@ fi
 sysOS=`uname -s`
 
 if [ $sysOS == "Darwin" ];then
-	gcc@7 --version
+	gcc --version
 	if [ $? -ne 0 ]; then
-		echo "[ERROR] Please install gcc@7 first."
-        echo "[mac] brew install gcc@7"
+		echo "[ERROR] Please install gcc first."
+        echo "[mac] brew install gcc"
         #exit 1
 	fi
 elif [ $sysOS == "Linux" ];then
@@ -43,12 +43,6 @@ elif [ $sysOS == "Linux" ];then
 		if [ $? -ne 0 ]; then
 			echo "[ERROR] Please install g++ first."
 			echo "[Ubuntu] sudo apt-get -y install g++"
-			exit 1
-		fi
-		g++-7 --version
-		if [ $? -ne 0 ]; then
-			echo "[ERROR] Please install g++-7 first."
-			echo "[Ubuntu] sudo apt-get -y install g++-7"
 			exit 1
 		fi
 	elif [ $DISTRO == "CentOS" ]; then

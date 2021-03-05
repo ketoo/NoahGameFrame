@@ -86,6 +86,8 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& className) = 0;
 
+	virtual bool AddClass(const std::string& className, const std::string& strParentName) = 0;
+
 };
 
 #endif

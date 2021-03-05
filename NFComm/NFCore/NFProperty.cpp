@@ -102,7 +102,7 @@ void NFProperty::SetValue(const NFData& xData)
 		NFData newValue;
 		newValue = *mxData;
 
-		OnEventHandler(oldValue, newValue);
+		OnEventHandler(oldValue, newValue, 0);
 	}
 
 }
@@ -273,7 +273,7 @@ void NFProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 	mtPropertyCallback.push_back(cb);
 }
 
-int NFProperty::OnEventHandler(const NFData& oldVar, const NFData& newVar)
+int NFProperty::OnEventHandler(const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
 	if (mtPropertyCallback.size() <= 0)
 	{
@@ -287,13 +287,13 @@ int NFProperty::OnEventHandler(const NFData& oldVar, const NFData& newVar)
 		
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
+		pFunc->operator()(mSelf, msPropertyName, oldVar, newVar, reason);
 	}
 
 	return 0;
 }
 
-bool NFProperty::SetInt(const NFINT64 value)
+bool NFProperty::SetInt(const NFINT64 value, const NFINT64 reason)
 {
 	if (eType != TDATA_INT)
 	{
@@ -328,13 +328,13 @@ bool NFProperty::SetInt(const NFINT64 value)
 
 		mxData->SetInt(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;
 }
 
-bool NFProperty::SetFloat(const double value)
+bool NFProperty::SetFloat(const double value, const NFINT64 reason)
 {
 	if (eType != TDATA_FLOAT)
 	{
@@ -369,13 +369,13 @@ bool NFProperty::SetFloat(const double value)
 
 		mxData->SetFloat(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;
 }
 
-bool NFProperty::SetString(const std::string& value)
+bool NFProperty::SetString(const std::string& value, const NFINT64 reason)
 {
 	if (eType != TDATA_STRING)
 	{
@@ -410,13 +410,13 @@ bool NFProperty::SetString(const std::string& value)
 
 		mxData->SetString(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;
 }
 
-bool NFProperty::SetObject(const NFGUID& value)
+bool NFProperty::SetObject(const NFGUID& value, const NFINT64 reason)
 {
 	if (eType != TDATA_OBJECT)
 	{
@@ -451,13 +451,13 @@ bool NFProperty::SetObject(const NFGUID& value)
 
 		mxData->SetObject(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;
 }
 
-bool NFProperty::SetVector2(const NFVector2& value)
+bool NFProperty::SetVector2(const NFVector2& value, const NFINT64 reason)
 {
 	if (eType != TDATA_VECTOR2)
 	{
@@ -492,13 +492,13 @@ bool NFProperty::SetVector2(const NFVector2& value)
 
 		mxData->SetVector2(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;
 }
 
-bool NFProperty::SetVector3(const NFVector3& value)
+bool NFProperty::SetVector3(const NFVector3& value, const NFINT64 reason)
 {
 	if (eType != TDATA_VECTOR3)
 	{
@@ -533,7 +533,7 @@ bool NFProperty::SetVector3(const NFVector3& value)
 
 		mxData->SetVector3(value);
 
-		OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData, reason);
 	}
 
 	return true;

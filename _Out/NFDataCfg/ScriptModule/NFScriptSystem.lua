@@ -1,4 +1,4 @@
-package.path = '../NFDataCfg/ScriptModule/?.lua;../NFDataCfg/ScriptModule/game/?.lua;../NFDataCfg/ScriptModule/world/?.lua;../NFDataCfg/ScriptModule/proxy/?.lua;../NFDataCfg/ScriptModule/master/?.lua;../NFDataCfg/ScriptModule/login/?.lua;'
+package.path = '../NFDataCfg/ScriptModule/?.lua;../NFDataCfg/ScriptModule/json/?.lua;../NFDataCfg/ScriptModule/cfg/?.lua;../NFDataCfg/ScriptModule/game/scenario/?.lua;../NFDataCfg/ScriptModule/game/?.lua;../NFDataCfg/ScriptModule/world/?.lua;../NFDataCfg/ScriptModule/proxy/?.lua;../NFDataCfg/ScriptModule/master/?.lua;../NFDataCfg/ScriptModule/login/?.lua;'
 
 require("NFScriptEnum");
 
@@ -32,6 +32,7 @@ function init_script_system(xLuaScriptModule)
 end
 
 function load_script_file(fileList, isReload)
+
 	for i=1, #(fileList) do
 		if package.loaded[fileList[i].tblName] then
 			package.loaded[fileList[i].tblName] = nil
@@ -72,11 +73,16 @@ function register_module(tbl, name, isReload)
 	script_module:log_info("try to register module " .. name);
 	script_module:register_module(name, tbl);
 	if ScriptList then
+		local isFind = false
 		for i=1, #(ScriptList) do
 			if ScriptList[i].tblName == name then
 				ScriptList[i].tbl = tbl;
+				isFind = true
 				script_module:log_info("register module " .. name .. " succeed");
 			end
+		end
+		if not isFind then
+			table.insert(ScriptList,{tblName = name, tbl = tbl})
 		end
 		if true == isReload then
 			for i=1, #(ScriptList) do

@@ -47,12 +47,12 @@ public:
     virtual void SetValue(const NFData& TData);
     virtual void SetValue(const NFIProperty* property);
 
-    virtual bool SetInt(const NFINT64 value);
-    virtual bool SetFloat(const double value);
-    virtual bool SetString(const std::string& value);
-    virtual bool SetObject(const NFGUID& value);
-	virtual bool SetVector2(const NFVector2& value);
-	virtual bool SetVector3(const NFVector3& value);
+    virtual bool SetInt(const NFINT64 value, const NFINT64 reason = 0);
+    virtual bool SetFloat(const double value, const NFINT64 reason = 0);
+    virtual bool SetString(const std::string& value, const NFINT64 reason = 0);
+    virtual bool SetObject(const NFGUID& value, const NFINT64 reason = 0);
+	virtual bool SetVector2(const NFVector2& value, const NFINT64 reason = 0);
+	virtual bool SetVector3(const NFVector3& value, const NFINT64 reason = 0);
 
     virtual const NFDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
@@ -95,7 +95,7 @@ public:
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
 private:
-    int OnEventHandler(const NFData& oldVar, const NFData& newVar);
+    int OnEventHandler(const NFData& oldVar, const NFData& newVar, const NFINT64 reason);
 
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;

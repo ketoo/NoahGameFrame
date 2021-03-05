@@ -24,36 +24,42 @@ message PropertyInt//The base protocol can not be transfer directly
 { 
     bytes     property_name = 1;
     int64      data = 2;
+		int64      reason = 3;
 }
 
 message PropertyFloat//The base protocol can not be transfer directly
 { 
     bytes     property_name = 1;
     float      data = 2;
+	int64      reason = 3;
 }
 
 message PropertyString//The base protocol can not be transfer directly
 { 
     bytes     property_name = 1;
     bytes     data = 2;
+    int64      reason = 3;
 }
 
 message PropertyObject//The base protocol can not be transfer directly
 { 
-    bytes     property_name = 1;
-    Ident      data = 2;
+	bytes     property_name = 1;
+	Ident      data = 2;
+	int64      reason = 3;
 }
 
 message PropertyVector2//The base protocol can not be transfer directly
 { 
-    bytes     property_name = 1;
-    Vector2      data = 2;
+	bytes     property_name = 1;
+	Vector2      data = 2;
+	int64      reason = 3;
 }
 
 message PropertyVector3//The base protocol can not be transfer directly
 { 
-    bytes     property_name = 1;
-    Vector3      data = 2;
+	bytes     property_name = 1;
+	Vector3      data = 2;
+	int64      reason = 3;
 }
 
 ///////////////////////////////////////////////

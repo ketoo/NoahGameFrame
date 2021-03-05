@@ -83,7 +83,7 @@ int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& pr
     return 0;
 }
 
-int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
     const int job = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     const int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
@@ -110,7 +110,7 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
     return 0;
 }
 
-int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
 {
 	//for appearance
 	return 0;
@@ -180,12 +180,12 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
             {
                 //first time online
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
-				OnObjectLevelEvent(self, NFrame::Player::Level(), 1, 1);
+				OnObjectLevelEvent(self, NFrame::Player::Level(), 1, 1, 0);
             }
             else
             {
                 int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
-                OnObjectLevelEvent(self, NFrame::Player::Level(), level, level);
+                OnObjectLevelEvent(self, NFrame::Player::Level(), level, level, 0);
             }
 		}
         else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT == classEvent)
@@ -195,10 +195,6 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
         {
 			RefreshAllProperty(self);
 			FullHPMP(self);
-
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
-			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
 
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
