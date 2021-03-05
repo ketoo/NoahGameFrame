@@ -82,7 +82,7 @@ public:
 	virtual NF_SHARE_PTR<NFScheduleElement> GetSchedule(const NFGUID self, const std::string& scheduleName) = 0;
 
 	template<typename BaseType>
-	bool AddSchedule(const NFGUID self, const std::string& scheduleName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fIntervalTime, const int count)
+	bool AddSchedule(const NFGUID self, const std::string& scheduleName, BaseType* pBase, int (BaseType::*handler)(const NFGUID& self, const std::string& scheduleName, const float time, const int count), const float fIntervalTime, const int count)
 	{
 		OBJECT_SCHEDULE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		OBJECT_SCHEDULE_FUNCTOR_PTR functorPtr(NF_NEW OBJECT_SCHEDULE_FUNCTOR(functor));

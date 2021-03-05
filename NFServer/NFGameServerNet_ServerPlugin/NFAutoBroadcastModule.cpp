@@ -494,7 +494,7 @@ int NFAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::strin
 	return 0;
 }
 
-int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string& recordName, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar)
+int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string& recordName, const RECORD_EVENT_DATA & eventData, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar)
 {
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
@@ -505,7 +505,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 		}
 	}
 
-	switch (xEventData.nOpType)
+	switch (eventData.nOpType)
 	{
 	case RECORD_EVENT_DATA::Add:
 	{
@@ -516,14 +516,14 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 		xAddRecordRow.set_record_name(recordName);
 
 		NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
-		pAddRowData->set_row(xEventData.row);
+		pAddRowData->set_row(eventData.row);
 
 
 		NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, recordName);
 		if (xRecord)
 		{
 			NFDataList rowDataList;
-			if (xRecord->QueryRow(xEventData.row, rowDataList))
+			if (xRecord->QueryRow(eventData.row, rowDataList))
 			{
 				for (int i = 0; i < rowDataList.GetCount(); i++)
 				{
@@ -536,7 +536,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 						NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 						pAddData->set_data(nValue);
 					}
 					break;
@@ -546,7 +546,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 						NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 						pAddData->set_data(fValue);
 					}
 					break;
@@ -555,7 +555,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 						const std::string& str = rowDataList.String(i);
 						NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 						pAddData->set_data(str);
 					}
 					break;
@@ -564,7 +564,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 						NFGUID identValue = rowDataList.Object(i);
 						NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 
 						*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
 					}
@@ -574,7 +574,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 						NFVector2 vPos = rowDataList.Vector2(i);
 						NFMsg::RecordVector2* pAddData = pAddRowData->add_record_vector2_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
 					}
 					break;
@@ -583,7 +583,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 						NFVector3 vPos = rowDataList.Vector3(i);
 						NFMsg::RecordVector3* pAddData = pAddRowData->add_record_vector3_list();
 						pAddData->set_col(i);
-						pAddData->set_row(xEventData.row);
+						pAddData->set_row(eventData.row);
 						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
 					}
 					break;
@@ -611,7 +611,7 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 		*pIdent = NFINetModule::NFToPB(self);
 
 		xReoveRecordRow.set_record_name(recordName);
-		xReoveRecordRow.add_remove_row(xEventData.row);
+		xReoveRecordRow.add_remove_row(eventData.row);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -629,8 +629,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 		xSwapRecord.set_origin_record_name(recordName);
 		xSwapRecord.set_target_record_name(recordName);
-		xSwapRecord.set_row_origin(xEventData.row);
-		xSwapRecord.set_row_target(xEventData.col);
+		xSwapRecord.set_row_origin(eventData.row);
+		xSwapRecord.set_row_target(eventData.col);
 
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
@@ -651,8 +651,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			int64_t nData = newVar.GetInt();
 			recordProperty->set_data(nData);
 
@@ -672,8 +672,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			recordProperty->set_data(newVar.GetFloat());
 
 			for (int i = 0; i < argVar.GetCount(); i++)
@@ -691,8 +691,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			recordProperty->set_data(newVar.GetString());
 
 			for (int i = 0; i < argVar.GetCount(); i++)
@@ -710,8 +710,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
 			for (int i = 0; i < argVar.GetCount(); i++)
@@ -729,8 +729,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordVector2* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
 
 			for (int i = 0; i < argVar.GetCount(); i++)
@@ -748,8 +748,8 @@ int NFAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const std::string&
 
 			xRecordChanged.set_record_name(recordName);
 			NFMsg::RecordVector3* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(xEventData.row);
-			recordProperty->set_col(xEventData.col);
+			recordProperty->set_row(eventData.row);
+			recordProperty->set_col(eventData.col);
 			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
 
 			for (int i = 0; i < argVar.GetCount(); i++)

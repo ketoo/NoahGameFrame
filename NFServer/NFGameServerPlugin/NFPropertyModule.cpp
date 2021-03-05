@@ -116,12 +116,12 @@ int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::strin
 	return 0;
 }
 
-int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar)
 {
-	const std::string& recordName = xEventData.recordName;
-    const int nOpType = xEventData.nOpType;
-    const int row = xEventData.row;
-    const int col = xEventData.col;
+	const std::string& recordName = eventData.recordName;
+    const int nOpType = eventData.nOpType;
+    const int row = eventData.row;
+    const int col = eventData.col;
 
     int nAllValue = 0;
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());

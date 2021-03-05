@@ -75,7 +75,7 @@ private:
 	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
 
 	int OnPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar, const NFINT64 reason);
-	int OnRecordEvent(const NFGUID& self, const std::string& recordName, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
+	int OnRecordEvent(const NFGUID& self, const std::string& recordName, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 
 
 private:

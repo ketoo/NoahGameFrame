@@ -1208,17 +1208,17 @@ int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::st
 	return 0;
 }
 
-int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & eventData, const NFData & oldVar, const NFData & newVar)
 {
 	auto itList = mtGroupRecordCallCommBackList.begin();
 	for (; itList != mtGroupRecordCallCommBackList.end(); itList++)
 	{
 		RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
 		RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, xEventData, oldVar, newVar);
+		pFunc->operator()(self, eventData, oldVar, newVar);
 	}
 
-	auto it = mtGroupRecordCallBackList.find(xEventData.recordName);
+	auto it = mtGroupRecordCallBackList.find(eventData.recordName);
 	if (it != mtGroupRecordCallBackList.end())
 	{
 		auto itList = it->second.begin();
@@ -1226,7 +1226,7 @@ int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EV
 		{
 			RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
 			RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-			pFunc->operator()(self, xEventData, oldVar, newVar);
+			pFunc->operator()(self, eventData, oldVar, newVar);
 		}
 	}
 
@@ -1263,9 +1263,9 @@ int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string 
 	return 0;
 }
 
-int NFSceneModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & eventData, const NFData & oldVar, const NFData & newVar)
 {
-	const std::string& recordName = xEventData.recordName;
+	const std::string& recordName = eventData.recordName;
 
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
@@ -1277,7 +1277,7 @@ int NFSceneModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_D
 	NFDataList valueBroadCaseList;
 	GetBroadCastObject(self, recordName, true, valueBroadCaseList);
 
-	OnRecordEvent(self, recordName, xEventData, oldVar, newVar, valueBroadCaseList);
+	OnRecordEvent(self, recordName, eventData, oldVar, newVar, valueBroadCaseList);
 
 	return 0;
 }
@@ -1724,14 +1724,14 @@ int NFSceneModule::OnPropertyEvent(const NFGUID & self, const std::string & prop
 	return 0;
 }
 
-int NFSceneModule::OnRecordEvent(const NFGUID & self, const std::string& propertyName, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
+int NFSceneModule::OnRecordEvent(const NFGUID & self, const std::string& propertyName, const RECORD_EVENT_DATA & eventData, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
 {
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mvRecordSingleCallback.begin();
 	for (; it != mvRecordSingleCallback.end(); it++)
 	{
 		RECORD_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		RECORD_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, propertyName, xEventData, oldVar, newVar, argVar);
+		pFunc->operator()(self, propertyName, eventData, oldVar, newVar, argVar);
 	}
 
 	return 0;

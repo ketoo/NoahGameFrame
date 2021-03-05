@@ -155,7 +155,7 @@ private:
 
     NFINT64 mnInitTime = 0;
 	NFINT64 mnNowTime = 0;
-	NFINT64 mnCPUCount = 1;
+	NFINT64 mnCPUCount = 8;
 
     std::string configPath;
     std::string configName;
@@ -170,7 +170,7 @@ private:
     typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
     typedef std::map<std::string, NFIModule*> ModuleInstanceMap;
     typedef std::map<std::string, NFIModule*> TestModuleInstanceMap;
-    typedef std::vector<std::pair<std::string, NFIModule*>> NeedExectuteModuleVec;
+    typedef std::vector<std::pair<std::string, NFIModule*>> NeedExecuteModuleVec;
 
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
@@ -183,7 +183,7 @@ private:
     PluginInstanceMap mPluginInstanceMap;
     ModuleInstanceMap mModuleInstanceMap;
     TestModuleInstanceMap mTestModuleInstanceMap;
-    NeedExectuteModuleVec mNeedExecuteModuleVec;
+    NeedExecuteModuleVec mNeedExecuteModuleVec;
 
     GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
 };

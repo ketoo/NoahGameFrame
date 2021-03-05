@@ -193,25 +193,25 @@ int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::strin
     return 0;
 }
 
-int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
-    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.recordName);
+    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, eventData.recordName);
     if (nullptr == xRecord)
     {
         return 0;
     }
 
-    switch (xEventData.nOpType)
+    switch (eventData.nOpType)
     {
         case RECORD_EVENT_DATA::Add:
         {
             NFDataList xDataList;
-            bool bRet = xRecord->QueryRow(xEventData.row, xDataList);
+            bool bRet = xRecord->QueryRow(eventData.row, xDataList);
             if (bRet)
             {
                 stream << xRecord->GetName();
-                stream << " Add Row[" << xEventData.row << "]";
+                stream << " Add Row[" << eventData.row << "]";
 
                 for (int j = 0; j < xDataList.GetCount(); ++j)
                 {
@@ -227,7 +227,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Del:
         {
             stream << xRecord->GetName();
-            stream << " Del Row[" << xEventData.row << "]";
+            stream << " Del Row[" << eventData.row << "]";
             //m_pLogModule->LogDebug(self, stream.str());
 
             PrintStackTrace();
@@ -236,7 +236,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Swap:
         {
             stream << xRecord->GetName();
-            stream << " Swap Row[" << xEventData.row << "] Row[" << xEventData.col << "]";
+            stream << " Swap Row[" << eventData.row << "] Row[" << eventData.col << "]";
             //m_pLogModule->LogDebug(self, stream.str());
         }
         break;
@@ -245,7 +245,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         case RECORD_EVENT_DATA::Update:
         {
             stream << xRecord->GetName();
-            stream << " UpData Row[" << xEventData.row << "] Col[" << xEventData.col << "]";
+            stream << " UpData Row[" << eventData.row << "] Col[" << eventData.col << "]";
             stream << oldVar.ToString();
             stream << "==>" << newVar.ToString();
             //m_pLogModule->LogDebug(self, stream.str());
