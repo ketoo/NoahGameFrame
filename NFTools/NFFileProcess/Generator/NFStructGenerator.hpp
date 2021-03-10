@@ -5,6 +5,10 @@
 #ifndef NFSTRUCTGENERATOR_H
 #define NFSTRUCTGENERATOR_H
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include<direct.h>
+#endif
+
 class NFStructGenerator : public NFIGenerator
 {
 public:
