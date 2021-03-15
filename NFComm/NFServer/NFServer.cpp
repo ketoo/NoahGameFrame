@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
 		serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList)));
 	}
 
-	for (auto item : serverList)
+	for (const auto& item : serverList)
 	{
 		item->SetMidWareLoader(MidWareLoader);
 		item->Init();
@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
 		nIndex++;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		for (auto item : serverList)
+		for (const auto& item : serverList)
 		{
 			item->Execute();
 		}
@@ -112,7 +112,7 @@ int main(int argc, char* argv[])
 
 	////////////////
 
-	for (auto item : serverList)
+	for (const auto& item : serverList)
 	{
 		item->Final();
 	}
