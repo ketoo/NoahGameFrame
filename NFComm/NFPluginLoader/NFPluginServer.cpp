@@ -66,9 +66,14 @@ void NFPluginServer::PrintfLogo()
 #endif
 }
 
+void NFPluginServer::SetBasicWareLoader(std::function<void(NFIPluginManager * p)> fun)
+{
+	externalBasicWarePluginLoader = fun;
+}
+
 void NFPluginServer::SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun)
 {
-    externalPluginLoader = fun;
+	externalMidWarePluginLoader = fun;
 }
 
 void NFPluginServer::Init()
@@ -82,12 +87,19 @@ void NFPluginServer::Init()
     pPluginManager->SetGetFileContentFunctor(GetFileContent);
     pPluginManager->SetConfigPath("../");
 
-    pPluginManager->LoadPluginConfig();
-    if (externalPluginLoader)
+
+	if (externalBasicWarePluginLoader)
+	{
+		externalBasicWarePluginLoader(pPluginManager.get());
+	}
+
+
+    if (externalMidWarePluginLoader)
     {
-        externalPluginLoader(pPluginManager.get());
+        externalMidWarePluginLoader(pPluginManager.get());
     }
 
+	pPluginManager->LoadPluginConfig();
     pPluginManager->LoadPlugin();
 
     pPluginManager->Awake();

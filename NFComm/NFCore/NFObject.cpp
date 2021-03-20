@@ -553,3 +553,13 @@ void NFObject::ToMemoryCounterString(std::string& info)
     info.append(":");
     info.append(m_pPropertyManager->GetPropertyString("ClassName"));
 }
+
+const NFVector3 &NFObject::GetPosition()
+{
+	return mPosition;
+}
+
+void NFObject::SetPosition(const NFVector3 &pos)
+{
+	mPosition = pos;
+}

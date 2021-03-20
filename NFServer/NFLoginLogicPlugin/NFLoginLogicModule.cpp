@@ -100,7 +100,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID,
 			pNetObject->SetConnectKeyState(1);
 			pNetObject->SetAccount(xMsg.account());
 
-			xAckMsg.set_event_code(NFMsg::ACCOUNT_SUCCESS);
+			xAckMsg.set_event_code(NFMsg::ACCOUNT_LOGIN_SUCCESS);
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, sockIndex);
 
 			m_pLogModule->LogInfo(NFGUID(0, sockIndex), "Login successed :", xMsg.account().c_str());

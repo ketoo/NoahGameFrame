@@ -175,7 +175,7 @@ void NFLoginNet_ServerModule::OnLoginProcess(const NFSOCK sockIndex, const int m
 			pNetObject->SetAccount(xMsg.account());
 
 			NFMsg::AckEventResult xData;
-			xData.set_event_code(NFMsg::ACCOUNT_SUCCESS);
+			xData.set_event_code(NFMsg::ACCOUNT_LOGIN_SUCCESS);
 
 			//The login server responds the login result to the player by sock id.
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xData, sockIndex);

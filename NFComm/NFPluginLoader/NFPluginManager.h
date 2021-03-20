@@ -138,7 +138,6 @@ public:
 
 protected:
 
-    bool LoadStaticPlugin();
     bool CheckStaticPlugin();
 
     bool LoadStaticPlugin(const std::string& pluginDLLName);

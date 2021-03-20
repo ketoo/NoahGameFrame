@@ -64,7 +64,7 @@ enum EGameEventCode : int {
   ACCOUNTPWD_INVALID = 3,
   ACCOUNT_USING = 4,
   ACCOUNT_LOCKED = 5,
-  ACCOUNT_SUCCESS = 6,
+  ACCOUNT_LOGIN_SUCCESS = 6,
   VERIFY_KEY_SUCCESS = 7,
   VERIFY_KEY_FAIL = 8,
   SELECTSERVER_SUCCESS = 9,
@@ -78,12 +78,15 @@ enum EGameEventCode : int {
   CHARACTER_LOCKED = 116,
   ZONE_OVERLOAD = 117,
   NOT_ONLINE = 118,
+  INSUFFICIENT_DIAMOND = 200,
+  INSUFFICIENT_GOLD = 201,
+  INSUFFICIENT_SP = 202,
   EGameEventCode_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameEventCode_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool EGameEventCode_IsValid(int value);
 constexpr EGameEventCode EGameEventCode_MIN = SUCCESS;
-constexpr EGameEventCode EGameEventCode_MAX = NOT_ONLINE;
+constexpr EGameEventCode EGameEventCode_MAX = INSUFFICIENT_SP;
 constexpr int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEventCode_descriptor();

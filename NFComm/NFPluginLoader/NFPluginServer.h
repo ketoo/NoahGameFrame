@@ -62,9 +62,6 @@ public:
 		Final();
 	}
 
-	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
-	std::string strArgvList;
-	std::function<void(NFIPluginManager * p)> externalPluginLoader;
 
 	void Init();
 
@@ -74,7 +71,14 @@ public:
 	
 	void PrintfLogo();
 
+	void SetBasicWareLoader(std::function<void(NFIPluginManager * p)> fun);
 	void SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun);
+
+private:
+	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
+	std::string strArgvList;
+	std::function<void(NFIPluginManager * p)> externalMidWarePluginLoader;
+	std::function<void(NFIPluginManager * p)> externalBasicWarePluginLoader;
 
 private:
 

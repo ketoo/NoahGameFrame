@@ -49,7 +49,8 @@ bool NFPropertyModule::Execute()
 
 bool NFPropertyModule::AfterInit()
 {
-    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFPropertyModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFPropertyModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFPropertyModule::OnObjectClassEvent);
 
     return true;
 }
@@ -108,6 +109,17 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
     FullSP(self);
 
     return 0;
+}
+
+int NFPropertyModule::OnObjectMAXHPEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
+{
+	const int hp = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HP());
+	if (hp > newVar.GetInt())
+	{
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), newVar.GetInt());
+	}
+
+	return 0;
 }
 
 int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar, const NFINT64 reason)
@@ -196,7 +208,8 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 			RefreshAllProperty(self);
 			FullHPMP(self);
 
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
+	        m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
+	        m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::MAXHP(), this, &NFPropertyModule::OnObjectMAXHPEvent);
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
 			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
         }
@@ -206,6 +219,13 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
         {
         }
+    }
+    else
+    {
+	    if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
+	    {
+		    m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::MAXHP(), this, &NFPropertyModule::OnObjectMAXHPEvent);
+	    }
     }
 
     return 0;
