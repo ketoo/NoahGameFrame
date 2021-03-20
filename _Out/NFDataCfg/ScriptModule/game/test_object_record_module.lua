@@ -39,14 +39,6 @@ function test_object_record_module:class_common_event(object_id, className, even
 end
 
 function test_object_record_module:schedule(id, heartBeat, time, count)
-	local varData = NFDataList()
-
-	varData:add_string("ItemId");
-	varData:add_int(1);
-
-	local row = script_module:add_row(id, "Inventory", varData);
-
-	script_module:set_record_int(id, "Inventory", row, "ItemCount", 5);
 end
 
 function test_object_record_module:inventory_list_cb(id, recordName, nOpType, row, col, oldVar, newVar)
