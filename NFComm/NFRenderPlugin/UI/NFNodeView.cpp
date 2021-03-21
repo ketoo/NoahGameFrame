@@ -45,7 +45,7 @@ void BEGIN_INPUT_PIN(int id, NFPinShape shape)
 
 void END_INPUT_PIN()
 {
-    imnodes::EndAttribute();
+    imnodes::EndInputAttribute();
 }
 
 void BEGIN_OUT_PIN(int id, NFPinShape shape)
@@ -55,7 +55,7 @@ void BEGIN_OUT_PIN(int id, NFPinShape shape)
 
 void END_OUT_PIN()
 {
-    imnodes::EndAttribute();
+    imnodes::EndOutputAttribute();
 }
 
 void BEGIN_NODE(const int id, const bool title, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
