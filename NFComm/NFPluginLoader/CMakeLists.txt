@@ -6,7 +6,6 @@ add_library(NFPluginLoader STATIC
 		${NFPluginLoader_ROOT_Cpp}
 		${NFPluginLoader_ROOT_Hpp})
 
-
 target_link_libraries(NFPluginLoader NFCore)
 target_link_libraries(NFPluginLoader NFMessageDefine)
 target_link_libraries(NFPluginLoader NFActorPlugin)
@@ -23,10 +22,8 @@ target_link_libraries(NFPluginLoader NFChatPlugin)
 target_link_libraries(NFPluginLoader NFConsumeManagerPlugin)
 target_link_libraries(NFPluginLoader NFInventoryPlugin)
 
-if (APPLE)
-	target_link_libraries(NFPluginLoader NFRenderPlugin)
-	target_link_libraries(NFPluginLoader NFBluePrintPlugin)
-endif()
+target_link_libraries(NFPluginLoader NFRenderPlugin)
+target_link_libraries(NFPluginLoader NFBluePrintPlugin)
 
 target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)

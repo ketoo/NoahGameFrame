@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -42,7 +42,7 @@
 #include "NFExamples/NFConsumeManagerPlugin/NFConsumeManagerPlugin.h"
 #include "NFExamples/NFInventoryPlugin/NFInventoryPlugin.h"
 
-#if NF_PLATFORM != NF_PLATFORM_LINUX
+#if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 #include "NFComm/NFRenderPlugin/NFRenderPlugin.h"
 #include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
 #endif
@@ -103,8 +103,8 @@ void BasicPluginLoader(NFIPluginManager* pPluginManager)
 
 #if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 #ifdef NF_DEBUG_MODE
-	//CREATE_PLUGIN(this, NFRenderPlugin)
-	//CREATE_PLUGIN(this, NFBluePrintPlugin)
+	CREATE_PLUGIN(pPluginManager, NFRenderPlugin)
+	CREATE_PLUGIN(pPluginManager, NFBluePrintPlugin)
 #endif
 #endif
 
