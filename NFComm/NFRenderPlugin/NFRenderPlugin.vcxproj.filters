@@ -46,9 +46,6 @@
     <ClCompile Include="gl3w\GL\gl3w.c">
       <Filter>gl3w\GL</Filter>
     </ClCompile>
-    <ClCompile Include="imnodes\imnodes.cpp">
-      <Filter>imnodes</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -73,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="UI\NFSceneSystem.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="imnodes\imnodes.cpp">
+      <Filter>imnodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +123,6 @@
     <ClInclude Include="gl3w\GL\glcorearb.h">
       <Filter>gl3w\GL</Filter>
     </ClInclude>
-    <ClInclude Include="imnodes\imnodes.h">
-      <Filter>imnodes</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -156,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="UI\NFSceneSystem.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="imnodes\imnodes.h">
+      <Filter>imnodes</Filter>
+    </ClInclude>
+    <ClInclude Include="imnodes\stb_image.h">
+      <Filter>imnodes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
