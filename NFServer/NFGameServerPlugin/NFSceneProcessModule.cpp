@@ -254,7 +254,8 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
     const std::string& strSceneFilePath = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::FilePath());
  
     rapidxml::file<> xFileSource(strSceneFilePath.c_str());
-    rapidxml::xml_document<>  xFileDoc;
+	const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
+	auto& xFileDoc = *pDoc;
     xFileDoc.parse<0>(xFileSource.data());
 
 	int sceneID = lexical_cast<int>(strSceneIDName);
