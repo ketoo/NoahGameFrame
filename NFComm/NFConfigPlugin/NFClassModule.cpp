@@ -344,7 +344,8 @@ bool NFClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<
 	std::string content;
 	pPluginManager->GetFileContent(strFile, content);
 
-	rapidxml::xml_document<> xDoc;
+	const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
+	auto& xDoc = *pDoc;
     xDoc.parse<0>((char*)content.c_str());
     //////////////////////////////////////////////////////////////////////////
 
@@ -482,9 +483,12 @@ bool NFClassModule::Load()
     //////////////////////////////////////////////////////////////////////////
 	std::string strFile = pPluginManager->GetConfigPath() + mConfigFileName;
 	std::string content;
-	pPluginManager->GetFileContent(strFile, content);
+    if (!pPluginManager->GetFileContent(strFile, content)) {
+        return false;
+    }
 
-	rapidxml::xml_document<> xDoc;
+	const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
+	auto& xDoc = *pDoc;
 	xDoc.parse<0>((char*)content.c_str());
     //////////////////////////////////////////////////////////////////////////
     //support for unlimited layer class inherits

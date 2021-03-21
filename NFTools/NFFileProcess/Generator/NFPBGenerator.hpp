@@ -15,6 +15,7 @@ public:
 	virtual bool Generate(const std::map<std::string, ClassData *> &classData) override
 	{
 		//"../proto/NFRecordDefine.proto"
+		return false;
 	}
 };
 #endif //NFPBGENERATOR_H

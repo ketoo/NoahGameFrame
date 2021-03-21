@@ -98,7 +98,7 @@ public:
 
 	virtual bool Awake()
 	{
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule* pModule = it.second;
 
@@ -117,7 +117,7 @@ public:
 
     virtual bool Init()
 	{
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -135,7 +135,7 @@ public:
 
     virtual bool AfterInit()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -152,7 +152,7 @@ public:
 
     virtual bool CheckConfig()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -166,7 +166,7 @@ public:
 
 	virtual bool ReadyExecute()
 	{
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -179,7 +179,7 @@ public:
 
     virtual bool Execute()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -193,7 +193,7 @@ public:
 
     virtual bool BeforeShut()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -206,7 +206,7 @@ public:
 
     virtual bool Shut()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -219,7 +219,7 @@ public:
 
     virtual bool Finalize()
     {
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 
@@ -233,7 +233,7 @@ public:
 
 	virtual bool OnReloadPlugin()
 	{
-		for (auto it : mModules)
+		for (const auto& it : mModules)
 		{
 			NFIModule *pModule = it.second;
 

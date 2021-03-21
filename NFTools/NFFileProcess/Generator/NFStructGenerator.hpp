@@ -2,8 +2,14 @@
 // Created by James on 7/02/21.
 //
 
+#include <direct.h>
+
 #ifndef NFSTRUCTGENERATOR_H
 #define NFSTRUCTGENERATOR_H
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include<direct.h>
+#endif
 
 class NFStructGenerator : public NFIGenerator
 {
