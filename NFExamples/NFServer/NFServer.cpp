@@ -103,8 +103,8 @@ void BasicPluginLoader(NFIPluginManager* pPluginManager)
 
 #if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 #ifdef NF_DEBUG_MODE
-	CREATE_PLUGIN(pPluginManager, NFRenderPlugin)
-	CREATE_PLUGIN(pPluginManager, NFBluePrintPlugin)
+	//CREATE_PLUGIN(pPluginManager, NFRenderPlugin)
+	//CREATE_PLUGIN(pPluginManager, NFBluePrintPlugin)
 #endif
 #endif
 
