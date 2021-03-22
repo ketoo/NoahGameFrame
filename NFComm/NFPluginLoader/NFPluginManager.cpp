@@ -272,12 +272,9 @@ bool NFPluginManager::LoadPluginConfig()
 {
 	std::string content;
 	std::string strFilePath = GetConfigPath() + configName;
-	if(!GetFileContent(strFilePath, content)){
-		return false;
-	}
+	GetFileContent(strFilePath, content);
 
-	const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-	auto& xDoc = *pDoc;
+	rapidxml::xml_document<> xDoc;
 	xDoc.parse<0>((char*)content.c_str());
 
     rapidxml::xml_node<>* pRoot = xDoc.first_node();
