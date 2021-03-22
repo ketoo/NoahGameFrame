@@ -146,8 +146,7 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readWorkBook(const char* filename)
 	{
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& doc = *pDoc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
 
@@ -172,8 +171,7 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readWorkBookRels(const char* filename)
 	{
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& doc = *pDoc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
 		rapidxml::xml_node<>* e = doc.first_node("Relationships");
@@ -199,8 +197,7 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readSharedStrings(const char* filename)
 	{
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& doc = *pDoc;
+		rapidxml::xml_document<> doc;
 
 		if (!_zip->openXML(filename, doc)) return;
 
@@ -237,8 +234,7 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readStyles(const char* filename)
 	{
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& doc = *pDoc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
 	}
@@ -284,8 +280,7 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readSheet(Sheet& sh)
 	{
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& doc = *pDoc;
+		rapidxml::xml_document<> doc;
 		rapidxml::xml_node<> *root, *row, *c, *v, *d;
 
 		_zip->openXML(sh._path.c_str(), doc);

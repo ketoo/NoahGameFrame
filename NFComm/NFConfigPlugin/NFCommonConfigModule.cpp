@@ -113,8 +113,7 @@ bool NFCommonConfigModule::LoadConfig(const std::string& strFile)
 	try
 	{
 		rapidxml::file<> xFile(strFile.c_str());
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& xDoc = *pDoc;
+		rapidxml::xml_document<> xDoc;
 		xDoc.parse<0>(xFile.data());
 
 		rapidxml::xml_node<>* pRoot = xDoc.first_node();

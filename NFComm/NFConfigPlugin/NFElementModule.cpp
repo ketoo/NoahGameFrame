@@ -172,8 +172,7 @@ bool NFElementModule::Load()
 		std::string content;
 		pPluginManager->GetFileContent(strFile, content);
 
-		const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-		auto& xDoc = *pDoc;
+		rapidxml::xml_document<> xDoc;
 		xDoc.parse<0>((char*)content.c_str());
         //////////////////////////////////////////////////////////////////////////
         //support for unlimited layer class inherits
@@ -551,8 +550,7 @@ bool NFElementModule::LoadSceneInfo(const std::string& fileName, const std::stri
 	std::string content;
 	pPluginManager->GetFileContent(fileName, content);
 
-	const auto pDoc = std::make_unique<rapidxml::xml_document<>>();
-	auto& xDoc = *pDoc;
+	rapidxml::xml_document<> xDoc;
 	xDoc.parse<0>((char*)content.c_str());
 	
     NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(className.c_str());
