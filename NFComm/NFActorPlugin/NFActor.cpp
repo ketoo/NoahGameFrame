@@ -49,11 +49,7 @@ bool NFActor::Execute()
 	{
 		//must make sure that only one thread running this function at the same time
 		//mxProcessFunctor is not thread-safe
-		NFLock lock;
-
-		lock.lock();
 		ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFunctor.GetElement(messageObject.msgID);
-		lock.unlock();
 
 		if (xBeginFunctor != nullptr)
 		{
