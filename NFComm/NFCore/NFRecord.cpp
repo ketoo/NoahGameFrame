@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -229,14 +229,15 @@ int NFRecord::AddRow(const int row, const NFDataList& var)
 		pVar->variantData = var.GetStack(i)->variantData;
     }
 
-	RECORD_EVENT_DATA xEventData;
-	xEventData.nOpType = bCover? RECORD_EVENT_DATA::Cover : RECORD_EVENT_DATA::Add;
-	xEventData.row = nFindRow;
-	xEventData.col = 0;
-	xEventData.recordName = mstrRecordName;
+	RECORD_EVENT_DATA eventData;
+	eventData.nOpType = bCover? RECORD_EVENT_DATA::Cover : RECORD_EVENT_DATA::Add;
+	eventData.row = nFindRow;
+	eventData.col = 0;
+	eventData.recordName = mstrRecordName;
+	eventData.recordData = this;
 
 	NFData tData;
-    OnEventHandler(mSelf, xEventData, tData, tData);
+    OnEventHandler(mSelf, eventData, tData, tData);
 
     return nFindRow;
 }
@@ -273,13 +274,14 @@ bool NFRecord::SetRow(const int row, const NFDataList & var)
 
 		pVar->variantData = var.GetStack(i)->variantData;
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = i;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = i;
+		eventData.recordName = mstrRecordName;
+		eventData.recordData = this;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
 	return false;
@@ -314,7 +316,7 @@ bool NFRecord::SetInt(const int row, const int col, const NFINT64 value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -328,13 +330,14 @@ bool NFRecord::SetInt(const int row, const int col, const NFINT64 value)
 
 		pVar->SetInt(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
+		eventData.recordData = this;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
     return true;
@@ -376,7 +379,7 @@ bool NFRecord::SetFloat(const int row, const int col, const double value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -389,13 +392,14 @@ bool NFRecord::SetFloat(const int row, const int col, const double value)
 		oldValue.SetFloat(pVar->GetFloat());
 		pVar->SetFloat(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
+		eventData.recordData = this;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
     return true;
@@ -437,7 +441,7 @@ bool NFRecord::SetString(const int row, const int col, const std::string& value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -451,13 +455,14 @@ bool NFRecord::SetString(const int row, const int col, const std::string& value)
 
 		pVar->SetString(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
+		eventData.recordData = this;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
     return true;
@@ -499,7 +504,7 @@ bool NFRecord::SetObject(const int row, const int col, const NFGUID& value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -513,13 +518,14 @@ bool NFRecord::SetObject(const int row, const int col, const NFGUID& value)
 
 		pVar->SetObject(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
+		eventData.recordData = this;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
     return true;
@@ -561,7 +567,7 @@ bool NFRecord::SetVector2(const int row, const int col, const NFVector2& value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -575,13 +581,13 @@ bool NFRecord::SetVector2(const int row, const int col, const NFVector2& value)
 
 		pVar->SetVector2(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
 	return true;
@@ -617,7 +623,7 @@ bool NFRecord::SetVector3(const int row, const int col, const NFVector3& value)
 
 	if (var == *pVar)
 	{
-		return false;
+		return true;
 	}
 
 	if (mtRecordCallback.size() == 0)
@@ -631,13 +637,13 @@ bool NFRecord::SetVector3(const int row, const int col, const NFVector3& value)
 
 		pVar->SetVector3(value);
 
-		RECORD_EVENT_DATA xEventData;
-		xEventData.nOpType = RECORD_EVENT_DATA::Update;
-		xEventData.row = row;
-		xEventData.col = col;
-		xEventData.recordName = mstrRecordName;
+		RECORD_EVENT_DATA eventData;
+		eventData.nOpType = RECORD_EVENT_DATA::Update;
+		eventData.row = row;
+		eventData.col = col;
+		eventData.recordName = mstrRecordName;
 
-		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, eventData, oldValue, *pVar);
 	}
 
 	return true;
@@ -1362,19 +1368,19 @@ bool NFRecord::Remove(const int row)
     {
         if (IsUsed(row))
         {
-			RECORD_EVENT_DATA xEventData;
-			xEventData.nOpType = RECORD_EVENT_DATA::Del;
-			xEventData.row = row;
-			xEventData.col = 0;
-			xEventData.recordName = mstrRecordName;
+			RECORD_EVENT_DATA eventData;
+			eventData.nOpType = RECORD_EVENT_DATA::Del;
+			eventData.row = row;
+			eventData.col = 0;
+			eventData.recordName = mstrRecordName;
 
-			OnEventHandler(mSelf, xEventData, NFData(), NFData());
+			OnEventHandler(mSelf, eventData, NFData(), NFData());
 
 			mVecUsedState[row] = 0;
 
-			xEventData.nOpType = RECORD_EVENT_DATA::AfterDel;
+			eventData.nOpType = RECORD_EVENT_DATA::AfterDel;
 
-			OnEventHandler(mSelf, xEventData, NFData(), NFData());
+			OnEventHandler(mSelf, eventData, NFData(), NFData());
 
 			return true;
         }
@@ -1491,7 +1497,7 @@ NF_SHARE_PTR<NFDataList> NFRecord::GetInitData() const
     return pIniData;
 }
 
-void NFRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+void NFRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar)
 {
     TRECORDCALLBACKEX::iterator itr = mtRecordCallback.begin();
     TRECORDCALLBACKEX::iterator end = mtRecordCallback.end();
@@ -1499,7 +1505,7 @@ void NFRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEven
     {
         
         RECORD_EVENT_FUNCTOR_PTR functorPtr = *itr;
-        functorPtr->operator()(self, xEventData, oldVar, newVar);
+        functorPtr->operator()(self, eventData, oldVar, newVar);
     }
 }
 
@@ -1534,14 +1540,14 @@ bool NFRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
         mVecUsedState[nOriginRow] = mVecUsedState[nTargetRow];
         mVecUsedState[nTargetRow] = nOriginUse;
 
-        RECORD_EVENT_DATA xEventData;
-        xEventData.nOpType = RECORD_EVENT_DATA::Swap;
-        xEventData.row = nOriginRow;
-        xEventData.col = nTargetRow;
-        xEventData.recordName = mstrRecordName;
+        RECORD_EVENT_DATA eventData;
+        eventData.nOpType = RECORD_EVENT_DATA::Swap;
+        eventData.row = nOriginRow;
+        eventData.col = nTargetRow;
+        eventData.recordName = mstrRecordName;
 
         NFData xData;
-        OnEventHandler(mSelf, xEventData, xData, xData);
+        OnEventHandler(mSelf, eventData, xData, xData);
 
         return true;
     }

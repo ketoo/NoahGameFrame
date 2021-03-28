@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -107,14 +107,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int scen
 	}
 	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
-		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::MaxGroup());
-		const int nMaxPlayer = m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::MaxGroupPlayers());
-		for (int i = 1; i <= nMaxGroup; ++i)
-		{
-			return m_pSceneModule->RequestEnterScene(self, sceneID, 1, type, pos, argList);
-		}
-
-		return false;
+		return m_pSceneModule->RequestEnterScene(self, sceneID, 1, type, pos, argList);
 	}
 	else
 	{

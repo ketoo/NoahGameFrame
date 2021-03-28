@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -56,132 +56,17 @@
 #pragma comment( lib, "NFMessageDefine.lib" )
 #pragma comment( lib, "event.lib" )
 #pragma comment( lib, "event_core.lib" )
-#pragma comment( lib, "lua.lib" )
 #pragma comment( lib, "navigation.lib" )
 #pragma comment( lib, "hiredis.lib" )
 
 
-#pragma comment( lib, "NFCore.lib" )
-#pragma comment( lib, "NFActorPlugin.lib" )
-#pragma comment( lib, "NFConfigPlugin.lib" )
-#pragma comment( lib, "NFKernelPlugin.lib" )
-#pragma comment( lib, "NFLogPlugin.lib" )
-#pragma comment( lib, "NFLuaScriptPlugin.lib" )
-#pragma comment( lib, "NFNavigationPlugin.lib" )
-#pragma comment( lib, "NFNetPlugin.lib" )
-#pragma comment( lib, "NFNoSqlPlugin.lib" )
-#pragma comment( lib, "NFSecurityPlugin.lib" )
-#pragma comment( lib, "NFTestPlugin.lib" )
-#pragma comment( lib, "NFRenderPlugin.lib" )
-#pragma comment( lib, "NFBluePrintPlugin.lib" )
-
-#pragma comment( lib, "NFDBLogicPlugin.lib" )
-#pragma comment( lib, "NFDBNet_ClientPlugin.lib" )
-#pragma comment( lib, "NFDBNet_ServerPlugin.lib" )
-
-#pragma comment( lib, "NFGameServerPlugin.lib" )
-#pragma comment( lib, "NFGameServerNet_ClientPlugin.lib" )
-#pragma comment( lib, "NFGameServerNet_ServerPlugin.lib" )
-
-#pragma comment( lib, "NFLoginLogicPlugin.lib" )
-#pragma comment( lib, "NFLoginNet_ClientPlugin.lib" )
-#pragma comment( lib, "NFLoginNet_ServerPlugin.lib" )
-#pragma comment( lib, "NFLoginNet_HttpServerPlugin.lib" )
-
-#pragma comment( lib, "NFMasterServerPlugin.lib" )
-#pragma comment( lib, "NFMasterNet_ServerPlugin.lib" )
-#pragma comment( lib, "NFMasterNet_HttpServerPlugin.lib" )
-
-#pragma comment( lib, "NFProxyLogicPlugin.lib" )
-#pragma comment( lib, "NFProxyServerNet_ClientPlugin.lib" )
-#pragma comment( lib, "NFProxyServerNet_ServerPlugin.lib" )
-
-#pragma comment( lib, "NFWorldNet_ClientPlugin.lib" )
-#pragma comment( lib, "NFWorldNet_ServerPlugin.lib" )
-
-#pragma comment( lib, "NFChatPlugin.lib" )
-#pragma comment( lib, "NFInventoryPlugin.lib" )
-#pragma comment( lib, "NFConsumeManagerPlugin.lib" )
-
-#pragma comment( lib, "Tutorial1.lib" )
-#pragma comment( lib, "Tutorial2.lib" )
-#pragma comment( lib, "Tutorial3.lib" )
-#pragma comment( lib, "Tutorial4.lib" )
-#pragma comment( lib, "Tutorial5.lib" )
-#pragma comment( lib, "Tutorial6.lib" )
-#pragma comment( lib, "Tutorial7.lib" )
 
 #endif
 
 #endif
 
-#ifdef NF_DEBUG_MODE
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#endif
-
-#else
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#endif
-
-#endif
 
 
-#ifndef NF_DYNAMIC_PLUGIN
-//for nf-sdk plugins
-#include "NFComm/NFActorPlugin/NFActorPlugin.h"
-#include "NFComm/NFConfigPlugin/NFConfigPlugin.h"
-#include "NFComm/NFKernelPlugin/NFKernelPlugin.h"
-#include "NFComm/NFLogPlugin/NFLogPlugin.h"
-#include "NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.h"
-#include "NFComm/NFNavigationPlugin/NFNavigationPlugin.h"
-#include "NFComm/NFNetPlugin/NFNetPlugin.h"
-#include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
-#include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
-#include "NFComm/NFTestPlugin/NFTestPlugin.h"
-
-#include "NFExamples/NFChatPlugin/NFChatPlugin.h"
-#include "NFExamples/NFConsumeManagerPlugin/NFConsumeManagerPlugin.h"
-#include "NFExamples/NFInventoryPlugin/NFInventoryPlugin.h"
-
-#if NF_PLATFORM != NF_PLATFORM_LINUX
-#include "NFComm/NFRenderPlugin/NFRenderPlugin.h"
-#include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
-#endif
-
-//DB
-#include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
-#include "NFServer/NFDBNet_ClientPlugin/NFDBNet_ClientPlugin.h"
-#include "NFServer/NFDBNet_ServerPlugin/NFDBNet_ServerPlugin.h"
-//GAME
-#include "NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.h"
-#include "NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.h"
-#include "NFServer/NFGameServerPlugin/NFGameServerPlugin.h"
-//LOGIN
-#include "NFServer/NFLoginLogicPlugin/NFLoginLogicPlugin.h"
-#include "NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin.h"
-#include "NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h"
-#include "NFServer/NFLoginNet_HttpServerPlugin/NFLoginNet_HttpServerPlugin.h"
-//MASTER
-#include "NFServer/NFMasterNet_HttpServerPlugin/NFMasterNet_HttpServerPlugin.h"
-#include "NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.h"
-//PROXY
-#include "NFServer/NFProxyLogicPlugin/NFProxyLogicPlugin.h"
-#include "NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h"
-#include "NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.h"
-//WORLD
-#include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
-#include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
-
-
-#endif
 
 NFPluginManager::NFPluginManager() : NFIPluginManager()
 {
@@ -217,10 +102,6 @@ NFPluginManager::~NFPluginManager()
 bool NFPluginManager::LoadPlugin()
 {
 	std::cout << "----LoadPlugin----" << std::endl;
-
-#ifndef NF_DYNAMIC_PLUGIN
-	LoadStaticPlugin();
-#endif
 
 	PluginNameMap::iterator it = mPluginNameMap.begin();
 	for (; it != mPluginNameMap.end(); ++it)
@@ -304,68 +185,6 @@ bool NFPluginManager::LoadPluginConfig()
 			}
 		}
 	}
-
-    return true;
-}
-
-bool NFPluginManager::LoadStaticPlugin()
-{
-
-#ifndef NF_DYNAMIC_PLUGIN
-
-//for nf-sdk plugins
-	CREATE_PLUGIN(this, NFActorPlugin)
-	CREATE_PLUGIN(this, NFConfigPlugin)
-	CREATE_PLUGIN(this, NFKernelPlugin)
-	CREATE_PLUGIN(this, NFLogPlugin)
-	CREATE_PLUGIN(this, NFLuaScriptPlugin)
-	CREATE_PLUGIN(this, NFNavigationPlugin)
-	CREATE_PLUGIN(this, NFNetPlugin)
-	CREATE_PLUGIN(this, NFNoSqlPlugin)
-	CREATE_PLUGIN(this, NFSecurityPlugin)
-	CREATE_PLUGIN(this, NFTestPlugin)
-
-	CREATE_PLUGIN(this, NFChatPlugin)
-	CREATE_PLUGIN(this, NFConsumeManagerPlugin)
-	CREATE_PLUGIN(this, NFInventoryPlugin)
-
-#if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
-//CREATE_PLUGIN(this, NFRenderPlugin)
-//CREATE_PLUGIN(this, NFBluePrintPlugin)
-#endif
-		
-//DB
-	CREATE_PLUGIN(this, NFDBLogicPlugin)
-	CREATE_PLUGIN(this, NFDBNet_ClientPlugin)
-	CREATE_PLUGIN(this, NFDBNet_ServerPlugin)
-
-//GAME
-	CREATE_PLUGIN(this, NFGameServerNet_ClientPlugin)
-	CREATE_PLUGIN(this, NFGameServerNet_ServerPlugin)
-	CREATE_PLUGIN(this, NFGameServerPlugin)
-
-//LOGIN
-	CREATE_PLUGIN(this, NFLoginLogicPlugin)
-	CREATE_PLUGIN(this, NFLoginNet_ClientPlugin)
-	CREATE_PLUGIN(this, NFLoginNet_ServerPlugin)
-	CREATE_PLUGIN(this, NFLoginNet_HttpServerPlugin)
-
-//MASTER
-	CREATE_PLUGIN(this, NFMasterNet_HttpServerPlugin)
-	CREATE_PLUGIN(this, NFMasterNet_ServerPlugin)
-
-//PROXY
-	CREATE_PLUGIN(this, NFProxyLogicPlugin)
-	CREATE_PLUGIN(this, NFProxyServerNet_ClientPlugin)
-	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
-
-//WORLD
-	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
-	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
-
-
-
-#endif
 
     return true;
 }
@@ -712,7 +531,9 @@ void NFPluginManager::AddModule(const std::string& moduleName, NFIModule* pModul
         mModuleInstanceMap.insert(ModuleInstanceMap::value_type(moduleName, pModule));
 
         if (pModule->m_bIsExecute)
-            mNeedExecuteModuleVec.push_back(std::make_pair(moduleName, pModule));
+        {
+	        mNeedExecuteModuleVec.push_back(std::make_pair(moduleName, pModule));
+        }
     }
 }
 

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -62,9 +62,6 @@ public:
 		Final();
 	}
 
-	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
-	std::string strArgvList;
-	std::function<void(NFIPluginManager * p)> externalPluginLoader;
 
 	void Init();
 
@@ -74,7 +71,14 @@ public:
 	
 	void PrintfLogo();
 
+	void SetBasicWareLoader(std::function<void(NFIPluginManager * p)> fun);
 	void SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun);
+
+private:
+	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
+	std::string strArgvList;
+	std::function<void(NFIPluginManager * p)> externalMidWarePluginLoader;
+	std::function<void(NFIPluginManager * p)> externalBasicWarePluginLoader;
 
 private:
 

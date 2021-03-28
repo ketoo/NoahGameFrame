@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -59,7 +59,7 @@ private:
 	int ClearRecord(const NFGUID& self, const int sceneID, const int groupID);
 
 	int OnPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
-	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
+	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar);
 
 	int OnBeforeLeaveSceneEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	int OnAfterEntrySceneEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList& argList);

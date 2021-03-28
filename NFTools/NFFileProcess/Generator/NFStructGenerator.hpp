@@ -2,8 +2,6 @@
 // Created by James on 7/02/21.
 //
 
-#include <direct.h>
-
 #ifndef NFSTRUCTGENERATOR_H
 #define NFSTRUCTGENERATOR_H
 

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -28,6 +28,8 @@
 
 #include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
+class NFIRecord;
 
 struct RECORD_EVENT_DATA
 {
@@ -56,6 +58,7 @@ struct RECORD_EVENT_DATA
 	int row;
 	int col;
 	std::string recordName;
+	NFIRecord* recordData;
 };
 
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&)> RECORD_EVENT_FUNCTOR;

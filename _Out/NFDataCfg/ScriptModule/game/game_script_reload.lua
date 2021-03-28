@@ -2,13 +2,24 @@ local version_code = "1.0.9"
 local force_load = true
 
 GameScriptReloadList={
+	--["test_object_module"] = true,
 	{tbl=nil, tblName="test_object_module"},
 	{tbl=nil, tblName="test_object_prop_module"},
 	{tbl=nil, tblName="test_object_record_module"},
-	{tbl=nil, tblName="test_net_msg_module"},
+	--{tbl=nil, tblName="test_pb_module"},
+	--{tbl=nil, tblName="test_pb_msg_module"},
+	--{tbl=nil, tblName="test_net_module"},
+	--{tbl=nil, tblName="test_net_msg_module"},
 	{tbl=nil, tblName="test_http_module"},
 	{tbl=nil, tblName="test_event_module"},
-	{tbl=nil, tblName="test_pb_module"},
+
+	{tbl=nil, tblName="scenario_cfg"},
+	{tbl=nil, tblName="scenario_module"},
+	{tbl=nil, tblName="scenario100"},
+	{tbl=nil, tblName="scenario200"},
+	{tbl=nil, tblName="scenario300"},
+	{tbl=nil, tblName="scenario400"},
+
 }
 
 

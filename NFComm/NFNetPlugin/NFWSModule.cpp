@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -26,7 +26,6 @@
 #include "NFWSModule.h"
 #include "common/base64.hpp"
 #include "common/sha1.hpp"
-#include "common/string_ref.hpp"
 #include "common/http_util.hpp"
 #include "ws_error.hpp"
 #include "NFComm/NFNetPlugin/NFINet.h"
@@ -326,9 +325,9 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const
             {
             case ws_init:
             {
-                string_view_t data(pNetObject->GetBuff(), pNetObject->GetBuffLen());
+                std::string_view data(pNetObject->GetBuff(), pNetObject->GetBuffLen());
                 auto pos = data.find("\r\n\r\n");
-                if (pos != string_view_t::npos)
+                if (pos != std::string_view::npos)
                 {
                     auto ec = HandShake(sockIndex, data.data(), pos);
                     if (ec)
@@ -438,10 +437,10 @@ void NFWSModule::KeepAlive()
 
 std::error_code NFWSModule::HandShake(const NFSOCK sockIndex, const char * msg, const uint32_t len)
 {
-    string_view_t data{ msg,len };
-    string_view_t method;
-    string_view_t ignore;
-    string_view_t version;
+    std::string_view data{ msg,len };
+    std::string_view method;
+    std::string_view ignore;
+    std::string_view version;
     http::util::case_insensitive_multimap_view header;
     if (!http::util::request_parser::parse(data, method
         , ignore
@@ -460,28 +459,28 @@ std::error_code NFWSModule::HandShake(const NFSOCK sockIndex, const char * msg, 
     if (method != "GET")
         return make_error_code(websocket::error::ws_bad_method);
 
-    string_view_t connection;
+    std::string_view connection;
     if (!http::util::try_get_header(header, "connection", connection))
         return make_error_code(websocket::error::ws_no_connection);
 
-    string_view_t upgrade;
+    std::string_view upgrade;
     if (!http::util::try_get_header(header, "upgrade", upgrade))
         return make_error_code(websocket::error::ws_no_upgrade);
 
-    if (!http::util::iequal_string(connection, string_view_t{ "upgrade" }))
+    if (!http::util::iequal_string(connection, std::string_view{ "upgrade" }))
         return make_error_code(websocket::error::ws_no_connection_upgrade);
 
-    if (!http::util::iequal_string(upgrade, string_view_t{ "websocket" }))
+    if (!http::util::iequal_string(upgrade, std::string_view{ "websocket" }))
         return make_error_code(websocket::error::ws_no_upgrade_websocket);
 
-    string_view_t sec_ws_key;
-    if (!http::util::try_get_header(header, string_view_t{ "sec-websocket-key" }, sec_ws_key))
+    std::string_view sec_ws_key;
+    if (!http::util::try_get_header(header, std::string_view{ "sec-websocket-key" }, sec_ws_key))
         return make_error_code(websocket::error::ws_no_sec_key);
 
     if (base64_decode(std::string{ sec_ws_key.data(), sec_ws_key.size() }).size() != 16)
         return make_error_code(websocket::error::ws_bad_sec_key);
 
-    string_view_t sec_ws_version;
+    std::string_view sec_ws_version;
     if (!http::util::try_get_header(header, "sec-websocket-version", sec_ws_version))
         return make_error_code(websocket::error::ws_no_sec_version);
 
@@ -490,7 +489,7 @@ std::error_code NFWSModule::HandShake(const NFSOCK sockIndex, const char * msg, 
         return make_error_code(websocket::error::ws_bad_sec_version);
     }
 
-    string_view_t protocol;
+    std::string_view protocol;
     http::util::try_get_header(header, "sec-websocket-protocol", protocol);
 
     std::string response;

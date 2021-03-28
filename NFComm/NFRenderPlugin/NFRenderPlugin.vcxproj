@@ -107,6 +107,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="imnodes\imnodes.h" />
+    <ClInclude Include="imnodes\stb_image.h" />
     <ClInclude Include="NFRenderModule.h" />
     <ClInclude Include="NFUIModule.h" />
     <ClInclude Include="NFRenderPlugin.h" />

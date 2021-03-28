@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -552,4 +552,14 @@ void NFObject::ToMemoryCounterString(std::string& info)
     info.append(mSelf.ToString());
     info.append(":");
     info.append(m_pPropertyManager->GetPropertyString("ClassName"));
+}
+
+const NFVector3 &NFObject::GetPosition()
+{
+	return mPosition;
+}
+
+void NFObject::SetPosition(const NFVector3 &pos)
+{
+	mPosition = pos;
 }

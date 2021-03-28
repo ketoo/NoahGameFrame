@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -1736,7 +1736,7 @@ bool NFKernelModule::DestroySelf(const NFGUID& self)
 	return true;
 }
 
-int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar)
 {
 	NFPerformance performance;
 
@@ -1750,7 +1750,7 @@ int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_D
 			{
 				RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 				RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
-				pFun->operator()(self, xEventData, oldVar, newVar);
+				pFun->operator()(self, eventData, oldVar, newVar);
 			}
 		}
 
@@ -1763,7 +1763,7 @@ int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_D
 			{
 				RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
 				RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
-				pFun->operator()(self, xEventData, oldVar, newVar);
+				pFun->operator()(self, eventData, oldVar, newVar);
 			}
 		}
 	}
@@ -1774,8 +1774,8 @@ int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_D
 		os << "--------------- performance problem------------------- ";
 		os << performance.TimeScope();
 		os << "---------- ";
-		os << xEventData.recordName;
-		os << " event type " << xEventData.nOpType;
+		os << eventData.recordName;
+		os << " event type " << eventData.nOpType;
 		//m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
 	}
 

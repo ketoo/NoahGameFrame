@@ -36,12 +36,19 @@ end
 
 
 function test_object_module:module_schedule(heartBeat, time, count)
-    if playerObject == nil then
-        playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
-        print("create_object: Player :" .. playerObject:tostring())
+
+    if test_object_module.playerObject == nil then
+        test_object_module.playerObject = {}
+        for i = 1, 1 do
+            --local ident = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
+            --test_object_module.playerObject[i] = ident
+        end
     else
-        print("destroy_object:" .. playerObject:tostring())
-        script_module:destroy_object(playerObject)
-        playerObject = nil
+        for i=1, #(test_object_module.playerObject) do
+            local ident = test_object_module.playerObject[i]
+            script_module:destroy_object(ident)
+        end
+        test_object_module.playerObject = nil
     end
+
 end

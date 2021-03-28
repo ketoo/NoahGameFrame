@@ -3,7 +3,7 @@ This file is part of:
 NoahFrame
 https://github.com/ketoo/NoahGameFrame
 
-Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
 File creator: lvsheng.huang
 
@@ -88,27 +88,27 @@ public:
 			totalSecond(days * SecondPerDay + hours * SecondPerHour + minutes * SecondPerMinute + seconds)
 	{}
 
-	inline int TotalSecond() const
+	inline int64_t TotalSecond() const
 	{
 		return totalSecond;
 	}
 
-	inline int Seconds() const
+	inline int64_t Seconds() const
 	{
 		return totalSecond - totalSecond / SecondPerMinute;
 	}
 
-	inline int Minutes() const
+	inline int64_t Minutes() const
 	{
 		return (totalSecond - totalSecond / SecondPerHour) / SecondPerMinute;
 	}
 
-	inline int Hours() const
+	inline int64_t Hours() const
 	{
 		return (totalSecond - totalSecond / SecondPerDay) / SecondPerHour;
 	}
 
-	inline int Days() const
+	inline int64_t Days() const
 	{
 		return totalSecond / SecondPerDay;
 	}

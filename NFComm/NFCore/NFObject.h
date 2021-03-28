@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -51,6 +51,9 @@ public:
     ///////////////////////////////////////////////////////////////////////
 
     virtual NFGUID Self() override ;
+
+	virtual const NFVector3& GetPosition() override ;
+	virtual void SetPosition(const NFVector3& pos) override ;
 
     virtual void ToMemoryCounterString(std::string& info) override ;
     /////////////////////////////////////////////////////////////////
@@ -120,7 +123,8 @@ protected:
     virtual bool AddPropertyCallBack(const std::string& strCriticalName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) override ;
 
 private:
-    NFGUID mSelf;
+	NFGUID mSelf;
+	NFVector3 mPosition;
 	CLASS_OBJECT_EVENT mObjectEventState;
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;

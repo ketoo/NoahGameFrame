@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -180,7 +180,7 @@ protected:
     bool ValidRow(int row) const;
     bool ValidCol(int col) const;
 
-    void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
+    void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar);
 
 protected:
     
@@ -190,7 +190,15 @@ protected:
     std::map<std::string, int> mmTag;
 
 	////////////////////////////
-	
+
+	//TODO
+	struct RowData
+	{
+
+	};
+
+	std::vector<RowData> mRecordData;
+
 	TRECORDVEC mtRecordVec;
 	std::vector<int> mVecUsedState;
     int mnMaxRow;

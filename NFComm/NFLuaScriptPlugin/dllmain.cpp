@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -30,26 +30,16 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
-#pragma comment( lib, "lua.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "lua.a" )
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "lua.a" )
+#pragma comment( lib, "lua53.lib" )
+#pragma comment( lib, "libprotobufd.lib" )
 #endif
 
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "NFCore.lib" )
-#pragma comment( lib, "lua.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "lua.a" )
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "lua.a" )
+#pragma comment( lib, "lua53.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
 #endif
 
 #endif

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,45 +23,7 @@
    limitations under the License.
 */
 
-#include "../NFPluginLoader/NFPluginServer.h"
-
-
-////////////EXTERNAL PLUGIN LISTED BELOW////////////////////////////////////////////
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "NFPluginLoader.lib" )
-
-#include "Tutorial/Tutorial1/Tutorial1.h"
-#include "Tutorial/Tutorial2/Tutorial2.h"
-#include "Tutorial/Tutorial3/Tutorial3Plugin.h"
-#include "Tutorial/Tutorial4/Tutorial4Plugin.h"
-#include "Tutorial/Tutorial5/Tutorial5.h"
-#include "Tutorial/Tutorial6/Tutorial6.h"
-#include "Tutorial/Tutorial7/Tutorial7.h"
-
-#pragma comment( lib, "Tutorial1.lib" )
-#pragma comment( lib, "Tutorial2.lib" )
-#pragma comment( lib, "Tutorial3.lib" )
-#pragma comment( lib, "Tutorial4.lib" )
-#pragma comment( lib, "Tutorial5.lib" )
-#pragma comment( lib, "Tutorial6.lib" )
-#pragma comment( lib, "Tutorial7.lib" )
-#endif
-
-void MidWareLoader(NFIPluginManager* pPluginManager)
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	//TUTORIAL
-	CREATE_PLUGIN(pPluginManager, Tutorial1)
-	CREATE_PLUGIN(pPluginManager, Tutorial2)
-	CREATE_PLUGIN(pPluginManager, Tutorial3Plugin)
-	CREATE_PLUGIN(pPluginManager, Tutorial4Plugin)
-	CREATE_PLUGIN(pPluginManager, Tutorial5)
-	CREATE_PLUGIN(pPluginManager, Tutorial6)
-	CREATE_PLUGIN(pPluginManager, Tutorial7)
-#endif
-}
-////////////////////////////////////////////////////////
+#include "NFServer.h"
 
 int main(int argc, char* argv[])
 {
@@ -91,8 +53,9 @@ int main(int argc, char* argv[])
 		serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList)));
 	}
 
-	for (const auto& item : serverList)
+	for (auto item : serverList)
 	{
+		item->SetBasicWareLoader(BasicPluginLoader);
 		item->SetMidWareLoader(MidWareLoader);
 		item->Init();
 	}
@@ -104,7 +67,7 @@ int main(int argc, char* argv[])
 		nIndex++;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		for (const auto& item : serverList)
+		for (auto item : serverList)
 		{
 			item->Execute();
 		}
@@ -112,7 +75,7 @@ int main(int argc, char* argv[])
 
 	////////////////
 
-	for (const auto& item : serverList)
+	for (auto item : serverList)
 	{
 		item->Final();
 	}

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -70,6 +70,8 @@ public:
 	}
 
     virtual NFGUID Self() = 0;
+	virtual const NFVector3& GetPosition() = 0;
+	virtual void SetPosition(const NFVector3& pos) = 0;
 
     template<typename BaseType>
     bool AddPropertyCallBack(const std::string& propertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFINT64))

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -383,9 +383,9 @@ bool NFLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& recor
 	return false;
 }
 
-int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& eventData, const NFData& oldVar, const NFData& newVar)
 {
-	auto funcList = mxLuaRecordCallBackFuncMap.GetElement(xEventData.recordName);
+	auto funcList = mxLuaRecordCallBackFuncMap.GetElement(eventData.recordName);
 	if (funcList)
 	{
 		auto funcNameList = funcList->GetElement(self);
@@ -398,7 +398,7 @@ int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA
 				try
 				{
 					LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
-					func.call<LuaIntf::LuaRef>("", self, xEventData.recordName, xEventData.nOpType, xEventData.row, xEventData.col, oldVar, newVar);
+					func.call<LuaIntf::LuaRef>("", self, eventData.recordName, eventData.nOpType, eventData.row, eventData.col, oldVar, newVar);
 				}
 				catch (LuaIntf::LuaException& e)
 				{
