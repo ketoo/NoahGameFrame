@@ -105,16 +105,15 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFDefine_2eproto_sccs[1] = {
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFDefine_2eproto_once;
-static bool descriptor_table_NFDefine_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto = {
-  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 2986,
+  false, false, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 2986,
   &descriptor_table_NFDefine_2eproto_once, descriptor_table_NFDefine_2eproto_sccs, descriptor_table_NFDefine_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_NFDefine_2eproto::offsets,
   file_level_metadata_NFDefine_2eproto, 0, file_level_enum_descriptors_NFDefine_2eproto, file_level_service_descriptors_NFDefine_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_NFDefine_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_NFDefine_2eproto), true);
+static bool dynamic_init_dummy_NFDefine_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_NFDefine_2eproto)), true);
 namespace NFMsg {
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEventCode_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);

@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClCompile Include="NFServer.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFServer.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BB94D700-0E7C-40AC-B025-6B0E25396ECD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -40,11 +43,11 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\NFCommon.props" />
+    <Import Project="..\..\NFComm\NFCommon.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\NFCommon.props" />
+    <Import Project="..\..\NFComm\NFCommon.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -54,36 +54,36 @@ namespace http
         };
 
         using iequal_string_functor_t = iequal_string_functor<std::string>;
-        using iequal_string_view_functor_t = iequal_string_functor<string_view_t>;
+        using iequal_string_view_functor_t = iequal_string_functor<std::string_view>;
 
-        using ihash_string_view_functor_t = ihash_string_functor<string_view_t>;
-        using  case_insensitive_multimap_view = std::unordered_multimap<string_view_t, string_view_t, ihash_string_view_functor_t, iequal_string_view_functor_t>;
+        using ihash_string_view_functor_t = ihash_string_functor<std::string_view>;
+        using  case_insensitive_multimap_view = std::unordered_multimap<std::string_view, std::string_view, ihash_string_view_functor_t, iequal_string_view_functor_t>;
 
-        string_view_t readline(const char* data, size_t size, size_t& readpos)
+        std::string_view readline(const char* data, size_t size, size_t& readpos)
         {
-            string_view_t strref(data + readpos, size);
+            std::string_view strref(data + readpos, size);
             size_t pos = strref.find("\r\n");
-            if (pos != string_view_t::npos)
+            if (pos != std::string_view::npos)
             {
                 readpos += (pos + 2);
-                return string_view_t(strref.data(), pos);
+                return std::string_view(strref.data(), pos);
             }
             pos = size;
             readpos += pos;
-            return string_view_t(strref.data(), pos);
+            return std::string_view(strref.data(), pos);
         }
 
         class http_header {
         public:
             /// Parse header fields
-            static case_insensitive_multimap_view parse(string_view_t sv) noexcept {
+            static case_insensitive_multimap_view parse(std::string_view sv) noexcept {
                 case_insensitive_multimap_view result;
                 auto data = sv.data();
                 auto size = sv.size();
                 size_t rpos = 0;
-                string_view_t line = readline(data, size, rpos);
+                std::string_view line = readline(data, size, rpos);
                 size_t param_end = 0;
-                while ((param_end = line.find(':')) != string_view_t::npos) {
+                while ((param_end = line.find(':')) != std::string_view::npos) {
                     size_t value_start = param_end + 1;
                     if (value_start < line.size()) {
                         if (line[value_start] == ' ')
@@ -101,19 +101,19 @@ namespace http
         {
         public:
             /// Parse request line and header fields
-            static bool parse(string_view_t sv, string_view_t& method, string_view_t& path, string_view_t& query_string, string_view_t& http_version, case_insensitive_multimap_view& header) noexcept
+            static bool parse(std::string_view sv, std::string_view& method, std::string_view& path, std::string_view& query_string, std::string_view& http_version, case_insensitive_multimap_view& header) noexcept
             {
                 auto data = sv.data();
                 auto size = sv.size();
                 size_t rpos = 0;
-                string_view_t line = readline(data, size, rpos);
+                std::string_view line = readline(data, size, rpos);
 
                 size_t method_end;
-                if ((method_end = line.find(' ')) != string_view_t::npos)
+                if ((method_end = line.find(' ')) != std::string_view::npos)
                 {
                     method = line.substr(0, method_end);
-                    size_t query_start = string_view_t::npos;
-                    size_t path_and_query_string_end = string_view_t::npos;
+                    size_t query_start = std::string_view::npos;
+                    size_t path_and_query_string_end = std::string_view::npos;
                     for (size_t i = method_end + 1; i < line.size(); ++i)
                     {
                         if (line[i] == '?' && (i + 1) < line.size())
@@ -126,16 +126,16 @@ namespace http
                             break;
                         }
                     }
-                    if (path_and_query_string_end != string_view_t::npos)
+                    if (path_and_query_string_end != std::string_view::npos)
                     {
-                        if (query_start != string_view_t::npos) {
+                        if (query_start != std::string_view::npos) {
                             path = line.substr(method_end + 1, query_start - method_end - 2);
                             query_string = line.substr(query_start, path_and_query_string_end - query_start);
                         }
                         else
                             path = line.substr(method_end + 1, path_and_query_string_end - method_end - 1);
                         size_t protocol_end;
-                        if ((protocol_end = line.find('/', path_and_query_string_end + 1)) != string_view_t::npos) {
+                        if ((protocol_end = line.find('/', path_and_query_string_end + 1)) != std::string_view::npos) {
                             if (line.compare(path_and_query_string_end + 1, protocol_end - path_and_query_string_end - 1, "HTTP") != 0)
                                 return false;
                             http_version = line.substr(protocol_end + 1, line.size() - protocol_end - 1);
@@ -143,7 +143,7 @@ namespace http
                         else
                             return false;
 
-                        header = http_header::parse(string_view_t{ data + rpos,size - rpos });
+                        header = http_header::parse(std::string_view{ data + rpos,size - rpos });
                     }
                     else
                         return false;

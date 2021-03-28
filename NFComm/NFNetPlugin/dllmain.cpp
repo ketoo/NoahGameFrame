@@ -33,6 +33,7 @@
 #pragma comment( lib, "NFMessageDefine.lib" )
 #pragma comment( lib, "event.lib" )
 #pragma comment( lib, "event_core.lib" )
+#pragma comment( lib, "libprotobufd.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "event_core.a" )
 #pragma comment( lib, "event.a" )
@@ -48,6 +49,7 @@
 #pragma comment( lib, "NFMessageDefine.lib" )
 #pragma comment( lib, "event.lib" )
 #pragma comment( lib, "event_core.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "event.a" )
