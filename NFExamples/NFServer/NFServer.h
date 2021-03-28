@@ -26,7 +26,7 @@
 
 #include "NFComm/NFPluginLoader/NFPluginServer.h"
 
-#pragma comment( lib, "lua53.lib" )
+#pragma comment( lib, "lua.lib" )
 #ifndef NF_DYNAMIC_PLUGIN
 //for nf-sdk plugins
 #include "NFComm/NFActorPlugin/NFActorPlugin.h"
