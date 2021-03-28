@@ -6,8 +6,8 @@ cd Dependencies
 
 rm -rf vcpkg
 
-git clone https://gitee.com/kytoo/vcpkg.git
-
+git clone https://github.com/ketoo/vcpkg_for_nf.git
+rename vcpkg_for_nf vcpkg
 cd vcpkg
 
 
