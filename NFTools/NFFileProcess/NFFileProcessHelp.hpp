@@ -14,8 +14,8 @@
 #include <dirent.h>
 #else if NF_PLATFORM == NF_PLATFORM_WIN
 #include <io.h>
-#endif
 #include <corecrt_io.h>
+#endif
 
 class NFFileProcessHelp
 {
