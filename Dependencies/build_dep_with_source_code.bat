@@ -1,20 +1,23 @@
 
 git submodule update --init --recursive
 
+rd /s /q vcpkg
 
-cd Dependencies
-
-rm -rf vcpkg
-
-git clone https://gitee.com/kytoo/vcpkg.git
+git clone https://github.com/Microsoft/vcpkg.git
 
 cd vcpkg
 
+call .\bootstrap-vcpkg.bat
 
-7z.exe x installed\x64-windows-static\debug\lib\libprotobufd.zip -oinstalled\x64-windows-static\debug\lib\
-7z.exe x installed\x64-windows-static\lib\libprotobuf.rar -oinstalled\x64-windows-static\lib\
+vcpkg install libevent:x64-windows-static
 
-cd ..
+vcpkg install protobuf:x64-windows-static
+
+::vcpkg install lua:x64-windows-static
+
+vcpkg install sdl2:x64-windows-static
+
+cd..
 
 xcopy vcpkg\installed\x64-windows-static\lib lib\Release\ /s /e /Y
 xcopy vcpkg\installed\x64-windows-static\bin ..\_Out\Release\  /s /e /Y
