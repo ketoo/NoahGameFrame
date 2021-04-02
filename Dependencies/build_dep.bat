@@ -5,6 +5,7 @@ git submodule update --init --recursive
 cd Dependencies
 
 rm -rf vcpkg
+rm -rf vcpkg_for_nf
 
 git clone https://github.com/ketoo/vcpkg_for_nf.git
 rename vcpkg_for_nf vcpkg
