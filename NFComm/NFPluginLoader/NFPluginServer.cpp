@@ -149,6 +149,13 @@ void NFPluginServer::ProcessParameter()
         pPluginManager->SetAppID(appID);
     }
 
+	std::string strCPUCount = FindParameterValue(argList, "CPU=");
+	int cpuCount = 1;//default = 1
+	NF_StrTo(strCPUCount, cpuCount);
+	{
+		pPluginManager->SetAppCPUCount(cpuCount);
+	}
+
 	std::string strDockerFlag = FindParameterValue(argList, "Docker=");
 	int nDockerFlag = 0;
 	if (NF_StrTo(strDockerFlag, nDockerFlag))

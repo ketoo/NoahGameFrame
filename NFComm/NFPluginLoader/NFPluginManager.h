@@ -154,7 +154,7 @@ private:
 
     NFINT64 mnInitTime = 0;
 	NFINT64 mnNowTime = 0;
-	NFINT64 mnCPUCount = 8;
+	NFINT64 mnCPUCount = 1;
 
     std::string configPath;
     std::string configName;
