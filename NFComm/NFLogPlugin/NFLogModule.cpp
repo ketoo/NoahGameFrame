@@ -68,10 +68,10 @@ std::string NFLogModule::GenerateFileName(const std::string &fileName)
 
 	time_t now = time(0);
 	tm *ltm = localtime(&now);
-	std::stringstream ss;
+	std::stringstream ss;souissss
 	ss << std::setfill('0') << std::setw(4) << 1900 + ltm->tm_year << "-" << std::setw(2) << 1 + ltm->tm_mon << "-" << std::setw(2) << ltm->tm_mday;
 
-	sprintf (finalFileName, fileName.c_str(), pPluginManager->GetAppID(), ss.str().c_str());
+	sprintf (finalFileName, fileName.c_str(), ss.str().c_str(), pPluginManager->GetAppID(), ss.str().c_str());
 
 	return finalFileName;
 }
