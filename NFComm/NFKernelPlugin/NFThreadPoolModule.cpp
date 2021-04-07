@@ -83,9 +83,17 @@ void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & da
 	{
 		index = taskID.nData64 % mThreadPool.size();
 	}
-	
-	NF_SHARE_PTR<NFThreadCell> threadobject = mThreadPool[index];
-	threadobject->AddTask(task);
+
+
+	NF_SHARE_PTR<NFThreadCell> threadObject = mThreadPool.at(index);
+	if (threadObject)
+	{
+		threadObject->AddTask(task);
+	}
+	else
+	{
+		//error
+	}
 }
 
 void NFThreadPoolModule::ExecuteTaskResult()
