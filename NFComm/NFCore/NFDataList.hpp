@@ -1325,7 +1325,7 @@ public:
         Concat(value);
         return *this;
     }
-    enum { STACK_SIZE = 8 };
+    enum { STACK_SIZE = 4 };
 
 protected:
 

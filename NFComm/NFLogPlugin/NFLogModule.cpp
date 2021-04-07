@@ -62,6 +62,21 @@ void NFLogModule::rolloutHandler(const char* filename, std::size_t size)
     }
 }
 
+std::string NFLogModule::GenerateFileName(const std::string &fileName)
+{
+	char finalFileName[256] = {0};
+
+	time_t now = time(0);
+	tm *ltm = localtime(&now);
+	std::stringstream ss;
+	ss << std::setfill('0') << std::setw(4) << 1900 + ltm->tm_year << "-" << std::setw(2) << 1 + ltm->tm_mon << "-" << std::setw(2) << ltm->tm_mday;
+
+	sprintf (finalFileName, fileName.c_str(), pPluginManager->GetAppID(), ss.str().c_str());
+
+	return finalFileName;
+}
+
+
 std::string NFLogModule::GetConfigPath(const std::string & fileName)
 {
 	std::string strAppLogName;
@@ -105,17 +120,26 @@ bool NFLogModule::Awake()
 
 	el::Configurations conf(strAppLogName);
 
-	el::Configuration* pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
-	if (pConfiguration == nullptr)
-	{
-		conf = el::Configurations(GetConfigPath("Default"));
-		pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
-	}
+	el::Configuration* globalConfiguration = conf.get(el::Level::Global, el::ConfigurationType::Filename);
+	el::Configuration* debugConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	el::Configuration* infoConfiguration = conf.get(el::Level::Info, el::ConfigurationType::Filename);
+	el::Configuration* warningConfiguration = conf.get(el::Level::Warning, el::ConfigurationType::Filename);
+	el::Configuration* errorConfiguration = conf.get(el::Level::Error, el::ConfigurationType::Filename);
+	el::Configuration* fatalConfiguration = conf.get(el::Level::Fatal, el::ConfigurationType::Filename);
 
-	const std::string& fileName = pConfiguration->value();
-	pConfiguration->setValue(pPluginManager->GetConfigPath() + fileName);
+	globalConfiguration->setValue(GenerateFileName(globalConfiguration->value()));
+	debugConfiguration->setValue(GenerateFileName(debugConfiguration->value()));
+	infoConfiguration->setValue(GenerateFileName(infoConfiguration->value()));
+	warningConfiguration->setValue(GenerateFileName(warningConfiguration->value()));
+	errorConfiguration->setValue(GenerateFileName(errorConfiguration->value()));
+	fatalConfiguration->setValue(GenerateFileName(fatalConfiguration->value()));
 
-	std::cout << "LogConfig: " << strAppLogName << std::endl;
+	std::cout << "LogConfig global: " << globalConfiguration->value() << std::endl;
+	std::cout << "LogConfig debug: " << debugConfiguration->value() << std::endl;
+	std::cout << "LogConfig info: " << infoConfiguration->value() << std::endl;
+	std::cout << "LogConfig warning: " << warningConfiguration->value() << std::endl;
+	std::cout << "LogConfig error: " << errorConfiguration->value() << std::endl;
+	std::cout << "LogConfig fatal: " << fatalConfiguration->value() << std::endl;
 
 	el::Loggers::reconfigureAllLoggers(conf);
 	el::Helpers::installPreRollOutCallback(rolloutHandler);

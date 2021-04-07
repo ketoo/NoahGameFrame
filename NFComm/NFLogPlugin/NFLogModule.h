@@ -89,6 +89,7 @@ protected:
     static void rolloutHandler(const char* filename, std::size_t size);
 
 	std::string GetConfigPath(const std::string& fileName);
+	std::string GenerateFileName(const std::string& fileName);
 
 private:
 
