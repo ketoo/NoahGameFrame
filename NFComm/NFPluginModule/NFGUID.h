@@ -144,6 +144,11 @@ public:
         return 0 == nData64 && 0 == nHead64;
     }
 
+	bool IsNotNull() const
+	{
+		return 0 != nData64 && 0 != nHead64;
+	}
+
     bool operator == (const NFGUID& id) const
     {
         return this->nData64 == id.nData64 && this->nHead64 == id.nHead64;

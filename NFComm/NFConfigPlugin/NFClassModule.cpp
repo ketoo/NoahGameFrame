@@ -46,9 +46,7 @@ NFClassModule::NFClassModule(NFIPluginManager* p)
 
 	if (!this->mbBackup)
 	{
-		//NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
-		//const int threadCount = threadPoolModule->GetThreadCount();
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < pPluginManager->GetAppCPUCount(); ++i)
 		{
 			ThreadClassModule threadElement;
 			threadElement.used = false;
@@ -106,13 +104,11 @@ bool NFClassModule::Shut()
 
 NFIClassModule* NFClassModule::GetThreadClassModule()
 {
-	std::thread::id threadID = std::this_thread::get_id();
-
 	for (int i = 0; i < mThreadClasses.size(); ++i)
 	{
 		if (mThreadClasses[i].used)
 		{
-			if (mThreadClasses[i].threadID == threadID)
+			if (IsCurrentThread(mThreadClasses[i].threadID))
 			{
 				return mThreadClasses[i].classModule;
 			}
@@ -120,7 +116,7 @@ NFIClassModule* NFClassModule::GetThreadClassModule()
 		else
 		{
 			mThreadClasses[i].used = true;
-			mThreadClasses[i].threadID = threadID;
+			mThreadClasses[i].threadID = std::this_thread::get_id();
 			return mThreadClasses[i].classModule;
 		}
 	}

@@ -129,13 +129,12 @@ bool NFElementModule::Shut()
 
 NFIElementModule* NFElementModule::GetThreadElementModule()
 {
-	std::thread::id threadID = std::this_thread::get_id();
 
 	for (int i = 0; i < mThreadElements.size(); ++i)
 	{
 		if (mThreadElements[i].used)
 		{
-			if (mThreadElements[i].threadID == threadID)
+			if (IsCurrentThread(mThreadElements[i].threadID))
 			{
 				return mThreadElements[i].elementModule;
 			}
@@ -143,7 +142,7 @@ NFIElementModule* NFElementModule::GetThreadElementModule()
 		else
 		{
 			mThreadElements[i].used = true;
-			mThreadElements[i].threadID = threadID;
+			mThreadElements[i].threadID = std::this_thread::get_id();
 			return mThreadElements[i].elementModule;
 		}
 	}

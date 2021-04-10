@@ -277,6 +277,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <thread>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
@@ -390,6 +391,22 @@ inline bool IsZeroFloat(const float fValue, float epsilon = 1e-6)
 inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
 {
     return std::abs(dValue) <= epsilon;
+}
+
+inline bool IsCurrentThread(const std::thread::id& threadId)
+{
+    auto currentThreadId = std::this_thread::get_id();
+#if NF_PLATFORM == NF_PLATFORM_APPLE
+	std::stringstream ssThreadId;
+	ssThreadId << threadId;
+
+	std::stringstream ssCurrentThreadId;
+	ssCurrentThreadId << currentThreadId;
+
+    return std::stoull(ssThreadId.str()) == std::stoull(ssCurrentThreadId.str());
+#else
+    return currentThreadId == threadId;
+#endif
 }
 
 inline int64_t NFGetTimeMSEx()

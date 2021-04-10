@@ -40,7 +40,7 @@ cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 time ./BuildNF.CMake.Debug.sh  $1
 
-else
+else if [ "$2" == "RELEASE" ]; then
 
 rm -rf ./_Out/Release/NFServer
 rm -rf ./_Out/Release/*.a

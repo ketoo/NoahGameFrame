@@ -200,9 +200,6 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 		var.AddString(NFrame::Player::GameID());
 		var.AddInt(pPluginManager->GetAppID());
 
-		var.AddString(NFrame::Player::Connection());
-		var.AddInt(1);
-
 		/*
 		var.AddString(NFrame::Player::HomeSceneID());
 		var.AddInt(1);
@@ -220,10 +217,11 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 			return;
 		}
 
+		const int reconnectReason = m_pKernelModule->GetPropertyInt(pObject->Self(), NFrame::Player::ReconnectReason());
 		/////other modules may move the player to other scene or group at ON_FINISHED event by require
 		/////if other modules moved the player, the group id > 0
 		const int group = m_pKernelModule->GetPropertyInt(pObject->Self(), NFrame::IObject::GroupID());
-		if (group <= 0)
+		if (group <= 0 && reconnectReason <= 0)
 		{
 			/////////////////////////////
 			//sometimes, the player might disconnected from game server and want to reconnect.

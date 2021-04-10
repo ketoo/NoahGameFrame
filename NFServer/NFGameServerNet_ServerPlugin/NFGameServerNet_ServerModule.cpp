@@ -179,8 +179,6 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK sockInd
 		return;
 	}
 
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::IObject::Connection(), 0);
-
 	m_pKernelModule->DestroyObject(nPlayerID);
 
 	RemovePlayerGateInfo(nPlayerID);
