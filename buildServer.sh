@@ -52,7 +52,7 @@ else
     cd ..
 fi
 
-
+if [ "$#" == 2 ] || [ "$#" == 0 ]; then
 
 if [ "$arg_2" == "DEBUG" ]; then
    echo "build NF DEBUG"
@@ -63,7 +63,7 @@ cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 time ./BuildNF.CMake.Debug.sh  $arg_1
 
-else
+elif [ "$arg_2" == "RELEASE" ]; then
    echo "build NF RELEASE"
 
 rm -rf ./_Out/Release/NFServer
@@ -72,6 +72,8 @@ rm -rf ./_Out/Release/*.a
 cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Release.sh
 time ./BuildNF.CMake.Release.sh  $arg_1
+fi
+
 fi
 
 cd ../../
