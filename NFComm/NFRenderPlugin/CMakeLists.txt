@@ -88,6 +88,7 @@ if (APPLE)
 	find_library(audioToolbox_lib AudioToolbox)
 	find_library(iconv_lib Iconv)
 	find_library(corefoundation_lib CoreFoundation)
+	find_library(metal_lib Metal)
 
 	set(frameworks
     ${carbon_lib}
@@ -100,7 +101,8 @@ if (APPLE)
     ${opengl_lib}
     ${audioToolbox_lib}
     ${iconv_lib}
-    ${corefoundation_lib})
+    ${corefoundation_lib}
+	${metal_lib})
 
 
 	target_link_libraries(NFRenderPlugin ${frameworks})

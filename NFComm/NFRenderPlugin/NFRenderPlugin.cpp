@@ -61,11 +61,11 @@ const std::string NFRenderPlugin::GetPluginName()
 void NFRenderPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIUIModule, NFUIModule)
-    //REGISTER_MODULE(pPluginManager, NFIRenderModule, NFRenderModule)
+    REGISTER_MODULE(pPluginManager, NFIRenderModule, NFRenderModule)
 }
 
 void NFRenderPlugin::Uninstall()
 {
-    //UNREGISTER_MODULE(pPluginManager, NFIRenderModule, NFRenderModule)
+    UNREGISTER_MODULE(pPluginManager, NFIRenderModule, NFRenderModule)
     UNREGISTER_MODULE(pPluginManager, NFIUIModule, NFUIModule)
 }

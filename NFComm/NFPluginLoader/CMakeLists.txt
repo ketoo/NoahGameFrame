@@ -24,6 +24,10 @@ target_link_libraries(NFPluginLoader NFInventoryPlugin)
 
 #target_link_libraries(NFPluginLoader NFRenderPlugin)
 #target_link_libraries(NFPluginLoader NFBluePrintPlugin)
+if (APPLE)
+	target_link_libraries(NFPluginLoader NFRenderPlugin)
+	target_link_libraries(NFPluginLoader NFBluePrintPlugin)
+endif()
 
 target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)
