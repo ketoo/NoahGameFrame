@@ -77,7 +77,8 @@ public:
 	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
 
 
- 
+	static int curAppID;
+
 
 protected:
 	int SetupGUI();
@@ -86,15 +87,12 @@ protected:
 
 	void ExecuteBegin(NF_SHARE_PTR<NFIView> view);
 	void ExecuteEnd(NF_SHARE_PTR<NFIView> view);
-private:
 
-	// Our state
-	//bool show_demo_window = true;
-	//bool show_another_window = false;
-	SDL_Window* window;
+private:
+	SDL_Window* window = nullptr;
 	bool done = false;
 	bool running = false;
-	SDL_GLContext gl_context;
+	SDL_GLContext gl_context = nullptr;
 
 private:
     std::vector<NF_SHARE_PTR<NFIView>> mViewList;

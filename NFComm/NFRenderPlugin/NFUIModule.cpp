@@ -36,8 +36,20 @@
 #include "UI/NFContainerView.h"
 #include "UI/NFOperatorView.h"
 
+int NFUIModule::curAppID = 0;
+
 bool NFUIModule::Awake()
 {
+	if (NFUIModule::curAppID <= 0)
+	{
+		NFUIModule::curAppID = pPluginManager->GetAppID();
+	}
+
+	if (NFUIModule::curAppID != pPluginManager->GetAppID())
+	{
+		return true;
+	}
+
 	int rt = SetupGUI();
 	if (rt != 0)
 	{
@@ -49,6 +61,10 @@ bool NFUIModule::Awake()
 
 bool NFUIModule::Init()
 {
+	if (NFUIModule::curAppID != pPluginManager->GetAppID())
+	{
+		return true;
+	}
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFContainerView(pPluginManager, NFViewType::ContainerView)));
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFOperatorView(pPluginManager, NFViewType::OperatorView)));
 
@@ -87,6 +103,11 @@ bool NFUIModule::ReadyExecute()
 
 bool NFUIModule::Execute()
 {
+	if (NFUIModule::curAppID != pPluginManager->GetAppID())
+	{
+		return true;
+	}
+
 	if (!done)
 	{
 		ImGuiIO& io = ImGui::GetIO();
