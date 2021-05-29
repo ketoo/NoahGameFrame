@@ -66,8 +66,7 @@
 #endif
 
 
-
-
+std::ofstream *NFIPluginManager::outfile = nullptr;
 NFPluginManager::NFPluginManager() : NFIPluginManager()
 {
 	appID = 0;
@@ -371,15 +370,54 @@ bool NFPluginManager::Execute()
 {
     mnNowTime = time(NULL);
 
-    bool bRet = true;
+	if (testMode)
+	{
+		TEST_BEGIN("NFTester.txt")
 
-    for (auto& xPair : mNeedExecuteModuleVec)
-    {
-        bool tembRet = xPair.second->Execute();
-        bRet = bRet && tembRet;
-    }
+		auto modules = this->TestModules();
+		for (auto module : modules)
+		{
+			if (module->testModule)
+			{
+				std::string begin = "start test module " + module->name;
+				TEST_MODULE_BEGIN(begin)
 
-    return bRet;
+				module->Awake();
+				module->Init();
+				module->AfterInit();
+				module->CheckConfig();
+				module->ReadyExecute();
+
+				module->Execute();
+
+				module->BeforeShut();
+				module->Shut();
+				module->Finalize();
+
+				std::string end = "end test module " + module->name;
+				TEST_MODULE_END(end, module->testPass)
+			}
+		}
+	}
+	else
+	{
+		return ForceExecute();
+	}
+
+	return true;
+}
+
+bool NFPluginManager::ForceExecute()
+{
+	bool bRet = true;
+
+	for (auto& xPair : mNeedExecuteModuleVec)
+	{
+		bool tembRet = xPair.second->Execute();
+		bRet = bRet && tembRet;
+	}
+
+	return bRet;
 }
 
 inline int NFPluginManager::GetAppID() const
@@ -530,10 +568,15 @@ void NFPluginManager::AddModule(const std::string& moduleName, NFIModule* pModul
     {
         mModuleInstanceMap.insert(ModuleInstanceMap::value_type(moduleName, pModule));
 
-        if (pModule->m_bIsExecute)
+        if (pModule->executableModule)
         {
 	        mNeedExecuteModuleVec.push_back(std::make_pair(moduleName, pModule));
         }
+
+        if (pModule->testModule)
+		{
+			AddTestModule(moduleName, pModule);
+		}
     }
 }
 
@@ -855,4 +898,42 @@ bool NFPluginManager::UsingBackThread() const
 void NFPluginManager::SetUsingBackThread(const bool b)
 {
 	usingBackThread = b;
+}
+
+void NFPluginManager::SetArgs(const string& v)
+{
+	strArgvList = v;
+	ProcessParameter();
+}
+
+const std::string& NFPluginManager::GetParam(const string& k)
+{
+	auto it = userParams.find(k);
+	if (it != userParams.end())
+	{
+		return it->second;
+	}
+
+	return "";
+}
+
+void NFPluginManager::ProcessParameter()
+{
+	std::string token;
+	std::istringstream tokenStream(this->strArgvList);
+	while (std::getline(tokenStream, token, ' '))
+	{
+		std::size_t found = token.find("=");
+		if (found != std::string::npos)
+		{
+			std::string k = token.substr(0, found);
+			std::string v = token.substr(found + 1, token.length());
+
+			userParams[k] = v;
+		}
+	}
+}
+void NFPluginManager::EnableTestMode()
+{
+	testMode = true;
 }

@@ -88,6 +88,7 @@ public:
 	virtual std::list<NFIModule*> TestModules() override;
 
     virtual bool Execute() override;
+	virtual bool ForceExecute() override;
 
     virtual int GetAppID() const override;
     virtual void SetAppID(const int appID) override;
@@ -133,10 +134,16 @@ public:
 
     virtual bool GetFileContent(const std::string &fileName, std::string &content) override;
 
+	virtual void SetArgs(const std::string &v) override;
+	virtual const std::string &GetParam(const std::string &k) override;
+
 	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) override;
 	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) override;
 
+	virtual void EnableTestMode() override;
+
 protected:
+	void ProcessParameter();
 
     bool CheckStaticPlugin();
 
@@ -151,6 +158,7 @@ private:
     bool mbIsDocker = false;
 	bool mbStaticPlugin = false;
 	bool usingBackThread = false;
+	bool testMode = false;
 
     NFINT64 mnInitTime = 0;
 	NFINT64 mnNowTime = 0;
@@ -176,6 +184,9 @@ private:
 
     std::vector<std::string> mStaticPlugin;
 	std::map<std::string, std::vector<NFReplaceContent>> mReplaceContent;
+
+	std::string strArgvList;
+	std::map<std::string, std::string> userParams;
 
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;

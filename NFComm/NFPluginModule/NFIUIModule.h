@@ -64,7 +64,7 @@ public:
 
 	NFIView(NFIPluginManager* p, NFViewType vt, const std::string& name)
 	{
-        m_bIsExecute = true;
+		executableModule = true;
 		this->viewType = vt;
 		pPluginManager = p;
 		this->name = name;

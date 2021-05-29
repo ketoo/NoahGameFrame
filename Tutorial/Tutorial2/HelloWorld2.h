@@ -40,7 +40,7 @@ class NFHelloWorld2
 public:
     NFHelloWorld2(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
     }
 

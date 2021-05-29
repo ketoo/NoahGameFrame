@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -24,34 +24,22 @@
 */
 
 #include <assert.h>
-#include "NFRedisTester.h"
+#include "NFRedisTestModule.h"
 
-NFRedisTester::NFRedisTester(const std::string& ip, int port, const std::string& auth)
+NFRedisTestModule::NFRedisTestModule(NFIPluginManager* pluginManager)
 {
-    mxRedisClient.Connect(ip, port, auth);
+	this->pPluginManager = pluginManager;
+	this->testModule = true;
 }
 
-bool NFRedisTester::RunTester()
+bool NFRedisTestModule::AfterInit()
 {
-	if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
-	{
-		printf("password error!\n");
-		return true;
-	}
-
-    mxRedisClient.FLUSHDB();
-	TestKey();
-	TestString();
-	TestList();
-	TestHash();
-	TestSet();
-	TestSort();
-	TestPubSub();
+	mxRedisClient.Connect("127.0.0.1", 6379, "NoahGameFrame");
 
 	return true;
 }
 
-bool NFRedisTester::Test_1()
+bool NFRedisTestModule::Test_1()
 {
 	int64_t num;
 	mxRedisClient.INCRBY("12123ddddd", 13, num);
@@ -60,7 +48,7 @@ bool NFRedisTester::Test_1()
 	return true;
 }
 
-void NFRedisTester::TestHash()
+void NFRedisTestModule::TestHash()
 {
 	int64_t nnn;
 	assert(mxRedisClient.HINCRBY("12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
@@ -167,7 +155,7 @@ void NFRedisTester::TestHash()
 	}
 }
 
-void NFRedisTester::TestKey()
+void NFRedisTestModule::TestKey()
 {
 	int64_t nnn;
 	assert(mxRedisClient.INCRBY("12123ddddd", 13, nnn) == true);
@@ -180,7 +168,7 @@ void NFRedisTester::TestKey()
 	assert(mxRedisClient.SETNX("124422dd1212", "121212") == true);
 
 
-	std::string strKey = "NFRedisTester::TestKey";
+	std::string strKey = "NFRedisTestModule::TestKey";
 	std::string strValue = "1232321123r34234";
 
 	assert(mxRedisClient.SET(strKey, strValue) == true);
@@ -207,7 +195,7 @@ void NFRedisTester::TestKey()
 
 }
 
-void NFRedisTester::TestList()
+void NFRedisTestModule::TestList()
 {
 	/*
 	NF_SHARE_PTR<NFRedisResult> RPUSHX(const std::string& key, const std::string& value);
@@ -299,7 +287,7 @@ void NFRedisTester::TestList()
 	assert(values.size() == strList.size() + 1);
 }
 
-void NFRedisTester::TestSet()
+void NFRedisTestModule::TestSet()
 {
 	struct A
 	{
@@ -318,12 +306,12 @@ void NFRedisTester::TestSet()
 	assert(pa->a == 100 && pa->b == 200);
 }
 
-void NFRedisTester::TestSort()
+void NFRedisTestModule::TestSort()
 {
 
 }
 
-void NFRedisTester::TestString()
+void NFRedisTestModule::TestString()
 {
 	std::string strKey11 = "TestString1112121";
 	std::string strValu11e = "111";
@@ -401,17 +389,41 @@ void NFRedisTester::TestString()
 
 }
 
-void NFRedisTester::TestPubSub()
+void NFRedisTestModule::TestPubSub()
 {
 
 }
 
-void NFRedisTester::Execute()
+bool NFRedisTestModule::Execute()
 {
-    mxRedisClient.Execute();
+	if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
+	{
+		printf("password error!\n");
+		return true;
+	}
+
+	mxRedisClient.FLUSHDB();
+	TestKey();
+	TestString();
+	TestList();
+	TestHash();
+	TestSet();
+	TestSort();
+	TestPubSub();
+
+	PerformanceTest();
+
+	mxRedisClient.Execute();
+
+    return false;
 }
 
-bool NFRedisTester::IsConnect()
+bool NFRedisTestModule::IsConnect()
 {
 	return mxRedisClient.IsConnect();
+}
+
+void NFRedisTestModule::PerformanceTest()
+{
+
 }

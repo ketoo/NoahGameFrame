@@ -45,7 +45,7 @@ public:
 	NFSyncPosModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
-		m_bIsExecute = true;
+		executableModule = true;
 	}
 
 	virtual ~NFSyncPosModule() {};

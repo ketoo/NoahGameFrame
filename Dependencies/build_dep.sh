@@ -60,7 +60,7 @@ chmod 777 *.sh
 
 ./build_hiredis.sh
 ./build_vcpkg.sh
-./build_lua.sh
+#./build_lua.sh
 
 if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/

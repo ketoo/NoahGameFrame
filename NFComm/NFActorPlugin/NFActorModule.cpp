@@ -28,7 +28,7 @@
 
 NFActorModule::NFActorModule(NFIPluginManager* p)
 {
-    m_bIsExecute = true;
+	executableModule = true;
 	pPluginManager = p;
 
     srand((unsigned)time(NULL));

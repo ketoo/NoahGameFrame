@@ -49,7 +49,7 @@ class NFDBToWorldModule
 public:
 	NFDBToWorldModule(NFIPluginManager* p)
 	{
-        m_bIsExecute = true;
+		executableModule = true;
 		pPluginManager = p;
 		mLastReportTime = 0;
 	}

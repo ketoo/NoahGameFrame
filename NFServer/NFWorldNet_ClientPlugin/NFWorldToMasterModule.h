@@ -44,7 +44,7 @@ public:
 	{
 		pPluginManager = p;
 		mLastReportTime = 0;
-        m_bIsExecute = true;
+		executableModule = true;
 	}
 
 	virtual bool Init();

@@ -11,7 +11,7 @@
 #example 3: ./buildServer.sh BUILD_MID_WARE RELEASE
 #example 4: ./buildServer.sh BUILD_TOOLS_ONLY
 
-arg_1="BUILD_MID_WARE"
+arg_1=""
 arg_2="RELEASE"
 
 echo "$1"

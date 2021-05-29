@@ -43,7 +43,7 @@ class NFHelloWorld3Module
 public:
     NFHelloWorld3Module(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
     }
 

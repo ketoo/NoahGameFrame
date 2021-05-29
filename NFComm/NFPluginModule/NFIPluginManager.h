@@ -123,7 +123,10 @@ public:
 	{
 		return true;
 	}
-
+	virtual bool ForceExecute()
+	{
+		return true;
+	}
 	virtual bool BeforeShut()
 	{
 		return true;
@@ -245,8 +248,138 @@ public:
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &fileName, std::string &content) = 0;
 
+	virtual void SetArgs(const std::string &v) = 0;
+	virtual const std::string &GetParam(const std::string &k) = 0;
+
 	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) = 0;
 	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) = 0;
+	virtual void EnableTestMode() = 0;
+
+	static std::ofstream *outfile;
 };
 
+
+#define TEST_BEGIN(fileName)                                                                                           \
+    {                                                                                                                  \
+        if (!NFIPluginManager::outfile)                                                                                  \
+        {                                                                                                              \
+            NFIPluginManager::outfile = new std::ofstream(fileName);                                                     \
+        }                                                                                                              \
+    }
+
+#define TEST_MODULE_BEGIN(moduleName)                                                                                  \
+    {                                                                                                                  \
+        *NFIPluginManager::outfile << "" << std::endl;                                                                   \
+        *NFIPluginManager::outfile << "start test module " << moduleName << std::endl;                                   \
+    }
+
+#define TEST_MODULE_END(moduleName, pass)                                                                              \
+    {                                                                                                                  \
+        if (pass)                                                                                                      \
+            *NFIPluginManager::outfile << "end test module " << moduleName << ", result: pass" << std::endl;             \
+        else                                                                                                           \
+            *NFIPluginManager::outfile << "end test module " << moduleName << ", result: fail" << std::endl;             \
+    }
+
+#define TEST_SECTION(moduleName)                                                                                       \
+    {                                                                                                                  \
+        *NFIPluginManager::outfile << moduleName << std::endl;                                                           \
+    }
+
+#define REQUIRE_EQUAL(desc, a, b)                                                                                      \
+    {                                                                                                                  \
+        if (a == b)                                                                                                    \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " CHECK_EQUAL==>" << a << ", " << b << ", result: pass" << std::endl;  \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " CHECK_EQUAL==>" << a << ", " << b << ", result: fail" << std::endl;  \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_POINTER(desc, a)                                                                                       \
+    {                                                                                                                  \
+        if (a == nullptr)                                                                                              \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " REQUIRE_POINTER==>" << a << ", "                                     \
+                                     << ", result: fail" << std::endl;                                                 \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " REQUIRE_POINTER==>" << a << ", "                                     \
+                                     << ", result: pass" << std::endl;                                                 \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_UNEQUAL(desc, a, b)                                                                                    \
+    {                                                                                                                  \
+        if (a == b)                                                                                                    \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " CHECK_UNEQUAL==>" << a << ", " << b << ", result: fail"              \
+                                     << std::endl;                                                                     \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " CHECK_UNEQUAL==>" << a << ", " << b << ", result: pass"              \
+                                     << std::endl;                                                                     \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_GREATER_EQUAL(desc, a, b)                                                                              \
+    {                                                                                                                  \
+        if (a >= b)                                                                                                    \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " GREATER_EQUAL==>" << a << ", " << b << ", result: pass"              \
+                                     << std::endl;                                                                     \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " GREATER_EQUAL==>" << a << ", " << b << ", result: fail"              \
+                                     << std::endl;                                                                     \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_GREATER_THAN(desc, a, b)                                                                               \
+    {                                                                                                                  \
+        if (a > b)                                                                                                     \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " GREATER_THAN==>" << a << ", " << b << ", result: pass" << std::endl; \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " GREATER_THAN==>" << a << ", " << b << ", result: fail" << std::endl; \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_LESS_EQUAL(desc, a, b)                                                                                 \
+    {                                                                                                                  \
+        if (a <= b)                                                                                                    \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " LESS_EQUAL==>" << a << ", " << b << ", result: pass" << std::endl;   \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " LESS_EQUAL==>" << a << ", " << b << ", result: fail" << std::endl;   \
+        }                                                                                                              \
+    }
+
+#define REQUIRE_LESS_THAN(desc, a, b)                                                                                  \
+    {                                                                                                                  \
+        if (a < b)                                                                                                     \
+        {                                                                                                              \
+            *NFIPluginManager::outfile << desc << " LESS_THAN==>" << a << ", " << b << ", result: pass" << std::endl;    \
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            this->testPass = false;                                                                                    \
+            *NFIPluginManager::outfile << desc << " LESS_THAN==>" << a << ", " << b << ", result: fail" << std::endl;    \
+        }                                                                                                              \
+    }
 #endif

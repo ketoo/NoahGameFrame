@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,20 +23,18 @@
    limitations under the License.
 */
 
-#ifndef NF_TEST_PLUGIN_H
-#define NF_TEST_PLUGIN_H
-
-///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFTestPlugin : public NFIPlugin
+//////////////////////////////////////////////////////////////////////////
+class NFNoSqlTestPlugin : public NFIPlugin
 {
 public:
-	NFTestPlugin(NFIPluginManager* p)
+	NFNoSqlTestPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
+
     virtual const int GetPluginVersion();
 
     virtual const std::string GetPluginName();
@@ -45,4 +43,3 @@ public:
 
     virtual void Uninstall();
 };
-#endif //NF_TASK_PLUGIN_H

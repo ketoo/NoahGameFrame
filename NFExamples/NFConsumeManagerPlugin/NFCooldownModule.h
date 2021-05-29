@@ -45,8 +45,8 @@ public:
 
     virtual bool AfterInit() override;
 
-    virtual void AddCooldown(const NFGUID& self, const std::string& configID );
-    virtual bool ExistCooldown(const NFGUID& self, const std::string& configID );
+    virtual void AddCooldown(const NFGUID& self, const std::string& configID ) override;
+    virtual bool ExistCooldown(const NFGUID& self, const std::string& configID ) override;
 
 private:
 

@@ -45,7 +45,7 @@ class NFWorldNet_ServerModule
 public:
     NFWorldNet_ServerModule(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
         mnLastCheckTime = pPluginManager->GetNowTime();
     }

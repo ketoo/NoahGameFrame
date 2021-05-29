@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,47 +23,40 @@
    limitations under the License.
 */
 
-#ifndef NF_TEST_MODULE_H
-#define NF_TEST_MODULE_H
+#include "NFNoSqlTestPlugin.h"
+#include "NFRedisTestModule.h"
 
-#include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
+#ifdef NF_DYNAMIC_PLUGIN
 
-class NFITestModule
-	: public NFIModule
+NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
+    CREATE_PLUGIN(pm, NFNoSqlTestPlugin)
 };
 
-class NFTestModule
-    : public NFITestModule
+NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-public:
-    NFTestModule( NFIPluginManager* p )
-    {
-        m_bIsExecute = true;
-        pPluginManager = p;
-    }
-
-    virtual ~NFTestModule() {};
-
-    virtual bool Awake();
-    virtual bool Init();
-    virtual bool AfterInit();
-    virtual bool CheckConfig();
-    virtual bool ReadyExecute();
-    virtual bool Execute();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Finalize();
-    virtual bool OnReloadPlugin();
-
-
-protected:
-    int Factorial(int n);
-
-private:
+    DESTROY_PLUGIN(pm, NFNoSqlTestPlugin)
 };
-
 
 #endif
+//////////////////////////////////////////////////////////////////////////
+
+const int NFNoSqlTestPlugin::GetPluginVersion()
+{
+    return 0;
+}
+
+const std::string NFNoSqlTestPlugin::GetPluginName()
+{
+	return GET_CLASS_NAME(NFNoSqlTestPlugin);
+}
+
+void NFNoSqlTestPlugin::Install()
+{
+	REGISTER_MODULE(pPluginManager, NFIRedisTestModule, NFRedisTestModule)
+}
+
+void NFNoSqlTestPlugin::Uninstall()
+{
+	UNREGISTER_MODULE(pPluginManager, NFIRedisTestModule, NFRedisTestModule)
+}

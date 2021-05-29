@@ -44,11 +44,11 @@ public:
     virtual bool Execute() override;
     virtual bool AfterInit() override;
 
-    virtual bool SetConsumeModule(const int skillType, NFISkillConsumeProcessModule* pModule);
-	virtual bool SetConsumeModule(const int skillType, const int skillSubType, NFISkillConsumeProcessModule* pModule);
+    virtual bool SetConsumeModule(const int skillType, NFISkillConsumeProcessModule* pModule) override;
+	virtual bool SetConsumeModule(const int skillType, const int skillSubType, NFISkillConsumeProcessModule* pModule) override;
 
-	virtual NFISkillConsumeProcessModule* GetConsumeModule( const int skillType);
-	virtual NFISkillConsumeProcessModule* GetConsumeModule( const int skillType, const int skillSubType);
+	virtual NFISkillConsumeProcessModule* GetConsumeModule( const int skillType) override;
+	virtual NFISkillConsumeProcessModule* GetConsumeModule( const int skillType, const int skillSubType) override;
 
 private:
 	std::map<NFGUID, NFISkillConsumeProcessModule*> mSkillConsumeProcess;

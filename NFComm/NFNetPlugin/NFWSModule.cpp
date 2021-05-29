@@ -77,7 +77,7 @@ static constexpr size_t FIN_FRAME_FLAG = 0x80;// 1 0 0 0 0 0 0 0
 
 NFWSModule::NFWSModule(NFIPluginManager* p)
 {
-    m_bIsExecute = true;
+	executableModule = true;
     pPluginManager = p;
 
     mnBufferSize = 0;

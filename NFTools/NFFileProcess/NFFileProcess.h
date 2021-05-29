@@ -1,7 +1,7 @@
 #pragma once
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "Dependencies/common/lexical_cast.hpp"
-#include "MiniExcelReader.h"
+#include "MiniExcelReader/MiniExcelReader.h"
 #include "NFFileData.h"
 #include "NFIGenerator.h"
 #include "NFFileProcessHelp.hpp"

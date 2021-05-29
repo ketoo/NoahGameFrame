@@ -55,7 +55,7 @@ class NFUIModule
 public:
     NFUIModule( NFIPluginManager* p )
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
     }
 

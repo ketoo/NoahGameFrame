@@ -43,7 +43,7 @@ class NFLoginToMasterModule
 public:
     NFLoginToMasterModule(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
 		mLastReportTime = 0;
     }

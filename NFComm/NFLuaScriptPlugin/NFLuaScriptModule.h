@@ -90,7 +90,7 @@ class NFLuaScriptModule
 public:
     NFLuaScriptModule(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
     }
 

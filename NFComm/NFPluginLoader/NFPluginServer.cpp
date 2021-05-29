@@ -29,6 +29,7 @@
 NFPluginServer::NFPluginServer(const std::string& strArgv)
 {
     this->strArgvList = strArgv;
+	pPluginManager = NF_SHARE_PTR<NFIPluginManager>(NF_NEW NFPluginManager());
     
 #if NF_PLATFORM != NF_PLATFORM_WIN
 	NF_CRASH_TRY_ROOT
@@ -80,7 +81,7 @@ void NFPluginServer::Init()
 {
     PrintfLogo();
 
-    pPluginManager = NF_SHARE_PTR<NFIPluginManager>(NF_NEW NFPluginManager());
+	pPluginManager->SetArgs(strArgvList);
 
     ProcessParameter();
 
@@ -139,24 +140,24 @@ void NFPluginServer::ProcessParameter()
 		argList.push_back(token);
 	}
 
-    pPluginManager->SetConfigName(FindParameterValue(argList, "Plugin="));
-	pPluginManager->SetAppName(FindParameterValue(argList, "Server="));
+    pPluginManager->SetConfigName(pPluginManager->GetParam("Plugin"));
+	pPluginManager->SetAppName(pPluginManager->GetParam("Server"));
 
-	std::string strAppID = FindParameterValue(argList, "ID=");
+	std::string strAppID = pPluginManager->GetParam("ID");
     int appID = 0;
     if (NF_StrTo(strAppID, appID))
     {
         pPluginManager->SetAppID(appID);
     }
 
-	std::string strCPUCount = FindParameterValue(argList, "CPU=");
+	std::string strCPUCount = pPluginManager->GetParam("CPU=");
 	int cpuCount = 1;//default = 1
 	NF_StrTo(strCPUCount, cpuCount);
 	{
 		pPluginManager->SetAppCPUCount(cpuCount);
 	}
 
-	std::string strDockerFlag = FindParameterValue(argList, "Docker=");
+	std::string strDockerFlag = pPluginManager->GetParam("Docker");
 	int nDockerFlag = 0;
 	if (NF_StrTo(strDockerFlag, nDockerFlag))
 	{
@@ -253,18 +254,7 @@ bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strF
     return true;
 }
 
-std::string NFPluginServer::FindParameterValue(const std::vector<std::string>& argList, const std::string& header)
+NF_SHARE_PTR<NFIPluginManager> NFPluginServer::GetPluginManager()
 {
-	for (int i = 0; i < argList.size(); i++)
-	{
-		std::string name = argList[i];
-		if (name.find(header) != string::npos)
-		{
-			name.erase(0, header.length());
-			return name;
-		}
-
-	}
-
-	return "";
+	return pPluginManager;
 }

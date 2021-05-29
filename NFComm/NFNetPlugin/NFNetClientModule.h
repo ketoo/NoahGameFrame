@@ -41,78 +41,78 @@ class NFNetClientModule : public NFINetClientModule
 public:
     NFNetClientModule(NFIPluginManager* p);
 
-    virtual bool Init();
+    virtual bool Init() override;
 
-    virtual bool AfterInit();
+    virtual bool AfterInit() override;
 
-    virtual bool BeforeShut();
+    virtual bool BeforeShut() override;
 
-    virtual bool Shut();
+    virtual bool Shut() override;
 
-    virtual bool Execute();
+    virtual bool Execute() override;
 
-    virtual void AddServer(const ConnectData& xInfo);
+    virtual void AddServer(const ConnectData& xInfo) override;
 
     virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
-    virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+    virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr) override;
 
-    virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+    virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) override;
 
-    virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
+    virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr) override;
 
-    virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID);
-
-    ////////////////////////////////////////////////////////////////////////////////
-	virtual void SendByServerIDWithOutHead(const int serverID, const uint16_t msgID, const std::string& strData);
-
-	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData);
-	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData, const NFGUID id);
-
-	virtual void SendToAllServerWithOutHead(const uint16_t msgID, const std::string& strData);
-
-	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData);
-	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData, const NFGUID id);
-
-	virtual void SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData);
-
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData);
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData, const NFGUID id);
-
-	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData);
-	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id);
-
-    virtual void SendToAllServerByPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id);
-
-    virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id);
+    virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID) override;
 
     ////////////////////////////////////////////////////////////////////////////////
+	virtual void SendByServerIDWithOutHead(const int serverID, const uint16_t msgID, const std::string& strData) override;
 
-	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData);
+	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData) override;
+	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData, const NFGUID id) override;
 
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData, const NFGUID id);
+	virtual void SendToAllServerWithOutHead(const uint16_t msgID, const std::string& strData) override;
 
-	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData);
+	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData) override;
+	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData, const NFGUID id) override;
 
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData, const NFGUID id);
+	virtual void SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData) override;
 
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id);
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData) override;
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData, const NFGUID id) override;
 
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id);
+	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData) override;
+	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) override;
+
+    virtual void SendToAllServerByPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) override;
+
+    virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) override;
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    virtual NFMapEx<int, ConnectData>& GetServerList();
+	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData) override;
 
-    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NF_SERVER_TYPES eType);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData) override;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData, const NFGUID id) override;
 
-    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int serverID);
+	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData) override;
 
-    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData) override;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData, const NFGUID id) override;
+
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData) override;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) override;
+
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData) override;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) override;
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    virtual NFMapEx<int, ConnectData>& GetServerList() override;
+
+    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NF_SERVER_TYPES eType) override;
+
+    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int serverID) override;
+
+    virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet) override;
 
 protected:
 

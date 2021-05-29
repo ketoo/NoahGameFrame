@@ -116,7 +116,7 @@ private:
 	NFGUID mSelectedNode;
 	std::string name;
 
-	std::function<void(const NFGUID&, const bool)> mSelectedFuntor;
+	std::function<void(const NFGUID&, const bool)> mSelectedFunctor;
 
 	std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
 };

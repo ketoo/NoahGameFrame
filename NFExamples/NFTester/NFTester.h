@@ -81,6 +81,9 @@
 #include "Tutorial/Tutorial6/Tutorial6.h"
 #include "Tutorial/Tutorial7/Tutorial7.h"
 
+//test cases
+#include "NFTestCases/NFNoSqlTestPlugin/NFNoSqlTestPlugin.h"
+
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
@@ -210,4 +213,6 @@ void MidWareLoader(NFIPluginManager* pPluginManager)
 	CREATE_PLUGIN(pPluginManager, Tutorial5)
 	CREATE_PLUGIN(pPluginManager, Tutorial6)
 	CREATE_PLUGIN(pPluginManager, Tutorial7)
+
+	CREATE_PLUGIN(pPluginManager, NFNoSqlTestPlugin)
 }

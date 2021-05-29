@@ -44,11 +44,11 @@ public:
     virtual bool Execute() override;
     virtual bool AfterInit() override;
 
-	virtual bool SetConsumeModule(const int itemType, NFIItemConsumeProcessModule* pModule);
-	virtual bool SetConsumeModule(const int itemType, const int itemSubType, NFIItemConsumeProcessModule* pModule);
+	virtual bool SetConsumeModule(const int itemType, NFIItemConsumeProcessModule* pModule) override;
+	virtual bool SetConsumeModule(const int itemType, const int itemSubType, NFIItemConsumeProcessModule* pModule) override;
 
-	virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType);
-	virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType, const int itemSubType);
+	virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType) override;
+	virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType, const int itemSubType) override;
 
 private:
 

@@ -175,15 +175,15 @@ void NFTreeView::SetName(const std::string& name)
 void NFTreeView::SetSelectedNode(const NFGUID& nodeId, bool doubleClick)
 {
 	mSelectedNode = nodeId;
-	if (mSelectedFuntor)
+	if (mSelectedFunctor)
 	{
-		mSelectedFuntor(mSelectedNode, doubleClick);
+		mSelectedFunctor(mSelectedNode, doubleClick);
 	}
 }
 
 void NFTreeView::SetSelectedNodeFunctor(std::function<void(const NFGUID&, const bool)> functor)
 {
-	mSelectedFuntor = functor;
+	mSelectedFunctor = functor;
 }
 
 const NFGUID NFTreeView::GetSelectedNode() const

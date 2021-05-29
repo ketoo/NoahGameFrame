@@ -40,7 +40,7 @@ class NFMasterNet_HttpServerModule
 public:
 	NFMasterNet_HttpServerModule(NFIPluginManager* p)
 	{
-        m_bIsExecute = true;
+		executableModule = true;
 		pPluginManager = p;
 	}
 

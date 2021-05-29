@@ -91,6 +91,7 @@ public:
 	virtual bool Execute() = 0;
     virtual bool SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex)=0;
 	virtual bool SendMsg(const std::string& msg, const NFSOCK sockIndex, const bool text = true) = 0;
+	virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex /*= 0*/) = 0;
 	virtual bool SendMsgToAllClient(const std::string& msg, const bool text = true) = 0;
 
 	virtual NFINet* GetNet() = 0;

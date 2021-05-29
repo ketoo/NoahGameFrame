@@ -44,28 +44,29 @@ public:
 	NFActorModule(NFIPluginManager* p);
     virtual ~NFActorModule();
 
-    virtual bool Init();
+    virtual bool Init() override;
 
-    virtual bool AfterInit();
+    virtual bool AfterInit() override;
 
-    virtual bool BeforeShut();
+    virtual bool BeforeShut() override;
 
-    virtual bool Shut();
+    virtual bool Shut() override;
 
-    virtual bool Execute();
+    virtual bool Execute() override;
 
-	virtual NF_SHARE_PTR<NFIActor> RequireActor();
-	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
-	virtual bool ReleaseActor(const NFGUID nActorIndex);
+	virtual NF_SHARE_PTR<NFIActor> RequireActor() override;
+	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex) override;
+	virtual bool ReleaseActor(const NFGUID nActorIndex) override;
 
-    virtual bool SendMsgToActor(const NFGUID actorIndex, const NFGUID who, const int eventID, const std::string& data, const std::string& arg = "");
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const NFGUID who, const int eventID, const std::string& data, const std::string& arg = "") override;
 
-	virtual bool AddResult(const NFActorMessage& message);
+	virtual bool AddResult(const NFActorMessage& message) override;
 
 protected:
-    virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
+	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end) override;
 
-	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
+
+	virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
 
 	virtual bool ExecuteEvent();
 	virtual bool ExecuteResultEvent();

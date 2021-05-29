@@ -91,7 +91,7 @@ class NFHelloWorld4Module
 public:
     NFHelloWorld4Module(NFIPluginManager* p)
     {
-        m_bIsExecute = true;
+		executableModule = true;
         pPluginManager = p;
     }
 

@@ -8,6 +8,7 @@
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "Dependencies/common/lexical_cast.hpp"
+#include "../minizip/zip.h"
 namespace MiniExcelReader
 {
     struct Cell

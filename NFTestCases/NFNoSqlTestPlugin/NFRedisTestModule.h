@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2021 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -26,9 +26,7 @@
 #ifndef NFREDISPLUGIN_NFREDISTESTER_H
 #define NFREDISPLUGIN_NFREDISTESTER_H
 
-#include "NFRedisClient.h"
-
-
+#include "NFComm/NFNoSqlPlugin/NFRedisClient.h"
 
 class NFRedisTester
 {
@@ -52,5 +50,37 @@ public:
     NFRedisClient mxRedisClient;
 };
 
+
+class NFIRedisTestModule : public NFIModule
+{
+
+};
+
+class NFRedisTestModule : public NFIRedisTestModule
+{
+ public:
+	NFRedisTestModule(NFIPluginManager* pluginManager);
+
+	virtual bool AfterInit() override;
+
+	virtual bool Execute() override;
+
+ private:
+	bool IsConnect();
+
+	bool Test_1();
+
+	void TestHash();
+	void TestKey();
+	void TestList();
+	void TestSet();
+	void TestSort();
+	void TestString();
+	void TestPubSub();
+
+	void PerformanceTest();
+
+	NFRedisClient mxRedisClient;
+};
 
 #endif //NFREDISPLUGIN_NFREDISTESTER_H

@@ -73,6 +73,7 @@ public:
 
 	void SetBasicWareLoader(std::function<void(NFIPluginManager * p)> fun);
 	void SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun);
+	NF_SHARE_PTR<NFIPluginManager> GetPluginManager();
 
 private:
 	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
@@ -83,8 +84,6 @@ private:
 private:
 
 	void ProcessParameter();
-
-	std::string FindParameterValue(const std::vector<std::string>& argList, const std::string& header);
 
 	void InitDaemon();
 
