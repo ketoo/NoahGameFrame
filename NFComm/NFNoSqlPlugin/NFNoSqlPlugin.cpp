@@ -46,11 +46,6 @@ const int NFNoSqlPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFNoSqlPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFNoSqlPlugin);
-}
-
 void NFNoSqlPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)

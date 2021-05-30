@@ -50,11 +50,6 @@ const int NFWorldNet_ClientPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFWorldNet_ClientPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFWorldNet_ClientPlugin);
-}
-
 void NFWorldNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFWorldToMasterModule)

@@ -51,11 +51,6 @@ const int NFDBNet_ClientPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFDBNet_ClientPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFDBNet_ClientPlugin);
-}
-
 void NFDBNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIDBToWorldModule, NFDBToWorldModule)

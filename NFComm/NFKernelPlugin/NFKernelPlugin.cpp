@@ -55,11 +55,6 @@ const int NFKernelPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFKernelPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFKernelPlugin);
-}
-
 void NFKernelPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFISceneModule, NFSceneModule)

@@ -54,11 +54,6 @@ const int NFConfigPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFConfigPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFConfigPlugin);
-}
-
 void NFConfigPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIClassModule, NFClassModule)

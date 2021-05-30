@@ -49,11 +49,6 @@ const int NFLuaScriptPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFLuaScriptPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFLuaScriptPlugin);
-}
-
 void NFLuaScriptPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFILuaScriptModule, NFLuaScriptModule)

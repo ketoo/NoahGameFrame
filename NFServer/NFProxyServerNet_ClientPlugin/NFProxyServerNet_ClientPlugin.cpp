@@ -50,11 +50,6 @@ const int NFProxyServerNet_ClientPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFProxyServerNet_ClientPlugin);
-}
-
 void NFProxyServerNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIProxyServerToWorldModule, NFProxyServerToWorldModule)

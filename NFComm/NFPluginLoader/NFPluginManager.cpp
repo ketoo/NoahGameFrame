@@ -388,8 +388,7 @@ bool NFPluginManager::Execute()
 		{
 			if (module->testModule)
 			{
-				std::string begin = "start test module " + module->name;
-				NF_TEST_MODULE_BEGIN(begin)
+				NF_TEST_MODULE_BEGIN(module->name)
 
 				module->Awake();
 				module->Init();
@@ -403,8 +402,7 @@ bool NFPluginManager::Execute()
 				module->Shut();
 				module->Finalize();
 
-				std::string end = "end test module " + module->name;
-				NF_TEST_MODULE_END(end, module->testPass)
+				NF_TEST_MODULE_END(module->name, module->testPass)
 			}
 		}
 	}
@@ -942,6 +940,7 @@ void NFPluginManager::ProcessParameter()
 		}
 	}
 }
+
 void NFPluginManager::EnableTestMode()
 {
 	testMode = true;

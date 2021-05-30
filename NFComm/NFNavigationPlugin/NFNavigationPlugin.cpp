@@ -50,11 +50,6 @@ const int NFNavigationPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFNavigationPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFNavigationPlugin);
-}
-
 void NFNavigationPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFINavigationModule, NFNavigationModule)

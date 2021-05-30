@@ -50,11 +50,6 @@ const int NFDBLogicPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFDBLogicPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFDBLogicPlugin);
-}
-
 void NFDBLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFPlayerRedisModule)

@@ -51,11 +51,6 @@ const int NFNetPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFNetPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFNetPlugin);
-}
-
 void NFNetPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)

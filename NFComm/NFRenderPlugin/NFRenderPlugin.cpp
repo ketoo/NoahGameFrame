@@ -52,12 +52,6 @@ const int NFRenderPlugin::GetPluginVersion()
 {
     return 0;
 }
-
-const std::string NFRenderPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFRenderPlugin);
-}
-
 void NFRenderPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIUIModule, NFUIModule)

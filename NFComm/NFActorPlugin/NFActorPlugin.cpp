@@ -46,12 +46,6 @@ const int NFActorPlugin::GetPluginVersion()
 {
     return 0;
 }
-
-const std::string NFActorPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFActorPlugin);
-}
-
 void NFActorPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIActorModule, NFActorModule)

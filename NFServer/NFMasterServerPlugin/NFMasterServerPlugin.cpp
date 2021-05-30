@@ -48,11 +48,6 @@ const int NFMasterServerPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFMasterServerPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFMasterServerPlugin);
-}
-
 void NFMasterServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIMasterModule, NFMasterModule)

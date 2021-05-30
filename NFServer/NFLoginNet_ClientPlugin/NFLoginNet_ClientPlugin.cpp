@@ -50,11 +50,6 @@ const int NFLoginNet_ClientPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFLoginNet_ClientPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFLoginNet_ClientPlugin);
-}
-
 void NFLoginNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFILoginToMasterModule, NFLoginToMasterModule)

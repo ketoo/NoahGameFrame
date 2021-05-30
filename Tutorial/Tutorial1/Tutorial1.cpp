@@ -48,11 +48,6 @@ const int Tutorial1::GetPluginVersion()
     return 0;
 }
 
-const std::string Tutorial1::GetPluginName()
-{
-	return GET_CLASS_NAME(Tutorial1);
-}
-
 void Tutorial1::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIHelloWorld1, NFHelloWorld1)

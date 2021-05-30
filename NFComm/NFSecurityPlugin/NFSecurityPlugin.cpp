@@ -51,11 +51,6 @@ const int NFSecurityPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFSecurityPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFSecurityPlugin);
-}
-
 void NFSecurityPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFISecurityModule, NFSecurityModule)

@@ -47,11 +47,6 @@ const int NFLogPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFLogPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFLogPlugin);
-}
-
 void NFLogPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFILogModule, NFLogModule)

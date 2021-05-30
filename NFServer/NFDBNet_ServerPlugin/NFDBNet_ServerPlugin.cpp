@@ -50,11 +50,6 @@ const int NFDBNet_ServerPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFDBNet_ServerPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFDBNet_ServerPlugin);
-}
-
 void NFDBNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIDBNet_ServerModule, NFDBNet_ServerModule)

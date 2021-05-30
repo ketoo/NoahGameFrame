@@ -50,11 +50,6 @@ const int NFChatPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFChatPlugin);
-}
-
 void NFChatPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIChatModule, NFChatModule)

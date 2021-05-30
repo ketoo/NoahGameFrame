@@ -46,11 +46,6 @@ const int NFNoSqlTestPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFNoSqlTestPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFNoSqlTestPlugin);
-}
-
 void NFNoSqlTestPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIRedisTestModule, NFRedisTestModule)

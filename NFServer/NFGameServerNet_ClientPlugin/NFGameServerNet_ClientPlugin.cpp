@@ -52,11 +52,6 @@ const int NFGameServerNet_ClientPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFGameServerNet_ClientPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFGameServerNet_ClientPlugin);
-}
-
 void NFGameServerNet_ClientPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFGameServerToWorldModule)

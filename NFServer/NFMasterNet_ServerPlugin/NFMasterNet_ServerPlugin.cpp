@@ -50,11 +50,6 @@ const int NFMasterNet_ServerPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFMasterNet_ServerPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFMasterNet_ServerPlugin);
-}
-
 void NFMasterNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFMasterNet_ServerModule)

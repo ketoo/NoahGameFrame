@@ -40,8 +40,6 @@ public:
 
     virtual const int GetPluginVersion();
 
-    virtual const std::string GetPluginName();
-
     virtual void Install();
 
     virtual void Uninstall();

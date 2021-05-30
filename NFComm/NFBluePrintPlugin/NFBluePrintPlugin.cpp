@@ -53,11 +53,6 @@ const int NFBluePrintPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFBluePrintPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFBluePrintPlugin);
-}
-
 void NFBluePrintPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIBPVirtualMachineModule, NFBPVirtualMachineModule)

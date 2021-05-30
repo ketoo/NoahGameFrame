@@ -49,11 +49,6 @@ const int NFLoginNet_HttpServerPlugin::GetPluginVersion()
 	return 0;
 }
 
-const std::string NFLoginNet_HttpServerPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFLoginNet_HttpServerPlugin);
-}
-
 void NFLoginNet_HttpServerPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFILoginNet_HttpServerModule, NFLoginNet_HttpServerModule)

@@ -49,11 +49,6 @@ const int NFConsumeManagerPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFConsumeManagerPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFConsumeManagerPlugin);
-}
-
 void NFConsumeManagerPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFICooldownModule, NFCooldownModule)

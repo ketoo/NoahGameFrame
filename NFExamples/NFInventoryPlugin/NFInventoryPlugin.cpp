@@ -47,11 +47,6 @@ const int NFInventoryPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFInventoryPlugin::GetPluginName()
-{
-	return GET_CLASS_NAME(NFInventoryPlugin);
-}
-
 void NFInventoryPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIInventoryModule, NFInventoryModule)

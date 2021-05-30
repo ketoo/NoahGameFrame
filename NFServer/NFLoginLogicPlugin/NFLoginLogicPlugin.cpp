@@ -48,11 +48,6 @@ const int NFLoginLogicPlugin::GetPluginVersion()
     return 0;
 }
 
-const std::string NFLoginLogicPlugin::GetPluginName()
-{
-    return GET_CLASS_NAME(NFLoginLogicPlugin);
-}
-
 void NFLoginLogicPlugin::Install()
 {
 
