@@ -34,28 +34,36 @@ NFRedisTestModule::NFRedisTestModule(NFIPluginManager* pluginManager)
 
 bool NFRedisTestModule::AfterInit()
 {
-	mxRedisClient.Connect("127.0.0.1", 6379, "NoahGameFrame");
+	mxRedisClient.Connect("127.0.0.1", 30001);
 
-	sleep(1);
+	NFSLEEP(0.1);
 	mxRedisClient.Execute();
 
 	return true;
 }
 
-bool NFRedisTestModule::Test_1()
+void NFRedisTestModule::TestCluster()
 {
-	int64_t num;
-	mxRedisClient.INCRBY("12123ddddd", 13, num);
-	mxRedisClient.INCRBY("12123ddddd", 13, num);
+	std::string info;
+	mxRedisClient.INFO(info);
 
-	return true;
+	std::string clusterInfo;
+	mxRedisClient.CLUSTERINFO(clusterInfo);
+
+	std::vector<std::string> nodes;
+	mxRedisClient.CLUSTERNODES(nodes, true);
+
+	for (auto& node : nodes)
+	{
+		NF_TEST_SECTION("master node data:" + node)
+	}
 }
 
 void NFRedisTestModule::TestHash()
 {
 	int64_t nnn;
-	NF_ASSERT("TestHash 1HINCRBY", mxRedisClient.HINCRBY("12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
-	NF_ASSERT("TestHash nnn == 13", nnn == 13);
+	NF_ASSERT("TestHash HINCRBY", mxRedisClient.HINCRBY("HINCRBY12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
+	NF_ASSERT("TestHash nnn", nnn == 13);
 
 	float fval;
 	NF_ASSERT("TestHash HINCRBYFLOAT", mxRedisClient.HINCRBYFLOAT("12123dd323ssss123ddd", "12444441212", 3.0f, fval) == true);
@@ -161,7 +169,7 @@ void NFRedisTestModule::TestHash()
 void NFRedisTestModule::TestKey()
 {
 	int64_t nnn;
-	NF_ASSERT("TestKey INCRBY", mxRedisClient.INCRBY("12123ddddd", 13, nnn) == true);
+	NF_ASSERT("TestKey INCRBY ", mxRedisClient.INCRBY("INCRBY3ddd121wssdsdsdd", 13, nnn) == true);
 	NF_ASSERT("TestKey nnn == 13", nnn == 13);
 
 	float fval;
@@ -392,11 +400,6 @@ void NFRedisTestModule::TestString()
 
 }
 
-void NFRedisTestModule::TestPubSub()
-{
-
-}
-
 bool NFRedisTestModule::Execute()
 {
 	if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
@@ -406,13 +409,15 @@ bool NFRedisTestModule::Execute()
 	}
 
 	mxRedisClient.FLUSHDB();
+
+	TestCluster();
+
 	TestKey();
 	TestString();
 	TestList();
 	TestHash();
 	TestSet();
 	TestSort();
-	TestPubSub();
 
 	PerformanceTest();
 
@@ -432,21 +437,23 @@ void NFRedisTestModule::PerformanceTest()
 
 	int64_t startTime;
 	int64_t endTime;
+
+	//1 million
 	int totalCount = 1000002;
 
 	startTime = NFGetTimeMS();
-	NF_TEST_SECTION("start PerformanceTest write:" + std::to_string(startTime))
+	NF_TEST_SECTION("start PerformanceTest write:" + std::to_string(startTime) + ", test count:" + std::to_string(totalCount))
 	for (int i = 0; i < totalCount; ++i)
 	{
 		mxRedisClient.HSET(strKey, std::to_string(i), std::to_string(i));
 		//NF_REQUIRE_EQUAL("", mxRedisClient.HSET(strKey, std::to_string(i), std::to_string(i)),true);
 	}
 	endTime = NFGetTimeMS();
-	NF_TEST_SECTION("end PerformanceTest write:" + std::to_string(endTime) + ", tps:" + std::to_string(totalCount * 1000 / (endTime - startTime)))
+	NF_TEST_SECTION("end PerformanceTest write:" + std::to_string(endTime) + ", delta:" + std::to_string(endTime - startTime) + ", tps:" + std::to_string(totalCount * 1000 / (endTime - startTime)))
 
 
 	startTime = NFGetTimeMS();
-	NF_TEST_SECTION("start PerformanceTest read:" + std::to_string(startTime))
+	NF_TEST_SECTION("start PerformanceTest read:" + std::to_string(startTime) + ", test  count:" + std::to_string(totalCount))
 	for (int i = 0; i < totalCount; ++i)
 	{
 		std::string value;
@@ -454,5 +461,5 @@ void NFRedisTestModule::PerformanceTest()
 		//NF_REQUIRE_EQUAL("", value,std::to_string(i));
 	}
 	endTime = NFGetTimeMS();
-	NF_TEST_SECTION("end PerformanceTest read:" + std::to_string(endTime) + ", qps:" + std::to_string(totalCount * 1000 / (endTime - startTime)))
+	NF_TEST_SECTION("end PerformanceTest read:" + std::to_string(endTime) + ", delta:" + std::to_string(endTime - startTime) + ", qps:" + std::to_string(totalCount * 1000 / (endTime - startTime)))
 }

@@ -23,38 +23,17 @@
    limitations under the License.
 */
 
-#include "NFNoSqlPlugin.h"
-#include "NFNoSqlModule.h"
-#include "NFNoSqlClusterModule.h"
 
-#ifdef NF_DYNAMIC_PLUGIN
+#ifndef NFI_NOSQL_CLUSTER_MODULE_H
+#define NFI_NOSQL_CLUSTER_MODULE_H
 
-NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
+#include "NFComm/NFPluginModule/NFIModule.h"
+
+class NFINoSqlClusterModule
+	: public NFIModule
 {
-    CREATE_PLUGIN(pm, NFNoSqlPlugin)
-};
+public:
 
-NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
-{
-    DESTROY_PLUGIN(pm, NFNoSqlPlugin)
 };
 
 #endif
-//////////////////////////////////////////////////////////////////////////
-
-const int NFNoSqlPlugin::GetPluginVersion()
-{
-    return 0;
-}
-
-void NFNoSqlPlugin::Install()
-{
-	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
-	REGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
-}
-
-void NFNoSqlPlugin::Uninstall()
-{
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
-}

@@ -68,6 +68,25 @@ bool NFRedisClient::SelectDB(int dbnum)
     return false;
 }
 
+bool NFRedisClient::INFO(std::string& info)
+{
+	NFRedisCommand cmd(GET_NAME(INFO));
+
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
+	{
+		return false;
+	}
+
+	if (pReply->type == REDIS_REPLY_STRING)
+	{
+		info.append(pReply->str, pReply->len);
+		return true;
+	}
+
+	return false;
+}
+
 bool NFRedisClient::KeepLive()
 {
     return false;
@@ -160,6 +179,8 @@ NF_SHARE_PTR<redisReply> NFRedisClient::ParseForReply()
 	if (REDIS_REPLY_ERROR == reply->type)
 	{
 		// write log
+		std::cout << reply->str << std::endl;
+
 		freeReplyObject(reply);
 		return nullptr;
 	}
@@ -191,4 +212,27 @@ bool NFRedisClient::AUTH(const std::string& auth)
 	}
 	
 	return false;
+}
+
+void StringToVector(const std::string& data, const std::string& split, std::vector<std::string>& out)
+{
+	if (data.empty())
+	{
+		return;
+	}
+
+	std::string::size_type pos;
+	std::string::size_type size = data.length();
+
+	for (std::string::size_type i = 0; i < size; i++)
+	{
+		pos = int(data.find(split, i));
+		if (pos < size)
+		{
+			std::string strSub = data.substr(i, pos - i);
+			out.push_back(strSub);
+
+			i = pos + split.size() - 1;
+		}
+	}
 }

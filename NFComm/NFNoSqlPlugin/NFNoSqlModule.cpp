@@ -27,11 +27,9 @@
 #include "NFNoSqlModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-NFIPluginManager* xPluginManager;
 NFNoSqlModule::NFNoSqlModule(NFIPluginManager* p)
 {
 	executableModule = true;
-	xPluginManager = p;
 	pPluginManager = p;
 }
 

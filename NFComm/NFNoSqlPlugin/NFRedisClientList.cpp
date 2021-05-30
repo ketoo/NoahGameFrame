@@ -216,7 +216,6 @@ int NFRedisClient::RPUSH(const std::string &key, const std::string &value)
 
 int NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
 {
-
 	NFRedisCommand cmd(GET_NAME(RPUSHX));
 	cmd << key;
 	cmd << value;

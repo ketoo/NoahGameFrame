@@ -23,38 +23,39 @@
    limitations under the License.
 */
 
-#include "NFNoSqlPlugin.h"
-#include "NFNoSqlModule.h"
-#include "NFNoSqlClusterModule.h"
+#ifndef NF_DATANOSQL_CLUSTER_MODULE_H
+#define NF_DATANOSQL_CLUSTER_MODULE_H
 
-#ifdef NF_DYNAMIC_PLUGIN
+#include "NFRedisClient.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFINoSqlClusterModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
-NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
+class NFNoSqlClusterModule
+	: public NFINoSqlClusterModule
 {
-    CREATE_PLUGIN(pm, NFNoSqlPlugin)
-};
+public:
 
-NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
-{
-    DESTROY_PLUGIN(pm, NFNoSqlPlugin)
+	NFNoSqlClusterModule(NFIPluginManager* p);
+	virtual ~NFNoSqlClusterModule();
+
+	virtual bool Init();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
+
+
+protected:
+
+protected:
+	NFINT64 mLastCheckTime;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFILogModule* m_pLogModule;
 };
 
 #endif
-//////////////////////////////////////////////////////////////////////////
-
-const int NFNoSqlPlugin::GetPluginVersion()
-{
-    return 0;
-}
-
-void NFNoSqlPlugin::Install()
-{
-	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
-	REGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
-}
-
-void NFNoSqlPlugin::Uninstall()
-{
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
-}

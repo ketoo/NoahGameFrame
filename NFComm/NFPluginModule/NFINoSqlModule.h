@@ -74,6 +74,12 @@ public:
 	*/
 	virtual bool SelectDB(int dbnum) = 0;
 
+	/**
+	* @brie Get information and statistics about the server
+	* @return success: the info
+	*/
+	virtual bool INFO(std::string& info) = 0;
+
 	/*
 	ECHO
 	PING
@@ -782,6 +788,18 @@ public:
 	* @return return true when cmd success.
 	*/
 	virtual	bool UNSUBSCRIBE(const std::string& key) = 0;
+
+	//cluster
+
+	/**	@brief cmd CLUSTER NODES
+	* @return return true, all of the master nodes of this cluster.
+	*/
+	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterIP) = 0;
+
+	/**	@brief cmd CLUSTER INFO
+	* @return return true, the cluster info of this cluster.
+	*/
+	virtual	bool CLUSTERINFO(std::string& clusterInfo) = 0;
 
 protected:
 

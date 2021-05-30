@@ -78,6 +78,12 @@ public:
 	*/
 	virtual bool SelectDB(int dbnum);
 
+	/**
+	* @brie Get information and statistics about the server
+	* @return success: the info
+	*/
+	virtual bool INFO(std::string& info);
+
 	/*
 	ECHO
 	PING
@@ -785,6 +791,18 @@ public:
 	* @return return true when cmd success.
 	*/
 	virtual	bool UNSUBSCRIBE(const std::string& key);
+
+	//cluster
+	/**	@brief cmd CLUSTER NODES
+	* @return return true master nodes of this cluster.
+	*/
+	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterIP);
+
+	/**	@brief cmd CLUSTER INFO
+	* @return return true, the cluster info of this cluster.
+	*/
+	virtual	bool CLUSTERINFO(std::string& clusterInfo);
+
 
 protected:
 	NF_SHARE_PTR<redisReply> BuildSendCmd(const NFRedisCommand& cmd);

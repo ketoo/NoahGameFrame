@@ -47,7 +47,7 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -97,7 +97,7 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -128,7 +128,7 @@ public:
 		}
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -187,7 +187,7 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -217,7 +217,7 @@ public:
 			inputArgs.push_back(var);
 		}
 	}
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -294,7 +294,7 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -343,7 +343,7 @@ public:
 		}
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -377,12 +377,12 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 	
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 	
 	}
@@ -409,12 +409,12 @@ public:
 	}
 
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 
 	}

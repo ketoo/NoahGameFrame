@@ -68,15 +68,13 @@ class NFRedisTestModule : public NFIRedisTestModule
  private:
 	bool IsConnect();
 
-	bool Test_1();
-
-	void TestHash();
+	void TestCluster();
 	void TestKey();
+	void TestHash();
 	void TestList();
 	void TestSet();
 	void TestSort();
 	void TestString();
-	void TestPubSub();
 
 	void PerformanceTest();
 
