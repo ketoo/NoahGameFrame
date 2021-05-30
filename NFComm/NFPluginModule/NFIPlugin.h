@@ -47,7 +47,10 @@
     delete pUnRegisterModule##className;
 
 
-#define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
+#define CREATE_PLUGIN(pManager, className)  \
+	NFIPlugin* pCreatePlugin##className = new className(pManager); \
+	pCreatePlugin##className->name = (#className);\
+	pManager->Registered( pCreatePlugin##className );
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnRegistered( pManager->FindPlugin((#className)) );
 
@@ -64,7 +67,6 @@ public:
 	{
 	}
     virtual const int GetPluginVersion() = 0;
-    virtual const std::string GetPluginName() = 0;
 
     virtual void Install() = 0;
 
@@ -244,6 +246,7 @@ public:
 		return true;
 	}
 
+	bool testPlugin = false;
 private:
 	std::map<std::string, NFIModule*> mModules;
 };

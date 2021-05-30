@@ -43,30 +43,16 @@ int main(int argc, char* argv[])
 	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=LoginServer ID=4 CPU=1 Plugin=Plugin.xml")));
 	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=DBServer ID=8 CPU=1 Plugin=Plugin.xml")));
 	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=ProxyServer ID=5 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=16001 CPU=1 Plugin=Plugin.xml")));
+	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=16001 CPU=1 Plugin=Plugin.xml", true)));
 
 	for (auto item : serverList)
 	{
-		item->GetPluginManager()->EnableTestMode();
-
 		item->SetBasicWareLoader(BasicPluginLoader);
 		item->SetMidWareLoader(MidWareLoader);
 		item->Init();
 		item->Execute();
 		item->Final();
 	}
-
-	NFPluginServer pluginServer(strArgvList);
-
-	pluginServer.SetBasicWareLoader(BasicPluginLoader);
-	pluginServer.SetMidWareLoader(MidWareLoader);
-	pluginServer.Init();
-
-	////////////////
-	uint64_t nIndex = 0;
-	pluginServer.Execute();
-
-	pluginServer.Final();
 
     return 0;
 }

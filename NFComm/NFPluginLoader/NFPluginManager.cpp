@@ -196,13 +196,22 @@ bool NFPluginManager::CheckStaticPlugin()
 	{
 		bool bFind = false;
 		const std::string& pluginName = it->first;
-		for (int i = 0; i < mStaticPlugin.size(); ++i)
+		NFIPlugin* plugin = it->second;
+
+		if (this->testMode && plugin->testPlugin)
 		{
-			const std::string& tempPluginName = mStaticPlugin[i];
-			if (tempPluginName == pluginName)
+			bFind = true;
+		}
+		else
+		{
+			for (int i = 0; i < mStaticPlugin.size(); ++i)
 			{
-				bFind = true;
-				break;
+				const std::string& tempPluginName = mStaticPlugin[i];
+				if (tempPluginName == pluginName)
+				{
+					bFind = true;
+					break;
+				}
 			}
 		}
 
@@ -212,7 +221,7 @@ bool NFPluginManager::CheckStaticPlugin()
 			delete it->second;
 			it->second = NULL;
 
-			it = mPluginInstanceMap.erase(it);  
+			it = mPluginInstanceMap.erase(it);
 		}
 		else
 		{
@@ -245,7 +254,7 @@ bool NFPluginManager::LoadStaticPlugin(const std::string& pluginDLLName)
 
 void NFPluginManager::Registered(NFIPlugin* plugin)
 {
-    const std::string& pluginName = plugin->GetPluginName();
+    const std::string& pluginName = plugin->name;
     if (!FindPlugin(pluginName))
 	{
 		mPluginInstanceMap.insert(PluginInstanceMap::value_type(pluginName, plugin));
@@ -260,7 +269,7 @@ void NFPluginManager::Registered(NFIPlugin* plugin)
 
 void NFPluginManager::UnRegistered(NFIPlugin* plugin)
 {
-    PluginInstanceMap::iterator it = mPluginInstanceMap.find(plugin->GetPluginName());
+    PluginInstanceMap::iterator it = mPluginInstanceMap.find(plugin->name);
     if (it != mPluginInstanceMap.end())
     {
         it->second->Uninstall();
@@ -372,7 +381,7 @@ bool NFPluginManager::Execute()
 
 	if (testMode)
 	{
-		TEST_BEGIN("NFTester.txt")
+		NF_TEST_BEGIN("NFTester.txt")
 
 		auto modules = this->TestModules();
 		for (auto module : modules)
@@ -380,7 +389,7 @@ bool NFPluginManager::Execute()
 			if (module->testModule)
 			{
 				std::string begin = "start test module " + module->name;
-				TEST_MODULE_BEGIN(begin)
+				NF_TEST_MODULE_BEGIN(begin)
 
 				module->Awake();
 				module->Init();
@@ -395,7 +404,7 @@ bool NFPluginManager::Execute()
 				module->Finalize();
 
 				std::string end = "end test module " + module->name;
-				TEST_MODULE_END(end, module->testPass)
+				NF_TEST_MODULE_END(end, module->testPass)
 			}
 		}
 	}

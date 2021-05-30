@@ -26,11 +26,15 @@
 #include "NFPluginServer.h"
 #include "NFComm/NFCore/NFException.hpp"
 
-NFPluginServer::NFPluginServer(const std::string& strArgv)
+NFPluginServer::NFPluginServer(const std::string& strArgv, bool testMode)
 {
     this->strArgvList = strArgv;
 	pPluginManager = NF_SHARE_PTR<NFIPluginManager>(NF_NEW NFPluginManager());
-    
+	if (testMode)
+	{
+		pPluginManager->EnableTestMode();
+	}
+
 #if NF_PLATFORM != NF_PLATFORM_WIN
 	NF_CRASH_TRY_ROOT
 #endif  

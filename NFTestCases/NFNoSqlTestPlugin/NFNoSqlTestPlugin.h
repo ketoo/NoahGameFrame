@@ -33,6 +33,7 @@ public:
 	NFNoSqlTestPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
+        testPlugin = true;
     }
 
     virtual const int GetPluginVersion();

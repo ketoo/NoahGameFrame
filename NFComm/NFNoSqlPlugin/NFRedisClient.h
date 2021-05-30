@@ -45,13 +45,6 @@
 
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
-
-typedef void(*CoroutineYieldFunction)();
-typedef void(*CoroutineStartFunction)();
-
-static CoroutineYieldFunction YieldFunction = NULL;
-static CoroutineStartFunction StartFunction = NULL;
-
 class NFRedisClient : public NFIRedisClient
 {
 public:

@@ -55,11 +55,10 @@
 class NFPluginServer
 {
 public:
-	NFPluginServer(const std::string& strArgv);
+	NFPluginServer(const std::string& strArgv, bool testMode = false);
 
 	virtual ~NFPluginServer()
 	{
-		Final();
 	}
 
 

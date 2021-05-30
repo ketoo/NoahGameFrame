@@ -16,7 +16,7 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
+   Unless NF_REQUIREd by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
@@ -70,8 +70,6 @@ public:
 	std::string newValue;
 };
 
-#define FIND_MODULE(classBaseName, className)  \
-	assert((TIsDerived<classBaseName, NFIModule>::Result));
 
 class NFIPluginManager
 {
@@ -259,7 +257,7 @@ public:
 };
 
 
-#define TEST_BEGIN(fileName)                                                                                           \
+#define NF_TEST_BEGIN(fileName)                                                                                           \
     {                                                                                                                  \
         if (!NFIPluginManager::outfile)                                                                                  \
         {                                                                                                              \
@@ -267,13 +265,13 @@ public:
         }                                                                                                              \
     }
 
-#define TEST_MODULE_BEGIN(moduleName)                                                                                  \
+#define NF_TEST_MODULE_BEGIN(moduleName)                                                                                  \
     {                                                                                                                  \
         *NFIPluginManager::outfile << "" << std::endl;                                                                   \
         *NFIPluginManager::outfile << "start test module " << moduleName << std::endl;                                   \
     }
 
-#define TEST_MODULE_END(moduleName, pass)                                                                              \
+#define NF_TEST_MODULE_END(moduleName, pass)                                                                              \
     {                                                                                                                  \
         if (pass)                                                                                                      \
             *NFIPluginManager::outfile << "end test module " << moduleName << ", result: pass" << std::endl;             \
@@ -281,12 +279,25 @@ public:
             *NFIPluginManager::outfile << "end test module " << moduleName << ", result: fail" << std::endl;             \
     }
 
-#define TEST_SECTION(moduleName)                                                                                       \
+#define NF_TEST_SECTION(moduleName)                                                                                       \
     {                                                                                                                  \
         *NFIPluginManager::outfile << moduleName << std::endl;                                                           \
     }
 
-#define REQUIRE_EQUAL(desc, a, b)                                                                                      \
+#define NF_ASSERT(desc, b)                                                                                              \
+    {                                                                                                                   \
+        if (b == true)                                                                                                          \
+        {                                                                                                               \
+            *NFIPluginManager::outfile << desc << " NF_ASSERT==>" << std::to_string(b) << ", result: pass" << std::endl;                \
+        }                                                                                                               \
+        else                                                                                                            \
+        {                                                                                                               \
+            this->testPass = false;                                                                                     \
+            *NFIPluginManager::outfile << desc << " NF_ASSERT==>" << std::to_string(b) << ", result: fail" << std::endl;                \
+        }                                                                                                               \
+    }
+
+#define NF_REQUIRE_EQUAL(desc, a, b)                                                                                      \
     {                                                                                                                  \
         if (a == b)                                                                                                    \
         {                                                                                                              \
@@ -299,22 +310,22 @@ public:
         }                                                                                                              \
     }
 
-#define REQUIRE_POINTER(desc, a)                                                                                       \
+#define NF_REQUIRE_POINTER(desc, a)                                                                                       \
     {                                                                                                                  \
         if (a == nullptr)                                                                                              \
         {                                                                                                              \
             this->testPass = false;                                                                                    \
-            *NFIPluginManager::outfile << desc << " REQUIRE_POINTER==>" << a << ", "                                     \
+            *NFIPluginManager::outfile << desc << " NF_REQUIRE_POINTER==>" << a << ", "                                     \
                                      << ", result: fail" << std::endl;                                                 \
         }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
-            *NFIPluginManager::outfile << desc << " REQUIRE_POINTER==>" << a << ", "                                     \
+            *NFIPluginManager::outfile << desc << " NF_REQUIRE_POINTER==>" << a << ", "                                     \
                                      << ", result: pass" << std::endl;                                                 \
         }                                                                                                              \
     }
 
-#define REQUIRE_UNEQUAL(desc, a, b)                                                                                    \
+#define NF_REQUIRE_UNEQUAL(desc, a, b)                                                                                    \
     {                                                                                                                  \
         if (a == b)                                                                                                    \
         {                                                                                                              \
@@ -329,7 +340,7 @@ public:
         }                                                                                                              \
     }
 
-#define REQUIRE_GREATER_EQUAL(desc, a, b)                                                                              \
+#define NF_REQUIRE_GREATER_EQUAL(desc, a, b)                                                                              \
     {                                                                                                                  \
         if (a >= b)                                                                                                    \
         {                                                                                                              \
@@ -344,7 +355,7 @@ public:
         }                                                                                                              \
     }
 
-#define REQUIRE_GREATER_THAN(desc, a, b)                                                                               \
+#define NF_REQUIRE_GREATER_THAN(desc, a, b)                                                                               \
     {                                                                                                                  \
         if (a > b)                                                                                                     \
         {                                                                                                              \
@@ -357,7 +368,7 @@ public:
         }                                                                                                              \
     }
 
-#define REQUIRE_LESS_EQUAL(desc, a, b)                                                                                 \
+#define NF_REQUIRE_LESS_EQUAL(desc, a, b)                                                                                 \
     {                                                                                                                  \
         if (a <= b)                                                                                                    \
         {                                                                                                              \
@@ -370,7 +381,7 @@ public:
         }                                                                                                              \
     }
 
-#define REQUIRE_LESS_THAN(desc, a, b)                                                                                  \
+#define NF_REQUIRE_LESS_THAN(desc, a, b)                                                                                  \
     {                                                                                                                  \
         if (a < b)                                                                                                     \
         {                                                                                                              \

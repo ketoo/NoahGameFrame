@@ -98,17 +98,6 @@ bool NFRedisClient::Execute()
 
 NF_SHARE_PTR<redisReply> NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
-	while (mbBusy)
-	{
-		//std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-		//you can not use build send cmd funciton again if you are not using coroutine
-		if (YieldFunction)
-		{
-			YieldFunction();
-		}
-	}
-
 	mbBusy = true;
 
 	if (!IsConnect())
@@ -152,14 +141,7 @@ NF_SHARE_PTR<redisReply> NFRedisClient::ParseForReply()
 			break;
 		}
 
-		if (YieldFunction)
-		{
-			YieldFunction();
-		}
-		else
-		{
-			Execute();
-		}
+		Execute();
 
 		if (!IsConnect())
 		{
