@@ -25,7 +25,7 @@
 
 #include "NFRedisClient.h"
 
-bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterIP)
+bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterNode, bool includeSelfMaster)
 {
 	NFRedisCommand cmd("CLUSTER");
 	cmd << "NODES";
@@ -38,7 +38,7 @@ bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMa
 
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
-		if (onlyMasterIP)
+		if (onlyMasterNode)
 		{
 			std::vector<std::string> clustersNode;
 			StringToVector(std::string(pReply->str, pReply->len), NFREDIS_LF, clustersNode);
@@ -46,7 +46,17 @@ bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMa
 			{
 				if (node.find("master") != std::string::npos)
 				{
-					clusters.push_back(node);
+					if (includeSelfMaster)
+					{
+						clusters.push_back(node);
+					}
+					else
+					{
+						if (node.find("myself") == std::string::npos)
+						{
+							clusters.push_back(node);
+						}
+					}
 				}
 			}
 		}

@@ -241,7 +241,7 @@ void NFNoSqlModule::CheckConnect()
 	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
 	while (xNosqlDriver)
 	{
-		if (xNosqlDriver->Enable() && !xNosqlDriver->Authed())
+		if (xNosqlDriver->Enable() && !xNosqlDriver->Authenticated())
 		{
 			xNosqlDriver->AUTH(xNosqlDriver->GetAuthKey());
 		}

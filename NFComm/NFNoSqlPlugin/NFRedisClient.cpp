@@ -38,7 +38,7 @@ bool NFRedisClient::Enable()
 	return m_pRedisClientSocket->IsConnect();
 }
 
-bool NFRedisClient::Authed()
+bool NFRedisClient::Authenticated()
 {
 	return mbAuthed;
 }

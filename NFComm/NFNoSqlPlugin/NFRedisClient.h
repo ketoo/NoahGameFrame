@@ -54,7 +54,7 @@ public:
 	virtual bool Connect(const std::string& ip, const int port, const std::string& auth = "");
 
 	virtual bool Enable();
-	virtual bool Authed();
+	virtual bool Authenticated();
 	virtual bool Busy();
 
 	virtual bool Execute();
@@ -796,7 +796,7 @@ public:
 	/**	@brief cmd CLUSTER NODES
 	* @return return true master nodes of this cluster.
 	*/
-	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterIP);
+	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterNode = true, bool includeSelfMaster = false);
 
 	/**	@brief cmd CLUSTER INFO
 	* @return return true, the cluster info of this cluster.

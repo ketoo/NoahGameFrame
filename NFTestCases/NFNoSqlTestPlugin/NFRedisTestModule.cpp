@@ -46,16 +46,19 @@ void NFRedisTestModule::TestCluster()
 {
 	std::string info;
 	mxRedisClient.INFO(info);
+	std::vector<std::string> infoData;
+	StringToVector(info, NFREDIS_CRLF, infoData);
 
 	std::string clusterInfo;
 	mxRedisClient.CLUSTERINFO(clusterInfo);
+	std::vector<std::string> clusterInfoData;
+	StringToVector(clusterInfo, NFREDIS_CRLF, clusterInfoData);
 
-	std::vector<std::string> nodes;
-	mxRedisClient.CLUSTERNODES(nodes, true);
-
-	for (auto& node : nodes)
+	std::vector<std::string> masterNodes;
+	mxRedisClient.CLUSTERNODES(masterNodes);
+	for (auto& node : masterNodes)
 	{
-		NF_TEST_SECTION("master node data:" + node)
+		NF_TEST_SECTION("master node:" + node)
 	}
 }
 

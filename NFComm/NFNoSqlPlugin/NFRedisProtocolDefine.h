@@ -59,7 +59,8 @@ enum NFREDIS_RESP_TYPE
 };
 
 static const std::string NFREDIS_CRLF = "\r\n";	///结束标志 terminated by CRLF
-static const std::string NFREDIS_LF = "\n";	///换行标志 terminated by CRLF
+static const std::string NFREDIS_LF = "\n";	///
+static const std::string NFREDIS_CR = "\r";	//
 static const int NFREDIS_SIZEOF_CRLF = 2;	///the size of CRLF
 static const std::string NFREDIS_STATUS_OK = "OK";
 

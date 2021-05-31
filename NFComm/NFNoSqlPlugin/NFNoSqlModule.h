@@ -34,6 +34,16 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
+class MasterRedisNode
+{
+public:
+	std::string id;
+	std::string host;
+	int port;
+	int slotStart;//included
+	int slotEnd;//included
+};
+
 class NFNoSqlModule
 	: public NFINoSqlModule
 {
