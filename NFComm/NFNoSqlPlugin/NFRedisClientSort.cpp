@@ -32,16 +32,16 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 	cmd << score;
 	cmd << member;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	int add_new_num = 0;
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		add_new_num = (int)pReply->integer;
+		add_new_num = (int)pReply->reply->integer;
 	}
 
 	return add_new_num;
@@ -52,15 +52,15 @@ bool NFRedisClient::ZCARD(const std::string & key, int &count)
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		count = (int)pReply->integer;
+		count = (int)pReply->reply->integer;
 	}
 
 	return true;
@@ -73,15 +73,15 @@ bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const do
 	cmd << start;
 	cmd << end;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		count = (int)pReply->integer;
+		count = (int)pReply->reply->integer;
 	}
 
 	return true;
@@ -94,16 +94,16 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 	cmd << score;
 	cmd << member;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool success = false;
-	if (pReply->type == REDIS_REPLY_STRING)
+	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<double>(pReply->str, newScore);
+		success = NF_StrTo<double>(pReply->reply->str, newScore);
 	}
 
 	return success;
@@ -117,23 +117,23 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	cmd << end;
 	cmd << "WITHSCORES";
 	
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	try
 	{
-		if (pReply->type == REDIS_REPLY_ARRAY)
+		if (pReply->reply->type == REDIS_REPLY_ARRAY)
 		{
-			for (size_t k = 0; k < pReply->elements; k = k + 2)
+			for (size_t k = 0; k < pReply->reply->elements; k = k + 2)
 			{
-				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				if (pReply->reply->element[k]->type == REDIS_REPLY_STRING)
 				{
 					string_score_pair vecPair;
-					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
-					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					vecPair.first = std::string(pReply->reply->element[k]->str, pReply->reply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->reply->element[k + 1]->str);
 					values.emplace_back(vecPair);
 				}
 			}
@@ -156,23 +156,23 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	try
 	{
-		if (pReply->type == REDIS_REPLY_ARRAY)
+		if (pReply->reply->type == REDIS_REPLY_ARRAY)
 		{
-			for (size_t k = 0; k < pReply->elements; k = k + 2)
+			for (size_t k = 0; k < pReply->reply->elements; k = k + 2)
 			{
-				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				if (pReply->reply->element[k]->type == REDIS_REPLY_STRING)
 				{
 					string_score_pair vecPair;
-					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
-					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					vecPair.first = std::string(pReply->reply->element[k]->str, pReply->reply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->reply->element[k + 1]->str);
 					values.emplace_back(vecPair);
 				}
 			}
@@ -192,15 +192,15 @@ bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, i
 	cmd << key;
 	cmd << member;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		rank = (int)pReply->integer;
+		rank = (int)pReply->reply->integer;
 	}
 
 	return true;
@@ -212,15 +212,15 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 	cmd << key;
 	cmd << member;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		return (bool)pReply->integer;
+		return (bool)pReply->reply->integer;
 	}
 
 	return false;
@@ -233,15 +233,15 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 	cmd << start;
 	cmd << end;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		return (bool)pReply->integer;
+		return (bool)pReply->reply->integer;
 	}
 
 	return false;
@@ -254,15 +254,15 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 	cmd << start;
 	cmd << end;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		return (bool)pReply->integer;
+		return (bool)pReply->reply->integer;
 	}
 
 	return false;
@@ -276,23 +276,23 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	try
 	{
-		if (pReply->type == REDIS_REPLY_ARRAY)
+		if (pReply->reply->type == REDIS_REPLY_ARRAY)
 		{
-			for (size_t k = 0; k < pReply->elements; k = k + 2)
+			for (size_t k = 0; k < pReply->reply->elements; k = k + 2)
 			{
-				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				if (pReply->reply->element[k]->type == REDIS_REPLY_STRING)
 				{
 					string_score_pair vecPair;
-					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
-					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					vecPair.first = std::string(pReply->reply->element[k]->str, pReply->reply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->reply->element[k + 1]->str);
 					values.emplace_back(vecPair);
 				}
 			}
@@ -314,23 +314,23 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	try
 	{
-		if (pReply->type == REDIS_REPLY_ARRAY)
+		if (pReply->reply->type == REDIS_REPLY_ARRAY)
 		{
-			for (size_t k = 0; k < pReply->elements; k = k + 2)
+			for (size_t k = 0; k < pReply->reply->elements; k = k + 2)
 			{
-				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				if (pReply->reply->element[k]->type == REDIS_REPLY_STRING)
 				{
 					string_score_pair vecPair;
-					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
-					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					vecPair.first = std::string(pReply->reply->element[k]->str, pReply->reply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->reply->element[k + 1]->str);
 					values.emplace_back(vecPair);
 				}
 			}
@@ -350,15 +350,15 @@ bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member
 	cmd << key;
 	cmd << member;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		rank = (int)pReply->integer;
+		rank = (int)pReply->reply->integer;
 	}
 
 	return true;
@@ -371,16 +371,16 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 	cmd << member;
 
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool success = false;
-	if (pReply->type == REDIS_REPLY_STRING)
+	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<double>(pReply->str, score);
+		success = NF_StrTo<double>(pReply->reply->str, score);
 	}
 
 	return success;

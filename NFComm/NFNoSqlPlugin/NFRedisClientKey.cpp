@@ -30,16 +30,16 @@ bool NFRedisClient::DEL(const std::string &key)
     NFRedisCommand cmd(GET_NAME(DEL));
     cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool del_key_num = false;
-	if (pReply->type == REDIS_REPLY_INTEGER)
+	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
-		del_key_num = (bool)pReply->integer;
+		del_key_num = (bool)pReply->reply->integer;
 	}
 
 	return del_key_num;
@@ -50,14 +50,14 @@ bool NFRedisClient::EXISTS(const std::string &key)
     NFRedisCommand cmd(GET_NAME(EXISTS));
     cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool exist = false;
-	if (REDIS_REPLY_INTEGER == pReply->type && 1 == pReply->integer)
+	if (REDIS_REPLY_INTEGER == pReply->reply->type && 1 == pReply->reply->integer)
 	{
 		exist = true;
 	}
@@ -71,14 +71,14 @@ bool NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
     cmd << key;
     cmd << secs;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool success = false;
-	if (REDIS_REPLY_INTEGER == pReply->type && 1 == pReply->integer)
+	if (REDIS_REPLY_INTEGER == pReply->reply->type && 1 == pReply->reply->integer)
 	{
 		success = true;
 	}
@@ -92,14 +92,14 @@ bool NFRedisClient::EXPIREAT(const std::string &key, const int64_t unixTime)
     cmd << key;
     cmd << unixTime;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool success = false;
-	if (REDIS_REPLY_INTEGER == pReply->type && 1 == pReply->integer)
+	if (REDIS_REPLY_INTEGER == pReply->reply->type && 1 == pReply->reply->integer)
 	{
 		success = true;
 	}
@@ -112,14 +112,14 @@ bool NFRedisClient::PERSIST(const std::string &key)
     NFRedisCommand cmd(GET_NAME(PERSIST));
     cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	bool success = false;
-	if (REDIS_REPLY_INTEGER == pReply->type && 1 == pReply->integer)
+	if (REDIS_REPLY_INTEGER == pReply->reply->type && 1 == pReply->reply->integer)
 	{
 		success = true;
 	}
@@ -132,16 +132,16 @@ int NFRedisClient::TTL(const std::string &key)
     NFRedisCommand cmd(GET_NAME(TTL));
     cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
 	int left_time = -1;
-	if (REDIS_REPLY_INTEGER == pReply->type)
+	if (REDIS_REPLY_INTEGER == pReply->reply->type)
 	{
-		left_time = (int)pReply->integer;
+		left_time = (int)pReply->reply->integer;
 	}
 
 	return left_time;
@@ -152,16 +152,16 @@ std::string NFRedisClient::TYPE(const std::string &key)
     NFRedisCommand cmd(GET_NAME(TYPE));
     cmd << key;
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return "";
 	}
 
 	std::string type_name = "";
-	if (pReply->type == REDIS_REPLY_STATUS)
+	if (pReply->reply->type == REDIS_REPLY_STATUS)
 	{
-		type_name = pReply->str;
+		type_name = pReply->reply->str;
 	}
 
 	return type_name;

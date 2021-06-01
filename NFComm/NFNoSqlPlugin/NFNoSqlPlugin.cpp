@@ -25,7 +25,7 @@
 
 #include "NFNoSqlPlugin.h"
 #include "NFNoSqlModule.h"
-#include "NFNoSqlClusterModule.h"
+#include "NFAsyncNoSqlModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -50,11 +50,11 @@ const int NFNoSqlPlugin::GetPluginVersion()
 void NFNoSqlPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
-	REGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
+	//REGISTER_MODULE(pPluginManager, NFIAsyncNoSqlModule, NFAsyncNoSqlModule)
 }
 
 void NFNoSqlPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlClusterModule, NFNoSqlClusterModule)
+	//UNREGISTER_MODULE(pPluginManager, NFIAsyncNoSqlModule, NFAsyncNoSqlModule)
 	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
 }

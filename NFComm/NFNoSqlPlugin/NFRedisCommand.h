@@ -68,6 +68,8 @@ public:
         return xDataString.str();
     }
 
+	int64_t cmd = 0;
+	int64_t index = 0;
 private:
     std::vector<std::string> mxParam;
 };

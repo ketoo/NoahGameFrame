@@ -23,48 +23,178 @@
    limitations under the License.
 */
 
+#ifndef NF_ASYNC_DATANOSQL_CLUSTER_MODULE_H
+#define NF_ASYNC_DATANOSQL_CLUSTER_MODULE_H
 
-#ifndef NFI_NOSQL_MODULE_H
-#define NFI_NOSQL_MODULE_H
+#include "NFRedisClient.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "Dependencies/concurrentqueue/concurrentqueue.h"
 
-#include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/ulti/CRC16.h"
+//only support write cmd
+//only support write cmd
+//only support write cmd
+//only support write cmd
+//only support write cmd
+//only support write cmd
 
+enum RedisCMD
+{
+	AUTH,
+	INFO,
+	DEL,
+	EXISTS,
+	EXPIRE,
+	EXPIREAT,
+	PERSIST,
+	TTL,
+	TYPE,
+	APPEND,
+	DECR,
+	DECRBY,
+	GET,
+	GETSET,
+	INCR,
+	INCRBY,
+	INCRBYFLOAT,
+	MGET,
+	MSET,
+	SET,
+	SETEX,
+	SETNX,
+	STRLEN,
+	HDEL,
+	HEXISTS,
+	HGET,
+	HGETALL,
+	HINCRBY,
+	HINCRBYFLOAT,
+	HKEYS,
+	HLEN,
+	HMGET,
+	HMSET,
+	HSET,
+	HSETNX,
+	HVALS,
+	HSTRLEN,
+	LINDEX,
+	LLEN,
+	LPOP,
+	LPUSH,
+	LPUSHX,
+	LRANGE,
+	LSET,
+	RPOP,
+	RPUSH,
+	RPUSHX,
+	SADD,
+	SCARD,
+	SDIFF,
+	SDIFFSTORE,
+	SINTER,
+	SINTERSTORE,
+	SISMEMBER,
+	SMEMBERS,
+	SMOVE,
+	SPOP,
+	SRANDMEMBER,
+	SREM,
+	SUNION,
+	SUNIONSTORE,
+	ZADD,
+	ZCARD,
+	ZCOUNT,
+	ZINCRBY,
+	ZRANGE,
+	ZRANGEBYSCORE,
+	ZRANK,
+	ZREM,
+	ZREMRANGEBYRANK,
+	ZREMRANGEBYSCORE,
+	ZREVRANGE,
+	ZREVRANGEBYSCORE,
+	ZREVRANK,
+	ZSCORE,
+	FLUSHALL,
+	FLUSHDB,
 
-typedef std::vector<std::string> string_vector;
-typedef std::pair<std::string, std::string> string_pair;
-typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<std::string, double> string_score_pair;
-typedef std::vector<string_score_pair> string_score_vector;
+	CLUSTERNODES,
+	CLUSTERINFO,
+};
 
-class NFRedisCommand;
-class NFRedisReply;
-class NFIRedisClient;
-class NFIRedis
+class RedisClientThread
+{
+private:
+	RedisClientThread(){};
+
+	void Execute()
+	{
+		while (1)
+		{
+			sleep(1);
+
+			NF_SHARE_PTR<NFRedisCommand> redisCommand = nullptr;
+			if (queue.try_dequeue(redisCommand) && redisCommand)
+			{
+				NF_SHARE_PTR<NFRedisReply> redisReply = redisClient->BuildSendCmd(*redisCommand);
+				trackerQueue->enqueue(redisReply);
+			}
+		}
+	}
+public:
+	RedisClientThread(NF_SHARE_PTR<NFIRedisClient> r, moodycamel::ConcurrentQueue<NF_SHARE_PTR<NFRedisReply>>* tracker)
+	{
+		redisClient = r;
+		trackerQueue = tracker;
+		thread = new std::thread(&RedisClientThread::Execute, this);
+	}
+
+	void Enqueue(NF_SHARE_PTR<NFRedisCommand> cmd)
+	{
+		queue.enqueue(cmd);
+	}
+
+	NF_SHARE_PTR<NFIRedisClient> redisClient;
+
+private:
+	std::thread* thread;
+	moodycamel::ConcurrentQueue<NF_SHARE_PTR<NFRedisCommand>> queue;
+	moodycamel::ConcurrentQueue<NF_SHARE_PTR<NFRedisReply>>* trackerQueue;
+};
+
+class NFAsyncNoSqlModule
+	: public NFIAsyncNoSqlModule
 {
 public:
 
-	virtual NF_SHARE_PTR<NFIRedisClient> Connect(const std::string& ip, const int port, const std::string& auth, const bool sync = true) = 0;
+	NFAsyncNoSqlModule(NFIPluginManager* p);
+	virtual ~NFAsyncNoSqlModule();
+
+	virtual bool Init();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
+
+	virtual NF_SHARE_PTR<NFIRedisClient> Connect(const std::string& ip, const int port, const std::string& auth, const bool sync = true);
+
+
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
 	* @param password
 	* @return success: true; fail: false
 	*/
-	virtual bool AUTH(const std::string& auth) = 0;
-
-	/**
-	* @brie select DB
-	* @param DB index
-	* @return success: true; fail: false
-	*/
-	//virtual bool SelectDB(int dbnum) = 0;
+	virtual bool AUTH(const std::string& auth) override;
 
 	/**
 	* @brie Get information and statistics about the server
 	* @return success: the info
 	*/
-	virtual bool INFO(std::string& info) = 0;
+	virtual bool INFO(std::string& info) override;
 
 	/*
 	ECHO
@@ -77,7 +207,7 @@ public:
 	* @param key's name
 	* @return success: true; fail: false
 	*/
-	virtual bool DEL(const std::string& key) = 0;
+	virtual bool DEL(const std::string& key) override;
 
 	//NF_SHARE_PTR<NFRedisResult> DUMP(const std::string& key, std::string& out);
 
@@ -86,7 +216,7 @@ public:
 	* @param key's name
 	* @return true if the key exists, false if the key does not exist.
 	*/
-	virtual bool EXISTS(const std::string& key) = 0;
+	virtual bool EXISTS(const std::string& key) override;
 
 	/**
 	* @brief Set a timeout on key. After the timeout has expired, the key will automatically be deleted
@@ -94,7 +224,7 @@ public:
 	* @param seconds [in] the key will be destroy after this second
 	* @return The true for set or reset success, false for failed(if key does not exist)
 	*/
-	virtual bool EXPIRE(const std::string& key, const unsigned int secs) = 0;
+	virtual bool EXPIRE(const std::string& key, const unsigned int secs) override;
 
 	/**
 	* @brief this function like EXPIRE, which is to set the lfie time for one key
@@ -103,7 +233,7 @@ public:
 	* @param timestamp [in] the key will be destroy after this timestamp
 	* @return true if the timeout was set, false if key does not exist.
 	*/
-	virtual bool EXPIREAT(const std::string& key, const int64_t unixTime) = 0;
+	virtual bool EXPIREAT(const std::string& key, const int64_t unixTime) override;
 
 	/**
 	* @brief Remove the existing timeout on key, turning the key from volatile (a key with an expire set) to persistent(a key that will never expire as no timeout is associated).
@@ -111,7 +241,7 @@ public:
 	* @param keys [in] name of key
 	* @return true if the timeout was removed, false if key does not exist or does not have an associated timeout.
 	*/
-	virtual bool PERSIST(const std::string& key) = 0;
+	virtual bool PERSIST(const std::string& key) override;
 
 	/**
 	* @brief Returns the remaining time to live of a key that has a timeout
@@ -120,14 +250,14 @@ public:
 	* The command returns -2 if the key does not exist.
 	* The command returns -1 if the key exists but has no associated expire.
 	*/
-	virtual int TTL(const std::string& key) = 0;
+	virtual int TTL(const std::string& key) override;
 
 	/**
 	* @brief Returns the string representation of the type of the value stored at key
 	* @param keys [in] name of key
 	* @return Simple string reply: type of key, or none when key does not exist.
 	*/
-	virtual std::string TYPE(const std::string& key) = 0;
+	virtual std::string TYPE(const std::string& key) override;
 	//NF_SHARE_PTR<NFRedisResult> SCAN(const std::string& key);
 
 
@@ -139,7 +269,7 @@ public:
 	* @param value that you want to append
 	* @return the length of the string after the append operation.
 	*/
-	virtual bool APPEND(const std::string& key, const std::string& value, int& length) = 0;
+	virtual bool APPEND(const std::string& key, const std::string& value, int& length) override;
 	//NF_SHARE_PTR<NFRedisResult> BITCOUNT
 	//NF_SHARE_PTR<NFRedisResult> BITOP
 	//NF_SHARE_PTR<NFRedisResult> BITFIELD(const std::string& key);
@@ -152,7 +282,7 @@ public:
 	* @return the value of key after the decrement
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as integer.
 	*/
-	virtual bool DECR(const std::string& key, int64_t& value) = 0;
+	virtual bool DECR(const std::string& key, int64_t& value) override;
 
 	/**
 	* @brief Decrements the number stored at key by decrement.
@@ -162,14 +292,14 @@ public:
 	* @return the value of key after the decrement
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as integer.
 	*/
-	virtual bool DECRBY(const std::string& key, const int64_t decrement, int64_t& value) = 0;
+	virtual bool DECRBY(const std::string& key, const int64_t decrement, int64_t& value) override;
 
 	/**
 	* @brief Get the value of key. If the key does not exist the special value "" is returned
 	* @param keys [in] name of key
 	* @return the value of key, or "" when key does not exist. An error is returned if the value stored at key is not a string
 	*/
-	virtual bool GET(const std::string& key, std::string & value) = 0;
+	virtual bool GET(const std::string& key, std::string & value) override;
 
 	//NF_SHARE_PTR<NFRedisResult> GETBIT(const std::string& key);
 	//NF_SHARE_PTR<NFRedisResult> GETRANGE(const std::string& key);
@@ -178,7 +308,7 @@ public:
 	* @param keys [in] name of key
 	* @return the old value stored at key, or "" when key did not exist.
 	*/
-	virtual bool GETSET(const std::string& key, const std::string& value, std::string& oldValue) = 0;
+	virtual bool GETSET(const std::string& key, const std::string& value, std::string& oldValue) override;
 
 	/**
 	* @brief Increments the number stored at key by one.
@@ -187,7 +317,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as integer.
 	*/
-	virtual bool INCR(const std::string& key, int64_t& value) = 0;
+	virtual bool INCR(const std::string& key, int64_t& value) override;
 
 	/**
 	* @brief Increments the number stored at key by increment
@@ -197,7 +327,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as integer.
 	*/
-	virtual bool INCRBY(const std::string& key, const int64_t increment, int64_t& value) = 0;
+	virtual bool INCRBY(const std::string& key, const int64_t increment, int64_t& value) override;
 
 	/**
 	* @brief Increment the string representing a floating point number stored at key by the specified increment
@@ -205,7 +335,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as float/double.
 	*/
-	virtual bool INCRBYFLOAT(const std::string& key, const float increment, float& value) = 0;
+	virtual bool INCRBYFLOAT(const std::string& key, const float increment, float& value) override;
 
 	/**
 	* @brief Returns the values of all specified keys.
@@ -215,14 +345,14 @@ public:
 	* For every key that does not hold a string value or does not exist,
 	* the special value "" is returned. Because of this, the operation never fails / if the key is not a string key than that field return ""
 	*/
-	virtual bool MGET(const string_vector& keys, string_vector& values) = 0;
+	virtual bool MGET(const string_vector& keys, string_vector& values) override;
 
 	/**
 	* @brief Sets the given keys to their respective values, MSET is atomic, so all given keys are set at once
 	* @param keys and values [in]
 	* @return always OK since MSET can't fail.
 	*/
-	virtual void MSET(const string_pair_vector& values) = 0;
+	virtual void MSET(const string_pair_vector& values) override;
 
 	//NF_SHARE_PTR<NFRedisResult> MSETNX(const std::string& key);
 	//NF_SHARE_PTR<NFRedisResult> PSETEX(const std::string& key);
@@ -233,7 +363,7 @@ public:
 	* @return true if SET was executed correctly.
 	* false is returned if the SET operation was not performed because the user specified the NX or XX option but the condition was not met.
 	*/
-	virtual bool SET(const std::string& key, const std::string& value) = 0;
+	virtual bool SET(const std::string& key, const std::string& value) override;
 
 	//NF_SHARE_PTR<NFRedisResult> SETBIT(const std::string& key);
 	/**
@@ -243,7 +373,7 @@ public:
 	* @param time [in] time that you want set
 	* @return true if SETEX was executed correctly, false is returned when seconds is invalid.
 	*/
-	virtual bool SETEX(const std::string& key, const std::string& value, int time) = 0;
+	virtual bool SETEX(const std::string& key, const std::string& value, int time) override;
 
 	/**
 	* @brief SET if Not eXists --- Set key to hold string value if key does not exist.
@@ -251,7 +381,7 @@ public:
 	* @param value [in] value of the key
 	* @return true if the key was set, false if the key was not set
 	*/
-	virtual bool SETNX(const std::string& key, const std::string& value) = 0;
+	virtual bool SETNX(const std::string& key, const std::string& value) override;
 	//NF_SHARE_PTR<NFRedisResult> SETRANGE(const std::string& key);
 
 	/**
@@ -260,7 +390,7 @@ public:
 	* @param length [out] the length of the string at key
 	* @return false when key does not exist or wrong type
 	*/
-	virtual bool STRLEN(const std::string& key, int& length) = 0;
+	virtual bool STRLEN(const std::string& key, int& length) override;
 
 	/////////client hash//////////////
 	/**
@@ -268,15 +398,15 @@ public:
 	* @param field/fields [in] the fields you want to remove
 	* @return the number of fields that were removed from the hash, not including specified but non existing fields.
 	*/
-	virtual int HDEL(const std::string& key, const std::string& field) = 0;
-	virtual int HDEL(const std::string& key, const string_vector& fields) = 0;
+	virtual int HDEL(const std::string& key, const std::string& field) override;
+	virtual int HDEL(const std::string& key, const string_vector& fields) override;
 
 	/**
 	* @brief Returns if field is an existing field in the hash stored at key.
 	* @param field [in] the field you want to check
 	* @return true if the hash contains field. false if the hash does not contain field, or key does not exist.
 	*/
-	virtual bool HEXISTS(const std::string& key, const std::string& field) = 0;
+	virtual bool HEXISTS(const std::string& key, const std::string& field) override;
 
 	/**
 	* @brief Returns the value associated with field in the hash stored at key.
@@ -284,7 +414,7 @@ public:
 	* @param value [out] the value you want to get
 	* @return true if the hash contains field. false if the hash does not contain field, or key does not exist.
 	*/
-	virtual bool HGET(const std::string& key, const std::string& field, std::string& value) = 0;
+	virtual bool HGET(const std::string& key, const std::string& field, std::string& value) override;
 
 	/**
 	* @brief Returns all field names in the hash stored at key.
@@ -292,7 +422,7 @@ public:
 	* @param values [out] all the key & values of the key
 	* @return true when key exist, false when key does not exist.
 	*/
-	virtual bool HGETALL(const std::string& key, std::vector<string_pair>& values) = 0;
+	virtual bool HGETALL(const std::string& key, std::vector<string_pair>& values) override;
 
 	/**
 	* @brief Increments the number stored at key by increment
@@ -303,7 +433,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as integer.
 	*/
-	virtual bool HINCRBY(const std::string& key, const std::string& field, const int by, int64_t& value) = 0;
+	virtual bool HINCRBY(const std::string& key, const std::string& field, const int by, int64_t& value) override;
 
 	/**
 	* @brief Increment the string representing a floating point number stored at key by the specified increment
@@ -314,7 +444,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as float/double.
 	*/
-	virtual bool HINCRBYFLOAT(const std::string& key, const std::string& field, const float by, float& value) = 0;
+	virtual bool HINCRBYFLOAT(const std::string& key, const std::string& field, const float by, float& value) override;
 
 	/**
 	* @brief Returns all field names in the hash stored at key.
@@ -322,7 +452,7 @@ public:
 	* @param fields [out] the fields of the key
 	* @return true when key exist, false when key does not exist.
 	*/
-	virtual bool HKEYS(const std::string& key, std::vector<std::string>& fields) = 0;
+	virtual bool HKEYS(const std::string& key, std::vector<std::string>& fields) override;
 
 
 	/**
@@ -331,7 +461,7 @@ public:
 	* @param number [out] number of fields in the hash
 	* @return true when key exist, false when key does not exist.
 	*/
-	virtual bool HLEN(const std::string& key, int& number) = 0;
+	virtual bool HLEN(const std::string& key, int& number) override;
 
 	/**
 	* @brief Returns the values associated with the specified fields in the hash stored at key.
@@ -340,7 +470,7 @@ public:
 	* @param values [out] the values return
 	* @return list of values associated with the given fields, in the same order as they are requested.
 	*/
-	virtual bool HMGET(const std::string& key, const string_vector& fields, string_vector& values) = 0;
+	virtual bool HMGET(const std::string& key, const string_vector& fields, string_vector& values) override;
 
 	/**
 	* @brief Sets the specified fields to their respective values in the hash stored at key
@@ -349,8 +479,8 @@ public:
 	* @return true if cmd success, false when the key not a hashmap
 	* If the key does not exist, a new key holding a hash is created
 	*/
-	virtual bool HMSET(const std::string& key, const std::vector<string_pair>& values) = 0;
-	virtual bool HMSET(const std::string& key, const string_vector& fields, const string_vector& values) = 0;
+	virtual bool HMSET(const std::string& key, const std::vector<string_pair>& values) override;
+	virtual bool HMSET(const std::string& key, const string_vector& fields, const string_vector& values) override;
 
 	/**
 	* @brief Sets the specified field to their respective values in the hash stored at key
@@ -359,7 +489,7 @@ public:
 	* @return true if cmd success, false when the key not a hashmap
 	* If the key does not exist, a new key holding a hash is created
 	*/
-	virtual bool HSET(const std::string& key, const std::string& field, const std::string& value) = 0;
+	virtual bool HSET(const std::string& key, const std::string& field, const std::string& value) override;
 
 	/**
 	* @brief SET if Not eXists --- Sets field in the hash stored at key to value, only if field does not yet exist
@@ -368,7 +498,7 @@ public:
 	* @param value [in] value of the field
 	* @return true if the key was set, false if the key was not set(maybe not a hashmap key)
 	*/
-	virtual bool HSETNX(const std::string& key, const std::string& field, const std::string& value) = 0;
+	virtual bool HSETNX(const std::string& key, const std::string& field, const std::string& value) override;
 
 	/**
 	* @brief Returns all values in the hash stored at key.
@@ -376,7 +506,7 @@ public:
 	* @param values [out] fields/values that you want to know
 	* @return false when key does not exist or not a hashmap key
 	*/
-	virtual bool HVALS(const std::string& key, string_vector& values) = 0;
+	virtual bool HVALS(const std::string& key, string_vector& values) override;
 	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
 
 	/**
@@ -386,7 +516,7 @@ public:
 	* @param length [out] the length of the string at field, or 0 when field does not exist.
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	virtual bool HSTRLEN(const std::string& key, const std::string& field, int& length) = 0;
+	virtual bool HSTRLEN(const std::string& key, const std::string& field, int& length) override;
 
 	/////////client list//////////////
 
@@ -400,7 +530,7 @@ public:
 	* @param value [out] th value that you got
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	virtual bool LINDEX(const std::string& key, const int index, std::string& value) = 0;
+	virtual bool LINDEX(const std::string& key, const int index, std::string& value) override;
 	//NF_SHARE_PTR<NFRedisResult> LINSERT(const std::string& key, const std::string& value1, const std::string& value2);
 
 	/**
@@ -409,7 +539,7 @@ public:
 	* @param length [out] the length that you got
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	virtual bool LLEN(const std::string& key, int& length) = 0;
+	virtual bool LLEN(const std::string& key, int& length) override;
 
 	/**
 	* @brief Removes and returns the first element of the list stored at key.
@@ -417,7 +547,7 @@ public:
 	* @param value [out] the value of the first element
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	virtual bool LPOP(const std::string& key, std::string& value) = 0;
+	virtual bool LPOP(const std::string& key, std::string& value) override;
 
 	/**
 	* @brief Insert all the specified values at the head of the list stored at key
@@ -425,7 +555,7 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int LPUSH(const std::string& key, const std::string& value) = 0;
+	virtual int LPUSH(const std::string& key, const std::string& value) override;
 
 	/**
 	* @brief Insert all the specified values at the head of the list stored at key
@@ -434,7 +564,7 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int LPUSHX(const std::string& key, const std::string& value) = 0;
+	virtual int LPUSHX(const std::string& key, const std::string& value) override;
 
 
 	/**
@@ -445,7 +575,7 @@ public:
 	* @param values [out] the value that you want to get
 	* @return true when cmd success, false when key does not exist or dose not a list key.
 	*/
-	virtual bool LRANGE(const std::string& key, const int start, const int end, string_vector& values) = 0;
+	virtual bool LRANGE(const std::string& key, const int start, const int end, string_vector& values) override;
 	//NF_SHARE_PTR<NFRedisResult> LREM(const std::string& key, string_vector& values);
 
 	/**
@@ -455,7 +585,7 @@ public:
 	* @param value [in] the value that you want set
 	* @return true when cmd success, false when key dose not a list key.
 	*/
-	virtual bool LSET(const std::string& key, const int index, const std::string& value) = 0;
+	virtual bool LSET(const std::string& key, const int index, const std::string& value) override;
 	//NF_SHARE_PTR<NFRedisResult> LTRIM(const std::string& key, string_vector& values);
 
 	/**
@@ -464,7 +594,7 @@ public:
 	* @param value [out] the value of the last element
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	virtual bool RPOP(const std::string& key, std::string& value) = 0;
+	virtual bool RPOP(const std::string& key, std::string& value) override;
 	//NF_SHARE_PTR<NFRedisResult> RPOPLPUSH(const std::string& key, string_vector& values);
 
 	/**
@@ -473,7 +603,7 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int RPUSH(const std::string& key, const std::string& value) = 0;
+	virtual int RPUSH(const std::string& key, const std::string& value) override;
 
 	/**
 	* @brief Inserts value at the tail of the list stored at key, only if key already exists and holds a list
@@ -481,7 +611,7 @@ public:
 	* @param value [in] the value that you want push
 	* @return true when cmd success, false when key does not exist or dose not a list key.
 	*/
-	virtual int RPUSHX(const std::string& key, const std::string& value) = 0;
+	virtual int RPUSHX(const std::string& key, const std::string& value) override;
 
 	/////////client set//////////////
 
@@ -491,7 +621,7 @@ public:
 	* @param member [in]
 	* @return return the number of elements added to the sets when cmd success.
 	*/
-	virtual int SADD(const std::string& key, const std::string& member) = 0;
+	virtual int SADD(const std::string& key, const std::string& member) override;
 
 	/**
 	* @brief cmd SCARD
@@ -499,7 +629,7 @@ public:
 	* @param count [out] the size of set
 	* @return return true when cmd success.
 	*/
-	virtual bool SCARD(const std::string& key, int& count) = 0;
+	virtual bool SCARD(const std::string& key, int& count) override;
 
 	/**
 	* @brief cmd SDIFF
@@ -508,7 +638,7 @@ public:
 	* @param output [out] difference sets
 	* @return return true when cmd success.
 	*/
-	virtual bool SDIFF(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+	virtual bool SDIFF(const std::string& key_1, const std::string& key_2, string_vector& output) override;
 
 	/**
 	* @brief cmd SDIFFSTORE
@@ -517,7 +647,7 @@ public:
 	* @param key_2 [in] name of diff_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SDIFFSTORE(const std::string& store_key, const std::string& diff_key1, const std::string& diff_key2) = 0;
+	virtual int SDIFFSTORE(const std::string& store_key, const std::string& diff_key1, const std::string& diff_key2) override;
 
 	/**
 	* @brief cmd SINTER
@@ -527,7 +657,7 @@ public:
 	* @param output [out] inter_key1 and inter_key2 intersection
 	* @return return true when cmd success.
 	*/
-	virtual bool SINTER(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+	virtual bool SINTER(const std::string& key_1, const std::string& key_2, string_vector& output) override;
 
 	/**
 	* @brief cmd SINTERSTORE
@@ -536,7 +666,7 @@ public:
 	* @param inter_key2 [in] name of inter_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) = 0;
+	virtual int SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) override;
 
 	/**
 	* @brief cmd SISMEMBER
@@ -544,7 +674,7 @@ public:
 	* @param member [in] set's member
 	* @return return true when the member in set.
 	*/
-	virtual bool SISMEMBER(const std::string& key, const std::string& member) = 0;
+	virtual bool SISMEMBER(const std::string& key, const std::string& member) override;
 
 	/**
 	* @brief cmd SMEMBERS
@@ -552,7 +682,7 @@ public:
 	* @param output [out] all member of set
 	* @return return true when cmd success.
 	*/
-	virtual bool SMEMBERS(const std::string& key, string_vector& output) = 0;
+	virtual bool SMEMBERS(const std::string& key, string_vector& output) override;
 
 	/**
 	* @brief cmd SMOVE
@@ -561,7 +691,7 @@ public:
 	* @param member [in] the member of source set
 	* @return return true when cmd success.
 	*/
-	virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) = 0;
+	virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) override;
 
 	/**
 	* @brief cmd SPOP
@@ -569,7 +699,7 @@ public:
 	* @param output [out] remove member
 	* @return return true when cmd success.
 	*/
-	virtual bool SPOP(const std::string& key, std::string& output) = 0;
+	virtual bool SPOP(const std::string& key, std::string& output) override;
 
 	/**
 	* @brief cmd SRANDMEMBER
@@ -578,7 +708,7 @@ public:
 	* @param output [out] remove members
 	* @return return true when cmd success.
 	*/
-	virtual bool SRANDMEMBER(const std::string& key, int count, string_vector& output) = 0;
+	virtual bool SRANDMEMBER(const std::string& key, int count, string_vector& output) override;
 
 	/**
 	* @brief cmd SREM
@@ -586,7 +716,7 @@ public:
 	* @param output [out] remove members
 	* @return return the number of remove member
 	*/
-	virtual int SREM(const std::string& key, const string_vector& members) = 0;
+	virtual int SREM(const std::string& key, const string_vector& members) override;
 
 	/**
 	* @brief cmd SUNION
@@ -595,7 +725,7 @@ public:
 	* @param output [out] set1 and set2 union member
 	* @return return true when cmd success.
 	*/
-	virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) = 0;
+	virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) override;
 
 	/**
 	* @brief cmd SUNIONSTORE
@@ -604,7 +734,7 @@ public:
 	* @param union_key2 [out] name of union_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) = 0;
+	virtual int SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) override;
 
 
 	/////////client SortedSet//////////////
@@ -615,14 +745,14 @@ public:
 	* @param score [in]
 	* @return return the number of elements added to the sorted sets when cmd success, false when key dose not a z key.
 	*/
-	virtual int ZADD(const std::string& key, const std::string& member, const double score) = 0;
+	virtual int ZADD(const std::string& key, const std::string& member, const double score) override;
 
 	/**
 	* @brief Returns the number of elements of the sorted set stored at key.
 	* @param key [in] name of key
 	* @return return the number( of elements) of the sorted set, or 0 if key does not exist or not a z key
 	*/
-	virtual bool ZCARD(const std::string& key, int &count) = 0;
+	virtual bool ZCARD(const std::string& key, int &count) override;
 
 	/**
 	* @brief Returns the number of elements in the sorted set at key with a score between min and max.
@@ -631,7 +761,7 @@ public:
 	* @param end [in]
 	* @return the number of elements in the specified score range, or 0 if key does not exist or not a z key
 	*/
-	virtual bool ZCOUNT(const std::string& key, const double start, const double end, int &count) = 0;
+	virtual bool ZCOUNT(const std::string& key, const double start, const double end, int &count) override;
 
 	/**
 	* @brief Increments the score of member in the sorted set stored at key by increment
@@ -643,7 +773,7 @@ public:
 	* @return the value of key after the increment
 	* An error is returned if the key contains a value of the wrong type or contains a string that can not be represented as float/double.
 	*/
-	virtual bool ZINCRBY(const std::string& key, const std::string & member, const double score, double& newScore) = 0;
+	virtual bool ZINCRBY(const std::string& key, const std::string & member, const double score, double& newScore) override;
 
 	/**
 	* @brief Returns the specified range of elements in the sorted set stored at key
@@ -653,7 +783,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZRANGE(const std::string& key, const int start, const int end, string_score_vector& values) = 0;
+	virtual bool ZRANGE(const std::string& key, const int start, const int end, string_score_vector& values) override;
 
 	/**
 	* @brief Returns all the elements in the sorted set at key with a score between min and max
@@ -664,7 +794,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values) = 0;
+	virtual bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values) override;
 
 	/**
 	* @brief Returns the rank of member in the sorted set stored at key, with the scores ordered from low to high
@@ -673,7 +803,7 @@ public:
 	* @param rank [out] the rank of this member
 	* @return true if member exists in the sorted set, false when member does not exist or not a z key.
 	*/
-	virtual bool ZRANK(const std::string & key, const std::string & member, int& rank) = 0;
+	virtual bool ZRANK(const std::string & key, const std::string & member, int& rank) override;
 
 	/**
 	* @brief Removes the specified members from the sorted set stored at key. Non existing members are ignored.
@@ -681,7 +811,7 @@ public:
 	* @param member [in] the members of this range
 	* @return true if member exists in the sorted set and removed success, false when member does not exist or not a z key.
 	*/
-	virtual bool ZREM(const std::string& key, const std::string& member) = 0;
+	virtual bool ZREM(const std::string& key, const std::string& member) override;
 
 	/**
 	* @brief Removes all elements in the sorted set stored at key with rank between start and stop
@@ -690,7 +820,7 @@ public:
 	* @param end [in]
 	* @return true if cmd removed success, false when the key is not a z key.
 	*/
-	virtual bool ZREMRANGEBYRANK(const std::string& key, const int start, const int end) = 0;
+	virtual bool ZREMRANGEBYRANK(const std::string& key, const int start, const int end) override;
 
 	/**
 	* @brief Removes all elements in the sorted set stored at key with a score between min and max (inclusive).
@@ -699,7 +829,7 @@ public:
 	* @param max [in]
 	* @return true if cmd removed success, false when the key is not a z key.
 	*/
-	virtual bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max) = 0;
+	virtual bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max) override;
 
 	/**
 	* @brief Returns the specified range of elements in the sorted set stored at key.
@@ -710,7 +840,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZREVRANGE(const std::string& key, const int start, const int end, string_score_vector& values) = 0;
+	virtual bool ZREVRANGE(const std::string& key, const int start, const int end, string_score_vector& values) override;
 
 	/**
 	* @brief Returns all the elements in the sorted set at key with a score between max and min
@@ -721,7 +851,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values) = 0;
+	virtual bool ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values) override;
 
 
 	/**
@@ -731,7 +861,7 @@ public:
 	* @param rank [out] the rank of this member
 	* @return true if member is exists in the sorted set, false when member does not exist or not a z key.
 	*/
-	virtual bool ZREVRANK(const std::string& key, const std::string& member, int& rank) = 0;
+	virtual bool ZREVRANK(const std::string& key, const std::string& member, int& rank) override;
 
 	/**
 	* @brief Returns the score of member in the sorted set at key.
@@ -740,19 +870,19 @@ public:
 	* @param rank [out] the rank of this member
 	* @return true if member is exists in the sorted set, false when member does not exist or not a z key.
 	*/
-	virtual bool ZSCORE(const std::string& key, const std::string& member, double& score) = 0;
+	virtual bool ZSCORE(const std::string& key, const std::string& member, double& score) override;
 
 
 	/////////client server//////////////
 	/**
 	* @brief Removes all data of all DB
 	*/
-	virtual void FLUSHALL() = 0;
+	virtual void FLUSHALL() override;
 
 	/**
 	* @brief Removes all the keys of current DB
 	*/
-	virtual void FLUSHDB() = 0;
+	virtual void FLUSHDB() override;
 
 
 	/////////client pubsub//////////////
@@ -761,122 +891,54 @@ public:
 	* @param value [in] publish's msg
 	* @return return true when cmd success.
 	*/
-	//virtual bool PUBLISH(const std::string& key, const std::string& value) = 0;
+	//virtual bool PUBLISH(const std::string& key, const std::string& value) override;
 
 	/**	@brief cmd SUBSCRIBE
 	* @param key [in] name of key
 	* @return return true when cmd success.
 	*/
-	//virtual bool SUBSCRIBE(const std::string& key) = 0;
+	//virtual bool SUBSCRIBE(const std::string& key) override;
 
 	/**	@brief cmd UNSUBSCRIBE
 	* @param key [in] name of key
 	* @return return true when cmd success.
 	*/
-	//virtual	bool UNSUBSCRIBE(const std::string& key) = 0;
+	//virtual	bool UNSUBSCRIBE(const std::string& key) override;
 
 	//cluster
 
 	/**	@brief cmd CLUSTER NODES
 	* @return return true, all of the master nodes of this cluster.
 	*/
-	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterNode = true, bool includeSelfMaster = false) = 0;
+	virtual	bool CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMasterNode = true, bool includeSelfMaster = false) override;
 
 	/**	@brief cmd CLUSTER INFO
 	* @return return true, the cluster info of this cluster.
 	*/
-	virtual	bool CLUSTERINFO(std::string& clusterInfo) = 0;
-};
+	virtual	bool CLUSTERINFO(std::string& clusterInfo) override;
 
-class NFIRedisClient : public NFIRedis
-{
-public:
-	NFIRedisClient(){}
-	virtual ~NFIRedisClient() {}
+	virtual NF_SHARE_PTR<NFIRedisClient> FindRedisClient(int slot);
 
+	virtual bool Enable();
+	virtual bool Busy();
+	virtual bool KeepLive();
 
-	virtual const std::string& GetAuthKey() { return mstrAuthKey; }
-
-	virtual const std::string& GetIP() { return mstrIP; }
-
-	virtual const int GetPort() { return mnPort; }
-	virtual const int StartSlot() { return startSlot; }
-	virtual const int EndSlot() { return endSlot; }
-
-	virtual bool Enable() = 0;
-	virtual bool Authenticated() = 0;
-
-	virtual bool KeepLive() = 0;
-	virtual bool Execute() {};
-
-	virtual void UpdateSlot(int start, int end) = 0;
-
-	virtual bool IsConnected() = 0;
-
-	virtual NF_SHARE_PTR<NFRedisReply> BuildSendCmd(const NFRedisCommand& cmd) = 0;
 
 protected:
 
-	int startSlot = 0;
-	int endSlot = 0;
-
-	std::string mstrIP;
-	int mnPort;
-	std::string mstrAuthKey;
-};
-
-class RedisMasterNode
-{
-public:
-	std::string id;
-	std::string host;
-	int port;
-	int slotStart;//included
-	int slotEnd;//included
-};
-
-class NFINoSqlModule
-		: public NFIModule, public NFIRedis
-{
-public:
-	virtual NF_SHARE_PTR<NFIRedisClient> FindRedisClient(int slot) = 0;
-
-	int GetSlotByKey(const std::string &key)
-	{
-		std::string realKey;
-		int pos1 = key.find("{");
-		int pos2 = key.find("}");
-		if (pos1 != std::string::npos && pos2 != std::string::npos)
-		{
-			realKey = key.substr(pos1 + 1, pos2 - pos1 - 1);
-		}
-		else
-		{
-			realKey = key;
-		}
-
-		return CRC16(realKey.c_str(), realKey.length());
-	}
-
-	NF_SHARE_PTR<NFIRedisClient> FindRedisClientByKey(const std::string& key)
-	{
-		int slot = GetSlotByKey(key);
-		if (slot >= 0 && slot <= 16383)
-		{
-			return FindRedisClient(slot);
-		}
-
-	}
-
-	virtual void CheckConnect() = 0;
+	void CheckConnect();
 	//如果收到move消息，就调用此函数强制刷新nodes
-	virtual void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient) = 0;
-};
+	void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient);
 
-class NFIAsyncNoSqlModule : public NFINoSqlModule
-{
-public:
+protected:
+	NFINT64 mLastCheckTime;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFILogModule* m_pLogModule;
 
+	moodycamel::ConcurrentQueue<NF_SHARE_PTR<NFRedisReply>> trackerQueue;
+	moodycamel::ConcurrentQueue<NF_SHARE_PTR<NFRedisReply>> masterNodesQueue;
+	std::list<NF_SHARE_PTR<RedisClientThread>> redisClients;
 };
 
 #endif

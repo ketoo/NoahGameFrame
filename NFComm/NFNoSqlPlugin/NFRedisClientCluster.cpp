@@ -30,18 +30,18 @@ bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMa
 	NFRedisCommand cmd("CLUSTER");
 	cmd << "NODES";
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_STRING)
+	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
 		if (onlyMasterNode)
 		{
 			std::vector<std::string> clustersNode;
-			StringToVector(std::string(pReply->str, pReply->len), NFREDIS_LF, clustersNode);
+			StringToVector(std::string(pReply->reply->str, pReply->reply->len), NFREDIS_LF, clustersNode);
 			for (auto & node : clustersNode)
 			{
 				if (node.find("master") != std::string::npos)
@@ -62,7 +62,7 @@ bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMa
 		}
 		else
 		{
-			StringToVector(std::string(pReply->str, pReply->len), NFREDIS_LF, clusters);
+			StringToVector(std::string(pReply->reply->str, pReply->reply->len), NFREDIS_LF, clusters);
 		}
 		return true;
 	}
@@ -75,15 +75,15 @@ bool NFRedisClient::CLUSTERINFO(std::string& clusterInfo)
 	NFRedisCommand cmd("CLUSTER");
 	cmd << "INFO";
 
-	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
+	if (pReply->reply == nullptr)
 	{
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_STRING)
+	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		clusterInfo.append(pReply->str, pReply->len);
+		clusterInfo.append(pReply->reply->str, pReply->reply->len);
 		return true;
 	}
 

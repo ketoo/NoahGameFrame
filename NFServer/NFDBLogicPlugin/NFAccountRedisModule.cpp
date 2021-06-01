@@ -59,14 +59,10 @@ bool NFAccountRedisModule::VerifyAccount(const std::string& account, const std::
 	}
 
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
-	if (xNoSqlDriver)
+	std::string strPassword;
+	if (m_pNoSqlModule->HGET(strAccountKey, "Password", strPassword) && strPassword == strPwd)
 	{
-		std::string strPassword;
-		if (xNoSqlDriver->HGET(strAccountKey, "Password", strPassword) && strPassword == strPwd)
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;
@@ -75,22 +71,13 @@ bool NFAccountRedisModule::VerifyAccount(const std::string& account, const std::
 bool NFAccountRedisModule::AddAccount(const std::string & account, const std::string & strPwd)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
-	if (xNoSqlDriver)
-	{
-		return xNoSqlDriver->HSET(strAccountKey, "Password", strPwd);
-	}
-	return false;
+	return m_pNoSqlModule->HSET(strAccountKey, "Password", strPwd);
 }
 
 bool NFAccountRedisModule::ExistAccount(const std::string & account)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
-	if (xNoSqlDriver)
-	{
-		return xNoSqlDriver->EXISTS(strAccountKey);
-	}
+	return m_pNoSqlModule->EXISTS(strAccountKey);
 
 	return false;
 }

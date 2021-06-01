@@ -42,8 +42,15 @@
 
 #include "NFRedisCommand.h"
 #include "NFRedisClientSocket.h"
-
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
+
+class NFRedisReply
+{
+public:
+	int64_t index = 0;
+	std::string error;
+	NF_SHARE_PTR<redisReply> reply = nullptr;
+};
 
 class NFRedisClient : public NFIRedisClient
 {
@@ -51,18 +58,17 @@ public:
 	NFRedisClient();
 	virtual ~NFRedisClient() {}
 
-	virtual bool Connect(const std::string& ip, const int port, const std::string& auth = "");
+	virtual NF_SHARE_PTR<NFIRedisClient> Connect(const std::string& ip, const int port, const std::string& auth, const bool sync = true) override ;
 
-	virtual bool Enable();
-	virtual bool Authenticated();
-	virtual bool Busy();
+	virtual bool Enable() override ;
+	virtual bool Authenticated() override ;
 
-	virtual bool Execute();
-	virtual bool KeepLive();
+	virtual bool Execute() override ;
+	virtual bool KeepLive() override ;
 
-	bool ReConnect();
+	virtual void UpdateSlot(int start, int end) override ;
 
-	bool IsConnect();
+	virtual bool IsConnected() override ;
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
@@ -70,13 +76,6 @@ public:
 	* @return success: true; fail: false
 	*/
 	virtual bool AUTH(const std::string& auth);
-
-	/**
-	* @brie select DB
-	* @param DB index
-	* @return success: true; fail: false
-	*/
-	virtual bool SelectDB(int dbnum);
 
 	/**
 	* @brie Get information and statistics about the server
@@ -778,19 +777,19 @@ public:
 	* @param value [in] publish's msg
 	* @return return true when cmd success.
 	*/
-	virtual bool PUBLISH(const std::string& key, const std::string& value);
+	//virtual bool PUBLISH(const std::string& key, const std::string& value);
 
 	/**	@brief cmd SUBSCRIBE
 	* @param key [in] name of key
 	* @return return true when cmd success.
 	*/
-	virtual bool SUBSCRIBE(const std::string& key);
+	//virtual bool SUBSCRIBE(const std::string& key);
 
 	/**	@brief cmd UNSUBSCRIBE
 	* @param key [in] name of key
 	* @return return true when cmd success.
 	*/
-	virtual	bool UNSUBSCRIBE(const std::string& key);
+	//virtual	bool UNSUBSCRIBE(const std::string& key);
 
 	//cluster
 	/**	@brief cmd CLUSTER NODES
@@ -804,15 +803,17 @@ public:
 	virtual	bool CLUSTERINFO(std::string& clusterInfo);
 
 
+	virtual NF_SHARE_PTR<NFRedisReply> BuildSendCmd(const NFRedisCommand& cmd);
+
 protected:
-	NF_SHARE_PTR<redisReply> BuildSendCmd(const NFRedisCommand& cmd);
-	NF_SHARE_PTR<redisReply> ParseForReply();
+	virtual NF_SHARE_PTR<NFRedisReply> ParseForReply();
 
 
 private:
 
-	bool mbAuthed;
-	bool mbBusy;
+	bool synchronization = true;
+	bool mbEnable = true;
+	bool mbAuthed = false;
 	NFRedisClientSocket* m_pRedisClientSocket;
 };
 

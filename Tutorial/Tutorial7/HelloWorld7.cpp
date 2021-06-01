@@ -45,7 +45,7 @@ bool NFHelloWorld7::Execute()
 {
     mxRedisClient.Execute();
 
-	if (mxRedisClient.IsConnect())
+	if (mxRedisClient.IsConnected())
 	{
         if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
         {

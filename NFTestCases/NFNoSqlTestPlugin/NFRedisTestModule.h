@@ -66,7 +66,7 @@ class NFRedisTestModule : public NFIRedisTestModule
 	virtual bool Execute() override;
 
  private:
-	bool IsConnect();
+	bool IsConnected();
 
 	void TestCluster();
 	void TestKey();
@@ -78,7 +78,7 @@ class NFRedisTestModule : public NFIRedisTestModule
 
 	void PerformanceTest();
 
-	NFRedisClient mxRedisClient;
+	NFRedisClient* mxRedisClient;
 };
 
 #endif //NFREDISPLUGIN_NFREDISTESTER_H
