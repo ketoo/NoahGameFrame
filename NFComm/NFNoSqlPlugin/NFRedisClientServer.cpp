@@ -30,7 +30,7 @@ void NFRedisClient::FLUSHALL()
     NFRedisCommand cmd(GET_NAME(FLUSHALL));
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply != nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		
 	}
@@ -41,8 +41,9 @@ void NFRedisClient::FLUSHDB()
     NFRedisCommand cmd(GET_NAME(FLUSHDB));
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply != nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
-		
+		return;
 	}
+
 }

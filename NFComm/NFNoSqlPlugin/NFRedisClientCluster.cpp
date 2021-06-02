@@ -31,7 +31,7 @@ bool NFRedisClient::CLUSTERNODES(std::vector<std::string>& clusters, bool onlyMa
 	cmd << "NODES";
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -76,7 +76,7 @@ bool NFRedisClient::CLUSTERINFO(std::string& clusterInfo)
 	cmd << "INFO";
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}

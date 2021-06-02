@@ -34,11 +34,7 @@ NFRedisTestModule::NFRedisTestModule(NFIPluginManager* pluginManager)
 
 bool NFRedisTestModule::AfterInit()
 {
-	mxRedisClient = new NFRedisClient();
-	mxRedisClient->Connect("127.0.0.1", 30001, "", true);
-
-	NFSLEEP(0.1);
-	mxRedisClient->Execute();
+	noSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 
 	return true;
 }
@@ -46,17 +42,17 @@ bool NFRedisTestModule::AfterInit()
 void NFRedisTestModule::TestCluster()
 {
 	std::string info;
-	mxRedisClient->INFO(info);
+	noSqlModule->INFO(info);
 	std::vector<std::string> infoData;
 	StringToVector(info, NFREDIS_CRLF, infoData);
 
 	std::string clusterInfo;
-	mxRedisClient->CLUSTERINFO(clusterInfo);
+	noSqlModule->CLUSTERINFO(clusterInfo);
 	std::vector<std::string> clusterInfoData;
 	StringToVector(clusterInfo, NFREDIS_CRLF, clusterInfoData);
 
 	std::vector<std::string> masterNodes;
-	mxRedisClient->CLUSTERNODES(masterNodes);
+	noSqlModule->CLUSTERNODES(masterNodes);
 	for (auto& node : masterNodes)
 	{
 		NF_TEST_SECTION("master node:" + node)
@@ -66,19 +62,16 @@ void NFRedisTestModule::TestCluster()
 void NFRedisTestModule::TestHash()
 {
 	int64_t nnn;
-	NF_ASSERT("TestHash HINCRBY", mxRedisClient->HINCRBY("HINCRBY12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
+	NF_ASSERT("TestHash HINCRBY", noSqlModule->HINCRBY("HINCRBY12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
 	NF_ASSERT("TestHash nnn", nnn == 13);
 
 	float fval;
-	NF_ASSERT("TestHash HINCRBYFLOAT", mxRedisClient->HINCRBYFLOAT("12123dd323ssss123ddd", "12444441212", 3.0f, fval) == true);
+	NF_ASSERT("TestHash HINCRBYFLOAT", noSqlModule->HINCRBYFLOAT("12123dd323ssss123ddd", "12444441212", 3.0f, fval) == true);
 
-	NF_ASSERT("TestHash HSETNX", mxRedisClient->HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == true);
-	NF_ASSERT("TestHash HSETNX", mxRedisClient->HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == false);
+	NF_ASSERT("TestHash HSETNX", noSqlModule->HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == true);
+	NF_ASSERT("TestHash HSETNX", noSqlModule->HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == false);
 
-
-	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
-
-	std::string strKey = "TestHash::TestHash";
+	std::string strKey = "TestHash::TestHash ";
 	std::string strField1 = "TestField1";
 	std::string strField2 = "TestField2";
 	std::string strField3 = "TestField3";
@@ -112,25 +105,25 @@ void NFRedisTestModule::TestHash()
 	pair_values.push_back(string_pair(fields[4], values[4]));
 
 
-	NF_ASSERT("TestHash DEL", mxRedisClient->DEL(strKey) == false);
+	NF_ASSERT("TestHash  DEL", noSqlModule->DEL(strKey) == false);
 
-	NF_ASSERT("TestHash HSET", mxRedisClient->HSET(strKey, strField1, strValue1) == true);
+	NF_ASSERT("TestHash HSET", noSqlModule->HSET(strKey, strField1, strValue1) == true);
 
 	std::string strHGET;
-	NF_ASSERT("TestHash HGET", mxRedisClient->HGET(strKey, strField1, strHGET) == true);
+	NF_ASSERT("TestHash HGET", noSqlModule->HGET(strKey, strField1, strHGET) == true);
 	NF_ASSERT("TestHash strHGET == strValue1", strHGET == strValue1);
 
-	NF_ASSERT("TestHash HEXISTS", mxRedisClient->HEXISTS(strKey, strField1) == true);
-	NF_ASSERT("TestHash HDEL", mxRedisClient->HDEL(strKey, strField1) != 0);
-	NF_ASSERT("TestHash HEXISTS", mxRedisClient->HEXISTS(strKey, strField1) == false);
-	NF_ASSERT("TestHash HMSET", mxRedisClient->HMSET(strKey, pair_values) == true);
+	NF_ASSERT("TestHash HEXISTS", noSqlModule->HEXISTS(strKey, strField1) == true);
+	NF_ASSERT("TestHash HDEL", noSqlModule->HDEL(strKey, strField1) != 0);
+	NF_ASSERT("TestHash HEXISTS", noSqlModule->HEXISTS(strKey, strField1) == false);
+	NF_ASSERT("TestHash HMSET", noSqlModule->HMSET(strKey, pair_values) == true);
 	
 	int nHLEN;
-	NF_ASSERT("TestHash HLEN", mxRedisClient->HLEN(strKey, nHLEN) == true);
+	NF_ASSERT("TestHash HLEN", noSqlModule->HLEN(strKey, nHLEN) == true);
 	NF_ASSERT("TestHash nHLEN == pair_values.size()", nHLEN == pair_values.size());
 
 	string_vector getValue;
-	NF_ASSERT("TestHash HMGET", mxRedisClient->HMGET(strKey, fields, getValue) == true);
+	NF_ASSERT("TestHash HMGET", noSqlModule->HMGET(strKey, fields, getValue) == true);
 	NF_ASSERT("TestHash fields.size() == getValue.size()", fields.size() == getValue.size());
 	for (int i = 0; i < values.size(); ++i)
 	{
@@ -138,7 +131,7 @@ void NFRedisTestModule::TestHash()
 	}
 
 	std::vector<string_pair> get_pair_values;
-	NF_ASSERT("TestHash HGETALL", mxRedisClient->HGETALL(strKey, get_pair_values) == true);
+	NF_ASSERT("TestHash HGETALL", noSqlModule->HGETALL(strKey, get_pair_values) == true);
 	NF_ASSERT("TestHash get_pair_values.size() == fields.size()", get_pair_values.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
@@ -147,7 +140,7 @@ void NFRedisTestModule::TestHash()
 	}
 
 	std::vector<std::string> get_keys;
-	NF_ASSERT("TestHash HKEYS", mxRedisClient->HKEYS(strKey, get_keys) == true);
+	NF_ASSERT("TestHash HKEYS", noSqlModule->HKEYS(strKey, get_keys) == true);
 	NF_ASSERT("TestHash get_keys.size() == fields.size()", get_keys.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
@@ -155,7 +148,7 @@ void NFRedisTestModule::TestHash()
 	}
 
 	std::vector<std::string> get_valuess;
-	NF_ASSERT("TestHash HVALS", mxRedisClient->HVALS(strKey, get_valuess) == true);
+	NF_ASSERT("TestHash HVALS", noSqlModule->HVALS(strKey, get_valuess) == true);
 	NF_ASSERT("TestHash get_valuess.size() == values.size()", get_valuess.size() == values.size());
 	for (int i = 0; i < values.size(); ++i)
 	{
@@ -165,7 +158,7 @@ void NFRedisTestModule::TestHash()
 	for (int i = 0; i < fields.size(); ++i)
 	{
 		int nHSTRLEN;
-		NF_ASSERT("TestHash HSTRLEN", mxRedisClient->HSTRLEN(strKey, fields[i], nHSTRLEN) == true);
+		NF_ASSERT("TestHash HSTRLEN ", noSqlModule->HSTRLEN(strKey, fields[i], nHSTRLEN) == true);
 		NF_ASSERT("TestHash nHSTRLEN == get_valuess[i].length()", nHSTRLEN == get_valuess[i].length());
 	}
 }
@@ -173,40 +166,43 @@ void NFRedisTestModule::TestHash()
 void NFRedisTestModule::TestKey()
 {
 	int64_t nnn;
-	NF_ASSERT("TestKey INCRBY ", mxRedisClient->INCRBY("INCRBY3ddd121wssdsdsdd", 13, nnn) == true);
+	NF_ASSERT("TestKey INCRBY ", noSqlModule->INCRBY("INCRBY3ddd121wssdsdsdd", 13, nnn) == true);
 	NF_ASSERT("TestKey nnn == 13", nnn == 13);
 
 	float fval;
-	NF_ASSERT("TestKey INCRBYFLOAT", mxRedisClient->INCRBYFLOAT("12123dd323123ddd", 3.0f, fval) == true);
+	NF_ASSERT("TestKey INCRBYFLOAT", noSqlModule->INCRBYFLOAT("12123dd323123ddd", 3.0f, fval) == true && std::abs(fval - 3.0f) < 0.01f);
 
-	NF_ASSERT("TestKey SETNX", mxRedisClient->SETNX("12123dd323123ddd", "121212") == false);
-	NF_ASSERT("TestKey SETNX", mxRedisClient->SETNX("124422dd1212", "121212") == true);
+	NF_ASSERT("TestKey SETNX", noSqlModule->SETNX("12123dd323123ddd", "121212") == false);
+	NF_ASSERT("TestKey SETNX", noSqlModule->SETNX("124422dd1212", "121212") == true);
 
 
 	std::string strKey = "NFRedisTestModule::TestKey";
 	std::string strValue = "1232321123r34234";
 
-	NF_ASSERT("TestKey SET", mxRedisClient->SET(strKey, strValue) == true);
+	NF_ASSERT("TestKey SET", noSqlModule->SET(strKey, strValue) == true);
 
-	NF_ASSERT("TestKey TYPE", mxRedisClient->TYPE(strKey) == "string");
+	std::string type;
+	NF_ASSERT("TestKey TYPE", noSqlModule->TYPE(strKey, type) == true && type == "string");
 
-	NF_ASSERT("TestKey DEL", mxRedisClient->DEL(strKey) == true);
-	NF_ASSERT("TestKey EXISTS", mxRedisClient->EXISTS(strKey) == false);
+	NF_ASSERT("TestKey DEL", noSqlModule->DEL(strKey) == true);
+	NF_ASSERT("TestKey EXISTS", noSqlModule->EXISTS(strKey) == false);
 
-	NF_ASSERT("TestKey SET", mxRedisClient->SET(strKey, strValue) == true);
-	NF_ASSERT("TestKey EXISTS", mxRedisClient->EXISTS(strKey) == true);
+	NF_ASSERT("TestKey SET", noSqlModule->SET(strKey, strValue) == true);
+	NF_ASSERT("TestKey EXISTS", noSqlModule->EXISTS(strKey) == true);
 
-	NF_ASSERT("TestKey EXPIRE", mxRedisClient->EXPIRE(strKey, 2) == true);
+	NF_ASSERT("TestKey EXPIRE", noSqlModule->EXPIRE(strKey, 2) == true);
 
 	NFSLEEP(3000);
 	std::string strGET;
-	NF_ASSERT("TestKey GET", mxRedisClient->GET(strKey, strGET) == false);
+	NF_ASSERT("TestKey GET", noSqlModule->GET(strKey, strGET) == false);
 	NF_ASSERT("TestKey strGET == \"\"", strGET == "");
 
-	//pRedisResult = mxRedisClient->EXPIREAT(strKey, const int64_t unixTime);
-	NF_ASSERT("TestKey PERSIST", mxRedisClient->PERSIST(strKey) == false);
-	NF_ASSERT("TestKey TTL", mxRedisClient->TTL(strKey) == -2);
-	NF_ASSERT("TestKey TYPE", mxRedisClient->TYPE(strKey) == "none");
+	//pRedisResult = noSqlModule->EXPIREAT(strKey, const int64_t unixTime);
+	NF_ASSERT("TestKey PERSIST", noSqlModule->PERSIST(strKey) == false);
+
+	int ttl;
+	NF_ASSERT("TestKey TTL", noSqlModule->TTL(strKey, ttl) == true && ttl == -2);
+	NF_ASSERT("TestKey TYPE", noSqlModule->TYPE(strKey, type) ==true && type == "none");
 
 }
 
@@ -227,78 +223,79 @@ void NFRedisTestModule::TestList()
 	strList.push_back("123444444");
 
 
-	NF_ASSERT("TestList LSET", mxRedisClient->LSET("12122121", 1, "12212") == false);
-	NF_ASSERT("TestList LPUSH", mxRedisClient->LPUSH("12122121", "12212") != 0);
+	NF_ASSERT("TestList LSET", noSqlModule->LSET("12122121", 1, "12212") == false);
+	int length = 0;
+	NF_ASSERT("TestList LPUSH", noSqlModule->LPUSH("12122121", "12212", length) == true && length != 0);
 	std::string lpop;
-	NF_ASSERT("TestList LPOP", mxRedisClient->LPOP("12122121", lpop) == true);
+	NF_ASSERT("TestList LPOP", noSqlModule->LPOP("12122121", lpop) == true);
 	NF_ASSERT("TestList \"12212\" == lpop", "12212" == lpop);
 
-	NF_ASSERT("TestList HLDELEN ", mxRedisClient->DEL(strKey) == false);
+	NF_ASSERT("TestList HLDELEN ", noSqlModule->DEL(strKey) == false);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		NF_ASSERT("TestList RPUSH", mxRedisClient->RPUSH(strKey, strList[i]) == (i + 1));
+		NF_ASSERT("TestList RPUSH", noSqlModule->RPUSH(strKey, strList[i], length) == true && length == (i + 1));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
 		std::string strLINDEX;
-		NF_ASSERT("TestList LINDEX", mxRedisClient->LINDEX(strKey, i, strLINDEX) == true);
+		NF_ASSERT("TestList LINDEX", noSqlModule->LINDEX(strKey, i, strLINDEX) == true);
 		NF_ASSERT("TestList strLINDEX == strList[i]", strLINDEX == strList[i]);
 	}
 
 	int nLLEN = 0;
-	NF_ASSERT("TestList LLEN", mxRedisClient->LLEN(strKey, nLLEN) == true);
+	NF_ASSERT("TestList LLEN", noSqlModule->LLEN(strKey, nLLEN) == true);
 	NF_ASSERT("TestList nLLEN == strList.size()", nLLEN == strList.size());
 
 	for (int i = strList.size() - 1; i >= 0; --i)
 	{
 		std::string strRPOP;
-		NF_ASSERT("TestList HRPOPLEN", mxRedisClient->RPOP(strKey, strRPOP) == true);
+		NF_ASSERT("TestList HRPOPLEN", noSqlModule->RPOP(strKey, strRPOP) == true);
 		NF_ASSERT("TestList strRPOP == strList[i]", strRPOP == strList[i]);
 	}
 
-	NF_ASSERT("TestList LLEN", mxRedisClient->LLEN(strKey, nLLEN) == true);
+	NF_ASSERT("TestList LLEN", noSqlModule->LLEN(strKey, nLLEN) == true);
 	NF_ASSERT("TestList nLLEN == 0", nLLEN == 0);
 	//////
 	for (int i = strList.size() - 1; i >= 0; --i)
 	{
-		NF_ASSERT("TestList LPUSH ", mxRedisClient->LPUSH(strKey, strList[i]) == (strList.size()-i));
+		int length = 0;
+		NF_ASSERT("TestList LPUSH ", noSqlModule->LPUSH(strKey, strList[i], length) == true && length == (strList.size()-i));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
 		std::string strLINDEX;
-		NF_ASSERT("TestList LINDEX", mxRedisClient->LINDEX(strKey, (int)i, strLINDEX) == true);
+		NF_ASSERT("TestList LINDEX", noSqlModule->LINDEX(strKey, (int)i, strLINDEX) == true);
 		NF_ASSERT("TestList strLINDEX == strList[i]", strLINDEX == strList[i]);
 	}
 
-	NF_ASSERT("TestList LLEN", mxRedisClient->LLEN(strKey, nLLEN) == true);
+	NF_ASSERT("TestList LLEN", noSqlModule->LLEN(strKey, nLLEN) == true);
 	NF_ASSERT("TestList , nLLEN == strList.size()", nLLEN == strList.size());
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
 		std::string strLPOP;
-		NF_ASSERT("TestList LPOP", mxRedisClient->LPOP(strKey, strLPOP) == true);
+		NF_ASSERT("TestList LPOP", noSqlModule->LPOP(strKey, strLPOP) == true);
 		NF_ASSERT("TestList strLPOP == strList[i]", strLPOP == strList[i]);
 	}
 
-	NF_ASSERT("TestList LLEN", mxRedisClient->LLEN(strKey, nLLEN) == true);
+	NF_ASSERT("TestList LLEN", noSqlModule->LLEN(strKey, nLLEN) == true);
 	NF_ASSERT("TestList nLLEN == 0", nLLEN == 0);
 	/////
+	NF_ASSERT("TestList LPUSH", noSqlModule->LPUSH(strKey, strKey, length) == true && length == 1);
 
-	NF_ASSERT("TestList LPUSH", mxRedisClient->LPUSH(strKey, strKey) == 1);
-
-	NF_ASSERT("TestList LLEN", mxRedisClient->LLEN(strKey, nLLEN) == true);
+	NF_ASSERT("TestList LLEN", noSqlModule->LLEN(strKey, nLLEN) == true);
 	NF_ASSERT("TestList nLLEN == 1", nLLEN == 1);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		NF_ASSERT("TestList LPUSHX", mxRedisClient->LPUSHX(strKey, strList[i]) == (i+2));
+		NF_ASSERT("TestList LPUSHX", noSqlModule->LPUSHX(strKey, strList[i], length) == true && length ==  (i+2));
 	}
 
 	string_vector values;
-	NF_ASSERT("TestList LRANGE", mxRedisClient->LRANGE(strKey, 0, (int)strList.size(), values) == true);
+	NF_ASSERT("TestList LRANGE", noSqlModule->LRANGE(strKey, 0, (int)strList.size(), values) == true);
 	NF_ASSERT("TestList values.size() == strList.size() + 1", values.size() == strList.size() + 1);
 }
 
@@ -313,12 +310,20 @@ void NFRedisTestModule::TestSet()
 
 	std::string strKey = "TestSetKey1:";
 	std::string strBinary((char*)&a, sizeof(a));
-	mxRedisClient->SADD(strKey, strBinary);
+	int count = 0;
+	noSqlModule->SADD(strKey, strBinary, count);
 
 	string_vector members;
-	mxRedisClient->SMEMBERS(strKey, members);
-	A* pa = (A*)members[0].c_str();
-	NF_ASSERT("TestSet HLEN", pa->a == 100 && pa->b == 200);
+	noSqlModule->SMEMBERS(strKey, members);
+	if (members.size() > 0)
+	{
+		A* pa = (A*)members[0].c_str();
+		NF_ASSERT("TestSet HLEN", pa->a == 100 && pa->b == 200);
+	}
+	else
+	{
+		NF_ASSERT("TestSet HLEN", false);
+	}
 }
 
 void NFRedisTestModule::TestSort()
@@ -332,40 +337,40 @@ void NFRedisTestModule::TestString()
 	std::string strValu11e = "111";
 
 	int64_t nValueDECR;
-	NF_ASSERT("TestString DECR", mxRedisClient->DECR(strKey11, nValueDECR) == true);
-	NF_ASSERT("TestString SET", mxRedisClient->SET(strKey11, strValu11e) == true);
-	NF_ASSERT("TestString DECR", mxRedisClient->DECR(strKey11, nValueDECR) == true);
+	NF_ASSERT("TestString DECR", noSqlModule->DECR(strKey11, nValueDECR) == true);
+	NF_ASSERT("TestString SET", noSqlModule->SET(strKey11, strValu11e) == true);
+	NF_ASSERT("TestString DECR", noSqlModule->DECR(strKey11, nValueDECR) == true);
 	NF_ASSERT("TestString nValueDECR == 110", nValueDECR == 110);
-	NF_ASSERT("TestString DECRBY", mxRedisClient->DECRBY(strKey11, 10, nValueDECR) == true);
+	NF_ASSERT("TestString DECRBY", noSqlModule->DECRBY(strKey11, 10, nValueDECR) == true);
 	NF_ASSERT("TestString nValueDECR == 100", nValueDECR == 100);
 	std::string oldGETSET;
-	NF_ASSERT("TestString GETSET", mxRedisClient->GETSET(strKey11, "200", oldGETSET) == true);
+	NF_ASSERT("TestString GETSET", noSqlModule->GETSET(strKey11, "200", oldGETSET) == true);
 	NF_ASSERT("TestString oldGETSET == \"100\"", oldGETSET == "100");
 
-	NF_ASSERT("TestString INCR", mxRedisClient->INCR(strKey11, nValueDECR) == true);
+	NF_ASSERT("TestString INCR", noSqlModule->INCR(strKey11, nValueDECR) == true);
 	NF_ASSERT("TestString nValueDECR == 201", nValueDECR == 201);
 
-	NF_ASSERT("TestString INCRBY", mxRedisClient->INCRBY(strKey11, 100, nValueDECR) == true);
+	NF_ASSERT("TestString INCRBY", noSqlModule->INCRBY(strKey11, 100, nValueDECR) == true);
 	NF_ASSERT("TestString nValueDECR == 301", nValueDECR == 301);
 
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
 
-	NF_ASSERT("TestString SET", mxRedisClient->SET(strKey, strValue) == true);
+	NF_ASSERT("TestString SET ", noSqlModule->SET(strKey, strValue) == true);
 
 	std::string strGET;
-	NF_ASSERT("TestString GET", mxRedisClient->GET(strKey, strGET) == true);
+	NF_ASSERT("TestString GET", noSqlModule->GET(strKey, strGET) == true);
 	NF_ASSERT("TestString strGET == strValue", strGET == strValue);
 
 	int nAPPEND = 0;
-	NF_ASSERT("TestString APPEND", mxRedisClient->APPEND(strKey, strValue, nAPPEND) == true);
+	NF_ASSERT("TestString APPEND", noSqlModule->APPEND(strKey, strValue, nAPPEND) == true);
 	NF_ASSERT("TestString nAPPEND == strValue.length() * 2", nAPPEND == strValue.length() * 2);
 
 	int nSTRLEN = 0;
-	NF_ASSERT("TestString STRLEN", mxRedisClient->STRLEN(strKey, nSTRLEN) == true);
+	NF_ASSERT("TestString STRLEN", noSqlModule->STRLEN(strKey, nSTRLEN) == true);
 	NF_ASSERT("TestString nSTRLEN == strValue.length() * 2", nSTRLEN == strValue.length() * 2);
 
-	NF_ASSERT("TestString STRLEN", mxRedisClient->STRLEN("321321", nSTRLEN) == false);
+	NF_ASSERT("TestString STRLEN", noSqlModule->STRLEN("321321", nSTRLEN) == false);
 
     std::cout << "test cmd:" << std::endl;
 
@@ -389,50 +394,40 @@ void NFRedisTestModule::TestString()
 
     }
 
-    mxRedisClient->MSET(vstring_pair);
+    //noSqlModule->MSET(vstring_pair);
 
 	std::vector<std::string> vstringListValue;
-    mxRedisClient->MGET(vstringListKey, vstringListValue);
-	NF_ASSERT("TestString vstringListKey.size() == vstringListValue.size()", vstringListKey.size() == vstringListValue.size());
+    //noSqlModule->MGET(vstringListKey, vstringListValue);
+	NF_ASSERT("TestString  vstringListKey.size() == vstringListValue.size()", vstringListKey.size() == vstringListValue.size());
 
 	for (int i = 0; i < vstringListKey.size(); ++i)
 	{
 		std::string strGET;
-		NF_ASSERT("TestString GET", mxRedisClient->GET(vstringListKey[i], strGET) == true);
-		NF_ASSERT("TestString strGET == vstringListValue[i]", strGET == vstringListValue[i]);
+		//NF_ASSERT("TestString GET", noSqlModule->GET(vstringListKey[i], strGET) == true);
+		//NF_ASSERT("TestString strGET == vstringListValue[i]", strGET == vstringListValue[i]);
 	}
 
 }
 
 bool NFRedisTestModule::Execute()
 {
-	if (!mxRedisClient->GetAuthKey().empty() && !mxRedisClient->AUTH(mxRedisClient->GetAuthKey()))
+	if (noSqlModule->Enable())
 	{
-		NF_TEST_SECTION("redis password error!")
-		return true;
+		noSqlModule->FLUSHALL();
+
+		TestCluster();
+
+		TestKey();
+		TestString();
+		TestList();
+		TestHash();
+		TestSet();
+		TestSort();
+
+		PerformanceTest();
 	}
 
-	mxRedisClient->FLUSHDB();
-
-	TestCluster();
-
-	TestKey();
-	TestString();
-	TestList();
-	TestHash();
-	TestSet();
-	TestSort();
-
-	PerformanceTest();
-
-	mxRedisClient->Execute();
-
     return false;
-}
-
-bool NFRedisTestModule::IsConnected()
-{
-	return mxRedisClient->IsConnected();
 }
 
 void NFRedisTestModule::PerformanceTest()
@@ -446,11 +441,11 @@ void NFRedisTestModule::PerformanceTest()
 	int totalCount = 1000002;
 
 	startTime = NFGetTimeMS();
-	NF_TEST_SECTION("start PerformanceTest write:" + std::to_string(startTime) + ", test count:" + std::to_string(totalCount))
+	NF_TEST_SECTION("start PerformanceTest  write:" + std::to_string(startTime) + ", test count:" + std::to_string(totalCount))
 	for (int i = 0; i < totalCount; ++i)
 	{
-		mxRedisClient->HSET(strKey, std::to_string(i), std::to_string(i));
-		//NF_REQUIRE_EQUAL("", mxRedisClient->HSET(strKey, std::to_string(i), std::to_string(i)),true);
+		noSqlModule->HSET(strKey + std::to_string(i), std::to_string(i), std::to_string(i));
+		//NF_REQUIRE_EQUAL("", noSqlModule->HSET(strKey, std::to_string(i), std::to_string(i)),true);
 	}
 	endTime = NFGetTimeMS();
 	NF_TEST_SECTION("end PerformanceTest write:" + std::to_string(endTime) + ", delta:" + std::to_string(endTime - startTime) + ", tps:" + std::to_string(totalCount * 1000 / (endTime - startTime)))
@@ -461,7 +456,7 @@ void NFRedisTestModule::PerformanceTest()
 	for (int i = 0; i < totalCount; ++i)
 	{
 		std::string value;
-		mxRedisClient->HGET(strKey, std::to_string(i), value);
+		noSqlModule->HGET(strKey + std::to_string(i), std::to_string(i), value);
 		//NF_REQUIRE_EQUAL("", value,std::to_string(i));
 	}
 	endTime = NFGetTimeMS();

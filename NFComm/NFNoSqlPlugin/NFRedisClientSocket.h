@@ -91,12 +91,12 @@ public:
 	virtual ~NFRedisClientSocket();
 
 	int64_t Connect(const std::string& ip, const int port);
-	bool ReConnect(const std::string& ip, const int port);
     int Close();
     int Write(const char *buf, size_t count);
 
     int Execute();
 
+	bool Enable();
 	bool IsConnect();
 	redisReader* GetRedisReader();
 protected:
@@ -114,6 +114,7 @@ private:
 	struct evconnlistener* listener;
 
 	NF_NET_EVENT mNetStatus;
+	bool enable = true;
 	redisReader* m_pRedisReader;
 	NFINT64 fd_;
 };

@@ -44,7 +44,7 @@ class NFIRedis
 {
 public:
 
-	virtual NF_SHARE_PTR<NFIRedisClient> Connect(const std::string& ip, const int port, const std::string& auth, const bool sync = true) = 0;
+	virtual bool Connect(const std::string& ip, const int port, const std::string& auth, const bool sync = true) = 0;
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
@@ -120,14 +120,14 @@ public:
 	* The command returns -2 if the key does not exist.
 	* The command returns -1 if the key exists but has no associated expire.
 	*/
-	virtual int TTL(const std::string& key) = 0;
+	virtual bool TTL(const std::string& key, int& ttl) = 0;
 
 	/**
 	* @brief Returns the string representation of the type of the value stored at key
 	* @param keys [in] name of key
 	* @return Simple string reply: type of key, or none when key does not exist.
 	*/
-	virtual std::string TYPE(const std::string& key) = 0;
+	virtual bool TYPE(const std::string& key, std::string& type) = 0;
 	//NF_SHARE_PTR<NFRedisResult> SCAN(const std::string& key);
 
 
@@ -207,23 +207,6 @@ public:
 	*/
 	virtual bool INCRBYFLOAT(const std::string& key, const float increment, float& value) = 0;
 
-	/**
-	* @brief Returns the values of all specified keys.
-	* @param keys [in] name of keys
-	* @param values [in] values of keys
-	* @return list of values at the specified keys.
-	* For every key that does not hold a string value or does not exist,
-	* the special value "" is returned. Because of this, the operation never fails / if the key is not a string key than that field return ""
-	*/
-	virtual bool MGET(const string_vector& keys, string_vector& values) = 0;
-
-	/**
-	* @brief Sets the given keys to their respective values, MSET is atomic, so all given keys are set at once
-	* @param keys and values [in]
-	* @return always OK since MSET can't fail.
-	*/
-	virtual void MSET(const string_pair_vector& values) = 0;
-
 	//NF_SHARE_PTR<NFRedisResult> MSETNX(const std::string& key);
 	//NF_SHARE_PTR<NFRedisResult> PSETEX(const std::string& key);
 	/**
@@ -268,8 +251,8 @@ public:
 	* @param field/fields [in] the fields you want to remove
 	* @return the number of fields that were removed from the hash, not including specified but non existing fields.
 	*/
-	virtual int HDEL(const std::string& key, const std::string& field) = 0;
-	virtual int HDEL(const std::string& key, const string_vector& fields) = 0;
+	virtual bool HDEL(const std::string& key, const std::string& field) = 0;
+	virtual bool HDEL(const std::string& key, const string_vector& fields) = 0;
 
 	/**
 	* @brief Returns if field is an existing field in the hash stored at key.
@@ -425,7 +408,7 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int LPUSH(const std::string& key, const std::string& value) = 0;
+	virtual bool LPUSH(const std::string& key, const std::string& value, int& length) = 0;
 
 	/**
 	* @brief Insert all the specified values at the head of the list stored at key
@@ -434,7 +417,7 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int LPUSHX(const std::string& key, const std::string& value) = 0;
+	virtual bool LPUSHX(const std::string& key, const std::string& value, int& length) = 0;
 
 
 	/**
@@ -473,15 +456,15 @@ public:
 	* @param value [in] the value that you want to push to the head
 	* @return length of the list when cmd success, 0 when key does not a list key.
 	*/
-	virtual int RPUSH(const std::string& key, const std::string& value) = 0;
+	virtual bool RPUSH(const std::string& key, const std::string& value, int& length) = 0;
 
 	/**
 	* @brief Inserts value at the tail of the list stored at key, only if key already exists and holds a list
 	* @param key [in] name of key
 	* @param value [in] the value that you want push
-	* @return true when cmd success, false when key does not exist or dose not a list key.
+	* @return length of the list when cmd success, false when key does not exist or dose not a list key.
 	*/
-	virtual int RPUSHX(const std::string& key, const std::string& value) = 0;
+	virtual bool RPUSHX(const std::string& key, const std::string& value, int& length) = 0;
 
 	/////////client set//////////////
 
@@ -491,7 +474,7 @@ public:
 	* @param member [in]
 	* @return return the number of elements added to the sets when cmd success.
 	*/
-	virtual int SADD(const std::string& key, const std::string& member) = 0;
+	virtual bool SADD(const std::string& key, const std::string& member, int& count) = 0;
 
 	/**
 	* @brief cmd SCARD
@@ -508,7 +491,7 @@ public:
 	* @param output [out] difference sets
 	* @return return true when cmd success.
 	*/
-	virtual bool SDIFF(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+	//virtual bool SDIFF(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
 
 	/**
 	* @brief cmd SDIFFSTORE
@@ -517,7 +500,7 @@ public:
 	* @param key_2 [in] name of diff_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SDIFFSTORE(const std::string& store_key, const std::string& diff_key1, const std::string& diff_key2) = 0;
+	virtual bool SDIFFSTORE(const std::string& store_key, const std::string& diff_key1, const std::string& diff_key2, int& num) = 0;
 
 	/**
 	* @brief cmd SINTER
@@ -527,7 +510,7 @@ public:
 	* @param output [out] inter_key1 and inter_key2 intersection
 	* @return return true when cmd success.
 	*/
-	virtual bool SINTER(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+	//virtual bool SINTER(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
 
 	/**
 	* @brief cmd SINTERSTORE
@@ -536,7 +519,7 @@ public:
 	* @param inter_key2 [in] name of inter_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) = 0;
+	//virtual bool SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) = 0;
 
 	/**
 	* @brief cmd SISMEMBER
@@ -586,7 +569,7 @@ public:
 	* @param output [out] remove members
 	* @return return the number of remove member
 	*/
-	virtual int SREM(const std::string& key, const string_vector& members) = 0;
+	virtual bool SREM(const std::string& key, const string_vector& members, int& number) = 0;
 
 	/**
 	* @brief cmd SUNION
@@ -604,7 +587,7 @@ public:
 	* @param union_key2 [out] name of union_key2
 	* @return return true when cmd success.
 	*/
-	virtual int SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) = 0;
+	virtual bool SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) = 0;
 
 
 	/////////client SortedSet//////////////
@@ -615,7 +598,7 @@ public:
 	* @param score [in]
 	* @return return the number of elements added to the sorted sets when cmd success, false when key dose not a z key.
 	*/
-	virtual int ZADD(const std::string& key, const std::string& member, const double score) = 0;
+	virtual bool ZADD(const std::string& key, const std::string& member, const double score, int& number) = 0;
 
 	/**
 	* @brief Returns the number of elements of the sorted set stored at key.
@@ -807,13 +790,14 @@ public:
 	virtual bool Authenticated() = 0;
 
 	virtual bool KeepLive() = 0;
-	virtual bool Execute() {};
+	virtual bool Execute() = 0;
 
 	virtual void UpdateSlot(int start, int end) = 0;
 
 	virtual bool IsConnected() = 0;
 
 	virtual NF_SHARE_PTR<NFRedisReply> BuildSendCmd(const NFRedisCommand& cmd) = 0;
+	virtual NF_SHARE_PTR<NFRedisReply> LastReply() = 0;
 
 protected:
 
@@ -846,7 +830,7 @@ public:
 		std::string realKey;
 		int pos1 = key.find("{");
 		int pos2 = key.find("}");
-		if (pos1 != std::string::npos && pos2 != std::string::npos)
+		if (pos1 != std::string::npos && pos2 != std::string::npos && pos2 > pos1)
 		{
 			realKey = key.substr(pos1 + 1, pos2 - pos1 - 1);
 		}
@@ -855,7 +839,7 @@ public:
 			realKey = key;
 		}
 
-		return CRC16(realKey.c_str(), realKey.length());
+		return CRC16(realKey.c_str(), realKey.length()) & 0x3FFF;// 0x3FFF == 16383
 	}
 
 	NF_SHARE_PTR<NFIRedisClient> FindRedisClientByKey(const std::string& key)
@@ -866,17 +850,24 @@ public:
 			return FindRedisClient(slot);
 		}
 
+		return nullptr;
 	}
 
+	virtual bool Enable() = 0;
 	virtual void CheckConnect() = 0;
 	//如果收到move消息，就调用此函数强制刷新nodes
 	virtual void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient) = 0;
 };
 
-class NFIAsyncNoSqlModule : public NFINoSqlModule
+class NFIAsyncNoSqlModule
+		: public NFIModule
 {
 public:
 
+	virtual void CheckConnect() = 0;
+
+	//如果收到move消息，就调用此函数强制刷新nodes
+	virtual void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient) = 0;
 };
 
 #endif

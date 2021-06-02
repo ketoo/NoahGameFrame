@@ -29,13 +29,13 @@ NFRedisClient::NFRedisClient()
 {
 	mnPort = 0;
 	mbAuthed = false;
-	mbEnable = false;
+	mbEnable = mbEnable;
     m_pRedisClientSocket = new NFRedisClientSocket();
 }
 
 bool NFRedisClient::Enable()
 {
-	return mbEnable;
+	return mbEnable && m_pRedisClientSocket->Enable();
 }
 
 bool NFRedisClient::Authenticated()
@@ -43,7 +43,7 @@ bool NFRedisClient::Authenticated()
 	return mbAuthed;
 }
 
-NF_SHARE_PTR<NFIRedisClient> NFRedisClient::Connect(const std::string &ip, const int port, const std::string &auth, const bool sync)
+bool NFRedisClient::Connect(const std::string &ip, const int port, const std::string &auth, const bool sync)
 {
     int64_t nFD = m_pRedisClientSocket->Connect(ip, port);
 	if (nFD > 0)
@@ -54,10 +54,10 @@ NF_SHARE_PTR<NFIRedisClient> NFRedisClient::Connect(const std::string &ip, const
 		mstrAuthKey = auth;
 		mbEnable = true;
 
-		return NF_SHARE_PTR<NFIRedisClient>(this);
+		return true;
 	}
 
-    return nullptr;
+	return false;
 }
 
 bool NFRedisClient::KeepLive()
@@ -110,9 +110,11 @@ NF_SHARE_PTR<NFRedisReply> NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd
 			return nullptr;
 		}
 	}
-	
 
-	return ParseForReply();
+
+	lastReply = ParseForReply();
+
+	return lastReply;
 }
 
 NF_SHARE_PTR<NFRedisReply> NFRedisClient::ParseForReply()
@@ -172,7 +174,12 @@ bool NFRedisClient::AUTH(const std::string& auth)
 	// if password error, redis will return REDIS_REPLY_ERROR
 	// pReply will be null
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr)
+	{
+		return false;
+	}
+
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -195,7 +202,12 @@ bool NFRedisClient::INFO(std::string& info)
 	NFRedisCommand cmd(GET_NAME(INFO));
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr)
+	{
+		return false;
+	}
+
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}

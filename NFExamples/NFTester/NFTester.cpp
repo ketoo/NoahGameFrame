@@ -38,18 +38,22 @@ int main(int argc, char* argv[])
 
 	std::vector<NF_SHARE_PTR<NFPluginServer>> serverList;
 
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=MasterServer ID=3 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=WorldServer ID=7 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=LoginServer ID=4 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=DBServer ID=8 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=ProxyServer ID=5 CPU=1 Plugin=Plugin.xml")));
-	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=16001 CPU=1 Plugin=Plugin.xml", true)));
+	//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=MasterServer ID=3 CPU=1 Plugin=Plugin.xml")));
+	serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=WorldServer ID=7 CPU=1 Plugin=Plugin.xml", true)));
+	//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=LoginServer ID=4 CPU=1 Plugin=Plugin.xml")));
+	//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=DBServer ID=8 CPU=1 Plugin=Plugin.xml")));
+	//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=ProxyServer ID=5 CPU=1 Plugin=Plugin.xml")));
+	//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=16001 CPU=1 Plugin=Plugin.xml")));
 
 	for (auto item : serverList)
 	{
 		item->SetBasicWareLoader(BasicPluginLoader);
 		item->SetMidWareLoader(MidWareLoader);
 		item->Init();
+		for(int i = 0; i < 100; ++i)
+		{
+			item->GetPluginManager()->ForceExecute();
+		}
 		item->Execute();
 		item->Final();
 	}

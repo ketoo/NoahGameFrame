@@ -112,18 +112,6 @@ int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 	return fd_;
 }
 
-bool NFRedisClientSocket::ReConnect(const std::string& ip, const int port)
-{
-	if (bev)
-	{
-		bufferevent_free(bev);
-		fd_ = -1;
-		bev = nullptr;
-	}
-
-	return Connect(ip, port);
-}
-
 int NFRedisClientSocket::Execute()
 {
 	if (base)
@@ -132,6 +120,11 @@ int NFRedisClientSocket::Execute()
 	}
 
 	return 0;
+}
+
+bool NFRedisClientSocket::Enable()
+{
+	return enable;
 }
 
 bool NFRedisClientSocket::IsConnect()
@@ -187,6 +180,7 @@ void NFRedisClientSocket::conn_readcb(bufferevent * bev, void * user_data)
 
 void NFRedisClientSocket::conn_writecb(bufferevent * bev, void * user_data)
 {
+
 }
 
 void NFRedisClientSocket::conn_eventcb(bufferevent * bev, short events, void * user_data)
@@ -198,10 +192,12 @@ void NFRedisClientSocket::conn_eventcb(bufferevent * bev, short events, void * u
 	}
 	else if (events & BEV_EVENT_TIMEOUT)
 	{
+		pClientSocket->enable = false;
 		pClientSocket->mNetStatus = NF_NET_EVENT::NF_NET_EVENT_TIMEOUT;
 	}
 	else
 	{
+		pClientSocket->enable = false;
 		pClientSocket->mNetStatus = NF_NET_EVENT::NF_NET_EVENT_ERROR;
 	}
 }

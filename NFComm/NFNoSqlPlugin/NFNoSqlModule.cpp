@@ -27,6 +27,24 @@
 #include "NFNoSqlModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
+#define CALL_REDIS(func, key, ...)\
+	auto redis = FindRedisClientByKey(key);\
+	if (redis)\
+	{\
+		bool ret = redis->func(key, ...);\
+		if (ret)\
+		{\
+			return ret;\
+		}\
+		if (redis->LastReply() == nullptr)\
+		{\
+			return false;\
+		}\
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);\
+		return false;\
+	}
+
+
 NFNoSqlModule::NFNoSqlModule(NFIPluginManager* p)
 {
 	executableModule = true;
@@ -42,21 +60,16 @@ NFNoSqlModule::~NFNoSqlModule()
 bool NFNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
-	return true;
-}
 
-bool NFNoSqlModule::Shut()
-{
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 	return true;
 }
 
 bool NFNoSqlModule::AfterInit()
 {
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
 	if (xLogicClass)
 	{
@@ -69,7 +82,6 @@ bool NFNoSqlModule::AfterInit()
 			const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::Port());
 			const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
 			const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
-
 			if (this->Connect("127.0.0.1", 30001, "", true))
 			//if (this->AddConnectSql(strId, ip, nPort, strAuth))
 			{
@@ -84,15 +96,33 @@ bool NFNoSqlModule::AfterInit()
 				strLog << "Cannot connect NoSqlServer[" << ip << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
 				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
 			}
+
+		}
+	}
+
+	for (int i = 0; i < 200; ++i)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		Execute();
+
+		if (this->Enable())
+		{
+			break;
 		}
 	}
 
 	return true;
 }
 
+bool NFNoSqlModule::Shut()
+{
+
+	return true;
+}
+
 bool NFNoSqlModule::Enable()
 {
-	return false;
+	return enable;
 }
 
 bool NFNoSqlModule::Busy()
@@ -107,7 +137,7 @@ bool NFNoSqlModule::KeepLive()
 
 bool NFNoSqlModule::Execute()
 {
-	for (auto redisClient : redisClients)
+	for (NF_SHARE_PTR<NFIRedisClient> redisClient : redisClients)
 	{
 		redisClient->Execute();
 	}
@@ -120,12 +150,15 @@ bool NFNoSqlModule::Execute()
 void NFNoSqlModule::CheckConnect()
 {
 	static const int CHECK_TIME = 1;
-	if (mLastCheckTime + CHECK_TIME > pPluginManager->GetNowTime())
+	if (mLastCheckTime > 0)
 	{
-		return;
+		if (mLastCheckTime + CHECK_TIME > NFGetTimeS())
+		{
+			return;
+		}
 	}
 
-	mLastCheckTime = pPluginManager->GetNowTime();
+	mLastCheckTime = NFGetTimeS();
 	{
 		NF_SHARE_PTR<NFIRedisClient> queryMasterNode = nullptr;
 		std::list<NF_SHARE_PTR<NFIRedisClient>> needToRemove;
@@ -150,7 +183,7 @@ void NFNoSqlModule::CheckConnect()
 				else
 				{
 					//should be connecting
-					m_pLogModule->LogInfo("connecting");
+					m_pLogModule->LogInfo("connecting........");
 				}
 			}
 			else
@@ -161,9 +194,19 @@ void NFNoSqlModule::CheckConnect()
 		}
 
 		//remove
-		for (auto redisClient : needToRemove)
+		for (auto r : needToRemove)
 		{
-
+			for (auto it = redisClients.begin(); it != redisClients.end(); )
+			{
+				if (it->get()->GetIP() == r->GetIP() && it->get()->GetPort() == r->GetPort())
+				{
+					it = redisClients.erase(it);
+				}
+				else
+				{
+					it++;
+				}
+			}
 		}
 
 		//试图连接所有的master nodes
@@ -174,14 +217,14 @@ void NFNoSqlModule::CheckConnect()
 	}
 }
 
-NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::Connect(const std::string &ip, const int port, const std::string &auth, const bool sync)
+bool NFNoSqlModule::Connect(const std::string &ip, const int port, const std::string &auth, const bool sync)
 {
-	NF_SHARE_PTR<NFIRedisClient> nosqlDriver(NF_NEW NFRedisClient());
-	nosqlDriver->Connect(ip, port, auth, sync);
+	NF_SHARE_PTR<NFIRedisClient> noSqlDriver(NF_NEW NFRedisClient());
+	redisClients.push_back(noSqlDriver);
 
-	redisClients.push_back(nosqlDriver);
+	m_pLogModule->LogInfo("NFNoSqlModule connect to:" + ip + std::to_string(port));
 
-	return nosqlDriver;
+	return noSqlDriver->Connect(ip, port, auth, sync);
 }
 
 void NFNoSqlModule::ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient)
@@ -243,12 +286,17 @@ void NFNoSqlModule::ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClie
 				std::cout << "!host.empty() && !port.empty() && !slotStart.empty() && !slotEnd.empty()" << std::endl;
 			}
 		}
+		else if (vec.size() == 8)
+		{
+			std::cout << "vec.size() != 8, master node down!!!!" << std::endl;
+		}
 		else
 		{
-			std::cout << "vec.size() != 9" << std::endl;
+			std::cout << "vec.size() != 8,9 " << std::endl;
 		}
 	}
 
+	//connect to all master nodes
 	for (auto& node : redisMasterNodes)
 	{
 		bool found = false;
@@ -258,21 +306,40 @@ void NFNoSqlModule::ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClie
 			if (redisClient->GetIP() == node.host && redisClient->GetPort() == node.port)
 			{
 				found = true;
-				//update slot
-				redisClient->UpdateSlot(node.slotStart, node.slotEnd);
+				break;
 			}
 		}
 
 		if (!found)
 		{
 			//connect to new nodes
-			auto r = Connect(node.host, node.port, "");
-			if (r)
-			{
-				r->UpdateSlot(node.slotStart, node.slotEnd);
-			}
+			Connect(node.host, node.port, "");
 		}
 	}
+
+	//update slot
+	for (auto& node : redisMasterNodes)
+	{
+		bool found = false;
+		for (auto redisClient : redisClients)
+		{
+			//如果没有找到，则需要新加
+			if (redisClient->GetIP() == node.host && redisClient->GetPort() == node.port)
+			{
+				found = true;
+				redisClient->UpdateSlot(node.slotStart, node.slotEnd);
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			//error
+			m_pLogModule->LogError(" failed to update slot for nodes:" + node.host + std::to_string(node.port));
+		}
+	}
+
+	enable = true;
 }
 
 NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::FindRedisClient(int slot)
@@ -304,29 +371,22 @@ bool NFNoSqlModule::DEL(const std::string &key)
 	auto redis = FindRedisClientByKey(key);
 	if (redis)
 	{
-		NFRedisCommand cmd(GET_NAME(DEL));
-		cmd << key;
-
-		NF_SHARE_PTR<NFRedisReply> pReply = redis->BuildSendCmd(cmd);
-		if (pReply == nullptr)
+		bool ret = redis->DEL(key);
+		if (ret)
 		{
-			// internet error or some thing I dont know
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
 			return false;
 		}
 
-		if (pReply->reply == nullptr)
-		{
-			//protocol error or logic error
-			return false;
-		}
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
 
-		bool del_key_num = false;
-		if (pReply->reply->type == REDIS_REPLY_INTEGER)
-		{
-			del_key_num = (bool)pReply->reply->integer;
-		}
-
-		return del_key_num;
+		return false;
 	}
 
 	return false;
@@ -334,265 +394,1263 @@ bool NFNoSqlModule::DEL(const std::string &key)
 
 bool NFNoSqlModule::EXISTS(const std::string &key)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->EXISTS(key);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::EXPIRE(const std::string &key, const unsigned int secs)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->EXPIRE(key, secs);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::EXPIREAT(const std::string &key, const int64_t unixTime)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->EXPIREAT(key, unixTime);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::PERSIST(const std::string &key)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->PERSIST(key);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
-int NFNoSqlModule::TTL(const std::string &key)
+bool NFNoSqlModule::TTL(const std::string &key, int& ttl)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->TTL(key, ttl);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
-std::string NFNoSqlModule::TYPE(const std::string &key)
+bool NFNoSqlModule::TYPE(const std::string &key, std::string& type)
 {
-	return std::string();
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->TYPE(key, type);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
 bool NFNoSqlModule::APPEND(const std::string &key, const std::string &value, int &length)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->APPEND(key, value, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::DECR(const std::string &key, int64_t &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->DECR(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::DECRBY(const std::string &key, const int64_t decrement, int64_t &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->DECRBY(key, decrement, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::GET(const std::string &key, std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->GET(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::GETSET(const std::string &key, const std::string &value, std::string &oldValue)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->GETSET(key, value, oldValue);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::INCR(const std::string &key, int64_t &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->INCR(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::INCRBY(const std::string &key, const int64_t increment, int64_t &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->INCRBY(key, increment, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::INCRBYFLOAT(const std::string &key, const float increment, float &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->INCRBYFLOAT(key, increment, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
-}
-
-bool NFNoSqlModule::MGET(const string_vector &keys, string_vector &values)
-{
-	return false;
-}
-
-void NFNoSqlModule::MSET(const string_pair_vector &values)
-{
-
 }
 
 bool NFNoSqlModule::SET(const std::string &key, const std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SET(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::SETEX(const std::string &key, const std::string &value, int time)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SETEX(key, value, time);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::SETNX(const std::string &key, const std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SETNX(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::STRLEN(const std::string &key, int &length)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->STRLEN(key, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
-int NFNoSqlModule::HDEL(const std::string &key, const std::string &field)
+bool NFNoSqlModule::HDEL(const std::string &key, const std::string &field)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HDEL(key, field);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
-int NFNoSqlModule::HDEL(const std::string &key, const string_vector &fields)
+bool NFNoSqlModule::HDEL(const std::string &key, const string_vector &fields)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HDEL(key, fields);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
 bool NFNoSqlModule::HEXISTS(const std::string &key, const std::string &field)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HEXISTS(key, field);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HGET(const std::string &key, const std::string &field, std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HGET(key, field, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HGETALL(const std::string &key, std::vector<string_pair> &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HGETALL(key, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HINCRBY(const std::string &key, const std::string &field, const int by, int64_t &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HINCRBY(key, field, by, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HINCRBYFLOAT(const std::string &key, const std::string &field, const float by, float &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HINCRBYFLOAT(key, field, by, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HKEYS(const std::string &key, std::vector<std::string> &fields)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HKEYS(key, fields);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HLEN(const std::string &key, int &number)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HLEN(key, number);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HMGET(const std::string &key, const string_vector &fields, string_vector &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HMGET(key, fields, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HMSET(const std::string &key, const std::vector<string_pair> &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HMSET(key, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HMSET(const std::string &key, const string_vector &fields, const string_vector &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HMSET(key, fields, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HSET(const std::string &key, const std::string &field, const std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HSET(key, field, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HSETNX(const std::string &key, const std::string &field, const std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HSETNX(key, field, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HVALS(const std::string &key, string_vector &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HVALS(key, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::HSTRLEN(const std::string &key, const std::string &field, int &length)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->HSTRLEN(key, field, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::LINDEX(const std::string &key, const int index, std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LINDEX(key, index, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::LLEN(const std::string &key, int &length)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LLEN(key, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::LPOP(const std::string &key, std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LPOP(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
-int NFNoSqlModule::LPUSH(const std::string &key, const std::string &value)
+bool NFNoSqlModule::LPUSH(const std::string &key, const std::string &value, int& length)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LPUSH(key, value, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
-int NFNoSqlModule::LPUSHX(const std::string &key, const std::string &value)
+bool NFNoSqlModule::LPUSHX(const std::string &key, const std::string &value, int& length)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LPUSHX(key, value, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
 bool NFNoSqlModule::LRANGE(const std::string &key, const int start, const int end, string_vector &values)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LRANGE(key, start, end, values);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::LSET(const std::string &key, const int index, const std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->LSET(key, index, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
 bool NFNoSqlModule::RPOP(const std::string &key, std::string &value)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->RPOP(key, value);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
 
-int NFNoSqlModule::RPUSH(const std::string &key, const std::string &value)
+bool NFNoSqlModule::RPUSH(const std::string &key, const std::string &value, int& length)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->RPUSH(key, value, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
-int NFNoSqlModule::RPUSHX(const std::string &key, const std::string &value)
+bool NFNoSqlModule::RPUSHX(const std::string &key, const std::string &value, int& length)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->RPUSHX(key, value, length);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
-int NFNoSqlModule::SADD(const std::string &key, const std::string &member)
+bool NFNoSqlModule::SADD(const std::string &key, const std::string &member, int& count)
 {
-	return 0;
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SADD(key, member, count);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
 }
 
 bool NFNoSqlModule::SCARD(const std::string &key, int &count)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SCARD(key, count);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
-
+/*
 bool NFNoSqlModule::SDIFF(const std::string &key_1, const std::string &key_2, string_vector &output)
 {
+	auto redis = FindRedisClientByKey(key);
+	if (redis)
+	{
+		bool ret = redis->SDIFF(key, member, count);
+		if (ret)
+		{
+			return ret;
+		}
+
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
 	return false;
 }
-
-int NFNoSqlModule::SDIFFSTORE(const std::string &store_key, const std::string &diff_key1, const std::string &diff_key2)
+*/
+bool NFNoSqlModule::SDIFFSTORE(const std::string &store_key, const std::string &diff_key1, const std::string &diff_key2, int& num)
 {
-	return 0;
-}
+	auto redis = FindRedisClientByKey(store_key);
+	if (redis)
+	{
+		bool ret = redis->SDIFFSTORE(store_key, diff_key1, diff_key2, num);
+		if (ret)
+		{
+			return ret;
+		}
 
+		if (redis->LastReply() == nullptr)
+		{
+			//crash
+			return false;
+		}
+
+		m_pLogModule->LogError(redis->LastReply()->error, __FUNCTION__, __LINE__);
+		//move????
+
+		return false;
+	}
+
+	return false;
+}
+/*
 bool NFNoSqlModule::SINTER(const std::string &key_1, const std::string &key_2, string_vector &output)
 {
-	return false;
+
 }
 
-int NFNoSqlModule::SINTERSTORE(const std::string &inter_store_key, const std::string &inter_key1,
+bool NFNoSqlModule::SINTERSTORE(const std::string &inter_store_key, const std::string &inter_key1,
                                const std::string &inter_key2)
 {
-	return 0;
+	return false;
 }
-
+*/
 bool NFNoSqlModule::SISMEMBER(const std::string &key, const std::string &member)
 {
 	return false;
@@ -618,9 +1676,9 @@ bool NFNoSqlModule::SRANDMEMBER(const std::string &key, int count, string_vector
 	return false;
 }
 
-int NFNoSqlModule::SREM(const std::string &key, const string_vector &members)
+bool NFNoSqlModule::SREM(const std::string &key, const string_vector &members, int& number)
 {
-	return 0;
+	return false;
 }
 
 bool NFNoSqlModule::SUNION(const std::string &union_key1, const std::string &union_key2, string_vector &output)
@@ -628,13 +1686,13 @@ bool NFNoSqlModule::SUNION(const std::string &union_key1, const std::string &uni
 	return false;
 }
 
-int NFNoSqlModule::SUNIONSTORE(const std::string &dest_store_key, const std::string &union_key1,
+bool NFNoSqlModule::SUNIONSTORE(const std::string &dest_store_key, const std::string &union_key1,
                                const std::string &union_key2)
 {
-	return 0;
+	return false;
 }
 
-int NFNoSqlModule::ZADD(const std::string &key, const std::string &member, const double score)
+bool NFNoSqlModule::ZADD(const std::string &key, const std::string &member, const double score, int& number)
 {
 	return 0;
 }
@@ -703,17 +1761,24 @@ bool NFNoSqlModule::ZREVRANK(const std::string &key, const std::string &member, 
 
 bool NFNoSqlModule::ZSCORE(const std::string &key, const std::string &member, double &score)
 {
+	//CALL_REDIS(ZSCORE, key, member, score)
 	return false;
 }
 
 void NFNoSqlModule::FLUSHALL()
 {
-
+	for (NF_SHARE_PTR<NFIRedisClient> redisClient : redisClients)
+	{
+		redisClient->FLUSHALL();
+	}
 }
 
 void NFNoSqlModule::FLUSHDB()
 {
-
+	for (NF_SHARE_PTR<NFIRedisClient> redisClient : redisClients)
+	{
+		redisClient->FLUSHDB();
+	}
 }
 
 bool NFNoSqlModule::CLUSTERNODES(std::vector<std::string> &clusters, bool onlyMasterNode, bool includeSelfMaster)

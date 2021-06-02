@@ -32,7 +32,7 @@ bool NFRedisClient::PUBLISH(const std::string& key, const std::string& value)
 	cmd << value;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -46,7 +46,7 @@ bool NFRedisClient::SUBSCRIBE(const std::string& key)
 	cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -60,7 +60,7 @@ bool NFRedisClient::UNSUBSCRIBE(const std::string& key)
 	cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}

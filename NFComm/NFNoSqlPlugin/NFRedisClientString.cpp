@@ -32,7 +32,7 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
     cmd << value;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -40,9 +40,10 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
 	if (pReply->reply->type == REDIS_REPLY_INTEGER)
 	{
 		length = (int)pReply->reply->integer;
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool NFRedisClient::DECR(const std::string& key, int64_t& value)
@@ -51,7 +52,7 @@ bool NFRedisClient::DECR(const std::string& key, int64_t& value)
     cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -73,7 +74,7 @@ bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int6
     cmd << decrement;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -95,7 +96,7 @@ bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std
     cmd << value;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -116,7 +117,7 @@ bool NFRedisClient::INCR(const std::string &key, int64_t& value)
     cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -138,7 +139,7 @@ bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int6
     cmd << increment;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -160,7 +161,7 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
     cmd << increment;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -173,7 +174,7 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 
 	return success;
 }
-
+/*
 bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 {
 	NFRedisCommand cmd(GET_NAME(MGET));
@@ -184,7 +185,7 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
     }
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -221,6 +222,7 @@ void NFRedisClient::MSET(const string_pair_vector &values)
 		
 	}
 }
+*/
 
 bool NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
 {
@@ -230,7 +232,7 @@ bool NFRedisClient::SETEX(const std::string &key, const std::string &value, int 
     cmd << time;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -245,7 +247,7 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
     cmd << value;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -265,7 +267,7 @@ bool NFRedisClient::STRLEN(const std::string &key, int& length)
     cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -274,7 +276,7 @@ bool NFRedisClient::STRLEN(const std::string &key, int& length)
 	{
 		length = (int)pReply->reply->integer;
 		
-		return length != 0;
+		return true;
 	}
 
 	return false;
@@ -287,7 +289,7 @@ bool NFRedisClient::SET(const std::string &key, const std::string &value)
     cmd << value;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -301,7 +303,7 @@ bool NFRedisClient::GET(const std::string& key, std::string & value)
     cmd << key;
 
 	NF_SHARE_PTR<NFRedisReply> pReply = BuildSendCmd(cmd);
-	if (pReply->reply == nullptr)
+	if (pReply == nullptr || pReply->reply == nullptr)
 	{
 		return false;
 	}
@@ -314,4 +316,9 @@ bool NFRedisClient::GET(const std::string& key, std::string & value)
 	}
 
 	return false;
+}
+
+NF_SHARE_PTR<NFRedisReply> NFRedisClient::LastReply()
+{
+	return lastReply;
 }

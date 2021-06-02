@@ -28,28 +28,6 @@
 
 #include "NFComm/NFNoSqlPlugin/NFRedisClient.h"
 
-class NFRedisTester
-{
-public:
-    NFRedisTester(const std::string& ip, int port, const std::string& auth = "");
-
-    bool RunTester();
-    void Execute();
-	bool IsConnect();
-
-	bool Test_1();
-
-    void TestHash();
-    void TestKey();
-    void TestList();
-    void TestSet();
-    void TestSort();
-    void TestString();
-	void TestPubSub();
-
-    NFRedisClient mxRedisClient;
-};
-
 
 class NFIRedisTestModule : public NFIModule
 {
@@ -66,8 +44,6 @@ class NFRedisTestModule : public NFIRedisTestModule
 	virtual bool Execute() override;
 
  private:
-	bool IsConnected();
-
 	void TestCluster();
 	void TestKey();
 	void TestHash();
@@ -78,7 +54,7 @@ class NFRedisTestModule : public NFIRedisTestModule
 
 	void PerformanceTest();
 
-	NFRedisClient* mxRedisClient;
+	NFINoSqlModule* noSqlModule;
 };
 
 #endif //NFREDISPLUGIN_NFREDISTESTER_H
