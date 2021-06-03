@@ -210,7 +210,7 @@ bool NFRedisClient::SMEMBERS(const std::string& key, string_vector& output)
 
 	return false;
 }
-
+/*
 bool NFRedisClient::SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member)
 {
 	NFRedisCommand cmd(GET_NAME(SMOVE));
@@ -231,6 +231,7 @@ bool NFRedisClient::SMOVE(const std::string& source_key, const std::string& dest
 
 	return false;
 }
+*/
 
 bool NFRedisClient::SPOP(const std::string& key, std::string& output)
 {
@@ -302,7 +303,7 @@ bool NFRedisClient::SREM(const std::string& key, const string_vector& members, i
 
 	return false;
 }
-
+/*
 bool NFRedisClient::SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output)
 {
 	NFRedisCommand cmd(GET_NAME(SUNION));
@@ -329,6 +330,7 @@ bool NFRedisClient::SUNION(const std::string& union_key1, const std::string& uni
 
 	return false;
 }
+ */
 
 bool NFRedisClient::SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2)
 {

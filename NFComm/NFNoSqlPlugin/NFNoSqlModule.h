@@ -145,11 +145,11 @@ public:
 	//virtual bool SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) override;
 	virtual bool SISMEMBER(const std::string& key, const std::string& member) override;
 	virtual bool SMEMBERS(const std::string& key, string_vector& output) override;
-	virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) override;
+	//virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) override;
 	virtual bool SPOP(const std::string& key, std::string& output) override;
 	virtual bool SRANDMEMBER(const std::string& key, int count, string_vector& output) override;
 	virtual bool SREM(const std::string& key, const string_vector& members, int& number) override;
-	virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) override;
+	//virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) override;
 	virtual bool SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) override;
 
 

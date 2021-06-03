@@ -544,7 +544,7 @@ public:
 	* @param member [in] the member of source set
 	* @return return true when cmd success.
 	*/
-	virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) = 0;
+	//virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) = 0;
 
 	/**
 	* @brief cmd SPOP
@@ -578,7 +578,7 @@ public:
 	* @param output [out] set1 and set2 union member
 	* @return return true when cmd success.
 	*/
-	virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) = 0;
+	//virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) = 0;
 
 	/**
 	* @brief cmd SUNIONSTORE
