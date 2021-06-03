@@ -102,13 +102,20 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 		return false;
 	}
 
-	bool success = false;
 	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<double>(pReply->reply->str, newScore);
+		try
+		{
+			newScore = std::stod(pReply->reply->str);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
 	}
 
-	return success;
+	return false;
 }
 
 bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_score_vector& values)
@@ -384,11 +391,18 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 		return false;
 	}
 
-	bool success = false;
 	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<double>(pReply->reply->str, score);
+		try
+		{
+			score = std::stod(pReply->reply->str);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
 	}
 
-	return success;
+	return false;
 }

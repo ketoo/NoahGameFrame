@@ -166,13 +166,20 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 		return false;
 	}
 
-	bool success = false;
 	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<float>(pReply->reply->str, value);
+		try
+		{
+			value = std::atof(pReply->reply->str);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
 	}
 
-	return success;
+	return false;
 }
 /*
 bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)

@@ -177,13 +177,20 @@ bool NFRedisClient::HINCRBYFLOAT(const std::string &key, const std::string &fiel
 		return false;
 	}
 
-	bool success = false;
 	if (pReply->reply->type == REDIS_REPLY_STRING)
 	{
-		success = NF_StrTo<float>(pReply->reply->str, value);
+		try
+		{
+			value = std::atof(pReply->reply->str);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
 	}
 
-	return success;
+	return false;
 }
 
 bool NFRedisClient::HKEYS(const std::string &key, std::vector<std::string> &fields)

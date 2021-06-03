@@ -339,7 +339,16 @@ void NFNoSqlModule::ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClie
 		}
 	}
 
-	enable = true;
+	if (!enable)
+	{
+		bool b = true;
+		for (auto redisClient : redisClients)
+		{
+			b = b && redisClient->Enable();
+		}
+
+		enable = b;
+	}
 }
 
 NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::FindRedisClient(int slot)
