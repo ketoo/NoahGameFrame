@@ -193,7 +193,7 @@ public:
 
 
 protected:
-	void CheckConnect();
+	void CheckConnect(bool force = false);
 	//如果收到move消息，就调用此函数强制刷新nodes
 	void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient);
 

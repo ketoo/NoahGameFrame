@@ -147,18 +147,18 @@ bool NFNoSqlModule::Execute()
 	return true;
 }
 
-void NFNoSqlModule::CheckConnect()
+void NFNoSqlModule::CheckConnect(bool force)
 {
-	static const int CHECK_TIME = 1;
+	static const int CHECK_TIME = 100;
 	if (mLastCheckTime > 0)
 	{
-		if (mLastCheckTime + CHECK_TIME > NFGetTimeS())
+		if (!force && (mLastCheckTime + CHECK_TIME > NFGetTimeMS()))
 		{
 			return;
 		}
 	}
 
-	mLastCheckTime = NFGetTimeS();
+	mLastCheckTime = NFGetTimeMS();
 	{
 		NF_SHARE_PTR<NFIRedisClient> queryMasterNode = nullptr;
 		std::list<NF_SHARE_PTR<NFIRedisClient>> needToRemove;
@@ -356,13 +356,24 @@ NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::FindRedisClient(int slot)
 	for (auto redisClient : redisClients)
 	{
 		//如果没有找到，则需要新加
-		if (slot >= redisClient->StartSlot() && slot <= redisClient->EndSlot())
+		if (redisClient->Enable() && redisClient->StartSlot() != redisClient->EndSlot() && slot >= redisClient->StartSlot() && slot <= redisClient->EndSlot())
 		{
 			return redisClient;
 		}
 	}
 
-	return nullptr;
+	m_pLogModule->LogError("force to check connect as we didn't found the master node for slot:" + std::to_string(slot));
+
+	//master down
+	CheckConnect(true);
+
+	for (int i = 0; i < 100; ++i)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		Execute();
+	}
+
+	return FindRedisClient(slot);
 }
 
 bool NFNoSqlModule::AUTH(const std::string &auth)

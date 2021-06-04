@@ -854,7 +854,7 @@ public:
 	}
 
 	virtual bool Enable() = 0;
-	virtual void CheckConnect() = 0;
+	virtual void CheckConnect(bool force = true) = 0;
 	//如果收到move消息，就调用此函数强制刷新nodes
 	virtual void ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClient) = 0;
 };
