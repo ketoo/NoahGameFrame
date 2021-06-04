@@ -102,7 +102,7 @@ public:
     std::string name;
 	bool executableModule = false;
 	bool testModule = false;
-	bool testPass = false;
+	bool testPass = true;
 protected:
 	NFIPluginManager* pPluginManager;
 };

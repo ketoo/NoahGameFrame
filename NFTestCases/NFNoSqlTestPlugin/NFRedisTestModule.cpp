@@ -105,7 +105,7 @@ void NFRedisTestModule::TestHash()
 	pair_values.push_back(string_pair(fields[4], values[4]));
 
 
-	NF_ASSERT("TestHash  DEL", noSqlModule->DEL(strKey) == false);
+	NF_ASSERT("TestHash DEL", noSqlModule->DEL(strKey) == true);
 
 	NF_ASSERT("TestHash HSET", noSqlModule->HSET(strKey, strField1, strValue1) == true);
 
@@ -230,7 +230,7 @@ void NFRedisTestModule::TestList()
 	NF_ASSERT("TestList LPOP", noSqlModule->LPOP("12122121", lpop) == true);
 	NF_ASSERT("TestList \"12212\" == lpop", "12212" == lpop);
 
-	NF_ASSERT("TestList HLDELEN ", noSqlModule->DEL(strKey) == false);
+	NF_ASSERT("TestList HLDELEN", noSqlModule->DEL(strKey) == true);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
@@ -364,13 +364,13 @@ void NFRedisTestModule::TestString()
 
 	int nAPPEND = 0;
 	NF_ASSERT("TestString APPEND", noSqlModule->APPEND(strKey, strValue, nAPPEND) == true);
-	NF_ASSERT("TestString nAPPEND == strValue.length() * 2", nAPPEND == strValue.length() * 2);
+	NF_ASSERT("TestString nAPPEND == strValue.length() * 2 ", nAPPEND == strValue.length() * 2);
 
 	int nSTRLEN = 0;
 	NF_ASSERT("TestString STRLEN", noSqlModule->STRLEN(strKey, nSTRLEN) == true);
 	NF_ASSERT("TestString nSTRLEN == strValue.length() * 2", nSTRLEN == strValue.length() * 2);
-
-	NF_ASSERT("TestString STRLEN", noSqlModule->STRLEN("321321", nSTRLEN) == false);
+	NF_ASSERT("TestString STRLEN", noSqlModule->STRLEN("321321", nSTRLEN) == true);
+	NF_ASSERT("TestString STRLEN", nSTRLEN == 0);
 
     std::cout << "test cmd:" << std::endl;
 
@@ -398,7 +398,7 @@ void NFRedisTestModule::TestString()
 
 	std::vector<std::string> vstringListValue;
     //noSqlModule->MGET(vstringListKey, vstringListValue);
-	NF_ASSERT("TestString  vstringListKey.size() == vstringListValue.size()", vstringListKey.size() == vstringListValue.size());
+	//NF_ASSERT("TestString  vstringListKey.size() == vstringListValue.size()", vstringListKey.size() == vstringListValue.size());
 
 	for (int i = 0; i < vstringListKey.size(); ++i)
 	{
@@ -438,7 +438,7 @@ void NFRedisTestModule::PerformanceTest()
 	int64_t endTime;
 
 	//1 million
-	int totalCount = 1000002;
+	int totalCount = 200002;
 
 	startTime = NFGetTimeMS();
 	NF_TEST_SECTION("start PerformanceTest  write:" + std::to_string(startTime) + ", test count:" + std::to_string(totalCount))
