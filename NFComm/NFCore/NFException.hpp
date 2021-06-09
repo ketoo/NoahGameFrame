@@ -84,8 +84,8 @@ private:
 
 		std::stringstream ss;
 		ss << std::setfill('0') << std::setw(4) << 1900 + ltm->tm_year << "-" << std::setw(2) << 1 + ltm->tm_mon << "-" << std::setw(2) << ltm->tm_mday;
-		ss << "-";
-		ss << std::setfill('0') << std::setw(2) << ltm->tm_hour << ":" << std::setw(2) << ltm->tm_min << ":" << std::setw(2) << ltm->tm_sec;
+		ss << "--";
+		ss << std::setfill('0') << std::setw(2) << ltm->tm_hour << "-" << std::setw(2) << ltm->tm_min << "-" << std::setw(2) << ltm->tm_sec;
 		ss << ".crash";
 		return ss.str();
 	}

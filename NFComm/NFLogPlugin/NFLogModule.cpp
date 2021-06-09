@@ -23,44 +23,15 @@
    limitations under the License.
 */
 
-#define GLOG_NO_ABBREVIATED_SEVERITIES
 #include <stdarg.h>
 #include "NFLogModule.h"
 #include "NFLogPlugin.h"
 #include "termcolor.hpp"
-#include "NFComm/NFCore/easylogging++.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include "NFComm/NFCore/NFException.hpp"
 #endif
 
-INITIALIZE_EASYLOGGINGPP
-
-unsigned int NFLogModule::idx = 0;
-
-bool NFLogModule::CheckLogFileExist(const char* filename)
-{
-    std::stringstream stream;
-    stream << filename << "." << ++idx;
-    std::fstream file;
-    file.open(stream.str(), std::ios::in);
-    if (file)
-    {
-        return CheckLogFileExist(filename);
-    }
-
-    return false;
-}
-
-void NFLogModule::rolloutHandler(const char* filename, std::size_t size)
-{
-    std::stringstream stream;
-    if (!CheckLogFileExist(filename))
-    {
-        stream << filename << "." << idx;
-        rename(filename, stream.str().c_str());
-    }
-}
 
 std::string NFLogModule::GenerateFileName(const std::string &fileName)
 {
@@ -76,41 +47,39 @@ std::string NFLogModule::GenerateFileName(const std::string &fileName)
 	return finalFileName;
 }
 
-
-std::string NFLogModule::GetConfigPath(const std::string & fileName)
-{
-	std::string strAppLogName;
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + "_win.conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + "_win.conf";
-#endif
-
-#else
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + ".conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + ".conf";
-#endif
-#endif
-
-	return strAppLogName;
-}
-
 NFLogModule::NFLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-
-	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
-	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+    executableModule = true;
 }
 
 bool NFLogModule::Awake()
 {
 	mnLogCountTotal = 0;
 
-	std::string strLogConfigName = pPluginManager->GetLogConfigName();
+	auto max_size = 1048576 * 100;//100M per file
+	auto max_files = 100;//100 files
+	//try
+	{
+		std::string strLogConfigName = pPluginManager->GetLogConfigName();
+		//auto logger = spdlog::basic_logger_mt("basic_logger", "logs/basic-log.txt");
+		logger = spdlog::rotating_logger_mt(pPluginManager->GetAppName(), "logs/" + pPluginManager->GetAppName() + ".log", max_size, max_files);
+
+		// Create a daily logger - a new file is created every day on 2:30am
+		//auto logger = spdlog::daily_logger_mt("daily_logger", "logs/daily.txt", 0, 0);
+
+	}
+	//catch (const spdlog::spdlog_ex &ex)
+	{
+		//std::cout << "Log init failed: " << ex.what() << std::endl;
+	}
+
+	spdlog::set_level(spdlog::level::debug);
+	spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e][%n][%l][thread %t]%v");
+	//spdlog::set_pattern("[%H:%M:%S %z][%n][%L][thread %t] %v");
+	spdlog::flush_every(std::chrono::seconds(2));
+	spdlog::flush_on(spdlog::level::warn);
+/*
 	if (strLogConfigName.empty())
 	{
 		strLogConfigName = pPluginManager->GetAppName();
@@ -143,20 +112,18 @@ bool NFLogModule::Awake()
 
 	el::Loggers::reconfigureAllLoggers(conf);
 	el::Helpers::installPreRollOutCallback(rolloutHandler);
-
+*/
 	return true;
 }
 
 bool NFLogModule::Init()
 {
-	m_pKernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
-
     return true;
 }
 
 bool NFLogModule::Shut()
 {
-    el::Helpers::uninstallPreRollOutCallback();
+   // el::Helpers::uninstallPreRollOutCallback();
 
     return true;
 }
@@ -175,32 +142,55 @@ bool NFLogModule::AfterInit()
 
 bool NFLogModule::Execute()
 {
+	for (int i = 0; i < 1000000; i++)
+	{
+		LogInfo("testtesttesttest i:" + std::to_string(i));
+	}
+	for (int i = 0; i < 1000000; i++)
+	{
+		LogWarning("testtesttesttesttesttest i:" + std::to_string(i));
+	}
+	for (int i = 0; i < 1000000; i++)
+	{
+		LogError("testtesttesttesttesttesttest i:" + std::to_string(i));
+	}
+	for (int i = 0; i < 1000000; i++)
+	{
+		LogFatal("testtesttesttesttesttest i:" + std::to_string(i));
+	}
     return true;
-
 }
 
 bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 {
     mnLogCountTotal++;
 
-    char szBuffer[1024 * 10] = {0};
+	std::string localStream;
+	localStream.append("[");
+	localStream.append(std::to_string(mnLogCountTotal));
+	localStream.append("][");
+	localStream.append(std::to_string(pPluginManager->GetAppID()));
+	localStream.append("]");
 
-    va_list args;
-    va_start(args, format);
-    vsnprintf(szBuffer, sizeof(szBuffer) - 1, format, args);
-    va_end(args);
+	char szBuffer[1024 * 10] = {0};
+	try
+	{
+		va_list args;
+		va_start(args, format);
+		vsnprintf(szBuffer, sizeof(szBuffer) - 1, format, args);
+		va_end(args);
+	}
+	catch(...)
+	{
+		//nll = NF_LOG_LEVEL::NLL_FATAL_NORMAL;
+		localStream.append("szBuffer catch......");
+	}
 
-    mstrLocalStream.clear();
-
-    mstrLocalStream.append(std::to_string(mnLogCountTotal));
-    mstrLocalStream.append(" | ");
-    mstrLocalStream.append(std::to_string(pPluginManager->GetAppID()));
-    mstrLocalStream.append(" | ");
-    mstrLocalStream.append(szBuffer);
+    localStream.append(szBuffer);
 
     if (mLogHooker)
     {
-        mLogHooker.get()->operator()(nll, mstrLocalStream);
+        mLogHooker.get()->operator()(nll, localStream);
     }
 
     switch (nll)
@@ -208,38 +198,38 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
         case NFILogModule::NLL_DEBUG_NORMAL:
 			{
 				std::cout << termcolor::green;
-				LOG(DEBUG) << mstrLocalStream;
+				logger->debug(localStream);
 			}
 			break;
         case NFILogModule::NLL_INFO_NORMAL:
 			{
 				std::cout << termcolor::green;
-				LOG(INFO) << mstrLocalStream;
-			}	
+				logger->info(localStream);
+			}
 			break;
         case NFILogModule::NLL_WARING_NORMAL:
 			{
 				std::cout << termcolor::yellow;
-				LOG(WARNING) << mstrLocalStream;
+				logger->warn(localStream);
 			}
 			break;
         case NFILogModule::NLL_ERROR_NORMAL:
 			{
 				std::cout << termcolor::red;
-				LOG(ERROR) << mstrLocalStream;
+				logger->error(localStream);
 				//LogStack();
 			}
 			break;
         case NFILogModule::NLL_FATAL_NORMAL:
 			{
 				std::cout << termcolor::red;
-				LOG(FATAL) << mstrLocalStream;
+				logger->critical(localStream);
 			}
 			break;
         default:
 			{
 				std::cout << termcolor::green;
-				LOG(INFO) << mstrLocalStream;
+				logger->debug(localStream);
 			}
 			break;
     }
@@ -249,58 +239,17 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     return true;
 }
 
-bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const char* func, int line)
-{
-	std::ostringstream os;
-	auto record = m_pKernelModule->FindRecord(ident, recordName);
-	if (record)
-	{
-
-		if (line > 0)
-		{
-			Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str(), func, line);
-		}
-		else
-		{
-			Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str());
-		}
-	}
-
-
-    return true;
-}
-
-bool NFLogModule::LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strDesc, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[OBJECT] Indent[%s] %s %s %d", ident.ToString().c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[OBJECT] Indent[%s] %s", ident.ToString().c_str(), strDesc.c_str());
-    }
-
-    return true;
-
-}
-
 void NFLogModule::LogStack()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
 	NFException::CrashHandler(0);
 #endif
 }
-bool NFLogModule::LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/)
-{
-    //#ifdef NF_DEBUG_MODE
-    LogDebug(ident, strArg + "MsgID:" + std::to_string(nMsg), func, line);
-    //#endif
-    return true;
-}
 
-bool NFLogModule::ChangeLogLevel(const std::string& strLevel)
+bool NFLogModule::ChangeLogLevel(const NF_LOG_LEVEL lgoLevel)
 {
+	//spdlog::set_level(spdlog::level::debug);
+	/*
     el::Level logLevel = el::LevelHelper::convertFromString(strLevel.c_str());
     el::Logger* pLogger = el::Loggers::getLogger("default");
     if (NULL == pLogger)
@@ -345,6 +294,7 @@ bool NFLogModule::ChangeLogLevel(const std::string& strLevel)
 
     el::Loggers::reconfigureAllLoggers(*pConfigurations);
     LogInfo("[Log] Change log level as " + strLevel, __FUNCTION__, __LINE__);
+    */
     return true;
 }
 

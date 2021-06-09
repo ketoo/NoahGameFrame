@@ -6,6 +6,8 @@ add_library(NFLogPlugin STATIC
 	${NFLogPlugin_ROOT_Cpp}
 	${NFLogPlugin_ROOT_Hpp})
 
+target_include_directories(NFLogPlugin PUBLIC
+		${SolutionDir}/Dependencies/spdlog/include/)
 if(UNIX)
 
 	if (CMAKE_BUILD_TYPE MATCHES "Release")

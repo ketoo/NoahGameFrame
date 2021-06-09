@@ -145,7 +145,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 	if (GetElement(ident))
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, "The object has Exists", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(ident, "The object has Exists", __FUNCTION__, __LINE__);
 		return pObject;
 	}
 
@@ -577,7 +577,7 @@ bool NFKernelModule::FindProperty(const NFGUID& self, const std::string& propert
 		return pObject->FindProperty(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -590,7 +590,7 @@ bool NFKernelModule::SetPropertyInt(const NFGUID& self, const std::string& prope
 		return pObject->SetPropertyInt(propertyName, nValue, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -603,7 +603,7 @@ bool NFKernelModule::SetPropertyFloat(const NFGUID& self, const std::string& pro
 		return pObject->SetPropertyFloat(propertyName, dValue, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -616,7 +616,7 @@ bool NFKernelModule::SetPropertyString(const NFGUID& self, const std::string& pr
 		return pObject->SetPropertyString(propertyName, value, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -629,7 +629,7 @@ bool NFKernelModule::SetPropertyObject(const NFGUID& self, const std::string& pr
 		return pObject->SetPropertyObject(propertyName, objectValue, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -642,7 +642,7 @@ bool NFKernelModule::SetPropertyVector2(const NFGUID& self, const std::string& p
 		return pObject->SetPropertyVector2(propertyName, value, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no vector2", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no vector2", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -655,7 +655,7 @@ bool NFKernelModule::SetPropertyVector3(const NFGUID& self, const std::string& p
 		return pObject->SetPropertyVector3(propertyName, value, reason);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no vector3", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no vector3", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -668,7 +668,7 @@ NFINT64 NFKernelModule::GetPropertyInt(const NFGUID& self, const std::string& pr
 		return pObject->GetPropertyInt(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_INT;
 }
@@ -681,7 +681,7 @@ int NFKernelModule::GetPropertyInt32(const NFGUID& self, const std::string& prop
 		return pObject->GetPropertyInt32(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return (int)NULL_INT;
 }
@@ -694,7 +694,7 @@ double NFKernelModule::GetPropertyFloat(const NFGUID& self, const std::string& p
 		return pObject->GetPropertyFloat(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_FLOAT;
 }
@@ -707,7 +707,7 @@ const std::string& NFKernelModule::GetPropertyString(const NFGUID& self, const s
 		return pObject->GetPropertyString(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_STR;
 }
@@ -720,7 +720,7 @@ const NFGUID& NFKernelModule::GetPropertyObject(const NFGUID& self, const std::s
 		return pObject->GetPropertyObject(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_OBJECT;
 }
@@ -733,7 +733,7 @@ const NFVector2& NFKernelModule::GetPropertyVector2(const NFGUID& self, const st
 		return pObject->GetPropertyVector2(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no vector2", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no vector2", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR2;
 }
@@ -746,7 +746,7 @@ const NFVector3& NFKernelModule::GetPropertyVector3(const NFGUID& self, const st
 		return pObject->GetPropertyVector3(propertyName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no vector3", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, propertyName + "| There is no vector3", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR3;
 }
@@ -759,7 +759,7 @@ NF_SHARE_PTR<NFIRecord> NFKernelModule::FindRecord(const NFGUID& self, const std
 		return pObject->GetRecordManager()->GetElement(recordName);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 
 	return nullptr;
 }
@@ -772,7 +772,7 @@ bool NFKernelModule::ClearRecord(const NFGUID& self, const std::string& recordNa
 		return pRecord->Clear();
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no record", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, recordName + "| There is no record", __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -793,7 +793,7 @@ bool NFKernelModule::SetRecordInt(const NFGUID& self, const std::string& recordN
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 
@@ -816,7 +816,7 @@ bool NFKernelModule::SetRecordInt(const NFGUID& self, const std::string& recordN
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -838,7 +838,7 @@ bool NFKernelModule::SetRecordFloat(const NFGUID& self, const std::string& recor
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -860,7 +860,7 @@ bool NFKernelModule::SetRecordFloat(const NFGUID& self, const std::string& recor
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -882,7 +882,7 @@ bool NFKernelModule::SetRecordString(const NFGUID& self, const std::string& reco
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -904,7 +904,7 @@ bool NFKernelModule::SetRecordString(const NFGUID& self, const std::string& reco
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -926,7 +926,7 @@ bool NFKernelModule::SetRecordObject(const NFGUID& self, const std::string& reco
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -948,7 +948,7 @@ bool NFKernelModule::SetRecordObject(const NFGUID& self, const std::string& reco
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -970,7 +970,7 @@ bool NFKernelModule::SetRecordVector2(const NFGUID& self, const std::string& rec
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -992,7 +992,7 @@ bool NFKernelModule::SetRecordVector2(const NFGUID& self, const std::string& rec
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -1014,7 +1014,7 @@ bool NFKernelModule::SetRecordVector3(const NFGUID& self, const std::string& rec
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -1036,7 +1036,7 @@ bool NFKernelModule::SetRecordVector3(const NFGUID& self, const std::string& rec
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, recordName + "| There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(self, recordName + "| There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return false;
@@ -1050,7 +1050,7 @@ NFINT64 NFKernelModule::GetRecordInt(const NFGUID& self, const std::string& reco
 		return pObject->GetRecordInt(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return 0;
 }
@@ -1063,7 +1063,7 @@ NFINT64 NFKernelModule::GetRecordInt(const NFGUID& self, const std::string& reco
 		return pObject->GetRecordInt(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return 0;
 }
@@ -1076,7 +1076,7 @@ double NFKernelModule::GetRecordFloat(const NFGUID& self, const std::string& rec
 		return pObject->GetRecordFloat(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return 0.0;
 }
@@ -1089,7 +1089,7 @@ double NFKernelModule::GetRecordFloat(const NFGUID& self, const std::string& rec
 		return pObject->GetRecordFloat(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return 0.0;
 }
@@ -1102,7 +1102,7 @@ const std::string& NFKernelModule::GetRecordString(const NFGUID& self, const std
 		return pObject->GetRecordString(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_STR;
 }
@@ -1115,7 +1115,7 @@ const std::string& NFKernelModule::GetRecordString(const NFGUID& self, const std
 		return pObject->GetRecordString(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_STR;
 }
@@ -1128,7 +1128,7 @@ const NFGUID& NFKernelModule::GetRecordObject(const NFGUID& self, const std::str
 		return pObject->GetRecordObject(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_OBJECT;
 }
@@ -1141,7 +1141,7 @@ const NFGUID& NFKernelModule::GetRecordObject(const NFGUID& self, const std::str
 		return pObject->GetRecordObject(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return NULL_OBJECT;
 }
@@ -1154,7 +1154,7 @@ const NFVector2& NFKernelModule::GetRecordVector2(const NFGUID& self, const std:
 		return pObject->GetRecordVector2(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no vector2", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR2;
 }
@@ -1167,7 +1167,7 @@ const NFVector2& NFKernelModule::GetRecordVector2(const NFGUID& self, const std:
 		return pObject->GetRecordVector2(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no vector2", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR2;
 }
@@ -1180,7 +1180,7 @@ const NFVector3& NFKernelModule::GetRecordVector3(const NFGUID& self, const std:
 		return pObject->GetRecordVector3(recordName, row, col);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no vector3", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR3;
 }
@@ -1193,7 +1193,7 @@ const NFVector3& NFKernelModule::GetRecordVector3(const NFGUID& self, const std:
 		return pObject->GetRecordVector3(recordName, row, colTag);
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no vector3", __FUNCTION__, __LINE__);
 
 	return NULL_VECTOR3;
 }
@@ -1500,7 +1500,7 @@ bool NFKernelModule::LogInfo(const NFGUID ident)
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, "", __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(ident, "", __FUNCTION__, __LINE__);
 	}
 
 	return true;

@@ -26,8 +26,15 @@
 #ifndef NF_LOG_MODULE_H
 #define NF_LOG_MODULE_H
 
+#include <atomic>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/rotating_file_sink.h"
+#include "spdlog/sinks/daily_file_sink.h"
+#include "spdlog/async.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFPerformance.hpp"
 
 class NFLogModule
@@ -49,9 +56,6 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     virtual void LogStack();
-
-    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc = "", const char* func = "", int line = 0);
-    virtual bool LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strDesc, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const std::string& strLog, const char* func = "", int line = 0);
     virtual bool LogInfo(const std::string& strLog, const  char* func = "", int line = 0);
@@ -77,29 +81,19 @@ public:
     virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
     virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
 
-    virtual bool LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg, const char* func = "", const int line = 0);
-    virtual bool ChangeLogLevel(const std::string& strLevel);
+    virtual bool ChangeLogLevel(const NF_LOG_LEVEL logLevel);
     
     virtual void SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker);
 
 protected:
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);
 
-    static bool CheckLogFileExist(const char* filename);
-    static void rolloutHandler(const char* filename, std::size_t size);
-
-	std::string GetConfigPath(const std::string& fileName);
 	std::string GenerateFileName(const std::string& fileName);
 
 private:
-
-	NFIKernelModule* m_pKernelModule;
-
-    std::string mstrLocalStream;
+	std::shared_ptr<spdlog::logger> logger;
     LOG_HOOKER_FUNCTOR_PTR mLogHooker;
-    static unsigned int idx;
-    uint64_t mnLogCountTotal;
-	std::list<NFPerformance> mxPerformanceList;
+	std::atomic<uint64_t> mnLogCountTotal;
 };
 
 #endif

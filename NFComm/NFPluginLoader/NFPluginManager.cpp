@@ -884,7 +884,10 @@ int NFPluginManager::GetAppCPUCount() const
 
 void NFPluginManager::SetAppCPUCount(const int count)
 {
-	mnCPUCount = count;
+	if (count > 0)
+	{
+		mnCPUCount = count;
+	}
 }
 
 int NFPluginManager::GetAppType() const

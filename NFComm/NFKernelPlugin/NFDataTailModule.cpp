@@ -150,16 +150,20 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
     NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
     if (nullptr != xRecordManager)
     {
+	    std::ostringstream stream;
+	    stream << self.ToString();
+
         NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
         while (nullptr != xRecord)
         {
-            for (int i = 0; i < xRecord->GetRows(); ++i)
+        	stream << xRecord->GetName();
+
+	        for (int i = 0; i < xRecord->GetRows(); ++i)
             {
                 NFDataList xDataList;
                 bool bRet = xRecord->QueryRow(i, xDataList);
                 if (bRet)
                 {
-                    std::ostringstream stream;
                     stream << " Start trail Row[" << i << "]";
 
                     for (int j = 0; j < xDataList.GetCount(); ++j)
@@ -167,7 +171,7 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
                         stream << " [" << j << "] " << xDataList.ToString(j);
                     }
 
-                    m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+                    m_pLogModule->LogDebug(stream.str(),  __FUNCTION__, __LINE__);
                 }
             }
 

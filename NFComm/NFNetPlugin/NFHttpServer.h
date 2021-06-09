@@ -28,7 +28,6 @@
 
 #include "NFIHttpServer.h"
 #include "NFComm/NFCore/NFMapEx.hpp"
-#include "NFComm/NFCore/easylogging++.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>

@@ -283,7 +283,7 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		return true;
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 
 	return false;
@@ -1178,7 +1178,7 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		return true;
 	}
 
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no object", __FUNCTION__, __LINE__);
 
 	return false;
 }

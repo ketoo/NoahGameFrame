@@ -118,14 +118,14 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
 	if (req == NULL)
 	{
-		LOG(ERROR) << "req ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "req ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 
 	NFHttpServer* pNet = (NFHttpServer*)arg;
 	if (pNet == NULL)
 	{
-		LOG(ERROR) << "pNet ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "pNet ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -133,7 +133,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	NF_SHARE_PTR<NFHttpRequest> pRequest = pNet->AllocHttpRequest();
 	if (pRequest == nullptr)
 	{
-		LOG(ERROR) << "pRequest ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "pRequest ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -146,7 +146,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		LOG(ERROR) << "header ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "header ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -165,7 +165,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		LOG(ERROR) << "uri ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "uri ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -181,7 +181,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
-		LOG(ERROR) << "bad request " << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "bad request " << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 
@@ -193,7 +193,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 	else
 	{
-		LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
 	}
 
 	evhttp_uri_free(decoded);
@@ -220,7 +220,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
+		//LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 
