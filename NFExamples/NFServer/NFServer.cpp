@@ -47,6 +47,8 @@ int main(int argc, char* argv[])
 		serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=DBServer ID=8 CPU=1 Plugin=Plugin.xml")));
 		serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=ProxyServer ID=5 CPU=1 Plugin=Plugin.xml")));
 		serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=16001 CPU=1 Plugin=Plugin.xml")));
+		//for tutorial
+		//serverList.push_back(NF_SHARE_PTR<NFPluginServer>(NF_NEW NFPluginServer(strArgvList + " Server=GameServer ID=3 Plugin=Tutorial.xml")));
 	}
 	else
 	{

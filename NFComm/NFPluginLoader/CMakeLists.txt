@@ -58,7 +58,6 @@ target_link_libraries(NFPluginLoader Tutorial3Plugin)
 target_link_libraries(NFPluginLoader Tutorial4Plugin)
 target_link_libraries(NFPluginLoader Tutorial5)
 target_link_libraries(NFPluginLoader Tutorial6)
-target_link_libraries(NFPluginLoader Tutorial7)
 
 target_link_libraries(NFPluginLoader NFNoSqlTestPlugin)
 

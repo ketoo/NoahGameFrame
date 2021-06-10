@@ -35,14 +35,15 @@
 
 std::string NFLogModule::GenerateFileName(const std::string &fileName)
 {
-	char finalFileName[256] = {0};
+	std::string finalFileName;
 
 	time_t now = time(0);
 	tm *ltm = localtime(&now);
 	std::stringstream ss;
 	ss << std::setfill('0') << std::setw(4) << 1900 + ltm->tm_year << "-" << std::setw(2) << 1 + ltm->tm_mon << "-" << std::setw(2) << ltm->tm_mday;
 
-	sprintf (finalFileName, fileName.c_str(), ss.str().c_str(), pPluginManager->GetAppID(), ss.str().c_str());
+	finalFileName.append(fileName);
+	finalFileName.append(ss.str());
 
 	return finalFileName;
 }
@@ -50,20 +51,19 @@ std::string NFLogModule::GenerateFileName(const std::string &fileName)
 NFLogModule::NFLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-    executableModule = true;
 }
 
 bool NFLogModule::Awake()
 {
 	mnLogCountTotal = 0;
-
+	auto fileName = GenerateFileName(pPluginManager->GetAppName());
 	auto max_size = 1048576 * 100;//100M per file
-	auto max_files = 100;//100 files
+	auto max_files = 10000;//100 files
 	//try
 	{
 		std::string strLogConfigName = pPluginManager->GetLogConfigName();
 		//auto logger = spdlog::basic_logger_mt("basic_logger", "logs/basic-log.txt");
-		logger = spdlog::rotating_logger_mt(pPluginManager->GetAppName(), "logs/" + pPluginManager->GetAppName() + ".log", max_size, max_files);
+		logger = spdlog::rotating_logger_mt(pPluginManager->GetAppName(), "logs/" + GenerateFileName(fileName) + ".log", max_size, max_files);
 
 		// Create a daily logger - a new file is created every day on 2:30am
 		//auto logger = spdlog::daily_logger_mt("daily_logger", "logs/daily.txt", 0, 0);
@@ -142,22 +142,7 @@ bool NFLogModule::AfterInit()
 
 bool NFLogModule::Execute()
 {
-	for (int i = 0; i < 1000000; i++)
-	{
-		LogInfo("testtesttesttest i:" + std::to_string(i));
-	}
-	for (int i = 0; i < 1000000; i++)
-	{
-		LogWarning("testtesttesttesttesttest i:" + std::to_string(i));
-	}
-	for (int i = 0; i < 1000000; i++)
-	{
-		LogError("testtesttesttesttesttesttest i:" + std::to_string(i));
-	}
-	for (int i = 0; i < 1000000; i++)
-	{
-		LogFatal("testtesttesttesttesttest i:" + std::to_string(i));
-	}
+
     return true;
 }
 

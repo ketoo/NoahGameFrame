@@ -79,7 +79,6 @@
 #include "Tutorial/Tutorial4/Tutorial4Plugin.h"
 #include "Tutorial/Tutorial5/Tutorial5.h"
 #include "Tutorial/Tutorial6/Tutorial6.h"
-#include "Tutorial/Tutorial7/Tutorial7.h"
 
 //test cases
 #include "NFTestCases/NFNoSqlTestPlugin/NFNoSqlTestPlugin.h"
@@ -138,7 +137,6 @@
 #pragma comment( lib, "Tutorial4.lib" )
 #pragma comment( lib, "Tutorial5.lib" )
 #pragma comment( lib, "Tutorial6.lib" )
-#pragma comment( lib, "Tutorial7.lib" )
 
 #endif
 #endif
@@ -212,7 +210,6 @@ void MidWareLoader(NFIPluginManager* pPluginManager)
 	CREATE_PLUGIN(pPluginManager, Tutorial4Plugin)
 	CREATE_PLUGIN(pPluginManager, Tutorial5)
 	CREATE_PLUGIN(pPluginManager, Tutorial6)
-	CREATE_PLUGIN(pPluginManager, Tutorial7)
 
 	CREATE_PLUGIN(pPluginManager, NFNoSqlTestPlugin)
 }

@@ -16,7 +16,6 @@
 		<Plugin Name="Tutorial4" />
 		<Plugin Name="Tutorial5" />
 		<Plugin Name="Tutorial6" />
-		<Plugin Name="Tutorial7" />
 
 	</GameServer>
 </XML>

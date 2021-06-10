@@ -41,8 +41,8 @@ bool NFHelloWorld5::Init()
 
 bool NFHelloWorld5::AfterInit()
 {
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat2", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 11);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 2), "OnHeartBeat2", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
 
 	std::cout << "Hello, world, Init" << std::endl;
 	//http://127.0.0.1/json
@@ -51,16 +51,16 @@ bool NFHelloWorld5::AfterInit()
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFHelloWorld5::OnCommandQuery);
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFHelloWorld5::OnCommandQuery);
 
+	//init http server
 	m_pHttpNetModule->AddNetFilter("/json", this, &NFHelloWorld5::OnFilter);
+	m_pHttpNetModule->InitServer(18080);
 
-	m_pHttpNetModule->InitServer(8080);
-
-
-    m_pWSModule->Initialization(9999, 8090, 4);
-
+	//init websocket server
+    m_pWSModule->Initialization(19999, 18090, 4);
 	m_pWSModule->AddReceiveCallBack(this, &NFHelloWorld5::OnWebSocketTestProcess);
 
-	m_pNetModule->Initialization(9999, 5001);
+	//init tcp server
+	m_pNetModule->Initialization(9999, 15001);
 	m_pNetModule->AddEventCallBack( this, &NFHelloWorld5::OnTCPEvent);
 	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LOGIN, this, &NFHelloWorld5::OnLoginProcess);
 
