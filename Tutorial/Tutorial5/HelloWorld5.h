@@ -60,6 +60,7 @@ class NFHelloWorld5
 public:
     NFHelloWorld5(NFIPluginManager* p)
     {
+	m_bIsExecute = true;
         pPluginManager = p;
     }
 
