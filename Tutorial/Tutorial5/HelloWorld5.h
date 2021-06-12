@@ -76,7 +76,9 @@ protected:
 
 	NFWebStatus OnFilter(NF_SHARE_PTR<NFHttpRequest> req);
 
-	int OnHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
+	int OnHttpHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
+	int OnTcpHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
+	int OnWebsocketHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
 	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);

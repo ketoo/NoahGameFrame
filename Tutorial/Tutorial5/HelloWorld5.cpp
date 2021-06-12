@@ -41,8 +41,9 @@ bool NFHelloWorld5::Init()
 
 bool NFHelloWorld5::AfterInit()
 {
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 11);
-	m_pScheduleModule->AddSchedule(NFGUID(0, 2), "OnHeartBeat2", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld5::OnHttpHeartBeat, 5.0f, 11);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 2), "OnHeartBeat2", this, &NFHelloWorld5::OnTcpHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 3), "OnHeartBeat2", this, &NFHelloWorld5::OnWebsocketHeartBeat, 5.0f, 10);
 
 	std::cout << "Hello, world, Init" << std::endl;
 	//http://127.0.0.1/json
@@ -120,27 +121,6 @@ NFWebStatus NFHelloWorld5::OnFilter(NF_SHARE_PTR<NFHttpRequest> req)
 	return NFWebStatus::WEB_OK;
 }
 
-int NFHelloWorld5::OnHeartBeat(const NFGUID & self, const std::string & heartBeat, const float time, const int count)
-{
-	std::cout << heartBeat << std::endl;
-
-	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld5::OnGetCallBack);
-	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
-	{
-		std::cout << "OnGetCallBack" << std::endl;
-	});
-
-    std::string strMemo = "Memo here";
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld5::OnPostCallBack, strMemo);
-
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
-	{
-		std::cout << "OnPostCallBack" << std::endl;
-	});
-
-	return 0;
-}
-
 void NFHelloWorld5::OnGetCallBack(const NFGUID id, const int state_code, const std::string & strRespData)
 {
 	std::cout << "OnGetCallBack" << std::endl;
@@ -175,4 +155,35 @@ void NFHelloWorld5::OnLoginProcess(const NFSOCK sockIndex, const int msgID, cons
 	}
 
 	std::cout << xMsg.account() << " " << xMsg.password() << std::endl;
+}
+
+int NFHelloWorld5::OnHttpHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count)
+{
+	std::cout << heartBeat << std::endl;
+
+	m_pHttpClientModule->DoGet("http://127.0.0.1:18080/json", this, &NFHelloWorld5::OnGetCallBack);
+	m_pHttpClientModule->DoGet("http://127.0.0.1:18080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
+	{
+		std::cout << "OnGetCallBack" << std::endl;
+	});
+
+	std::string strMemo = "Memo here";
+	m_pHttpClientModule->DoPost("http://127.0.0.1:18080/json", "OnHeartBeat post data---", this, &NFHelloWorld5::OnPostCallBack, strMemo);
+
+	m_pHttpClientModule->DoPost("http://127.0.0.1:18080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
+	{
+		std::cout << "OnPostCallBack" << std::endl;
+	});
+
+	return 0;
+}
+
+int NFHelloWorld5::OnTcpHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count)
+{
+	return 0;
+}
+
+int NFHelloWorld5::OnWebsocketHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count)
+{
+	return 0;
 }

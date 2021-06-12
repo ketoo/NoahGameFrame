@@ -30,6 +30,7 @@ NFHttpServerModule::NFHttpServerModule(NFIPluginManager* p)
 {
     pPluginManager = p;
     m_pHttpServer = NULL;
+    executableModule = true;
 }
 
 NFHttpServerModule::~NFHttpServerModule()
