@@ -69,6 +69,8 @@ bool NFHelloWorld5::AfterInit()
 
 bool NFHelloWorld5::Execute()
 {
+	if(m_pHttpNetModule)
+		m_pHttpNetModule->Execute();
  
     return true;
 }
