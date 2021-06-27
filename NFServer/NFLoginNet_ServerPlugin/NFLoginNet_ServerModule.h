@@ -66,13 +66,13 @@ protected:
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
-    void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnViewWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnViewWorldProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnHeartBeat(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnLogOut(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnHeartBeat(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnLogOut(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 protected:
 

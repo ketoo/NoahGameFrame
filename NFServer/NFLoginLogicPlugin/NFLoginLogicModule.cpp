@@ -41,11 +41,11 @@ bool NFLoginLogicModule::Shut()
     return true;
 }
 
-void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 	    m_pLogModule->LogError("Failed to ReceivePB for message id:" + std::to_string(msgID));
 		return;
@@ -71,8 +71,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID,
 				if (!m_pAccountRedisModule->VerifyAccount(xMsg.account(), xMsg.password()))
 				{
 					std::ostringstream strLog;
-					strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
-					m_pLogModule->LogError(NFGUID(0, sockIndex), strLog, __FUNCTION__, __LINE__);
+					strLog << sockIndex << " Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+					m_pLogModule->LogError(strLog.str(), __FUNCTION__, __LINE__);
 
 					xAckMsg.set_event_code(NFMsg::ACCOUNTPWD_INVALID);
 					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, sockIndex);
@@ -84,8 +84,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID,
 				if (!m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password()))
 				{
 					std::ostringstream strLog;
-					strLog << "Create account failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
-					m_pLogModule->LogError(NFGUID(0, sockIndex), strLog, __FUNCTION__, __LINE__);
+					strLog << sockIndex << " Create account failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+					m_pLogModule->LogError(strLog.str(), __FUNCTION__, __LINE__);
 
 					xAckMsg.set_event_code(NFMsg::ACCOUNT_EXIST);
 					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, sockIndex);
@@ -103,7 +103,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK sockIndex, const int msgID,
 			xAckMsg.set_event_code(NFMsg::ACCOUNT_LOGIN_SUCCESS);
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, sockIndex);
 
-			m_pLogModule->LogInfo(NFGUID(0, sockIndex), "Login successed :", xMsg.account().c_str());
+			m_pLogModule->LogInfo(std::to_string(sockIndex) + " Login successful :", xMsg.account().c_str());
 		}
 	}
 }

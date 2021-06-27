@@ -83,11 +83,11 @@ protected:
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
 	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 
-    void OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 	void OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet* pNet);
 
-	void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 private:
 

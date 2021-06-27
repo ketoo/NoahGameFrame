@@ -52,7 +52,7 @@ bool NFNavigationModule::Init()
 			//loadNavigation(sceneId, navigationResPath);
 			//std::ostringstream strLog;
 			//strLog << "strId: (" << strId.c_str() << ") is destroyed!\n";
-			//m_pLogModule->LogInfo(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			//m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 			/*elementModule->
 			int sceneID = lexical_cast<int>(strIdList[i]);*/
 		}
@@ -96,7 +96,7 @@ bool NFNavigationModule::RemoveNavigation(NFINT64 scendId)
 
 		std::ostringstream strLog;
 		strLog << "Navigation::removeNavigation: (" << scendId << ") is destroyed!\n";
-		m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 		return true;
 	}
 
@@ -117,9 +117,9 @@ NF_SHARE_PTR<NFNavigationHandle> NFNavigationModule::FindNavigation(NFINT64 scen
 	return NULL;
 }
 
-int NFNavigationModule::FindPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
+int NFNavigationModule::FindPath(NFINT64 sceneId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
 {
-	NF_SHARE_PTR<NFNavigationHandle> pNavMeshHandle = FindNavigation(scendId);
+	NF_SHARE_PTR<NFNavigationHandle> pNavMeshHandle = FindNavigation(sceneId);
 	if (pNavMeshHandle)
 	{
 		return pNavMeshHandle->FindStraightPath(start, end, paths);

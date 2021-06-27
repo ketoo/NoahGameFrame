@@ -70,24 +70,16 @@ bool NFSecurityModule::VerifySecurityKey(const std::string & account, const std:
 	return false;
 }
 
-std::string NFSecurityModule::EncodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int len)
+bool NFSecurityModule::EncodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string_view & strMessageData, std::string& output)
 {
-	return std::string(strMessageData, len);
+	output = strMessageData;
+	return true;
 }
 
-std::string NFSecurityModule::EncodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
+bool NFSecurityModule::DecodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string_view & strMessageData, std::string& output)
 {
-	return strMessageData;
-}
-
-std::string NFSecurityModule::DecodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int len)
-{
-	return std::string(strMessageData, len);
-}
-
-std::string NFSecurityModule::DecodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
-{
-	return strMessageData;
+	output = strMessageData;
+	return true;
 }
 
 bool NFSecurityModule::Shut()

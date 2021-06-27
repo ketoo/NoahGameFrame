@@ -69,14 +69,14 @@ NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& con
 	bool bExist = m_pElementModule->ExistElement( configName );
 	if ( !bExist )
 	{
-		m_pLogModule->LogError(self, "has no this element:" + configName);
+		m_pLogModule->LogError(self.ToString() + "has no this element:" + configName);
 		return NULL_OBJECT;
 	}
 
 	int nItemType = m_pElementModule->GetPropertyInt32(configName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
 	{
-		m_pLogModule->LogError(self, configName + " has no this item type:" + std::to_string(nItemType));
+		m_pLogModule->LogError(self.ToString() + configName + " has no this item type:" + std::to_string(nItemType));
 		return NULL_OBJECT;
 	}
 
@@ -133,7 +133,7 @@ bool NFInventoryModule::CreateItem(const NFGUID& self, const std::string& config
 	bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), configName );
 	if ( !bExist )
 	{
-		m_pLogModule->LogError(self, "has no this element:" + configName);
+		m_pLogModule->LogError(self.ToString() + "has no this element:" + configName);
 		return false;
 	}
 
@@ -199,7 +199,7 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 
 	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
 	{
-		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
+		m_pLogModule->LogError(self.ToString() + "has no this element:" + strItemConfigID);
 		return false;
 	}
 
@@ -218,13 +218,13 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 			int nNewCount = nOldCount - count;
 			pRecord->SetInt(nFindRow, NFrame::Player::Inventory::ItemCount, nNewCount);
 
-			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to " + std::to_string(nNewCount));
+			m_pLogModule->LogInfo(self.ToString() +  " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to " + std::to_string(nNewCount));
 			return true;
 		}
 		else if (nOldCount == count)
 		{
 			pRecord->Remove(nFindRow);
-			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to 0");
+			m_pLogModule->LogInfo(self.ToString() +  " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to 0");
 			return true;
 		}
 	}
@@ -251,7 +251,7 @@ bool NFInventoryModule::EnoughItem(const NFGUID& self, const std::string& strIte
     bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID );
     if ( !bExist )
     {
-		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
+		m_pLogModule->LogError(self.ToString() + "has no this element:" + strItemConfigID);
         return false;
     }
 
@@ -294,7 +294,7 @@ bool NFInventoryModule::CreateItemInNormalBag(const NFGUID & self, const std::st
 		int row = pRecord->AddRow(-1, *xRowData);
 		if (row < 0)
 		{
-			m_pLogModule->LogError(self, " cant add item to bag " + configName);
+			m_pLogModule->LogError(self.ToString() + " cant add item to bag " + configName);
 			return false;
 		}
 	}
@@ -305,7 +305,7 @@ bool NFInventoryModule::CreateItemInNormalBag(const NFGUID & self, const std::st
 	}
 
 
-	m_pLogModule->LogInfo(self, "add item to bag:" + configName + ", count:" + std::to_string(count));
+	m_pLogModule->LogInfo(self.ToString() +  "add item to bag:" + configName + ", count:" + std::to_string(count));
 
 	return true;
 }
@@ -322,7 +322,7 @@ int NFInventoryModule::ItemCount(const NFGUID &self, const std::string &strItemC
 
 	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
 	{
-		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
+		m_pLogModule->LogError(self.ToString() + "has no this element:" + strItemConfigID);
 		return 0;
 	}
 

@@ -248,7 +248,7 @@ protected:
 
 class NFINet;
 
-typedef std::function<void(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)> NET_RECEIVE_FUNCTOR;
+typedef std::function<void(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)> NET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
 
 typedef std::function<void(const NFSOCK sockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;

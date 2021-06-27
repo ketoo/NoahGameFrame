@@ -76,7 +76,7 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPac
 	}
 
 	
-	m_pLogModule->LogError(self, "loaded data false", __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self.ToString() + "loaded data false", __FUNCTION__, __LINE__);
 
 	return false;
 }

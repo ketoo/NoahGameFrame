@@ -67,12 +67,12 @@ protected:
 	void Register(NFINet* pNet);
 	void ServerReport();
 	void RefreshWorldInfo();
-	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnSelectServerProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnKickClientProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnSelectServerProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnKickClientProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 private:
 	NFINT64 mLastReportTime;
 

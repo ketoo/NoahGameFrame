@@ -200,7 +200,7 @@ void NFNet::conn_readcb(struct bufferevent* bev, void* user_data)
         {
             if (pNet->mRecvCB)
             {
-                pNet->mRecvCB(pObject->GetRealFD(), -1, pObject->GetBuff(), len);
+                pNet->mRecvCB(pObject->GetRealFD(), -1, std::string_view(pObject->GetBuff(), len));
 
                 pNet->mnReceiveMsgTotal++;
             }
@@ -390,18 +390,18 @@ bool NFNet::Dismantle(NetObject* pObject)
                 try
                 {
 #endif
-                
-                    mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+                    std::string_view msgObject(pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+                    mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), msgObject);
                 
 #if NF_PLATFORM != NF_PLATFORM_WIN
                 }
                 catch (const std::exception & e)
                 {
-                    NFException::StackTrace(xHead.GetMsgID());
+                    NFException::StackTrace(xHead.GetMsgID(), e.what(), __FUNCTION__, __LINE__);
                 }
                 catch (...)
                 {
-                    NFException::StackTrace(xHead.GetMsgID());
+                    NFException::StackTrace(xHead.GetMsgID(), "unknow", __FUNCTION__, __LINE__);
                 }
 #endif
 

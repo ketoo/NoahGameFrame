@@ -75,14 +75,14 @@ bool NFAsyncNoSqlModule::AfterInit()
 			{
 				std::ostringstream strLog;
 				strLog << "Connected NoSqlServer[" << ip << "], Port = [" << nPort << "], Passsword = [" << strAuth << "]";
-				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 
 			}
 			else
 			{
 				std::ostringstream strLog;
 				strLog << "Cannot connect NoSqlServer[" << ip << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
-				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 			}
 		}
 	}

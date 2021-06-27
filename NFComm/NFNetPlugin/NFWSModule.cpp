@@ -196,7 +196,7 @@ bool NFWSModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgData, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
 		return false;
 	}
@@ -210,7 +210,7 @@ bool NFWSModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
 		return false;
 	}
@@ -262,7 +262,7 @@ bool NFWSModule::SendMsgToAllClient(const std::string& msg, const bool text)
 	{
 		std::ostringstream stream;
 		stream << " SendMsgToAllClient failed";
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 
 	return bRet;
@@ -297,7 +297,7 @@ void NFWSModule::OnError(const NFSOCK sockIndex, const std::error_code & e)
     stream << e.value();
     stream << " ";
     stream << e.message();
-    m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+    m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
     m_pNet->CloseNetObject(sockIndex);
 }
 
@@ -308,13 +308,13 @@ bool NFWSModule::SendRawMsg(const std::string & msg, const NFSOCK sockIndex)
     {
         std::ostringstream stream;
         stream << " SendMsg failed fd " << sockIndex;
-        m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+        m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
     }
 
     return bRet;
 }
 
-void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
     if (msgID < 0)
     {
@@ -385,7 +385,7 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const
 				auto& pFunPtr = *itList;
 				auto pFunc = pFunPtr.get();
 
-                pFunc->operator()(sockIndex, msgID, msg, len);
+                pFunc->operator()(sockIndex, msgID, msg);
             }
         } 
         else
@@ -395,7 +395,7 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const
 				auto& pFunPtr = *itList;
 				auto pFunc = pFunPtr.get();
 
-                pFunc->operator()(sockIndex, msgID, msg, len);
+                pFunc->operator()(sockIndex, msgID, msg);
             }
         }
 #if NF_PLATFORM != NF_PLATFORM_WIN
@@ -662,13 +662,13 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK sockIndex, NetObject* pNetO
 		int nMsgBodyLength = DeCode(pbData, reallen, xHead);
 		if (nMsgBodyLength > 0 && xHead.GetMsgID() > 0)
 		{
-			OnReceiveNetPack(sockIndex, xHead.GetMsgID(), pbData + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+			OnReceiveNetPack(sockIndex, xHead.GetMsgID(), pbData + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
 		}
 	}
 	else if (fh.op == opcode::text)
 	{
 		const char* pbData = data + need;
-		OnReceiveNetPack(sockIndex, 0, pbData, reallen);
+		OnReceiveNetPack(sockIndex, 0, pbData);
 	}
 
     //remove control frame

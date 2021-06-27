@@ -60,35 +60,35 @@ enum NF_SERVER_TYPES
 ////////////////////////////////////////////////////////////////////////////
 
 //only use this macro when u has entered game server
-#define CLIENT_MSG_PROCESS(msgID, msgData, len, msg)                 \
+#define CLIENT_MSG_PROCESS(msgID, msgData, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::ReceivePB(msgID, msgData, len, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(msgID, msgData.data(), msgData.length(), xMsg, nPlayerID))             \
     {                                                   \
-        m_pLogModule->LogError(NFGUID(), "Parse msg error " + std::to_string(msgID), __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError("Parse msg error " + std::to_string(msgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }                                                   \
     \
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
     if ( NULL == pObject.get() )                        \
     {                                                   \
-        m_pLogModule->LogError(nPlayerID, "FromClient Object do not Exist " + std::to_string(msgID), __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError(nPlayerID.ToString() + " FromClient Object do not Exist " + std::to_string(msgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }
 
-#define CLIENT_MSG_PROCESS_NO_OBJECT(msgID, msgData, len, msg)                 \
+#define CLIENT_MSG_PROCESS_NO_OBJECT(msgID, msgData, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::ReceivePB(msgID, msgData, len, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(msgID, msgData.data(), msgData.length(), xMsg, nPlayerID))             \
     {                                                   \
-        m_pLogModule->LogError(nPlayerID, "Parse msg error " + std::to_string(msgID), __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError(nPlayerID.ToString() + " Parse msg error " + std::to_string(msgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }
 
-#define CLIENT_MSG_PROCESS_NO_LOG(msgID, msgData, len, msg)                 \
+#define CLIENT_MSG_PROCESS_NO_LOG(msgID, msgData, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::ReceivePB(msgID, msgData, len, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(msgID, msgData.data(), msgData.length(), xMsg, nPlayerID))             \
     {                                                   \
         return 0;                                         \
     }
@@ -168,18 +168,18 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(const int msgID, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const int msgID, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const std::string_view&))
 	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
 		return AddReceiveCallBack(msgID, functorPtr);
 	}
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const std::string_view&t))
 	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
 		return AddReceiveCallBack(functorPtr);

@@ -69,6 +69,7 @@ class NFExceptFrame
 {
 public:
 	jmp_buf Jump_Buffer;
+	std::string args;
 };
 
 
@@ -91,14 +92,14 @@ private:
 	}
 public:
 
-	static void StackTrace(int sig)
+	static void StackTrace(int sig, std::string desc, std::string function, int line)
 	{
 		std::ofstream outfile;
 		outfile.open(FileName(), std::ios::app);
 
 		outfile << std::endl;
 		outfile << "******************************************************************************" << std::endl;
-		outfile << "crash sig:" << sig << std::endl;
+		outfile << "crash sig:" << sig << ", desc:" << desc << ", function:" << function << ", line:" << line << ", args:" << NFException::ExceptStack().args << std::endl;
 
 		int size = 16;
 		void * array[16];
@@ -118,7 +119,7 @@ public:
 	{
 		//std::cout << "CrashHandler" << std::endl;
 
-		NFException::StackTrace(sig);
+		NFException::StackTrace(sig, "", "", 0);
 		if (sig > 0)
 		{
 			if (signal(SIGILL, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGILL, NFException::CrashHandler);
@@ -132,7 +133,8 @@ public:
 
 	static NFExceptFrame& ExceptStack();
 };
-#define NF_CRASH_TRY_ROOT \
+#define NF_CRASH_TRY_ROOT(t) \
+NFException::ExceptStack().args = t;\
 if (signal(SIGILL, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGILL, NFException::CrashHandler); \
 if (signal(SIGABRT, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGABRT, NFException::CrashHandler); \
 if (signal(SIGFPE, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGFPE, NFException::CrashHandler); \

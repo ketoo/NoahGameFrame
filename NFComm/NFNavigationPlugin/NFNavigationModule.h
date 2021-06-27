@@ -526,7 +526,7 @@ public:
 
 	virtual bool RemoveNavigation(NFINT64 scendId);
 
-	virtual int FindPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths);
+	virtual int FindPath(NFINT64 sceneId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths);
 
 	virtual int FindRandomPointAroundCircle(NFINT64 scendId, const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius);
 

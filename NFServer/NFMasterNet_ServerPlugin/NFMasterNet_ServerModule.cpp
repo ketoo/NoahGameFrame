@@ -48,11 +48,11 @@ bool NFMasterNet_ServerModule::Shut()
 	return true;
 }
 
-void NFMasterNet_ServerModule::OnWorldRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnWorldRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -70,18 +70,18 @@ void NFMasterNet_ServerModule::OnWorldRegisteredProcess(const NFSOCK sockIndex, 
 		pServerData->nFD = sockIndex;
 		*(pServerData->pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "WorldRegistered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 
 	SynWorldToLoginAndWorld();
 }
 
-void NFMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -92,17 +92,17 @@ void NFMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK sockIndex
 		mWorldMap.RemoveElement(xData.server_id());
 
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "WorldUnRegistered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 	SynWorldToLoginAndWorld();
 }
 
-void NFMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -120,18 +120,18 @@ void NFMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK sockIndex,
 		pServerData->nFD = sockIndex;
 		*(pServerData->pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "RefreshWorldInfo");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 
 	}
 
 	SynWorldToLoginAndWorld();
 }
 
-void NFMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -149,17 +149,17 @@ void NFMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK sockIndex, 
 		pServerData->nFD = sockIndex;
 		*(pServerData->pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "LoginRegistered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 	SynWorldToLoginAndWorld();
 }
 
-void NFMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -170,16 +170,16 @@ void NFMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFSOCK sockIndex
 
 		mLoginMap.RemoveElement(xData.server_id());
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "LoginUnRegistered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 
 	}
 }
 
-void NFMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -197,16 +197,16 @@ void NFMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFSOCK sockIndex,
 		pServerData->nFD = sockIndex;
 		*(pServerData->pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "RefreshLoginInfo");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 
 	}
 }
 
-void NFMasterNet_ServerModule::OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -227,11 +227,11 @@ bool NFMasterNet_ServerModule::Execute()
 	return true;
 }
 
-void NFMasterNet_ServerModule::OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -287,7 +287,7 @@ bool NFMasterNet_ServerModule::AfterInit()
 				{
 					std::ostringstream strLog;
 					strLog << "Cannot init server net, Port = " << nPort;
-					m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+					m_pLogModule->LogError(strLog.str(), __FUNCTION__, __LINE__);
 					NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
 					exit(0);
 				}
@@ -318,22 +318,22 @@ void NFMasterNet_ServerModule::OnSocketEvent(const NFSOCK sockIndex, const NF_NE
 
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_ERROR)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 		OnClientConnected(sockIndex);
 	}
 }
@@ -438,21 +438,21 @@ void NFMasterNet_ServerModule::LogGameServer()
 
 	//////////////////////////////////////////////////////////////////////////
 
-	m_pLogModule->LogInfo(NFGUID(), "Begin Log WorldServer Info", "");
+	m_pLogModule->LogInfo("Begin Log WorldServer Info");
 
 	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
 	while (pGameData)
 	{
 		std::ostringstream stream;
 		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " << NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
-		m_pLogModule->LogInfo(NFGUID(), stream);
+		m_pLogModule->LogInfo(stream.str());
 
 		pGameData = mWorldMap.Next();
 	}
 
-	m_pLogModule->LogInfo(NFGUID(), "End Log WorldServer Info", "");
+	m_pLogModule->LogInfo("End Log WorldServer Info", "");
 
-	m_pLogModule->LogInfo(NFGUID(), "Begin Log LoginServer Info", "");
+	m_pLogModule->LogInfo("Begin Log LoginServer Info", "");
 
 	//////////////////////////////////////////////////////////////////////////
 	pGameData = mLoginMap.First();
@@ -460,73 +460,73 @@ void NFMasterNet_ServerModule::LogGameServer()
 	{
 		std::ostringstream stream;
 		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " << NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
-		m_pLogModule->LogInfo(NFGUID(), stream);
+		m_pLogModule->LogInfo(stream.str());
 
 		pGameData = mLoginMap.Next();
 	}
 
-	m_pLogModule->LogInfo(NFGUID(), "End Log LoginServer Info", "");
+	m_pLogModule->LogInfo("End Log LoginServer Info");
 
 }
 
-void NFMasterNet_ServerModule::OnHeartBeat(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
+void NFMasterNet_ServerModule::OnHeartBeat(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 }
 
-void NFMasterNet_ServerModule::InvalidMessage(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
+void NFMasterNet_ServerModule::InvalidMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	printf("NFNet || umsgID=%d\n", msgID);
 }
 
-void NFMasterNet_ServerModule::OnServerReport(const NFSOCK nFd, const int msgId, const char* buffer, const uint32_t len)
+void NFMasterNet_ServerModule::OnServerReport(const NFSOCK nFd, const int msgId, const std::string_view& msg)
 {
 	NFGUID xGUID;
-	NFMsg::ServerInfoReport msg;
-	if (!m_pNetModule->ReceivePB(msgId, buffer, len, msg, xGUID))
+	NFMsg::ServerInfoReport msgObject;
+	if (!m_pNetModule->ReceivePB(msgId, msg.data(), msg.length(), msgObject, xGUID))
 	{
 		return;
 	}
 
 	std::shared_ptr<ServerData> pServerData;
-	switch (msg.server_type())
+	switch (msgObject.server_type())
 	{
 		case NF_SERVER_TYPES::NF_ST_LOGIN:
 		{
-			pServerData = mLoginMap.GetElement(msg.server_id());
+			pServerData = mLoginMap.GetElement(msgObject.server_id());
 			if (!pServerData)
 			{
 				pServerData = std::shared_ptr<ServerData>(new ServerData());
-				mLoginMap.AddElement(msg.server_id(), pServerData);
+				mLoginMap.AddElement(msgObject.server_id(), pServerData);
 			}
 		}
 		break;
 		case NF_SERVER_TYPES::NF_ST_WORLD:
 		{
-			pServerData = mWorldMap.GetElement(msg.server_id());
+			pServerData = mWorldMap.GetElement(msgObject.server_id());
 			if (!pServerData)
 			{
 				pServerData = std::shared_ptr<ServerData>(new ServerData());
-				mWorldMap.AddElement(msg.server_id(), pServerData);
+				mWorldMap.AddElement(msgObject.server_id(), pServerData);
 			}
 		}
 		break;
 		case NF_SERVER_TYPES::NF_ST_PROXY:
 		{
-			pServerData = mProxyMap.GetElement(msg.server_id());
+			pServerData = mProxyMap.GetElement(msgObject.server_id());
 			if (!pServerData)
 			{
 				pServerData = std::shared_ptr<ServerData>(new ServerData());
-				mProxyMap.AddElement(msg.server_id(), pServerData);
+				mProxyMap.AddElement(msgObject.server_id(), pServerData);
 			}
 		}
 		break;
 		case NF_SERVER_TYPES::NF_ST_GAME:
 		{
-			pServerData = mGameMap.GetElement(msg.server_id());
+			pServerData = mGameMap.GetElement(msgObject.server_id());
 			if (!pServerData)
 			{
 				pServerData = std::shared_ptr<ServerData>(new ServerData());
-				mGameMap.AddElement(msg.server_id(), pServerData);
+				mGameMap.AddElement(msgObject.server_id(), pServerData);
 			}
 		}
 		break;
@@ -542,7 +542,7 @@ void NFMasterNet_ServerModule::OnServerReport(const NFSOCK nFd, const int msgId,
 	if (pServerData)
 	{
 		pServerData->nFD = nFd;
-		*(pServerData->pData) = msg;
+		*(pServerData->pData) = msgObject;
 	}
 }
 

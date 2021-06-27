@@ -55,10 +55,8 @@ public:
 	virtual bool VerifySecurityKey(const std::string& account, const std::string& strSecurityKey);
 
 	//when the user want to post a message to proxy, the message-data need to be verified.
-	virtual std::string EncodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const char* strMessageData, const int len);
-	virtual std::string EncodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const std::string& strMessageData);
-	virtual std::string DecodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const char* strMessageData, const int len);
-	virtual std::string DecodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const std::string& strMessageData);
+	virtual bool EncodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const std::string_view & strMessageData, std::string& output);
+	virtual bool DecodeMsg(const std::string& account, const std::string& strSecurityKey, const int nMessageID, const std::string_view& strMessageData, std::string& output);
 
 protected:
 

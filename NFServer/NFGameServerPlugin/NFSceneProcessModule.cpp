@@ -158,7 +158,7 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 			{
 				m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-				m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
+				m_pLogModule->LogInfo(self.ToString() +  "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
 			}
 		}
 	}
@@ -181,7 +181,7 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
             	//wa need to wait for this player for a moment if the player disconnected from server.
                 m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-                m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
+                m_pLogModule->LogInfo(self.ToString() +  "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
             }
 			else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 			{
@@ -191,7 +191,7 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
 				{
 					m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
-					m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
+					m_pLogModule->LogInfo(self.ToString() +  "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
 				}
 			}
         }

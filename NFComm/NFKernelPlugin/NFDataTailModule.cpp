@@ -69,6 +69,8 @@ int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& 
 	}
 
     std::ostringstream stream;
+	stream << self.ToString();
+
     switch (classEvent)
     {
         case CLASS_OBJECT_EVENT::COE_CREATE_NODATA:
@@ -109,7 +111,7 @@ int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& 
         break;
     }
 
-    m_pLogModule->LogDebug(self, stream.str());
+    m_pLogModule->LogDebug(stream.str());
     return 0;
 }
 
@@ -136,12 +138,13 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
         {
             std::ostringstream stream;
 
+	        stream << self.ToString();
             stream << " Start trail ";
 			stream << xProperty->GetKey();
 			stream << "==>";
             stream << xProperty->ToString();
 
-            m_pLogModule->LogDebug(self, stream.str(),  __FUNCTION__, __LINE__);
+            m_pLogModule->LogDebug(stream.str(),  __FUNCTION__, __LINE__);
 
             xProperty = xPropertyManager->Next();
         }

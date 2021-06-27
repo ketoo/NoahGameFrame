@@ -33,7 +33,7 @@ class NFILoginLogicModule
     : public NFIModule
 {
 public:
-    virtual void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len) = 0;
+    virtual void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg) = 0;
 
 };
 

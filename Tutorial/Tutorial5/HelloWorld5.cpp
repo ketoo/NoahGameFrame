@@ -133,9 +133,9 @@ void NFHelloWorld5::OnPostCallBack(const NFGUID id, const int state_code, const 
 
 ///////////////////////////////////////web socket ////////////////////////////////////////
 
-void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	std::string s(msg, len);
+	std::string s(msg);
     std::cout << s << std::endl;
     m_pWSModule->SendMsg(s, sockIndex);
 }
@@ -145,11 +145,11 @@ void NFHelloWorld5::OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet
 	std::cout << "fd:" << fd << " event " << event << std::endl;
 }
 
-void NFHelloWorld5::OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
+void NFHelloWorld5::OnLoginProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}

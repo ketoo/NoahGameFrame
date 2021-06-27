@@ -54,7 +54,7 @@ public:
 
     virtual bool AfterInit();
 
-    virtual int Transport(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    virtual int Transport(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     
     virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
@@ -66,21 +66,21 @@ protected:
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
-    void OnConnectKeyProcessWS(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnConnectKeyProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnReqServerListProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnSelectServerProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnReqRoleListProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnReqCreateRoleProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnReqDelRoleProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnReqEnterGameServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnConnectKeyProcessWS(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnConnectKeyProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnReqServerListProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnSelectServerProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnReqRoleListProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnReqCreateRoleProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnReqDelRoleProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnReqEnterGameServer(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     //////////////////////////////////////////////////////////////////////////
 
-	void OnOtherMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnOtherMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 protected:
 
-    NFMapEx<NFGUID, NFSOCK> mxClientIdent;
+    std::map<NFGUID, NFSOCK> mxClientIdent;
 protected:
     NFINetClientModule* m_pNetClientModule;
     NFIKernelModule* m_pKernelModule;

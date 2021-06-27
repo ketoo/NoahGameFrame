@@ -961,7 +961,7 @@ public:
 							os << "End Node ID " << inputArg->id.ToString() << " ";
 							os << "End Node Name " << inputArg->name << " ";
 
-							m_pLogModule->LogError(os, __FUNCTION__, __LINE__);
+							m_pLogModule->LogError(os.str(), __FUNCTION__, __LINE__);
 						}
 					}
 				}
@@ -1012,7 +1012,7 @@ public:
 			os << std::endl;
 		}
 
-		m_pLogModule->LogDebug(os, __FUNCTION__, __LINE__);
+		m_pLogModule->LogDebug(os.str(), __FUNCTION__, __LINE__);
 	}
 
 	bool enable = true;//only for logic block

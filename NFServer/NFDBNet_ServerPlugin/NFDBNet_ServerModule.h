@@ -73,11 +73,11 @@ protected:
 	void OnClientConnected(const NFSOCK nAddress);
 
 
-	void OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnCreateRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnDeleteRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnLoadRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnSaveRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnCreateRoleGameProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnDeleteRoleGameProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnLoadRoleDataProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnSaveRoleDataProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 
 protected:

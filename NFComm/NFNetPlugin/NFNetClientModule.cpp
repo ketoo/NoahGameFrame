@@ -175,7 +175,7 @@ void NFNetClientModule::SendByServerIDWithOutHead(const int serverID, const uint
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << serverID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -184,7 +184,7 @@ void NFNetClientModule::SendByServerIDWithOutHead(const int serverID, const uint
 		std::ostringstream stream;
 		stream << " can't find the server " << serverID;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -201,7 +201,7 @@ void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID,
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << serverID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -210,7 +210,7 @@ void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID,
 		std::ostringstream stream;
 		stream << " can't find the server " << serverID;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -227,7 +227,7 @@ void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID,
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << serverID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -236,7 +236,7 @@ void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID,
 		std::ostringstream stream;
 		stream << " can't find the server " << serverID;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -253,7 +253,7 @@ void NFNetClientModule::SendToAllServerWithOutHead(const uint16_t msgID, const s
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 
@@ -274,7 +274,7 @@ void NFNetClientModule::SendToAllServer(const uint16_t msgID, const std::string&
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
         }
 
@@ -295,7 +295,7 @@ void NFNetClientModule::SendToAllServer(const uint16_t msgID, const std::string 
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 
@@ -316,7 +316,7 @@ void NFNetClientModule::SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, 
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 
@@ -337,7 +337,7 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
         }
 
@@ -358,7 +358,7 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 
@@ -379,7 +379,7 @@ void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgI
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 		   }
         }
     }
@@ -388,7 +388,7 @@ void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgI
 		std::ostringstream stream;
 		stream << " can't find the server " << serverID;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -405,7 +405,7 @@ void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgI
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -414,7 +414,7 @@ void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgI
 		std::ostringstream stream;
 		stream << " can't find the server " << serverID;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -431,7 +431,7 @@ void NFNetClientModule::SendToAllServerByPB(const uint16_t msgID, const google::
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
         }
 
@@ -452,7 +452,7 @@ void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const u
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
 				stream << " msg id " << msgID;
-				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 			}
         }
 
@@ -495,7 +495,7 @@ void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -515,7 +515,7 @@ void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashK
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 
@@ -535,7 +535,7 @@ void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashK
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 }
 

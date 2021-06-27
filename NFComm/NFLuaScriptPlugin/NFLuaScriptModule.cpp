@@ -1177,7 +1177,7 @@ std::string NFLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luaTable, co
 	return NULL_STR;
 }
 
-void NFLuaScriptModule::OnNetMsgCallBackAsServer(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+void NFLuaScriptModule::OnNetMsgCallBackAsServer(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	auto msgCallBack = mxNetMsgCallBackFuncMapAsServer.GetElement(msgID);
 	if (msgCallBack)
@@ -1205,7 +1205,7 @@ void NFLuaScriptModule::OnNetMsgCallBackAsServer(const NFSOCK sockIndex, const i
 	}
 }
 
-void NFLuaScriptModule::OnNetMsgCallBackAsClientForMasterServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForMasterServer(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_MASTER);
 	if (serverData)
@@ -1238,7 +1238,7 @@ void NFLuaScriptModule::OnNetMsgCallBackAsClientForMasterServer(const NFSOCK soc
 	}
 }
 
-void NFLuaScriptModule::OnNetMsgCallBackAsClientForWorldServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForWorldServer(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_WORLD);
 	if (serverData)
@@ -1271,7 +1271,7 @@ void NFLuaScriptModule::OnNetMsgCallBackAsClientForWorldServer(const NFSOCK sock
 	}
 }
 
-void NFLuaScriptModule::OnNetMsgCallBackAsClientForGameServer(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLuaScriptModule::OnNetMsgCallBackAsClientForGameServer(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	auto serverData = mxNetMsgCallBackFuncMapAsClient.GetElement(NF_SERVER_TYPES::NF_ST_GAME);
 	if (serverData)

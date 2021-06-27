@@ -63,22 +63,22 @@ public:
 	virtual bool AfterInit();
 
 protected:
-	void OnClientPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientPropertyStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientPropertyObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientPropertyVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientPropertyVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnClientPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientPropertyStringProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientPropertyObjectProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientPropertyVector2Process(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientPropertyVector3Process(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnClientAddRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRemoveRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientSwapRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnClientRecordVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnClientAddRowProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRemoveRowProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientSwapRowProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordIntProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordFloatProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordStringProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordObjectProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordVector2Process(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientRecordVector3Process(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 protected:
 	//get GM Level and what you want to modify

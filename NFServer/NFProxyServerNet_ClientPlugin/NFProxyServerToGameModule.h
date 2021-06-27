@@ -60,10 +60,10 @@ protected:
 
     void Register(NFINet* pNet);
 
-    void OnAckEnterGame(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnAckEnterGame(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
     void LogServerInfo(const std::string& strServerInfo);
 
-	void Transport(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void Transport(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 private:
 

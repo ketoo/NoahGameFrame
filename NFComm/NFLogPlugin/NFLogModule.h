@@ -63,24 +63,6 @@ public:
     virtual bool LogError(const std::string& strLog, const char* func = "", int line = 0);
     virtual bool LogFatal(const std::string& strLog, const char* func = "", int line = 0);
 
-    virtual bool LogDebug(const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogInfo(const std::ostringstream& stream, const  char* func = "", int line = 0);
-    virtual bool LogWarning(const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogError(const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogFatal(const std::ostringstream& stream, const char* func = "", int line = 0);
-
-    virtual bool LogDebug(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-    virtual bool LogInfo(const NFGUID ident, const std::string& strLog, const  char* func = "", int line = 0);
-    virtual bool LogWarning(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-    virtual bool LogError(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-    virtual bool LogFatal(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-
-    virtual bool LogDebug(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogInfo(const NFGUID ident, const std::ostringstream& stream, const  char* func = "", int line = 0);
-    virtual bool LogWarning(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-    virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-
     virtual bool ChangeLogLevel(const NF_LOG_LEVEL logLevel);
     
     virtual void SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker);

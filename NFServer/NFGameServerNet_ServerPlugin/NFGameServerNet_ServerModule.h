@@ -81,20 +81,20 @@ protected:
     void OnClientConnected(const NFSOCK sockIndex);
 
 protected:
-    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 protected:
-    void OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
-	void OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
-	void OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
-	void OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+    void OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
-    void OnTransWorld(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnTransWorld(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 private:
     

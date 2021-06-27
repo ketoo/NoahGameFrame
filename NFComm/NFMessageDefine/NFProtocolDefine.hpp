@@ -30,6 +30,7 @@ namespace NFrame
 		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& CityLevel(){ static std::string x = "CityLevel"; return x; };// int
+		static const std::string& CityName(){ static std::string x = "CityName"; return x; };// string
 		static const std::string& Country(){ static std::string x = "Country"; return x; };// string
 		static const std::string& Element(){ static std::string x = "Element"; return x; };// int
 		static const std::string& IsCapital(){ static std::string x = "IsCapital"; return x; };// int
@@ -59,8 +60,8 @@ namespace NFrame
 		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Active(){ static std::string x = "Active"; return x; };// int
-		static const std::string& CityName(){ static std::string x = "CityName"; return x; };// string
 		static const std::string& CountryLevel(){ static std::string x = "CountryLevel"; return x; };// int
+		static const std::string& CountryName(){ static std::string x = "CountryName"; return x; };// string
 		static const std::string& CountrySceneID(){ static std::string x = "CountrySceneID"; return x; };// int
 		static const std::string& Element(){ static std::string x = "Element"; return x; };// int
 		static const std::string& SeedID(){ static std::string x = "SeedID"; return x; };// int
@@ -1844,6 +1845,7 @@ namespace NFrame
 		static const std::string& ResourcePos(){ static std::string x = "ResourcePos"; return x; };// string
 		static const std::string& SceneName(){ static std::string x = "SceneName"; return x; };// string
 		static const std::string& SceneShowName(){ static std::string x = "SceneShowName"; return x; };// string
+		static const std::string& Seed(){ static std::string x = "Seed"; return x; };// int
 		static const std::string& SoundList(){ static std::string x = "SoundList"; return x; };// string
 		static const std::string& SubType(){ static std::string x = "SubType"; return x; };// int
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int

@@ -70,7 +70,7 @@ protected:
 
 	bool SendRawMsg(const std::string& msg, const NFSOCK sockIndex);
 
-    void OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     void OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 

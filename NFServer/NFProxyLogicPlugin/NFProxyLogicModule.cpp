@@ -59,16 +59,16 @@ bool NFProxyLogicModule::AfterInit()
     return true;
 }
 
-void NFProxyLogicModule::OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
+void NFProxyLogicModule::OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	std::string msgDatag(msg, len);
-	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::ACK_GATE_LAG_TEST, msgDatag, sockIndex);
+	std::string msgData(msg);
+	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::ACK_GATE_LAG_TEST, msgData, sockIndex);
 
 	//TODO improve performance
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(sockIndex);
 	if (pNetObject)
 	{
 		const int gameID = pNetObject->GetGameID();
-		m_pNetClientModule->SendByServerIDWithOutHead(gameID, msgID, msgDatag);
+		m_pNetClientModule->SendByServerIDWithOutHead(gameID, msgID, msgData);
 	}
 }

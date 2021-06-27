@@ -140,7 +140,7 @@ void NFLoginToMasterModule::Register(NFINet* pNet)
                     int nTargetID = pServerData->nGameID;
 					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::LTM_LOGIN_REGISTERED, xMsg);
 
-                    m_pLogModule->LogInfo(NFGUID(0, pData->server_id()), pData->server_name(), "Register");
+                    m_pLogModule->LogInfo(std::to_string(pData->server_id()) + " " + pData->server_name(), __FUNCTION__, __LINE__);
                 }
             }
         }
@@ -188,11 +188,11 @@ void NFLoginToMasterModule::ServerReport()
 	}
 }
 
-void NFLoginToMasterModule::OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLoginToMasterModule::OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
     {
         return;
     }
@@ -204,28 +204,28 @@ void NFLoginToMasterModule::OnSocketMSEvent(const NFSOCK sockIndex, const NF_NET
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
 }
 
-void NFLoginToMasterModule::OnWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFLoginToMasterModule::OnWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
     NFGUID nPlayerID ;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
     {
         return;
     }
@@ -245,7 +245,7 @@ void NFLoginToMasterModule::OnWorldInfoProcess(const NFSOCK sockIndex, const int
 
     }
 
-    m_pLogModule->LogInfo(NFGUID(0, xMsg.server_list_size()), "", "WorldInfo");
+	m_pLogModule->LogInfo(std::to_string(xMsg.server_list_size()), __FUNCTION__, __LINE__);
 }
 
 NFINetClientModule* NFLoginToMasterModule::GetClusterModule()

@@ -42,6 +42,8 @@ void NFDebugger::UpdateOutputData(const NFGUID& runTimeOwner)
 
         std::ostringstream os;
 
+	    os << runTimeOwner.ToString();
+	    os << " ";
         os << data->GetString();
 
         os << " float:" << dataFloat->ToString();
@@ -60,16 +62,16 @@ void NFDebugger::UpdateOutputData(const NFGUID& runTimeOwner)
         switch (lvl->GetInt())
         {
             case NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL:
-                m_pLogModule->LogDebug(runTimeOwner, os);
+                m_pLogModule->LogDebug(os.str());
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL:
-                m_pLogModule->LogInfo(runTimeOwner, os);
+                m_pLogModule->LogInfo(os.str());
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_WARING_NORMAL:
-                m_pLogModule->LogWarning(runTimeOwner, os);
+                m_pLogModule->LogWarning(os.str());
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL:
-                m_pLogModule->LogError(runTimeOwner, os);
+                m_pLogModule->LogError(os.str());
                 break;
         default:
             break;

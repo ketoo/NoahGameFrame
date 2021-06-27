@@ -96,7 +96,7 @@ bool NFGameServerNet_ServerModule::AfterInit()
 				{
 					std::ostringstream strLog;
 					strLog << "Cannot init server net, Port = " << nPort;
-					m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+					m_pLogModule->LogError(strLog.str(), __FUNCTION__, __LINE__);
 					NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
 					exit(0);
 				}
@@ -122,22 +122,22 @@ void NFGameServerNet_ServerModule::OnSocketPSEvent(const NFSOCK sockIndex, const
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_ERROR)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
 		OnClientDisconnect(sockIndex);
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 		OnClientConnected(sockIndex);
 	}
 }
@@ -165,11 +165,11 @@ void NFGameServerNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 
 }
 
-void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqLeaveGameServer xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -184,23 +184,23 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK sockInd
 	RemovePlayerGateInfo(nPlayerID);
 }
 
-void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ReqAckEnterGameSuccess);
+	CLIENT_MSG_PROCESS(msgID, msg, NFMsg::ReqAckEnterGameSuccess);
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList::Empty());
 	
 	m_pNetModule->SendMsgPB(NFMsg::ACK_ENTER_GAME_FINISH, xMsg, sockIndex, nPlayerID);
 }
 
-void NFGameServerNet_ServerModule::OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	CLIENT_MSG_PROCESS(msgID, msg, len, NFMsg::ReqAckLagTest);
+	CLIENT_MSG_PROCESS(msgID, msg, NFMsg::ReqAckLagTest);
 	this->SendMsgPBToGate(NFMsg::ACK_GAME_LAG_TEST, xMsg, nPlayerID);
 }
 
-void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	CLIENT_MSG_PROCESS(msgID, msg, len, NFMsg::ReqAckSwapScene)
+	CLIENT_MSG_PROCESS(msgID, msg, NFMsg::ReqAckSwapScene)
 
 	const NFMsg::ESceneType sceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(xMsg.scene_id()), NFrame::Scene::Type());
 	const int nowSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
@@ -218,9 +218,9 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK sockInd
 	}
 }
 
-void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const char *msg,  const uint32_t len)
+void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(msgID, msg, len, NFMsg::ReqAckPlayerPosSync)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msgID, msg, NFMsg::ReqAckPlayerPosSync)
 
 	if (xMsg.sync_unit_size() > 0)
 	{
@@ -233,7 +233,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK sockIndex
 				const NFGUID masterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
 				if (masterID != nPlayerID)
 				{
-					m_pLogModule->LogError(xMover, "Message come from player " + nPlayerID.ToString());
+					m_pLogModule->LogError(xMover.ToString() + " Message come from player " + nPlayerID.ToString());
 					return;
 				}
 				return;
@@ -259,11 +259,11 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK sockIndex
 	}
 }
 
-void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!NFINetModule::ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -281,17 +281,17 @@ void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK s
 		pServerData->xServerData.nFD = sockIndex;
 		*(pServerData->xServerData.pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 	return;
 }
 
-void NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -302,17 +302,17 @@ void NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK
 		mProxyMap.RemoveElement(xData.server_id());
 
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 	return;
 }
 
-void NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg.data(), msg.length(), xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -330,7 +330,7 @@ void NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK 
 		pServerData->xServerData.nFD = sockIndex;
 		*(pServerData->xServerData.pData) = xData;
 
-		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		m_pLogModule->LogInfo(std::to_string(xData.server_id()) + " " + xData.server_name(), __FUNCTION__, __LINE__);
 	}
 
 	return;
@@ -438,8 +438,8 @@ bool NFGameServerNet_ServerModule::AddPlayerGateInfo(const NFGUID& roleID, const
     NF_SHARE_PTR<NFGameServerNet_ServerModule::GateBaseInfo> pBaseData = mRoleBaseData.GetElement(roleID);
     if (nullptr != pBaseData)
     {
-        
-        m_pLogModule->LogError(clientID, "player is exist, cannot enter game", __FUNCTION__, __LINE__);
+
+        m_pLogModule->LogError(clientID.ToString() + " player is exist, cannot enter game", __FUNCTION__, __LINE__);
         return false;
     }
 
@@ -516,15 +516,15 @@ NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> NFGameServerNet_Serv
     return pServerData;
 }
 
-void NFGameServerNet_ServerModule::OnTransWorld(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFGameServerNet_ServerModule::OnTransWorld(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	std::string msgData;
 	NFGUID nPlayer;
 	int64_t nHasKey = 0;
-	if (NFINetModule::ReceivePB( msgID, msg, len, msgData, nPlayer))
+	if (NFINetModule::ReceivePB(msgID, msg.data(), msg.length(), msgData, nPlayer))
 	{
 		nHasKey = nPlayer.nData64;
 	}
 
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, msgID, std::string(msg, len));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, msgID, std::string(msg));
 }

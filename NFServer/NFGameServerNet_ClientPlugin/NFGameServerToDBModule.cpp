@@ -77,13 +77,13 @@ void NFGameServerToDBModule::OnSocketWSEvent(const NFSOCK sockIndex, const NF_NE
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(std::to_string(sockIndex) + " NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 	}
 }
 
-void NFGameServerToDBModule::TransPBToProxy(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFGameServerToDBModule::TransPBToProxy(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, msgID, std::string(msg, len));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, msgID, std::string(msg));
 
 	return;
 }

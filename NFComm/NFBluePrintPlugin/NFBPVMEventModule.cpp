@@ -141,7 +141,7 @@ int NFBPVMEventModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVEN
     return 0;
 }
 
-void NFBPVMEventModule::OnMessageEvent(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFBPVMEventModule::OnMessageEvent(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
     // unpack
     NFGUID playerID(1, 1);

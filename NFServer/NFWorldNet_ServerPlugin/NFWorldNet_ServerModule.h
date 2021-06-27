@@ -55,7 +55,7 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 	virtual bool IsPrimaryWorldServer();
 	virtual int GetWorldAreaID();
@@ -86,25 +86,25 @@ protected:
     void OnClientConnected(const NFSOCK nAddress);
 
 
-    void OnOnlineProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnOfflineProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnOnlineProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnOfflineProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-    void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t len);
+    void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const std::string_view& msg);
     void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
 protected:
 
-    void OnGameServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnGameServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnRefreshGameServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnGameServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnGameServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnRefreshGameServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnProxyServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnProxyServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnRefreshProxyServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnDBServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnDBServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnRefreshDBServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnDBServerRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnDBServerUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnRefreshDBServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 	void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);

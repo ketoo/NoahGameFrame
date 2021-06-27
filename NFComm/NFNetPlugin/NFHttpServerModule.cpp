@@ -96,7 +96,7 @@ bool NFHttpServerModule::OnReceiveNetPack(NF_SHARE_PTR<NFHttpRequest> req)
 		os << performance.TimeScope();
 		os << "---------- ";
 		os << req->path;
-		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+		m_pLogModule->LogWarning(os.str(), __FUNCTION__, __LINE__);
 	}
 
 	return ResponseMsg(req, "", NFWebStatus::WEB_ERROR);

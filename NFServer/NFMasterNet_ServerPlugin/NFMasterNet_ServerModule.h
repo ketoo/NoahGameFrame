@@ -64,27 +64,27 @@ protected:
     void OnClientConnected(const NFSOCK nAddress);
 
 protected:
-    void OnWorldRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnWorldUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnRefreshWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnWorldRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnWorldUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnRefreshWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     //////////////////////////////////////////////////////////////////////////
-    void OnLoginRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnLoginUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnRefreshLoginInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnLoginRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnLoginUnRegisteredProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnRefreshLoginInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-    void OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnSelectWorldProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
-	void OnServerReport(const NFSOCK nFd, const int msgId, const char* buffer, const uint32_t len);
+	void OnServerReport(const NFSOCK nFd, const int msgId, const std::string_view& msg);
 
     //////////////////////////////////////////////////////////////////////////
 
     void SynWorldToLoginAndWorld();
     void LogGameServer();
 
-	void OnHeartBeat(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnHeartBeat(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 private:
 

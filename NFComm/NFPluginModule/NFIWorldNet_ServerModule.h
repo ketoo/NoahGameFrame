@@ -93,7 +93,7 @@ public:
 	virtual bool IsPrimaryWorldServer() = 0;
 	virtual int GetWorldAreaID() = 0;
 
-	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len) = 0;
+	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg) = 0;
 
 	virtual bool SendMsgToGame(const int gameID, const int msgID, const std::string& xData) = 0;
 	virtual bool SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message& xData) = 0;

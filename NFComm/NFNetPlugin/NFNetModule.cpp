@@ -148,7 +148,7 @@ bool NFNetModule::SendMsgWithOutHead(const int msgID, const std::string& msg, co
 		std::ostringstream stream;
 		stream << " SendMsgWithOutHead failed fd " << sockIndex;
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 
 	return bRet;
@@ -162,7 +162,7 @@ bool NFNetModule::SendMsgToAllClientWithOutHead(const int msgID, const std::stri
 		std::ostringstream stream;
 		stream << " SendMsgToAllClientWithOutHead failed";
 		stream << " msg id " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 	}
 
 	return bRet;
@@ -176,7 +176,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgData, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -190,7 +190,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -217,7 +217,7 @@ bool NFNetModule::SendMsg(const uint16_t msgID, const std::string & xData, const
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
 		return false;
 	}
@@ -233,7 +233,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgData, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
 		return false;
 	}
@@ -247,7 +247,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB Message to  " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
 		return false;
 	}
@@ -265,7 +265,7 @@ bool NFNetModule::SendMsgPBToAllClient(const uint16_t msgID, const google::proto
 		std::ostringstream stream;
 		stream << " SendMsgPBToAllClient";
 		stream << " Failed For Serialize of MsgData, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -276,7 +276,7 @@ bool NFNetModule::SendMsgPBToAllClient(const uint16_t msgID, const google::proto
 		std::ostringstream stream;
 		stream << " SendMsgPBToAllClient";
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -291,7 +291,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " m_pNet SendMsgPB faailed fd " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -302,7 +302,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB faailed fd " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -330,7 +330,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Messag
 		std::ostringstream stream;
 		stream << " SendMsgPB faailed fd " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -345,7 +345,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const std::string& strData, co
 		std::ostringstream stream;
 		stream << " SendMsgPB NULL Of Net faailed fd " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -375,7 +375,7 @@ bool NFNetModule::SendMsgPB(const uint16_t msgID, const std::string& strData, co
 		std::ostringstream stream;
 		stream << " SendMsgPB failed fd " << sockIndex;
 		stream << " Failed For Serialize of MsgBase, MessageID " << msgID;
-		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(stream.str(), __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -388,7 +388,7 @@ NFINet* NFNetModule::GetNet()
     return m_pNet;
 }
 
-void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
+void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const std::string_view& msg)
 {
 	//m_pLogModule->LogInfo(pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID()) + " NFNetModule::OnReceiveNetPack " + std::to_string(msgID), __FILE__, __LINE__);
 
@@ -398,26 +398,26 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, cons
 	NF_CRASH_TRY
 #endif
 
-    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(msgID);
+    auto it = mxReceiveCallBack.find(msgID);
     if (mxReceiveCallBack.end() != it)
     {
-		std::list<NET_RECEIVE_FUNCTOR_PTR>& xFunList = it->second;
-		for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = xFunList.begin(); itList != xFunList.end(); ++itList)
+		auto& xFunList = it->second;
+		for (auto itList = xFunList.begin(); itList != xFunList.end(); ++itList)
 		{
 			NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
 			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
 
-			pFunc->operator()(sockIndex, msgID, msg, len);
+			pFunc->operator()(sockIndex, msgID, msg);
 		}
     } 
 	else
     {
-        for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = mxCallBackList.begin(); itList != mxCallBackList.end(); ++itList)
+        for (auto itList = mxCallBackList.begin(); itList != mxCallBackList.end(); ++itList)
         {
             NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
             NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
 
-            pFunc->operator()(sockIndex, msgID, msg, len);
+            pFunc->operator()(sockIndex, msgID, msg);
         }
     }
 

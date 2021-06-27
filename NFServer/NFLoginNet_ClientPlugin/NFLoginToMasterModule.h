@@ -68,8 +68,8 @@ protected:
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-	void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-	void OnWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+	void OnWorldInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);

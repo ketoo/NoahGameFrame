@@ -36,7 +36,7 @@ NFPluginServer::NFPluginServer(const std::string& strArgv, bool testMode)
 	}
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-	NF_CRASH_TRY_ROOT
+	NF_CRASH_TRY_ROOT(this->strArgvList)
 #endif  
 }
 

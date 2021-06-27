@@ -82,19 +82,19 @@ bool NFNoSqlModule::AfterInit()
 			const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::Port());
 			const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
 			const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
-			if (this->Connect("127.0.0.1", 30001, "", true))
+			if (this->Connect("127.0.0.1", 30001, strAuth, true))
 			//if (this->AddConnectSql(strId, ip, nPort, strAuth))
 			{
 				std::ostringstream strLog;
 				strLog << "Connected NoSqlServer[" << ip << "], Port = [" << nPort << "], Passsword = [" << strAuth << "]";
-				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 
 			}
 			else
 			{
 				std::ostringstream strLog;
 				strLog << "Cannot connect NoSqlServer[" << ip << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
-				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(strLog.str(), __FUNCTION__, __LINE__);
 			}
 
 		}
@@ -353,6 +353,13 @@ void NFNoSqlModule::ConnectAllMasterNodes(NF_SHARE_PTR<NFIRedisClient> redisClie
 
 NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::FindRedisClient(int slot)
 {
+	static int idx = 0;
+	if (idx > 100)
+	{
+		idx = 0;
+		return nullptr;
+	}
+
 	for (auto redisClient : redisClients)
 	{
 		//如果没有找到，则需要新加
@@ -373,6 +380,7 @@ NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::FindRedisClient(int slot)
 		Execute();
 	}
 
+	idx++;
 	return FindRedisClient(slot);
 }
 

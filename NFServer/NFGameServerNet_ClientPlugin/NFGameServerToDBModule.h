@@ -58,7 +58,7 @@ protected:
     void OnSocketWSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
-    void TransPBToProxy(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void TransPBToProxy(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
 	NFINT64 mLastReportTime;
 

@@ -93,7 +93,7 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
 
     if (configID.empty() || !m_pElementModule->ExistElement(configID))
     {
-        m_pLogModule->LogError(self, configID + " configID not exist!!!", __FUNCTION__, __LINE__);
+        m_pLogModule->LogError(self.ToString() + configID + " configID not exist!!!", __FUNCTION__, __LINE__);
         return 1;
     }
     //normally, we modify the config id by hero module, so we don't need to modify the config id by job and level
@@ -241,7 +241,7 @@ void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
     const std::string& effectData = m_pElementModule->GetPropertyString(configID, NFrame::NPC::EffectData());
     if (effectData.empty() || !m_pElementModule->ExistElement(effectData))
     {
-        m_pLogModule->LogError(self, effectData + " effectData not exist!!!", __FUNCTION__, __LINE__);
+        m_pLogModule->LogError(self.ToString() + effectData + " effectData not exist!!!", __FUNCTION__, __LINE__);
         return;
     }
 

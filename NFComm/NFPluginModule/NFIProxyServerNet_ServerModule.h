@@ -36,7 +36,7 @@ class NFIProxyServerNet_ServerModule
 {
 
 public:
-    virtual int Transport(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len) = 0;
+    virtual int Transport(const NFSOCK sockIndex, const int msgID, const std::string_view& msg) = 0;
     virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID) = 0;
 };
 

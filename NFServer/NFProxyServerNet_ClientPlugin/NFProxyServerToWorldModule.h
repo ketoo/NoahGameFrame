@@ -69,12 +69,12 @@ protected:
     void Register(NFINet* pNet);
 	void ServerReport();
 
-    void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
-    void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
+    void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 
     void LogServerInfo(const std::string& strServerInfo);
 
-	void OnOtherMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnOtherMessage(const NFSOCK sockIndex, const int msgID, const std::string_view& msg);
 private:
     struct ClientConnectData
     {
