@@ -1,3 +1,7 @@
+# 2021.7.9 在新西兰奥克兰的一场车祸中，ketoo 永远离开了我们。
+# On July 9, 2021, ketoo left us forever in a car accident in Auckland, New Zealand.
+# 由于Master没有下发权限，目前重新拉了一个 master-new 用于后续版本的维护。
+# Because the master does not have permission to issue, a new master new has been pulled for maintenance of subsequent versions.
 # NoahGameFrame
 
 
