@@ -1,3 +1,7 @@
+# 2021.7.9 在新西兰奥克兰的一场车祸中，ketoo 永远离开了我们。
+# On July 9, 2021, ketoo left us forever in a car accident in Auckland, New Zealand.
+# 由于mater有权限合并了， master-new 分支后续不再维护。 直接维护master即可，pr也提交到master即可
+# Since mater has permission to merge, the master-new branch will no longer be maintained. You can directly maintain the master, and the pr can also be submitted to the master
 # NoahGameFrame
 
 
