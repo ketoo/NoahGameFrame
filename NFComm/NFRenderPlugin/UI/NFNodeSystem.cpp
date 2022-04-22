@@ -181,7 +181,7 @@ namespace NodeSystem
 
     void NFNodeSystem::SetNodeSize(const int size)
     {
-        this->nodeSize = nodeSize;
+        this->nodeSize = size;
     }
 
     int NFNodeSystem::GetNodeSize()
