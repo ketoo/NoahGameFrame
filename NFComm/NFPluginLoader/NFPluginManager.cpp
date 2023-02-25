@@ -42,6 +42,8 @@
 #pragma comment( lib, "imm32.lib" )
 //#pragma comment( lib, "msvcrt.lib" )
 #pragma comment (lib, "Setupapi.lib")
+#pragma comment( lib, "Bcrypt" )
+
 
 #ifndef NF_DYNAMIC_PLUGIN
 #ifdef NF_DEBUG_MODE

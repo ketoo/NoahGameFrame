@@ -27,6 +27,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
+#pragma comment( lib, "Bcrypt" )
 #pragma comment( lib, "event.lib" )
 #pragma comment( lib, "hiredis.lib") 
 #else
@@ -37,6 +38,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
+#pragma comment( lib, "Bcrypt" )
 #pragma comment( lib, "event.lib" )
 #pragma comment( lib, "hiredis.lib") 
 
