@@ -1,13 +1,4 @@
-include_directories(
-	./)
-
-include_directories(
-	./gl3w)
-
-include_directories(
-		./imgui)
-
-
+# NOTE: 使用 target_include_directories 与其他现代化写法
 set(ProjectName "NFRenderPlugin")
 
 file(GLOB NFUIPlugin_ROOT_Cpp
@@ -34,7 +25,6 @@ file(GLOB IMNODES_ROOT_Cpp
 file(GLOB IMNODES_ROOT_Hpp
 		./imnodes/*.h)
 
-
 file(GLOB IMGUI_ROOT_Cpp
 	./imgui/*.cpp)
 	
@@ -58,6 +48,12 @@ add_library(NFRenderPlugin STATIC
 	${IMGUI_ROOT_Hpp}
 	${IMNODES_ROOT_Cpp}
 	${IMNODES_ROOT_Hpp})
+
+# NOTE: 使用 target_include_directories 替代顶层 include_directories
+target_include_directories(NFRenderPlugin PRIVATE
+	./
+	./gl3w
+	./imgui)
 	
 set_target_properties( NFRenderPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFRenderPlugin")
 set_target_properties( NFRenderPlugin PROPERTIES PREFIX "")
@@ -69,11 +65,12 @@ set_target_properties( NFRenderPlugin PROPERTIES
 	
 link_NFSDK("NFRenderPlugin")
 
+# NOTE: target_link_libraries 加 PRIVATE；add_definitions 转 target_compile_definitions
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFRenderPlugin libSDL2.a)
+		target_link_libraries(NFRenderPlugin PRIVATE libSDL2.a)
 	else()
-		target_link_libraries(NFRenderPlugin libSDL2d.a)
+		target_link_libraries(NFRenderPlugin PRIVATE libSDL2d.a)
 	endif()
 
 if (APPLE)
@@ -102,16 +99,13 @@ if (APPLE)
     ${iconv_lib}
     ${corefoundation_lib})
 
-
-	target_link_libraries(NFRenderPlugin ${frameworks})
+	target_link_libraries(NFRenderPlugin PRIVATE ${frameworks})
 
 endif()
 
-	target_link_libraries(NFRenderPlugin -static-libstdc++)
+	target_link_libraries(NFRenderPlugin PRIVATE -static-libstdc++)
 
-	add_definitions(
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFRenderPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 	
 else()
 

@@ -18,17 +18,14 @@ set_target_properties( NFDBNet_ServerPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK(NFDBNet_ServerPlugin)
 
+# NOTE: target_link_libraries 添加 PRIVATE，add_definitions 转 target_compile_definitions
 if(UNIX)
-	target_link_libraries(NFDBNet_ServerPlugin -static-libstdc++)
-	add_definitions(
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFDBNet_ServerPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFDBNet_ServerPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 
 else()
-	target_link_libraries(NFDBNet_ServerPlugin -static-libstdc++)
-	add_definitions(
-		-DWIN
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFDBNet_ServerPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFDBNet_ServerPlugin PRIVATE WIN ELPP_NO_DEFAULT_LOG_FILE)
 
 endif()
+

@@ -1,21 +1,30 @@
+# NOTE: 修正 - 将 cmake_minimum_required 与 project() 提到文件首部（原来的顺序不符合规范）
+# NOTE: CMake 最低版本从 2.8 升级到 3.20，兼容 CMake 4.x
+cmake_minimum_required(VERSION 3.20)
+
+project(NoahFrame LANGUAGES CXX C)
+
+# NOTE: 以下 option / set_property / macro 原本散落在 cmake_minimum_required 之前，统一收拢到 project 之后
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
 option(BUILD_TOOLS_ONLY "help string describing option" OFF)
 option(BUILD_MID_WARE_SDK "help string describing option" OFF)
 
-cmake_minimum_required(VERSION 2.8)
-
 macro(link_NFSDK projName)
 	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
-	target_link_libraries(${projName} NFCore NFMessageDefine NFNetPlugin)
+	# NOTE: 显式使用 PRIVATE 关键字，避免与其它带 keyword 的 target_link_libraries 冲突
+	target_link_libraries(${projName} PRIVATE NFCore NFMessageDefine NFNetPlugin)
 endmacro(link_NFSDK)
 
-project(NoahFrame)
+# NOTE: 使用现代 C++ 标准声明替代 add_definitions(-std=c++17) 与 CXX_FLAGS 中的 -std=c++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 #OSX上强制生成so后缀的动态库而不是dylib后缀动态库
 if (APPLE)
-	SET(CMAKE_SHARED_LIBRARY_SUFFIX ".so")
-endif(APPLE)
+	set(CMAKE_SHARED_LIBRARY_SUFFIX ".so")
+endif()
 
 set(SolutionDir ${PROJECT_SOURCE_DIR})
 
@@ -25,9 +34,7 @@ else()
 	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Release)
 endif()
 
-
 message("NFOutPutDir:${NFOutPutDir}")
-
 
 # message(STATUS "SolutionDir=" ${SolutionDir})
 if (APPLE)
@@ -68,26 +75,25 @@ else()
 	)
 endif()
 
-
 #message("Build Type:"${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})
 
+# NOTE: 使用 add_compile_options + generator expression 替代旧的直接覆盖 CMAKE_CXX_FLAGS
 if(UNIX)
-	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-		set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O0 -Wall -g -ggdb -DDEBUG -fPIC")
-	else()
+	add_compile_options(-fPIC -Wall)
+	add_compile_options(
+		"$<$<CONFIG:Debug>:-O0;-g;-ggdb;-DDEBUG>"
+		"$<$<CONFIG:Release>:-O3>"
+	)
+
+	if( CMAKE_BUILD_TYPE STREQUAL "" )
 		set(CMAKE_BUILD_TYPE "Release")
-		set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -fPIC -std=c++17 -O3 -Wall")
 	endif()
 
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
-	#MAC不需要这一行
-	if (NOT APPLE)
-		add_definitions(-std=c++17)
-	endif()
-else()
-	SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS /EHsc" )
+elseif(MSVC)
+	# NOTE: 使用 add_compile_definitions/add_compile_options 替代覆盖 CMAKE_CXX_FLAGS
+	add_compile_definitions(_X64 _WINDOWS)
+	add_compile_options(/EHsc)
 	include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
 endif()
 
@@ -97,13 +103,13 @@ else()
 	set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Release/ ${SolutionDir}/Dependencies/lib/Release)
 endif()
 
-
 link_directories(${DependenciesLibPath})
 
-if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
+# NOTE: 简化 option 判定，去掉 ${VAR} STREQUAL "ON" 的老式写法
+if(BUILD_TOOLS_ONLY)
 	message("Build Tools Only")
 	add_subdirectory(NFTools)
-elseif(${BUILD_MID_WARE_SDK} STREQUAL "ON")
+elseif(BUILD_MID_WARE_SDK)
 	add_subdirectory(NFTools)
 	message("Build SDK & MIDWARE")
 	add_subdirectory(Dependencies)

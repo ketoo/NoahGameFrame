@@ -1,6 +1,6 @@
 set(ProjectName "NFNoSqlPlugin")
 
-set(ProjectName "NFNoSqlPlugin")
+# NOTE: 移除重复的 set(ProjectName ...) 冗余声明
 file(GLOB NFNoSqlPlugin_ROOT_Cpp
 		*.cpp)
 
@@ -20,30 +20,26 @@ set_target_properties( NFNoSqlPlugin PROPERTIES
 		LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFNoSqlPlugin")
 
+# NOTE: target_link_libraries 统一添加 PRIVATE 关键字；add_definitions 改为 target_compile_definitions
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin hiredis)
+		target_link_libraries(NFNoSqlPlugin PRIVATE hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin hiredis)
+		target_link_libraries(NFNoSqlPlugin PRIVATE hiredis)
 	endif()
 
-	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
+	target_link_libraries(NFNoSqlPlugin PRIVATE -static-libstdc++)
 
-	add_definitions(
-			-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFNoSqlPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 
 else()
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin hiredis)
+		target_link_libraries(NFNoSqlPlugin PRIVATE hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin hiredis_d)
+		target_link_libraries(NFNoSqlPlugin PRIVATE hiredis_d)
 	endif()
 
-	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
-	add_definitions(
-			-DWIN
-			-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFNoSqlPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFNoSqlPlugin PRIVATE WIN ELPP_NO_DEFAULT_LOG_FILE)
 endif()
 

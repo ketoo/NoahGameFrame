@@ -28,23 +28,20 @@ set_target_properties( NFBluePrintPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFBluePrintPlugin")
+
+# NOTE: target_link_libraries 加 PRIVATE；add_definitions 转 target_compile_definitions
 if(UNIX)
 	target_include_directories(NFBluePrintPlugin PUBLIC
 			${SolutionDir}/Dependencies/googletest-release-1.8.0/googletest/include/)
 
 
-	target_link_libraries(NFBluePrintPlugin -static-libstdc++)
+	target_link_libraries(NFBluePrintPlugin PRIVATE -static-libstdc++)
 
-	add_definitions(
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFBluePrintPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 	
 else()
 
-	target_link_libraries(NFBluePrintPlugin -static-libstdc++)
+	target_link_libraries(NFBluePrintPlugin PRIVATE -static-libstdc++)
 	
-	add_definitions(
-		-DWIN
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFBluePrintPlugin PRIVATE WIN ELPP_NO_DEFAULT_LOG_FILE)
 endif()

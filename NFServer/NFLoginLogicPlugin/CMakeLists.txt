@@ -18,17 +18,13 @@ set_target_properties( NFLoginLogicPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFLoginLogicPlugin")
 
+# NOTE: target_link_libraries 添加 PRIVATE，add_definitions 转 target_compile_definitions
 if(UNIX)
-	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
-	add_definitions(
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFLoginLogicPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFLoginLogicPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 
 else()
-	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
-	add_definitions(
-		-DWIN
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFLoginLogicPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFLoginLogicPlugin PRIVATE WIN ELPP_NO_DEFAULT_LOG_FILE)
 
 endif()

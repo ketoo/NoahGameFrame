@@ -6,6 +6,7 @@ add_library(NFLogPlugin STATIC
 	${NFLogPlugin_ROOT_Cpp}
 	${NFLogPlugin_ROOT_Hpp})
 
+# NOTE: target_link_libraries 统一添加 PRIVATE 关键字
 if(UNIX)
 
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
@@ -14,11 +15,11 @@ if(UNIX)
 	
 	add_dependencies(NFLogPlugin NFCore )
 
-	target_link_libraries(NFLogPlugin -static-libstdc++)
+	target_link_libraries(NFLogPlugin PRIVATE -static-libstdc++)
 else()
 	add_dependencies(NFLogPlugin NFCore )
 	
-	target_link_libraries(NFLogPlugin -static-libstdc++)
+	target_link_libraries(NFLogPlugin PRIVATE -static-libstdc++)
 endif()
 
 set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin")

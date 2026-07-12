@@ -1,7 +1,8 @@
 set(ProjectName "NFNavigationPlugin")
 file(GLOB NFNavigationPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFNavigationPlugin_ROOT_Hpp *.h)
-	
+
+# NOTE: target_link_libraries 统一添加 PRIVATE；add_definitions 改为 target_compile_definitions
 if(UNIX)
 	add_library(NFNavigationPlugin STATIC
 		${NFNavigationPlugin_ROOT_Cpp}
@@ -9,13 +10,13 @@ if(UNIX)
 	target_include_directories(NFNavigationPlugin PUBLIC
 		${SolutionDir}/Dependencies/navigation/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNavigationPlugin navigation NFCore)
+		target_link_libraries(NFNavigationPlugin PRIVATE navigation NFCore)
 	else()
-		target_link_libraries(NFNavigationPlugin navigation NFCore)
+		target_link_libraries(NFNavigationPlugin PRIVATE navigation NFCore)
 	endif()
 
 
-	target_link_libraries(NFNavigationPlugin -static-libstdc++)
+	target_link_libraries(NFNavigationPlugin PRIVATE -static-libstdc++)
 else()
 	add_library(NFNavigationPlugin STATIC
 		${NFNavigationPlugin_ROOT_Cpp}
@@ -23,11 +24,9 @@ else()
 	target_include_directories(NFNavigationPlugin PUBLIC
 		${SolutionDir}/Dependencies/navigation/)
 	add_dependencies(NFNavigationPlugin navigation NFCore)
-	target_link_libraries(NFNavigationPlugin navigation NFCore)
-	target_link_libraries(NFNavigationPlugin -static-libstdc++)
-	add_definitions(
-			-DWIN32_LEAN_AND_MEAN
-		)
+	target_link_libraries(NFNavigationPlugin PRIVATE navigation NFCore)
+	target_link_libraries(NFNavigationPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFNavigationPlugin PRIVATE WIN32_LEAN_AND_MEAN)
 endif()
 link_NFSDK("NFNavigationPlugin")
 set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin")

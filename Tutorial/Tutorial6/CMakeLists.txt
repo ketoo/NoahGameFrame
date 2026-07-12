@@ -17,19 +17,14 @@ set_target_properties( Tutorial6 PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial6")
 
+# NOTE: target_link_libraries 添加 PRIVATE；add_definitions 转 target_compile_definitions
 if(UNIX)
-	target_link_libraries(Tutorial6 -static-libstdc++)
-	add_definitions(
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(Tutorial6 PRIVATE -static-libstdc++)
+	target_compile_definitions(Tutorial6 PRIVATE _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 
 else()
-	target_link_libraries(Tutorial6 -static-libstdc++)
-	add_definitions(
-		-DWIN
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(Tutorial6 PRIVATE -static-libstdc++)
+	target_compile_definitions(Tutorial6 PRIVATE WIN _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 
 endif()
+

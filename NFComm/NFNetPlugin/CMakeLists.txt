@@ -9,7 +9,8 @@ file(GLOB NFNet_ROOT_Hpp *.h)
 
 add_library(NFNetPlugin STATIC ${NFNet_ROOT_Cpp} ${NFNet_ROOT_Hpp})
 
-add_definitions(-DNF_NONCLIENT_BUILD)
+# NOTE: 使用 target_compile_definitions 替代 add_definitions
+target_compile_definitions(NFNetPlugin PRIVATE NF_NONCLIENT_BUILD)
 set_target_properties( NFNetPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNetPlugin")
 set_target_properties( NFNetPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNetPlugin PROPERTIES
@@ -22,18 +23,17 @@ set_target_properties( NFNetPlugin PROPERTIES
 	
 if(UNIX)
 
-		target_link_libraries(NFNetPlugin NFCore)
-		target_link_libraries(NFNetPlugin libevent.a)
-		target_link_libraries(NFNetPlugin libevent_core.a)
-		target_link_libraries(NFNetPlugin libevent_extra.a)
-		#target_link_libraries(NFNetPlugin libevent_openssl.a)
-		#target_link_libraries(NFNetPlugin libssl.a)
-		#target_link_libraries(NFNetPlugin libcrypto.a)
-		target_link_libraries(NFNetPlugin NFMessageDefine)
-		target_link_libraries(NFNetPlugin -static-libstdc++)
-	add_definitions(
-		-D_THREAD_SAFE
-	)
+		# NOTE: 统一使用 PRIVATE 关键字
+		target_link_libraries(NFNetPlugin PRIVATE NFCore)
+		target_link_libraries(NFNetPlugin PRIVATE libevent.a)
+		target_link_libraries(NFNetPlugin PRIVATE libevent_core.a)
+		target_link_libraries(NFNetPlugin PRIVATE libevent_extra.a)
+		#target_link_libraries(NFNetPlugin PRIVATE libevent_openssl.a)
+		#target_link_libraries(NFNetPlugin PRIVATE libssl.a)
+		#target_link_libraries(NFNetPlugin PRIVATE libcrypto.a)
+		target_link_libraries(NFNetPlugin PRIVATE NFMessageDefine)
+		target_link_libraries(NFNetPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFNetPlugin PRIVATE _THREAD_SAFE)
 else()
 
 

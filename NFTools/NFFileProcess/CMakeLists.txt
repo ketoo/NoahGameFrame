@@ -1,9 +1,3 @@
-include_directories(
-	minizip
-	tinyxml2
-	zlib
-	MiniExcelReader)
-
 file(GLOB NFFileProcess_MiniExcelReader_Cpp ./MiniExcelReader/*.cpp)
 file(GLOB NFFileProcess_MiniExcelReader_Hpp ./MiniExcelReader/*.h)
 file(GLOB NFFileProcess_minizip_C ./minizip/ioapi.c ./minizip/ioapi_mem.c ./minizip/unzip.c)
@@ -37,6 +31,13 @@ add_executable(NFFileProcess
 	${NFFileProcess_zlib_Hpp}
 	${NFFileProcess_ROOT_Cpp}
 	${NFFileProcess_ROOT_Hpp})
+
+# NOTE: include_directories 转 target_include_directories
+target_include_directories(NFFileProcess PRIVATE
+	minizip
+	tinyxml2
+	zlib
+	MiniExcelReader)
 	
 set_target_properties( NFFileProcess PROPERTIES
 	FOLDER "NFTools"
@@ -47,7 +48,5 @@ set_target_properties( NFFileProcess PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${SolutionDir}/_Out/NFDataCfg/Tool/
 	LIBRARY_OUTPUT_DIRECTORY_RELEASE ${SolutionDir}/_Out/NFDataCfg/Tool/	)
 
-add_definitions(
-	-D_CRT_SECURE_NO_WARNINGS
-	-D_CRT_NONSTDC_NO_DEPRECATE
-)
+# NOTE: add_definitions 转 target_compile_definitions
+target_compile_definitions(NFFileProcess PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)

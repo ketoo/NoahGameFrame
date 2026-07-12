@@ -14,17 +14,18 @@ set_target_properties( NFConfigPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 
+# NOTE: target_link_libraries 统一添加 PRIVATE 关键字
 if(UNIX)
 	add_dependencies(NFConfigPlugin NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 	else()
 	endif()
 
-	target_link_libraries(NFConfigPlugin  NFCore)
-	target_link_libraries(NFConfigPlugin -static-libstdc++)
+	target_link_libraries(NFConfigPlugin PRIVATE NFCore)
+	target_link_libraries(NFConfigPlugin PRIVATE -static-libstdc++)
 else()
 	message("${ProjectName} ${CMAKE_BUILD_TYPE}")
 	
-	target_link_libraries(NFConfigPlugin  NFCore)
-	target_link_libraries(NFConfigPlugin -static-libstdc++)
+	target_link_libraries(NFConfigPlugin PRIVATE NFCore)
+	target_link_libraries(NFConfigPlugin PRIVATE -static-libstdc++)
 endif()

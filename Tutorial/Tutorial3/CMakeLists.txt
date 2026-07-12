@@ -17,18 +17,12 @@ set_target_properties( Tutorial3Plugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial3Plugin")
 
+# NOTE: target_link_libraries 添加 PRIVATE；add_definitions 转 target_compile_definitions
 if(UNIX)
-	target_link_libraries(Tutorial3Plugin -static-libstdc++)
-	add_definitions(
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(Tutorial3Plugin PRIVATE -static-libstdc++)
+	target_compile_definitions(Tutorial3Plugin PRIVATE _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 
 else()
-	target_link_libraries(Tutorial3Plugin -static-libstdc++)
-	add_definitions(
-		-DWIN
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(Tutorial3Plugin PRIVATE -static-libstdc++)
+	target_compile_definitions(Tutorial3Plugin PRIVATE WIN _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 endif()

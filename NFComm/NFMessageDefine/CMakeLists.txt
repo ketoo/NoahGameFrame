@@ -8,18 +8,17 @@ add_library(NFMessageDefine STATIC
 	${NFMessageDefine_ROOT_CC}
 	${NFMessageDefine_ROOT_Hpp})
 
+# NOTE: target_link_libraries 统一添加 PRIVATE 关键字；add_definitions 改为 target_compile_definitions
 if (UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFMessageDefine libprotobuf.a)
+		target_link_libraries(NFMessageDefine PRIVATE libprotobuf.a)
 	else()
-		target_link_libraries(NFMessageDefine libprotobufd.a)
+		target_link_libraries(NFMessageDefine PRIVATE libprotobufd.a)
 	endif()
 
-	add_definitions(
-		-D_THREAD_SAFE
-	)
+	target_compile_definitions(NFMessageDefine PRIVATE _THREAD_SAFE)
 
-	target_link_libraries(NFMessageDefine -static-libstdc++)
+	target_link_libraries(NFMessageDefine PRIVATE -static-libstdc++)
 else()
 
 

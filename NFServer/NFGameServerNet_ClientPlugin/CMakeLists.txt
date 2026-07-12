@@ -19,12 +19,11 @@ set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES
 
 link_NFSDK("NFGameServerNet_ClientPlugin")
 
+# NOTE: target_link_libraries 添加 PRIVATE，add_definitions 转 target_compile_definitions
 if(UNIX)
 
-	target_link_libraries(NFGameServerNet_ClientPlugin -static-libstdc++)
-	add_definitions(
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_link_libraries(NFGameServerNet_ClientPlugin PRIVATE -static-libstdc++)
+	target_compile_definitions(NFGameServerNet_ClientPlugin PRIVATE ELPP_NO_DEFAULT_LOG_FILE)
 	
 
 else()

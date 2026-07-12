@@ -8,19 +8,20 @@ add_executable(NFServer ${NFServer_ROOT_Cpp} ${NFServer_ROOT_Hpp})
 #link_NFSDK("NFServer")
 
 
-target_link_libraries(NFServer NFPluginLoader)
+# NOTE: target_link_libraries 添加 PRIVATE
+target_link_libraries(NFServer PRIVATE NFPluginLoader)
 
 
 if (UNIX)
 	add_dependencies(NFServer NFCore)
 
 	#if (CMAKE_BUILD_TYPE MATCHES "Release")
-	#	target_link_libraries(NFServer libSDL2.a)
+	#	target_link_libraries(NFServer PRIVATE libSDL2.a)
 	#else()
-	#	target_link_libraries(NFServer libSDL2d.a)
+	#	target_link_libraries(NFServer PRIVATE libSDL2d.a)
 	#endif()
 
-	target_link_libraries(NFServer -static-libstdc++ -pthread)
+	target_link_libraries(NFServer PRIVATE -static-libstdc++ -pthread)
 
 else()
 
@@ -34,5 +35,6 @@ set_target_properties( NFServer PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 
 
-add_definitions(-D_X64 -D_CONSOLE)
-#add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)
+# NOTE: add_definitions 转 target_compile_definitions
+target_compile_definitions(NFServer PRIVATE _X64 _CONSOLE)
+#target_compile_definitions(NFServer PRIVATE _X64 _CONSOLE NF_DYNAMIC_PLUGIN)

@@ -8,9 +8,10 @@ add_library(NFActorPlugin STATIC
 	${NFActorPlugin_ROOT_CC}
 	${NFActorPlugin_ROOT_Hpp})
 	
+# NOTE: target_link_libraries 添加 PRIVATE 关键字
 if(UNIX)
 
-	target_link_libraries(NFActorPlugin -static-libstdc++)
+	target_link_libraries(NFActorPlugin PRIVATE -static-libstdc++)
 else()
 
 endif()

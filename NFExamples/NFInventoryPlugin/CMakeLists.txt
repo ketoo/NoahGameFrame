@@ -18,22 +18,16 @@ set_target_properties( NFInventoryPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFInventoryPlugin")
 
+# NOTE: target_link_libraries 添加 PRIVATE；add_definitions 转 target_compile_definitions
 if(UNIX)
 
-	target_link_libraries(NFInventoryPlugin -static-libstdc++)
+	target_link_libraries(NFInventoryPlugin PRIVATE -static-libstdc++)
 
-	add_definitions(
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFInventoryPlugin PRIVATE _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 	
 else()
 
-	target_link_libraries(NFInventoryPlugin -static-libstdc++)
+	target_link_libraries(NFInventoryPlugin PRIVATE -static-libstdc++)
 
-	add_definitions(
-		-DWIN
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
+	target_compile_definitions(NFInventoryPlugin PRIVATE WIN _USRDLL ELPP_NO_DEFAULT_LOG_FILE)
 endif()

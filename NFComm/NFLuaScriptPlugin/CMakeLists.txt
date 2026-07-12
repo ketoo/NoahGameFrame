@@ -6,12 +6,13 @@ add_library(NFLuaScriptPlugin STATIC
 	${NFLuaScriptPlugin_ROOT_Cpp}
 	${NFLuaScriptPlugin_ROOT_Hpp})
 
-target_link_libraries(NFLuaScriptPlugin liblua.a)
+# NOTE: target_link_libraries 统一添加 PRIVATE 关键字
+target_link_libraries(NFLuaScriptPlugin PRIVATE liblua.a)
 add_dependencies(NFLuaScriptPlugin NFCore)
 
 if(UNIX)
 
-	target_link_libraries(NFLuaScriptPlugin -static-libstdc++)
+	target_link_libraries(NFLuaScriptPlugin PRIVATE -static-libstdc++)
 else()
 
 
